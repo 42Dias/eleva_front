@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { LOGIN } from 'routes'
+import { LOGIN } from '../../routes'
 
 export function MyProducts() {
   return (
