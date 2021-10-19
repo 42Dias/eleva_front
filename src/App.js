@@ -1,5 +1,18 @@
-function App() {
-  return <h1>Hello World</h1>
-}
+import React from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-export default App
+import { GlobalStyle } from 'ui'
+import { LOGIN, MYPRODUCTS } from 'routes'
+import { Login, MyProducts } from './pages'
+
+export function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path={LOGIN} exact component={Login} />
+        <Route path={MYPRODUCTS} component={MyProducts} />
+      </Switch>
+      <GlobalStyle />
+    </BrowserRouter>
+  )
+}
