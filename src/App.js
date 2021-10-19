@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import { GlobalStyle } from 'ui'
 import { LOGIN, MYPRODUCTS } from 'routes'
-import { Login, MyProducts } from './pages'
+import { Login, MyProducts } from 'pages'
 
 export function App() {
   return (
