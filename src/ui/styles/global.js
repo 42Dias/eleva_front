@@ -31,4 +31,9 @@ export const GlobalStyle = createGlobalStyle`
   ul {
     list-style: none;
   }
+
+  &::selection {
+    color: ${theme.colors.white};
+    background: ${theme.colors.green};
+  }
 `

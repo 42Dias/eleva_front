@@ -25,14 +25,18 @@ export const BoxImage = styled.div`
   }
 `
 export const BoxLogin = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: 100vh;
-  width: 100vw;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   background-color: ${theme.colors.blue};
 `
 
 export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+
   h2 {
     text-align: left;
     display: flex;
@@ -41,6 +45,25 @@ export const Form = styled.form`
     font-size: 24px;
     font-weight: bold;
     margin: 10px 0;
-    color: white;
+    color: ${theme.colors.white};
+  }
+
+  label {
+    color: ${theme.colors.white};
+    font-size: 14px;
+    font-weight: normal;
+  }
+
+  input {
+    width: 337px !important;
+    height: 48px;
+    margin-top: 8px;
+    color: ${theme.colors.blue};
+    border: 1px solid ${theme.colors.white};
+    background: ${theme.colors.white};
+    border: 0;
+    border-radius: 4px;
+    padding-left: 26px;
+    padding-right: 26px;
   }
 `

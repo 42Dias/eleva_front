@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FiLock } from 'react-icons/fi'
 import { MYPRODUCTS } from '../../routes'
-import image from '../../assets/imagelogin.svg'
+import IMAGE from '../../assets/imagelogin.svg'
 import * as S from './styled'
 
 export function Login() {
@@ -9,13 +10,19 @@ export function Login() {
     <S.ContainerLogin>
       <S.GridLogin>
         <S.BoxImage>
-          <img src={image} alt='imagem de login' />
+          <img src={IMAGE} alt='imagem de login' />
         </S.BoxImage>
         <S.BoxLogin>
           <S.Form method='post'>
             <h2>Bem vindo</h2>
+            <label>Nome de usuário</label>
+            <input type='text' />
+            <label>Senha</label>
+            <FiLock />
+            <input type='password' />
+            <Link to={MYPRODUCTS}>Entrar</Link>
+            <Link>Criar conta</Link>
           </S.Form>
-          <Link to={MYPRODUCTS}>Entrar</Link>
         </S.BoxLogin>
       </S.GridLogin>
     </S.ContainerLogin>
