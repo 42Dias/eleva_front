@@ -10,8 +10,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${theme};
-    font-family: ${theme};
+    background: ${theme.colors.neutral[100]};
+    font-family: ${theme.font.poppins};
   }
 
   html {
