@@ -12,7 +12,8 @@ export const theme = {
     },
   },
   font: {
-    poppins: {
+    family: 'Poppins',
+    weigths: {
       regular: 400,
       medium: 500,
       bold: 700,
