@@ -12,6 +12,8 @@ export const GlobalStyle = createGlobalStyle`
   body {
     background: ${theme.colors.neutral[100]};
     font-family: ${theme.font.family};
+    overflow-x: hidden;
+    position: relative;
   }
 
   html {
