@@ -23,7 +23,7 @@ export const ContentBorder = styled.div`
 
   strong {
     padding: 20px 10px;
-    color: #5c677d;
+    color: ${theme.colors.neutral[500]};
   }
 `
 
@@ -33,7 +33,7 @@ export const Border = styled.div`
   left: 773px;
   top: 418px;
 
-  border: 1px solid rgba(90, 111, 124, 0.3);
+  border: 1px solid ${theme.colors.neutral[500]};
   transform: rotate(0.21deg);
 `
 
@@ -42,13 +42,14 @@ export const ContentLinks = styled.section`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+
   a {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     padding: 10px 0;
-    color: white;
+    color: ${theme.colors.white};
   }
 
   span {
@@ -66,11 +67,12 @@ export const IconContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
   svg {
     font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #05debd;
+    color: ${theme.colors.green};
   }
 `
