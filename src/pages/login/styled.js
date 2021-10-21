@@ -14,7 +14,7 @@ export const GridLogin = styled.div`
 `
 
 export const BoxImage = styled.div`
-  background-color: ${theme.colors.darkBlue};
+  background-color: ${theme.colors.blue};
   display: flex;
   align-items: center;
   justify-content: center;
