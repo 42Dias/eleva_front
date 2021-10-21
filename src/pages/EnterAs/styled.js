@@ -29,12 +29,8 @@ export const ContentBorder = styled.div`
 
 export const Border = styled.div`
   width: 84px;
-  height: 0px;
-  left: 773px;
-  top: 418px;
 
   border: 1px solid ${theme.colors.neutral[500]};
-  transform: rotate(0.21deg);
 `
 
 export const ContentLinks = styled.section`
