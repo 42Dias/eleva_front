@@ -31,6 +31,19 @@ export const BoxLogin = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color: ${theme.colors.blue};
+
+  svg {
+    color: ${theme.colors.green};
+  }
+
+  a {
+    color: ${theme.colors.neutral[300]};
+
+    :hover {
+      opacity: 70%;
+      transition: 0.5s;
+    }
+  }
 `
 
 export const Form = styled.form`
@@ -44,7 +57,7 @@ export const Form = styled.form`
     justify-content: left;
     font-size: 24px;
     font-weight: bold;
-    margin: 10px 0;
+    margin: 40px 0;
     color: ${theme.colors.white};
   }
 
@@ -52,6 +65,7 @@ export const Form = styled.form`
     color: ${theme.colors.white};
     font-size: 14px;
     font-weight: normal;
+    margin: 15px 0 0 0;
   }
 
   input {
@@ -61,9 +75,52 @@ export const Form = styled.form`
     color: ${theme.colors.blue};
     border: 1px solid ${theme.colors.white};
     background: ${theme.colors.white};
-    border: 0;
     border-radius: 5px;
-    padding-left: 26px;
+    padding-left: 35px;
     padding-right: 26px;
+
+    &:focus {
+      border: 2px solid ${theme.colors.green};
+      background: none;
+      color: ${theme.colors.green};
+    }
   }
+
+  svg {
+    position: absolute;
+    margin-top: 26.5rem;
+    margin-left: 10px;
+    color: ${theme.colors.green};
+  }
+
+  a {
+    padding: 10px 20px;
+    font-size: 15px;
+    text-decoration: none;
+    color: ${theme.colors.white};
+    background: ${theme.colors.green};
+    border-radius: 5px;
+    margin: 20px 0 0 0;
+    width: 335px;
+    height: 48px;
+    text-align: center;
+  }
+`
+
+export const ContentBorder = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    color: ${theme.colors.neutral[400]};
+    opacity: 15%;
+  }
+`
+
+export const Border = styled.div`
+  width: 100px;
+  border: 0.5px solid ${theme.colors.neutral[400]};
+  opacity: 15%;
+  margin: 15px;
 `
