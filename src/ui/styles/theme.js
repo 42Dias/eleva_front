@@ -10,7 +10,7 @@ export const theme = {
       200: '#F5F5F5',
       300: '#F9F9F9',
       400: '#BFBFBF',
-      500: '#5C677D'
+      500: '#5C677D',
     },
   },
   font: {
