@@ -4,7 +4,7 @@ import { FiUser, FiBriefcase, FiTruck } from 'react-icons/fi'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import * as S from './styled'
-import logo from './../../assets/Logo.png'
+import logo from './../../assets/logo.png'
 
 export function EnterAs() {
   AOS.init()
