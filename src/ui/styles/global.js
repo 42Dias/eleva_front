@@ -11,7 +11,9 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     background: ${theme.colors.neutral[100]};
-    font-family: ${theme.font.poppins};
+    font-family: ${theme.font.family};
+    overflow-x: hidden;
+    position: relative;
   }
 
   html {
@@ -28,5 +30,10 @@ export const GlobalStyle = createGlobalStyle`
 
   ul {
     list-style: none;
+  }
+
+  &::selection {
+    color: ${theme.colors.white};
+    background: ${theme.colors.green};
   }
 `

@@ -2,6 +2,7 @@ export const theme = {
   colors: {
     white: '#FFFF',
     blue: '#050C21',
+    darkBlue: '#020718',
     green: '#05DEBD',
     red: '#AA2323',
     neutral: {
@@ -12,7 +13,8 @@ export const theme = {
     },
   },
   font: {
-    poppins: {
+    family: 'Poppins',
+    weigths: {
       regular: 400,
       medium: 500,
       bold: 700,
