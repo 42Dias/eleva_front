@@ -62,7 +62,7 @@ export const Form = styled.form`
     border: 1px solid ${theme.colors.white};
     background: ${theme.colors.white};
     border: 0;
-    border-radius: 4px;
+    border-radius: 5px;
     padding-left: 26px;
     padding-right: 26px;
   }
