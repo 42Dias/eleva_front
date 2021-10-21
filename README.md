@@ -26,4 +26,5 @@ Open http://localhost:3000 to view it in the browser.
 * [Prettier](https://prettier.io/)
 * [Estilo do Chakra UI](https://chakra-ui.com)
 * [Bootstrap](https://getbootstrap.com/docs/4.4/components/collapse/)
+* [React Icons](https://react-icons.github.io/react-icons)
 
