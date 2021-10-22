@@ -1,12 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { LOGIN } from '../../routes'
+import { BUY } from '../../routes'
+import IMAGE from '../../assets/imageinit.svg'
+import * as S from './styled'
 
 export function MyProducts() {
   return (
-    <>
-      <h1>Meus Produtos</h1>
-      <Link to={LOGIN}>Navegar</Link>
-    </>
+    <S.ContainerLogin>
+      <S.BoxImage>
+        <img src={IMAGE} alt='imagem inicial' />
+      </S.BoxImage>
+      <S.Button>
+        <Link to={BUY}>Comece a comprar</Link>
+      </S.Button>
+      <S.Footer>
+        <p>© Copyright 2021 B2B Quick</p>
+      </S.Footer>
+    </S.ContainerLogin>
   )
 }
