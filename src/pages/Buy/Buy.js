@@ -1,6 +1,14 @@
 import React from 'react'
-// import * as S from './styled'
+import Header from './../../components/Header'
+import * as S from './styled'
 
 export function Buy() {
-  return <h1>Comprar</h1>
+  return (
+    <>
+      <Header />
+      <S.Content>
+        <h2>teste</h2>
+      </S.Content>
+    </>
+  )
 }
