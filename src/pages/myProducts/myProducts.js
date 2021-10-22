@@ -2,10 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { BUY } from '../../routes'
 import IMAGE from '../../assets/imageinit.svg'
+import Header from './../../components/Header'
 import * as S from './styled'
 
 export function MyProducts() {
   return (
+    <Header />
     <S.ContainerLogin>
       <S.BoxImage>
         <img src={IMAGE} alt='imagem inicial' />
@@ -18,4 +20,5 @@ export function MyProducts() {
       </S.Footer>
     </S.ContainerLogin>
   )
-}
+
+
