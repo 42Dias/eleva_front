@@ -7,8 +7,8 @@ import * as S from './styled'
 
 export function MyProducts() {
   return (
-    <Header />
     <S.ContainerLogin>
+      <Header />
       <S.BoxImage>
         <img src={IMAGE} alt='imagem inicial' />
       </S.BoxImage>
@@ -20,5 +20,4 @@ export function MyProducts() {
       </S.Footer>
     </S.ContainerLogin>
   )
-
-
+}
