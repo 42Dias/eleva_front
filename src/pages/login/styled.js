@@ -57,7 +57,7 @@ export const Form = styled.form`
     justify-content: left;
     font-size: 24px;
     font-weight: bold;
-    margin: 40px 0;
+    margin: 20px 0;
     color: ${theme.colors.white};
   }
 
@@ -88,7 +88,7 @@ export const Form = styled.form`
 
   svg {
     position: absolute;
-    margin-top: 26.5rem;
+    margin-top: 22.5rem;
     margin-left: 10px;
     color: ${theme.colors.green};
   }
@@ -123,4 +123,13 @@ export const Border = styled.div`
   border: 0.5px solid ${theme.colors.neutral[400]};
   opacity: 15%;
   margin: 15px;
+`
+
+export const ContentCreateAccount = styled.div`
+  position: relative;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `
