@@ -4,7 +4,6 @@ import {
   FiAlignJustify,
   FiSearch,
   FiBell,
-  FiShoppingCart,
   FiUser,
 } from 'react-icons/fi'
 import logo from './../../assets/logo.png'
@@ -48,10 +47,7 @@ export default function Header() {
               <S.IconsActions>
                 <S.IconsLeft>
                   <a href=''>
-                    <FiBell />
-                  </a>
-                  <a href=''>
-                    <FiShoppingCart />
+                    <FiBell size={15} />
                   </a>
                 </S.IconsLeft>
                 <S.IconUser>

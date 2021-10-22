@@ -66,8 +66,14 @@ export const SearchContainer = styled.div`
     height: 48px;
     outline: 0;
     border: 0;
-    padding-left: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-radius: 5px 0 0 5px;
+    color: ${theme.colors.neutral[400]};
+
+    &::placeholder {
+      color: ${theme.colors.neutral[400]};
+    }
   }
 
   button {
