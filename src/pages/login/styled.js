@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { theme } from '../../ui/styles/theme'
 
 export const ContainerLogin = styled.div`
