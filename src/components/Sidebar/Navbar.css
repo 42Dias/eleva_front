@@ -57,7 +57,7 @@ body {
 
 
 .nav-text svg {
-  color: #05DEBD;
+  color: #fff;
 }
 
 .nav-text a:hover  {
@@ -133,6 +133,11 @@ span {
   background: #C4C4C4;
 }
 
+.userIcon svg {
+  width: 15px;
+  height: 15px;
+}
+
 .bell {
   width: 50px;
   height: 40px;
@@ -142,6 +147,11 @@ span {
   align-items: center;
   justify-content:center;
   color: #A1A8CF;
+}
+
+.bell svg {
+  width: 20px;
+  height: 20px;
 }
 
 @media (max-width: 768px) {
@@ -155,7 +165,7 @@ span {
     color: #CBCBCB;
     margin-left: 40px;
   }
-  
+
 }
 
 @media (max-width: 555px) {
@@ -167,7 +177,7 @@ span {
   .navbar button {
     width: 20px;
     height: 28px;
-  } 
+  }
 
   .navbar {
     height: 40px;
@@ -177,5 +187,5 @@ span {
     align-items: center;
     flex-direction: row;
   }
-  
+
 }
