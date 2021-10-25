@@ -20,8 +20,8 @@ export const BoxImage = styled.div`
   justify-content: center;
 
   img {
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
   }
 `
 export const BoxLogin = styled.div`
