@@ -8,11 +8,18 @@ export const ContainerBuy = styled.div`
 
 export const BoxBuy = styled.div`
   display: flex;
+`
+
+import styled from 'styled-components'
+import { theme } from '../../ui/styles/theme'
+
+export const Content = styled.div`
   width: calc(100% - 250px);
   position: relative;
   left: 250px;
   padding: 2%;
 `
+
 /*
 export const Aside = styled.aside`
   p {
@@ -60,4 +67,5 @@ export const Items = styled.div`
   height: 223px;
   background: ${theme.colors.neutral[50]};
   margin: 0 -20px 0 75px;
+  background: ${theme.colors.neutral[200]};
 `

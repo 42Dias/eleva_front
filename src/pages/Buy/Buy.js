@@ -41,5 +41,11 @@ export function Buy() {
         </S.ContainerPurchases>
       </S.BoxBuy>
     </S.ContainerBuy>
+    <>
+      <Header />
+      <S.Content>
+        <h2>teste</h2>
+      </S.Content>
+    </>
   )
 }

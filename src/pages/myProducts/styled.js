@@ -2,8 +2,15 @@ import styled from 'styled-components/macro'
 import { theme } from '../../ui/styles/theme'
 
 export const ContainerLogin = styled.div`
-  width: 100vw;
-  height: 100vh;
+  height: 100%;
+`
+
+export const Content = styled.div`
+  width: calc(100% - 250px);
+  position: relative;
+  left: 250px;
+  padding: 2%;
+  background: ${theme.colors.neutral[200]};
 `
 
 export const BoxImage = styled.div`

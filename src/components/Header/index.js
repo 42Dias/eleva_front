@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import {
   FiLock,
   FiAlignJustify,
@@ -14,7 +15,9 @@ export default function Header() {
     <>
       <S.Menu>
         <S.MenuWrapper>
-          <img src={logo} alt='' />
+          <Link to='/'>
+            <img src={logo} alt='' />
+          </Link>
           <div>
             <h2>
               <FiLock />
