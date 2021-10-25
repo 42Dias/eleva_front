@@ -1,8 +1,8 @@
 import React from 'react'
 import { FiPlus } from 'react-icons/fi'
 import IMAGE from '../../assets/material.png'
-import Header from './../../components/Header'
 import * as S from './styled'
+import Header from './../../components/Header'
 
 export function Buy() {
   return (
