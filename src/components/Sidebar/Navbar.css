@@ -1,0 +1,181 @@
+body {
+  background-color:  #F2F2F2;
+}
+
+.navbar {
+  height: 40px;
+  padding: 40px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-bars {
+  margin-left: 20px;
+  font-size: 16px;
+  background: transparent;
+  color: #05DEBD;
+}
+
+.nav-menu {
+  background-color: #050C21;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px 0px 8px 16px;
+  list-style: none;
+  height: 50px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  font-size: 14px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+  color: white;
+}
+
+
+.nav-text svg {
+  color: #05DEBD;
+}
+
+.nav-text a:hover  {
+  background-color: #05DEBD;
+  transition: .4s;
+  color: white;
+}
+
+.nav-menu-items {
+  width: 100%;
+}
+
+.nav-menu-items img {
+  width: 200px;
+  height: 90px;
+  object-fit: cover;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-toggle {
+  background-color: #050C21;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+span {
+  margin-left: 16px;
+}
+
+.navbar input[type=text] {
+  width: 365px;
+  height: 48px;
+  border-radius: 5px;
+  border: 0;
+  outline: none;
+  padding: 0 7px;
+  color: #CBCBCB;
+  margin-left: 40px;
+}
+
+.navbar button {
+  cursor: pointer;
+  width: 66px;
+  height: 48px;
+  outline: 0;
+  border: 0;
+  border-radius: 0 5px 5px 0;
+  background: #05DEBD;
+  color: white;
+}
+
+.user {
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+}
+
+.userIcon {
+  margin-left: 60px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  color: white;
+  background: #C4C4C4;
+}
+
+.bell {
+  width: 50px;
+  height: 40px;
+  background: #FFFFFF;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  color: #A1A8CF;
+}
+
+@media (max-width: 768px) {
+  .navbar input[type=text] {
+    width: 165px;
+    height: 48px;
+    border-radius: 5px;
+    border: 0;
+    outline: none;
+    padding: 0 7px;
+    color: #CBCBCB;
+    margin-left: 40px;
+  }
+  
+}
+
+@media (max-width: 555px) {
+  .navbar input[type=text] {
+    width: 120px;
+    height: 28px;
+  }
+
+  .navbar button {
+    width: 20px;
+    height: 28px;
+  } 
+
+  .navbar {
+    height: 40px;
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+  
+}

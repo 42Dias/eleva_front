@@ -2,12 +2,10 @@ import React from 'react'
 import { FiPlus } from 'react-icons/fi'
 import IMAGE from '../../assets/material.png'
 import * as S from './styled'
-import Header from './../../components/Header'
 
 export function Buy() {
   return (
     <S.ContainerBuy>
-      <Header />
       <S.BoxBuy>
         <S.ContainerPurchases>
           <p>Categoria</p>

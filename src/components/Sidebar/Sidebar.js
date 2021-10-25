@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import './styled.css'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import { IconContext } from 'react-icons'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/logo.png'
 import { SidebarData } from './SidebarData'
+import './Navbar.css'
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false)
