@@ -22,7 +22,7 @@ export const SidebarData = [
   },
   {
     title: 'Cadastrar fornecedor',
-    path: '/team',
+    path: '/cadastrar-fornecedor',
     icon: <FaIcons.FaPlus />,
     cName: 'nav-text',
   },

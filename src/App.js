@@ -9,8 +9,17 @@ import {
   BUY,
   REGISTER,
   ACCEPTTERMS,
+  REGISTERSUPPLIER,
 } from './routes'
-import { Login, MyProducts, EnterAs, Buy, Register, AcceptTerms } from './pages'
+import {
+  Login,
+  MyProducts,
+  EnterAs,
+  Buy,
+  Register,
+  AcceptTerms,
+  RegisterSupplier,
+} from './pages'
 
 export function App() {
   return (
@@ -22,6 +31,7 @@ export function App() {
         <Route path={BUY} exact component={Buy} />
         <Route path={REGISTER} exact component={Register} />
         <Route path={ACCEPTTERMS} exact component={AcceptTerms} />
+        <Route path={REGISTERSUPPLIER} exact component={RegisterSupplier} />
       </Switch>
       <GlobalStyle />
     </BrowserRouter>
