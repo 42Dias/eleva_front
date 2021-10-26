@@ -4,7 +4,7 @@ import * as FaIcons from 'react-icons/fa'
 export const SidebarData = [
   {
     title: 'Menu',
-    path: '/',
+    path: '/myproducts',
     icon: <FaIcons.FaHome />,
     cName: 'nav-text',
   },
@@ -40,7 +40,7 @@ export const SidebarData = [
   },
   {
     title: 'Aprovar usuários',
-    path: '/support',
+    path: '/aprovar-usuario',
     icon: <FaIcons.FaUserPlus />,
     cName: 'nav-text',
   },
