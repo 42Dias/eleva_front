@@ -38,7 +38,7 @@ body {
   display: flex;
   justify-content: start;
   align-items: center;
-  padding: 8px 0px 8px 16px;
+  padding: 5px 0 5px 16px;
   list-style: none;
   height: 50px;
 }
