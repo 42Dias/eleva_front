@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
-import { FiArrowLeft } from 'react-icons/fi'
 import { IconContext } from 'react-icons'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/logo.png'
@@ -58,9 +57,6 @@ function Navbar() {
                 </li>
               )
             })}
-            <button className='button'>
-              <FiArrowLeft /> Sair
-            </button>
           </ul>
         </nav>
       </IconContext.Provider>
