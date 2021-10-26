@@ -41,7 +41,7 @@ export const SidebarData = [
   },
   {
     title: 'Detalhes da venda',
-    path: '/support',
+    path: '/sale-details',
     icon: <FaIcons.FaMoneyBillAlt />,
     cName: 'nav-text',
   },
