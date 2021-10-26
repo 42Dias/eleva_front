@@ -21,6 +21,7 @@ export const RegisterSupplierForm = styled.form`
   grid-template-columns: 1fr 1fr;
   justify-items: center;
   align-items: center;
+
   input {
     width: 345px;
     height: 48px;

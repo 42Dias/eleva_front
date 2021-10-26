@@ -29,7 +29,7 @@ export const SidebarData = [
   },
   {
     title: 'Cadastrar fornecedor',
-    path: '/cadastrar-fornecedor',
+    path: '/register-supplier',
     icon: <FaIcons.FaPlus />,
     cName: 'nav-text',
   },
@@ -47,7 +47,7 @@ export const SidebarData = [
   },
   {
     title: 'Aprovar usuários',
-    path: '/aprovar-usuario',
+    path: '/approve-user',
     icon: <FaIcons.FaUserPlus />,
     cName: 'nav-text',
   },
