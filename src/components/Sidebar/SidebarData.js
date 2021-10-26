@@ -5,7 +5,7 @@ import { FiArrowLeft, FiTag } from 'react-icons/fi'
 export const SidebarData = [
   {
     title: 'Menu',
-    path: '/',
+    path: '/myproducts',
     icon: <FaIcons.FaHome />,
     cName: 'nav-text',
   },
@@ -29,7 +29,7 @@ export const SidebarData = [
   },
   {
     title: 'Cadastrar fornecedor',
-    path: '/team',
+    path: '/cadastrar-fornecedor',
     icon: <FaIcons.FaPlus />,
     cName: 'nav-text',
   },
@@ -47,7 +47,7 @@ export const SidebarData = [
   },
   {
     title: 'Aprovar usuários',
-    path: '/support',
+    path: '/aprovar-usuario',
     icon: <FaIcons.FaUserPlus />,
     cName: 'nav-text',
   },

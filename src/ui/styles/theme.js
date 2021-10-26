@@ -7,8 +7,10 @@ export const theme = {
     red: '#AA2323',
     gray: '#a1a8cf',
     neutral: {
+      0: '#0B091A',
       50: '#FAFAFA',
       100: '#F2F2F2',
+      150: '#F3F3F3',
       200: '#F5F5F5',
       300: '#F9F9F9',
       400: '#BFBFBF',

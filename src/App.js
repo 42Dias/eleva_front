@@ -9,6 +9,10 @@ import {
   BUY,
   PRODUCTS,
   REGISTERPRODUCT,
+  REGISTER,
+  ACCEPTTERMS,
+  REGISTERSUPPLIER,
+  APPROVEUSER,
 } from './routes'
 import {
   Login,
@@ -17,6 +21,10 @@ import {
   Buy,
   Products,
   RegisterProduct,
+  Register,
+  AcceptTerms,
+  RegisterSupplier,
+  ApproveUser,
 } from './pages'
 
 export function App() {
@@ -29,6 +37,10 @@ export function App() {
         <Route path={BUY} exact component={Buy} />
         <Route path={PRODUCTS} exact component={Products} />
         <Route path={REGISTERPRODUCT} exact component={RegisterProduct} />
+        <Route path={REGISTER} exact component={Register} />
+        <Route path={ACCEPTTERMS} exact component={AcceptTerms} />
+        <Route path={REGISTERSUPPLIER} exact component={RegisterSupplier} />
+        <Route path={APPROVEUSER} exact component={ApproveUser} />
       </Switch>
       <GlobalStyle />
     </BrowserRouter>
