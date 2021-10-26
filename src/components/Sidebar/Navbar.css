@@ -155,7 +155,7 @@ span {
     color: #CBCBCB;
     margin-left: 40px;
   }
-  
+
 }
 
 @media (max-width: 555px) {
@@ -167,7 +167,7 @@ span {
   .navbar button {
     width: 20px;
     height: 28px;
-  } 
+  }
 
   .navbar {
     height: 40px;
@@ -177,5 +177,5 @@ span {
     align-items: center;
     flex-direction: row;
   }
-  
+
 }
