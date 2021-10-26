@@ -154,6 +154,10 @@ span {
   height: 20px;
 }
 
+.nav-exit {
+  color: red;
+}
+
 @media (max-width: 768px) {
   .navbar input[type=text] {
     width: 165px;
