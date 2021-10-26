@@ -16,6 +16,7 @@ export const theme = {
       400: '#BFBFBF',
       500: '#5C677D',
       600: '#C4C4C4',
+      700: '#BFBFBF',
     },
   },
   font: {
