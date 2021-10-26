@@ -38,7 +38,7 @@ body {
   display: flex;
   justify-content: start;
   align-items: center;
-  padding: 8px 0px 8px 16px;
+  padding: 5px 0 5px 16px;
   list-style: none;
   height: 50px;
 }
@@ -57,7 +57,7 @@ body {
 
 
 .nav-text svg {
-  color: #05DEBD;
+  color: #fff;
 }
 
 .nav-text a:hover  {
@@ -133,6 +133,11 @@ span {
   background: #C4C4C4;
 }
 
+.userIcon svg {
+  width: 15px;
+  height: 15px;
+}
+
 .bell {
   width: 50px;
   height: 40px;
@@ -142,6 +147,24 @@ span {
   align-items: center;
   justify-content:center;
   color: #A1A8CF;
+}
+
+.bell svg {
+  width: 20px;
+  height: 20px;
+}
+
+.nav-exit a {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 4px;
+  color: white;
+  background: red;
+  margin: 10px 0 0 30px;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {
@@ -155,7 +178,7 @@ span {
     color: #CBCBCB;
     margin-left: 40px;
   }
-  
+
 }
 
 @media (max-width: 555px) {
@@ -167,7 +190,7 @@ span {
   .navbar button {
     width: 20px;
     height: 28px;
-  } 
+  }
 
   .navbar {
     height: 40px;
@@ -177,5 +200,5 @@ span {
     align-items: center;
     flex-direction: row;
   }
-  
+
 }

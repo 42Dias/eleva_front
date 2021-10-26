@@ -1,14 +1,15 @@
 import React from 'react'
 import { FiPlus } from 'react-icons/fi'
 import IMAGE from '../../assets/material.png'
+import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 
 export function Buy() {
   return (
     <S.ContainerBuy>
+      <Navbar />
       <S.BoxBuy>
         <S.ContainerPurchases>
-          <p>Categoria</p>
           <S.Items>
             <img src={IMAGE} alt='exemplo de produto' />
             <h3>Titulo do produto</h3>
