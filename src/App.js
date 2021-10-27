@@ -15,6 +15,7 @@ import {
   APPROVEUSER,
   SALEDETAILS,
   APPROVEORDERS,
+  ORDERCONFIRMATION,
   BUYPRODS,
   PRODSINGLE,
 } from './routes'
@@ -31,6 +32,7 @@ import {
   ApproveUser,
   SaleDetails,
   ApproveOrders,
+  OrderConfirmation,
   BuyProds,
   ProdSingle,
 } from './pages'
@@ -51,6 +53,7 @@ export function App() {
         <Route path={APPROVEUSER} exact component={ApproveUser} />
         <Route path={SALEDETAILS} exact component={SaleDetails} />
         <Route path={APPROVEORDERS} exact component={ApproveOrders} />
+        <Route path={ORDERCONFIRMATION} exact component={OrderConfirmation} />
         <Route path={BUYPRODS} exact component={BuyProds} />
         <Route path={PRODSINGLE} exact component={ProdSingle} />
       </Switch>
