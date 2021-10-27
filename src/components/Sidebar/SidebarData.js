@@ -1,5 +1,6 @@
 import React from 'react'
 import * as FaIcons from 'react-icons/fa'
+import { FiArrowLeft, FiTag } from 'react-icons/fi'
 
 export const SidebarData = [
   {
@@ -16,13 +17,19 @@ export const SidebarData = [
   },
   {
     title: 'Meus pedidos',
-    path: '/products',
+    path: '/buy',
     icon: <FaIcons.FaBox />,
     cName: 'nav-text',
   },
   {
+    title: 'Cadastrar produto',
+    path: '/registerproduct',
+    icon: <FiTag />,
+    cName: 'nav-text',
+  },
+  {
     title: 'Cadastrar fornecedor',
-    path: '/cadastrar-fornecedor',
+    path: '/register-supplier',
     icon: <FaIcons.FaPlus />,
     cName: 'nav-text',
   },
@@ -40,7 +47,7 @@ export const SidebarData = [
   },
   {
     title: 'Aprovar usuários',
-    path: '/aprovar-usuario',
+    path: '/approve-user',
     icon: <FaIcons.FaUserPlus />,
     cName: 'nav-text',
   },
@@ -49,5 +56,11 @@ export const SidebarData = [
     path: '/aprovar-produtos',
     icon: <FaIcons.FaCheck />,
     cName: 'nav-text',
+  },
+  {
+    title: 'Sair',
+    path: '/login',
+    icon: <FiArrowLeft />,
+    cName: 'nav-exit',
   },
 ]
