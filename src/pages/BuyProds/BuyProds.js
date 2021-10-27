@@ -2,19 +2,14 @@ import React from 'react'
 import Navbar from '../../components/Sidebar/Sidebar'
 import Accordion from '../../components/Accordion/Accordion'
 import item from './../../assets/item.png'
-import deleteIcon from './../../assets/delete.svg'
 import * as S from './styled'
 
-export function ApproveOrders() {
+export function BuyProds() {
   return (
     <>
       <Navbar />
       <S.ContainerApprove>
-        <S.StoreUserApprove>
-          <p>Código: XXX</p>
-          <p>Loja: XXXXX</p>
-        </S.StoreUserApprove>
-        <h2>Validação</h2>
+        <h2>Comprar</h2>
 
         <S.GridValidation>
           <span>Cod. barras</span>
@@ -33,11 +28,21 @@ export function ApproveOrders() {
           status='status-approve'
           amount='2 '
           content={item}
-          conteudo='prod 1'
-          preco='R$40,00'
-          informacoes='info do produto'
-          iconClass='btnDelete'
-          icon={deleteIcon}
+          lote=' 400'
+          info=' 400'
+          lastprice=' 400'
+          quantidadeporembalagem=' 400'
+          leadtime=' 400'
+          datadefaturamento=' 400'
+          myProp={
+            <input
+              type='number'
+              id='quantity'
+              name='quantity'
+              min='1'
+              max='9999999'
+            />
+          }
         />
         <Accordion
           codeBarras='321312421321321'
@@ -48,11 +53,21 @@ export function ApproveOrders() {
           status='status-await'
           amount='12 '
           content={item}
-          conteudo='prod 2'
-          preco='R$40,00'
-          informacoes='info do produto'
-          iconClass='btnDelete'
-          icon={deleteIcon}
+          lote='400'
+          info='400'
+          lastprice='400'
+          quantidadeporembalagem='400'
+          leadtime='400'
+          datadefaturamento='400'
+          myProp={
+            <input
+              type='number'
+              id='quantity'
+              name='quantity'
+              min='1'
+              max='9999999'
+            />
+          }
         />
         <Accordion
           codeBarras='321312421321321'
@@ -63,11 +78,21 @@ export function ApproveOrders() {
           status='status-packaging'
           amount='5 '
           content={item}
-          conteudo='prod 3'
-          preco='R$40,00'
-          informacoes='info do produto'
-          iconClass='btnDelete'
-          icon={deleteIcon}
+          lote='400'
+          info='400'
+          lastprice='400'
+          quantidadeporembalagem='400'
+          leadtime='400'
+          datadefaturamento='400'
+          myProp={
+            <input
+              type='number'
+              id='quantity'
+              name='quantity'
+              min='1'
+              max='9999999'
+            />
+          }
         />
       </S.ContainerApprove>
     </>

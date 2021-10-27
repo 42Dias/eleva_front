@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { FaRegTrashAlt } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 import Chevron from './Chevron'
 
 import './Accordion.css'
@@ -27,7 +27,7 @@ function Accordion(props) {
         <p>{props.code}</p>
         <p>{props.name}</p>
         <span className={props.status}>{props.approve}</span>
-        <p>{props.amount}</p>
+        <p>{props.amount}Produtos</p>
         <Chevron className={`${setRotate}`} width={10} fill={'#777'} />
       </button>
       <div
@@ -35,14 +35,22 @@ function Accordion(props) {
         style={{ maxHeight: `${setHeight}` }}
         className='accordion_content'
       >
-        <img src={props.content} alt='' />
+        <Link to='/produto-1'>
+          <img src={props.content} alt='' />
+        </Link>
         <p>{props.conteudo}</p>
         <p>{props.preco}</p>
         <p>{props.informacoes}</p>
-        <p>{props.name}</p>
-        <a className='btnDelete'>
-          <FaRegTrashAlt />
+        <p>Lote minino:{props.lote}</p>
+        <p>Informações do produto:{props.info}</p>
+        <p>Preço da última venda:{props.lastprice}</p>
+        <p>Quantidade por embalagem:{props.quantidadeporembalagem}</p>
+        <p>Lead time: {props.leadtime}</p>
+        <p>Data de faturamento:{props.datadefaturamento}</p>
+        <a className={props.iconClass}>
+          <img src={props.icon} alt='' />
         </a>
+        <span>{props.myProp}</span>
       </div>
     </div>
   )
