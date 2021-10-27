@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/Sidebar/Sidebar'
-import luminaria from './../../assets/luminaria.png'
+import luminariaSingle from './../../assets/luminaria.png'
 import * as S from './styled'
 
 export function ProdSingle() {
@@ -11,7 +11,7 @@ export function ProdSingle() {
       <S.ContainerProdSingle>
         <S.ProdImage>
           <h1>Luminária</h1>
-          <img src={luminaria} alt='' />
+          <img src={luminariaSingle} alt='' />
           <strong>R$ 339,90</strong>
         </S.ProdImage>
 
