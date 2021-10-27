@@ -14,6 +14,7 @@ import {
   REGISTERSUPPLIER,
   APPROVEUSER,
   APPROVEORDERS,
+  BUYPRODS,
 } from './routes'
 import {
   Login,
@@ -27,6 +28,7 @@ import {
   RegisterSupplier,
   ApproveUser,
   ApproveOrders,
+  BuyProds,
 } from './pages'
 
 export function App() {
@@ -44,6 +46,7 @@ export function App() {
         <Route path={REGISTERSUPPLIER} exact component={RegisterSupplier} />
         <Route path={APPROVEUSER} exact component={ApproveUser} />
         <Route path={APPROVEORDERS} exact component={ApproveOrders} />
+        <Route path={BUYPRODS} exact component={BuyProds} />
       </Switch>
       <GlobalStyle />
     </BrowserRouter>
