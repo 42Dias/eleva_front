@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/Sidebar/Sidebar'
-import luminariaSingle from './../../assets/luminaria.png'
+import luminariaSingle from './../../assets/luminariaSingle.png'
 import * as S from './styled'
 
 export function ProdSingle() {
