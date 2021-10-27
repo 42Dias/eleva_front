@@ -47,16 +47,23 @@ export const Product = styled.div`
 
   p {
     font-size: 14px;
-    color: ${theme.colors.neutral[700]};
+    color: ${theme.colors.blue};
     font-weight: 600;
   }
 
   li {
-    color: ${theme.colors.blue};
+    color: ${theme.colors.neutral[500]};
+    margin: 0px 5px 0px 0;
+    padding: 4px;
   }
 
-  span {
+  strong {
     color: ${theme.colors.green};
     font-weight: bold;
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
   }
 `

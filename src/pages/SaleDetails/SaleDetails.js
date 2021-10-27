@@ -17,11 +17,11 @@ export function SaleDetails() {
 
         <S.Content>
           <S.Product>
+            <img src={IMAGE} alt='image product' />
             <ul>
               <p>Luminária</p>
               <li>Quantidade: 2</li>
             </ul>
-            <img src={IMAGE} alt='image product' />
           </S.Product>
         </S.Content>
 
@@ -67,18 +67,18 @@ export function SaleDetails() {
             <ul>
               <p>Detalhes</p>
               <li>
-                Data de solicitação da compra: <span>00/00/0000</span>
+                Data da compra: <strong>00/00/0000</strong>
               </li>
               <li>
-                Produto <span>R$ 00,00</span>
+                Produto: <strong>R$ 00,00</strong>
               </li>
               <li>
-                Envio <span>R$ 00,00</span>
+                Envio: <strong>R$ 00,00</strong>
               </li>
               <li>Forma de pagamento: XXXXX</li>
               <li>Data para faturamento: 00/00/0000</li>
               <li>
-                Total: <span>R$ 00,00 </span>6x <span>R$ 00,00</span>
+                Total: <strong>R$ 00,00 </strong>
               </li>
               <li>Sem juros</li>
             </ul>
