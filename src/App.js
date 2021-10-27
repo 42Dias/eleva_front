@@ -11,6 +11,7 @@ import {
   ACCEPTTERMS,
   REGISTERSUPPLIER,
   APPROVEUSER,
+  APPROVEORDERS,
 } from './routes'
 import {
   Login,
@@ -21,6 +22,7 @@ import {
   AcceptTerms,
   RegisterSupplier,
   ApproveUser,
+  ApproveOrders,
 } from './pages'
 
 export function App() {
@@ -35,6 +37,7 @@ export function App() {
         <Route path={ACCEPTTERMS} exact component={AcceptTerms} />
         <Route path={REGISTERSUPPLIER} exact component={RegisterSupplier} />
         <Route path={APPROVEUSER} exact component={ApproveUser} />
+        <Route path={APPROVEORDERS} exact component={ApproveOrders} />
       </Switch>
       <GlobalStyle />
     </BrowserRouter>
