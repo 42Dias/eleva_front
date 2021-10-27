@@ -13,6 +13,7 @@ import {
   ACCEPTTERMS,
   REGISTERSUPPLIER,
   APPROVEUSER,
+  SALEDETAILS,
   APPROVEORDERS,
 } from './routes'
 import {
@@ -26,6 +27,7 @@ import {
   AcceptTerms,
   RegisterSupplier,
   ApproveUser,
+  SaleDetails,
   ApproveOrders,
 } from './pages'
 
@@ -43,6 +45,7 @@ export function App() {
         <Route path={ACCEPTTERMS} exact component={AcceptTerms} />
         <Route path={REGISTERSUPPLIER} exact component={RegisterSupplier} />
         <Route path={APPROVEUSER} exact component={ApproveUser} />
+        <Route path={SALEDETAILS} exact component={SaleDetails} />
         <Route path={APPROVEORDERS} exact component={ApproveOrders} />
       </Switch>
       <GlobalStyle />
