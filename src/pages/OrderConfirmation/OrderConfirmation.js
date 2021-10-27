@@ -4,26 +4,30 @@ import Navbar from '../../components/Sidebar/Sidebar'
 import Accordion from '../../components/Accordion/Accordion'
 import item from './../../assets/item.png'
 import * as S from './styled'
+import elo from './../../assets/elo.svg'
+import mastercard from './../../assets/mastercard.svg'
+import paypal from './../../assets/paypal.svg'
+import visa from './../../assets/visa.svg'
 
 export function OrderConfirmation() {
   return (
     <>
       <Navbar />
-      <S.ContainerApprove>
-        <S.StoreUserApprove>
+      <S.ContainerConfirmation>
+        <S.StoreUserConfirmation>
           <p>Fornecedor: XXX</p>
           <p>Loja: XXXXX</p>
-        </S.StoreUserApprove>
+        </S.StoreUserConfirmation>
         <h2>Confirmação</h2>
 
-        <S.GridValidation>
+        <S.GridConfirmation>
           <span>Código de barras</span>
           <span>Produto SKU</span>
           <span>Código</span>
           <span>Nome</span>
           <span>Status</span>
           <span>Quantidade</span>
-        </S.GridValidation>
+        </S.GridConfirmation>
         <Accordion
           codeBarras='321312421321321'
           prodSku='Luminária'
@@ -69,7 +73,42 @@ export function OrderConfirmation() {
         <p>
           Total: <strong>R$ 219,99</strong>
         </p>
-      </S.ContainerApprove>
+
+        <h3>Pagamento</h3>
+        <S.BoxImage>
+          <button>
+            <img src={mastercard} alt='mastercard' />
+          </button>
+          <button>
+            <img src={visa} alt='visa' />
+          </button>
+          <button>
+            <img src={paypal} alt='paypal' />
+          </button>
+          <button>
+            <img src={elo} alt='elo' />
+          </button>
+        </S.BoxImage>
+
+        <S.ContentForm>
+          <S.Payment>
+            <label htmlFor='card-number'>Número do cartão</label>
+            <input type='number' id='card-number' />
+          </S.Payment>
+        </S.ContentForm>
+        <S.ContentForm>
+          <S.Payment>
+            <label htmlFor='data'>Data de validade</label>
+            <input type='date' id='data' />
+          </S.Payment>
+        </S.ContentForm>
+        <S.ContentForm>
+          <S.Payment>
+            <label htmlFor='cvv'>CVV</label>
+            <input type='number' id='cvv' />
+          </S.Payment>
+        </S.ContentForm>
+      </S.ContainerConfirmation>
     </>
   )
 }
