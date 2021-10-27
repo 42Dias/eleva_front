@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap");
+
+.accordion_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between !important;
+  background: #FAFAFA !important;
+  margin-top: 15px;
+}
+
+.accordion {
+  background: #FAFAFA !important;
+  border-radius: 5px;
+  color: #BFBFBF;
+  cursor: pointer;
+  padding: 18px;
+  border: none;
+  outline: none;
+  transition: background-color 0.6s ease;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  justify-items: space-between;
+  align-items: center;
+}
+
+.accordion p {
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.accordion__title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: left;
+}
+
+.accordion__icon {
+  margin-left: auto;
+  transition: transform 0.6s ease;
+}
+
+.rotate {
+  transform: rotate(90deg);
+}
+
+.accordion_content {
+  background-color: white;
+  overflow-y: hidden;
+  transition: 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.accordion_content p {
+  color: #BFBFBF;
+  font-size: 14px;
+}
+
+
+.status-approve {
+  color: #05debd;
+  background: rgba(5, 222, 189, 0.15);
+  padding: 8px 8px;
+  border-radius: 5px;
+}
+
+.status-await {
+  color: #AA2323;
+  background: rgba(170, 35, 35, 0.15);
+  padding: 8px 8px;
+  border-radius: 5px;
+}
+
+.status-packaging {
+  color: #F79E1B;
+  background: rgba(183, 149, 30, 0.15);
+  padding: 8px 8px;
+  border-radius: 5px;
+}
+
+a.btnDelete {
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  background: #AA2323;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+a.btnDelete svg {
+  color: white;
+  font-size: 18px;
+}
