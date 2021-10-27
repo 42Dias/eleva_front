@@ -15,6 +15,7 @@ import {
   APPROVEUSER,
   APPROVEORDERS,
   BUYPRODS,
+  PRODSINGLE,
 } from './routes'
 import {
   Login,
@@ -29,6 +30,7 @@ import {
   ApproveUser,
   ApproveOrders,
   BuyProds,
+  ProdSingle,
 } from './pages'
 
 export function App() {
@@ -47,6 +49,7 @@ export function App() {
         <Route path={APPROVEUSER} exact component={ApproveUser} />
         <Route path={APPROVEORDERS} exact component={ApproveOrders} />
         <Route path={BUYPRODS} exact component={BuyProds} />
+        <Route path={PRODSINGLE} exact component={ProdSingle} />
       </Switch>
       <GlobalStyle />
     </BrowserRouter>

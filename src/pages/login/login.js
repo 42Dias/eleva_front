@@ -144,7 +144,7 @@ export function Login() {
           >
             <Link to='/register'>Criar uma conta</Link>
             <FiMoreHorizontal size={14} />
-            <Link>Entrar como</Link>
+            <Link to='/'>Entrar como</Link>
           </S.ContentCreateAccount>
         </S.BoxLogin>
       </S.GridLogin>
