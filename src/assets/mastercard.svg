@@ -7,7 +7,11 @@
 </g>
 <defs>
 <clipPath id="clip0_137:2450">
+<<<<<<< HEAD
+<rect x="24.8182" y="8" width="59.0909" height="50" rx="5" fill="white"/>
+=======
 <rect width="59.0909" height="50" fill="white" transform="translate(24.8182 8)"/>
+>>>>>>> 99338a458d789941182b277b226a7f615e088c79
 </clipPath>
 </defs>
 </svg>
