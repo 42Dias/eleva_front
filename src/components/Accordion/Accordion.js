@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import Chevron from './Chevron'
 
 import './Accordion.css'
@@ -34,7 +35,9 @@ function Accordion(props) {
         style={{ maxHeight: `${setHeight}` }}
         className='accordion_content'
       >
-        <img src={props.content} alt='' />
+        <Link to='/produto-1'>
+          <img src={props.content} alt='' />
+        </Link>
         <p>{props.conteudo}</p>
         <p>{props.preco}</p>
         <p>{props.informacoes}</p>
