@@ -17,7 +17,7 @@ export const SidebarData = [
   },
   {
     title: 'Meus pedidos',
-    path: '/buy',
+    path: '/meus-pedidos',
     icon: <FaIcons.FaBox />,
     cName: 'nav-text',
   },
