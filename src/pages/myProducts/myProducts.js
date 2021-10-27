@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { PRODUCTS } from '../../routes'
 import IMAGE from '../../assets/imageinit.svg'
 import Navbar from '../../components/Sidebar/Sidebar'
-import Footer from './../../components/Footer'
+import Footer from '../../components/Footer'
 import * as S from './styled'
 
 export function MyProducts() {

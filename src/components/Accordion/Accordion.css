@@ -52,12 +52,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 
 .accordion_content p {
   color: #BFBFBF;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 
@@ -96,4 +96,12 @@ a.btnDelete {
 a.btnDelete svg {
   color: white;
   font-size: 18px;
+}
+
+input[type='number'] {
+  border: 1px solid #BFBFBF;
+  width: 90px;
+  height: 29px;
+  color: #05DEBD;
+  padding: 0 5px;
 }
