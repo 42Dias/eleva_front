@@ -11,7 +11,9 @@ export function ErrorPage() {
       <S.ContainerError>
         <S.ErrorPage>
           <img src={imageError} alt='' />
-          <Link className='btnError'>Voltar ao início</Link>
+          <Link to='myproducts' className='btnError'>
+            Voltar ao início
+          </Link>
         </S.ErrorPage>
       </S.ContainerError>
     </>
