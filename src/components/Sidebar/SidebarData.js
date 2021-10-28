@@ -35,7 +35,7 @@ export const SidebarData = [
   },
   {
     title: 'Histórico de pedidos',
-    path: '/messages',
+    path: '/historico-de-pedidos',
     icon: <FaIcons.FaHistory />,
     cName: 'nav-text',
   },
