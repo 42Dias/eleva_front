@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaRegTrashAlt } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 import Navbar from '../../components/Sidebar/Sidebar'
 import Accordion from '../../components/Accordion/Accordion'
 import item from './../../assets/item.png'
@@ -96,17 +97,20 @@ export function OrderConfirmation() {
             <input type='number' id='card-number' />
           </S.Payment>
         </S.ContentForm>
+
         <S.ContentForm>
           <S.Payment>
             <label htmlFor='data'>Data de validade</label>
             <input type='date' id='data' />
           </S.Payment>
         </S.ContentForm>
+
         <S.ContentForm>
           <S.Payment>
             <label htmlFor='cvv'>CVV</label>
             <input type='number' id='cvv' />
           </S.Payment>
+          <Link to='/sale-details'>Continuar</Link>
         </S.ContentForm>
       </S.ContainerConfirmation>
     </>
