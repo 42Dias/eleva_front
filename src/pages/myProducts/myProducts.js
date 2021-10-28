@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { PRODUCTS } from '../../routes'
 import IMAGE from '../../assets/imageinit.svg'
 import Navbar from '../../components/Sidebar/Sidebar'
 import Footer from '../../components/Footer'
@@ -14,7 +13,7 @@ export function MyProducts() {
         <img src={IMAGE} alt='imagem inicial' />
       </S.BoxImage>
       <S.Button>
-        <Link to={PRODUCTS}>Comece a comprar</Link>
+        <Link to='/comprar'>Comece a comprar</Link>
       </S.Button>
       <Footer />
     </S.ContainerLogin>
