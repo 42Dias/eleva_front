@@ -18,6 +18,7 @@ import {
   ORDERCONFIRMATION,
   BUYPRODS,
   PRODSINGLE,
+  PRICENEGOTIATION,
 } from './routes'
 import {
   Login,
@@ -35,6 +36,7 @@ import {
   OrderConfirmation,
   BuyProds,
   ProdSingle,
+  PriceNegotiation,
 } from './pages'
 
 export function App() {
@@ -56,6 +58,7 @@ export function App() {
         <Route path={ORDERCONFIRMATION} exact component={OrderConfirmation} />
         <Route path={BUYPRODS} exact component={BuyProds} />
         <Route path={PRODSINGLE} exact component={ProdSingle} />
+        <Route path={PRICENEGOTIATION} exact component={PriceNegotiation} />
       </Switch>
       <GlobalStyle />
     </BrowserRouter>
