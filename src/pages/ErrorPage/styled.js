@@ -40,5 +40,6 @@ export const ErrorPage = styled.div`
     background: ${theme.colors.green};
     border-radius: 5px;
     color: ${theme.colors.white};
+    font-size: 16px;
   }
 `
