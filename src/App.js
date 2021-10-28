@@ -19,6 +19,8 @@ import {
   BUYPRODS,
   PRODSINGLE,
   MYREQUESTS,
+  HISTORY,
+  ERRORPAGE,
 } from './routes'
 import {
   Login,
@@ -37,6 +39,8 @@ import {
   BuyProds,
   ProdSingle,
   MyRequests,
+  History,
+  ErrorPage,
 } from './pages'
 
 export function App() {
@@ -59,6 +63,8 @@ export function App() {
         <Route path={BUYPRODS} exact component={BuyProds} />
         <Route path={PRODSINGLE} exact component={ProdSingle} />
         <Route path={MYREQUESTS} exact component={MyRequests} />
+        <Route path={HISTORY} exact component={History} />
+        <Route path={ERRORPAGE} exact component={ErrorPage} />
       </Switch>
       <GlobalStyle />
     </BrowserRouter>
