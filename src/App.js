@@ -18,6 +18,7 @@ import {
   ORDERCONFIRMATION,
   BUYPRODS,
   PRODSINGLE,
+  PRICENEGOTIATION,
   MYREQUESTS,
   HISTORY,
   ERRORPAGE,
@@ -38,6 +39,7 @@ import {
   OrderConfirmation,
   BuyProds,
   ProdSingle,
+  PriceNegotiation,
   MyRequests,
   History,
   ErrorPage,
@@ -62,6 +64,7 @@ export function App() {
         <Route path={ORDERCONFIRMATION} exact component={OrderConfirmation} />
         <Route path={BUYPRODS} exact component={BuyProds} />
         <Route path={PRODSINGLE} exact component={ProdSingle} />
+        <Route path={PRICENEGOTIATION} exact component={PriceNegotiation} />
         <Route path={MYREQUESTS} exact component={MyRequests} />
         <Route path={HISTORY} exact component={History} />
         <Route path={ERRORPAGE} exact component={ErrorPage} />
