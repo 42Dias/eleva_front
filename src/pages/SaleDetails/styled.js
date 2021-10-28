@@ -29,7 +29,7 @@ export const ContainerDetails = styled.div`
 
 export const Content = styled.div`
   width: 100%;
-  height: 150px;
+  height: 160px;
   background: ${theme.colors.neutral[300]};
   border-radius: 5px;
   padding-right: 15px;

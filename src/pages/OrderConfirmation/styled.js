@@ -20,6 +20,16 @@ export const ContainerConfirmation = styled.div`
     font-size: 24px;
     padding: 20px 0;
   }
+
+  p {
+    color: ${theme.colors.neutral[400]};
+    font-size: 15px;
+    margin: 5px;
+
+    strong {
+      color: ${theme.colors.green};
+    }
+  }
 `
 
 export const StoreUserConfirmation = styled.div`
@@ -57,6 +67,7 @@ export const BoxImage = styled.div`
     width: 115px;
     height: 70px;
     border-radius: 5px;
+    margin: 10px;
 
     &:focus {
       border: 2px solid ${theme.colors.green};
@@ -93,6 +104,18 @@ export const ContentForm = styled.div`
     font-size: 14px;
     color: ${theme.colors.neutral[0]};
   }
+
+  a {
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: ${theme.colors.green};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${theme.colors.white};
+    margin: auto;
+  }
 `
 
 export const Payment = styled.div`
@@ -101,7 +124,7 @@ export const Payment = styled.div`
   margin: 0 auto;
 
   input {
-    width: 710px;
+    width: 400px;
     height: 48px;
     box-sizing: border-box;
     border-radius: 4px;
