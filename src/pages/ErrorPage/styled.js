@@ -4,6 +4,7 @@ import { theme } from '../../ui/styles/theme'
 export const ContainerError = styled.div`
   height: 100%;
   padding: 40px 15px;
+
   h2 {
     font-size: 24px;
     color: ${theme.colors.neutral[0]};
@@ -28,6 +29,11 @@ export const ErrorPage = styled.div`
     img {
       width: 100%;
     }
+  }
+
+  img {
+    width: 400px;
+    height: 400px;
   }
 
   a.btnError {

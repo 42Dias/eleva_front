@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import imageError from '../../assets/image-error.png'
+import imageError from '../../assets/image-error.svg'
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 
