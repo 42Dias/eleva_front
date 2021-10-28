@@ -17,7 +17,7 @@ export const SidebarData = [
   },
   {
     title: 'Meus pedidos',
-    path: '/buy',
+    path: '/meus-pedidos',
     icon: <FaIcons.FaBox />,
     cName: 'nav-text',
   },
@@ -35,7 +35,7 @@ export const SidebarData = [
   },
   {
     title: 'Histórico de pedidos',
-    path: '/messages',
+    path: '/historico-de-pedidos',
     icon: <FaIcons.FaHistory />,
     cName: 'nav-text',
   },
