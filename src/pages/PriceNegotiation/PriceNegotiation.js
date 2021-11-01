@@ -36,8 +36,8 @@ export function PriceNegotiation() {
               <input type='text' id='freight' />
             </S.Price>
           </S.ContentSupplierForm>
-          <Link to='/myproducts'>Salvar</Link>
-          <Link to='/myproducts' style={{ background: '#AA2323' }}>
+          <Link to='/home'>Salvar</Link>
+          <Link to='/home' style={{ background: '#AA2323' }}>
             Cancelar
           </Link>
         </S.RegisterSupplier>

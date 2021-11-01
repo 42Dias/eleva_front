@@ -11,7 +11,7 @@ export function SaleDetails() {
       <Navbar />
       <S.ContainerDetails>
         <h1>Detalhes da venda</h1>
-        <Link className='back' to='/myproducts'>
+        <Link className='back' to='/meus-pedidos'>
           <FiChevronLeft size={18} />
         </Link>
 

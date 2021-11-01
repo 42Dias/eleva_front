@@ -1,11 +1,11 @@
 import React from 'react'
 import * as FaIcons from 'react-icons/fa'
-import { FiArrowLeft, FiTag } from 'react-icons/fi'
+import { FiTag } from 'react-icons/fi'
 
 export const SidebarData = [
   {
     title: 'Home',
-    path: '/myproducts',
+    path: '/home',
     icon: <FaIcons.FaHome />,
     cName: 'nav-text',
   },
@@ -23,13 +23,13 @@ export const SidebarData = [
   },
   {
     title: 'Cadastrar produto',
-    path: '/registerproduct',
+    path: '/cadastrar-produto',
     icon: <FiTag />,
     cName: 'nav-text',
   },
   {
     title: 'Cadastrar fornecedor',
-    path: '/register-supplier',
+    path: '/cadastrar-fornecedor',
     icon: <FaIcons.FaPlus />,
     cName: 'nav-text',
   },
@@ -41,13 +41,13 @@ export const SidebarData = [
   },
   {
     title: 'Detalhes da venda',
-    path: '/sale-details',
+    path: '/detalhes-da-venda',
     icon: <FaIcons.FaMoneyBillAlt />,
     cName: 'nav-text',
   },
   {
     title: 'Aprovar usuários',
-    path: '/approve-user',
+    path: '/aprovar-usuario',
     icon: <FaIcons.FaUserPlus />,
     cName: 'nav-text',
   },
@@ -60,7 +60,7 @@ export const SidebarData = [
   {
     title: 'Sair',
     path: '/login',
-    icon: <FiArrowLeft />,
+    icon: <FaIcons.FaArrowLeft />,
     cName: 'nav-exit',
   },
 ]

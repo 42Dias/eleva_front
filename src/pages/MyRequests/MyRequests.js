@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaHistory, FaEye, FaFontAwesomeFlag } from 'react-icons/fa'
+import { FaHistory, FaEye } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
@@ -29,11 +29,8 @@ export function MyRequests() {
           <p>XXXXXXX</p>
           <p className='status-approve'>Aprovado</p>
           <S.ContentIconsPedidos>
-            <Link className='eye'>
+            <Link to='/detalhes-da-venda' className='eye'>
               <FaEye />
-            </Link>
-            <Link className='flag'>
-              <FaFontAwesomeFlag />
             </Link>
           </S.ContentIconsPedidos>
         </S.PedidosContainer>
@@ -45,11 +42,8 @@ export function MyRequests() {
           <p>XXXXXXX</p>
           <p className='status-packaging'>Embalagem</p>
           <S.ContentIconsPedidos>
-            <Link className='eye'>
+            <Link to='/detalhes-da-venda' className='eye'>
               <FaEye />
-            </Link>
-            <Link className='flag'>
-              <FaFontAwesomeFlag />
             </Link>
           </S.ContentIconsPedidos>
         </S.PedidosContainer>
@@ -61,11 +55,8 @@ export function MyRequests() {
           <p>XXXXXXX</p>
           <p className='status-await'>Esperando</p>
           <S.ContentIconsPedidos>
-            <Link className='eye'>
+            <Link to='/detalhes-da-venda' className='eye'>
               <FaEye />
-            </Link>
-            <Link className='flag'>
-              <FaFontAwesomeFlag />
             </Link>
           </S.ContentIconsPedidos>
         </S.PedidosContainer>
