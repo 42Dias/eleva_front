@@ -110,7 +110,7 @@ export function OrderConfirmation() {
             <label htmlFor='cvv'>CVV</label>
             <input type='number' id='cvv' />
           </S.Payment>
-          <Link to='/sale-details'>Continuar</Link>
+          <Link to='/detalhes-da-venda'>Continuar</Link>
         </S.ContentForm>
       </S.ContainerConfirmation>
     </>

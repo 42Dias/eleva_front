@@ -205,10 +205,10 @@ export function RegisterProduct() {
             </select>
           </S.SelectItems>
         </S.RegisterSupplier>
-        <Link to='/myproducts' style={{ background: '#AA2323' }}>
+        <Link to='/home' style={{ background: '#AA2323' }}>
           Cancelar
         </Link>
-        <Link to='/products'>Salvar</Link>
+        <Link to='/home'>Salvar</Link>
       </S.ContainerRegisterSupplier>
     </>
   )

@@ -10,7 +10,7 @@ export function History() {
       <Navbar />
       <S.ContainerHistory>
         <h1>Histórico</h1>
-        <Link className='backIcon'>
+        <Link to='/home' className='backIcon'>
           <FaArrowLeft />
         </Link>
 
@@ -29,7 +29,7 @@ export function History() {
           <p>XXXXXXX</p>
           <p className='status-approve'>Em trânsito</p>
           <S.ContentIconsHistory>
-            <Link to='/sale-details' className='eye'>
+            <Link to='/detalhes-da-venda' className='eye'>
               <FaEye />
             </Link>
           </S.ContentIconsHistory>
@@ -42,7 +42,7 @@ export function History() {
           <p>XXXXXXX</p>
           <p className='status-packaging'>Despachado</p>
           <S.ContentIconsHistory>
-            <Link to='/sale-details' className='eye'>
+            <Link to='/detalhes-da-venda' className='eye'>
               <FaEye />
             </Link>
           </S.ContentIconsHistory>
@@ -55,7 +55,7 @@ export function History() {
           <p>XXXXXXX</p>
           <p className='status-await'>Em aberto</p>
           <S.ContentIconsHistory>
-            <Link to='/sale-details' className='eye'>
+            <Link to='/detalhes-da-venda' className='eye'>
               <FaEye />
             </Link>
           </S.ContentIconsHistory>
@@ -68,7 +68,7 @@ export function History() {
           <p>XXXXXXX</p>
           <p className='status-approve'>Finalizado</p>
           <S.ContentIconsHistory>
-            <Link to='/sale-details' className='eye'>
+            <Link to='/detalhes-da-venda' className='eye'>
               <FaEye />
             </Link>
           </S.ContentIconsHistory>
@@ -81,7 +81,7 @@ export function History() {
           <p>XXXXXXX</p>
           <p className='status-approve'>Confirmado</p>
           <S.ContentIconsHistory>
-            <Link to='/sale-details' className='eye'>
+            <Link to='/detalhes-da-venda' className='eye'>
               <FaEye />
             </Link>
           </S.ContentIconsHistory>
@@ -94,7 +94,7 @@ export function History() {
           <p>XXXXXXX</p>
           <p className='status-await'>Aguardando</p>
           <S.ContentIconsHistory>
-            <Link to='/sale-details' className='eye'>
+            <Link to='/detalhes-da-venda' className='eye'>
               <FaEye />
             </Link>
           </S.ContentIconsHistory>
@@ -107,7 +107,7 @@ export function History() {
           <p>XXXXXXX</p>
           <p className='status-packaging'>Embalagem</p>
           <S.ContentIconsHistory>
-            <Link to='/sale-details' className='eye'>
+            <Link to='/detalhes-da-venda' className='eye'>
               <FaEye />
             </Link>
           </S.ContentIconsHistory>
