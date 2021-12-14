@@ -1,49 +1,18 @@
 import styled from 'styled-components/macro'
+import banner from '../../assets/bannerLogin.png'
 import { theme } from '../../ui/styles/theme'
 
 export const ContainerLogin = styled.div`
   width: 100vw;
   height: 100vh;
-`
-
-export const GridLogin = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: 100vh;
-  width: 100vw;
-`
-
-export const BoxImage = styled.div`
-  background-color: ${theme.colors.blue};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    width: 400px;
-    height: 400px;
-  }
-`
-export const BoxLogin = styled.div`
-  width: 100%;
+  background: url(${banner});
+  background-size: 100%;
+  background-repeat: no-repeat;
+  object-fit: contain;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: ${theme.colors.blue};
-
-  svg {
-    color: ${theme.colors.green};
-  }
-
-  a {
-    color: ${theme.colors.neutral[300]};
-
-    :hover {
-      opacity: 70%;
-      transition: 0.5s;
-    }
-  }
 `
 
 export const Form = styled.form`

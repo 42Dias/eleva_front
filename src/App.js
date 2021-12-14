@@ -22,6 +22,7 @@ import {
   MYREQUESTS,
   HISTORY,
   ERRORPAGE,
+  SUPPLIES,
 } from './routes'
 import {
   Login,
@@ -43,6 +44,7 @@ import {
   MyRequests,
   History,
   ErrorPage,
+  Supplies,
 } from './pages'
 
 export function App() {
@@ -67,6 +69,7 @@ export function App() {
         <Route path={PRICENEGOTIATION} exact component={PriceNegotiation} />
         <Route path={MYREQUESTS} exact component={MyRequests} />
         <Route path={HISTORY} exact component={History} />
+        <Route path={SUPPLIES} exact component={Supplies} />
         <Route path={ERRORPAGE} exact component={ErrorPage} />
       </Switch>
       <GlobalStyle />
