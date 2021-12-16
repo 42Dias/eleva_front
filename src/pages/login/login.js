@@ -3,7 +3,6 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { Link } from 'react-router-dom'
 import { FiLock, FiMoreHorizontal } from 'react-icons/fi'
-import { MYPRODUCTS } from '../../routes'
 import LOGO from '../../assets/logo.png'
 import * as S from './styled'
 
@@ -87,7 +86,7 @@ export function Login() {
             data-aos-easing='ease-in-out'
             data-aos-mirror='true'
             data-aos-once='false'
-            to={MYPRODUCTS}
+            to='/home'
           >
             Entrar
           </Link>
