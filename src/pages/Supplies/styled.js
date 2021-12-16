@@ -6,6 +6,50 @@ export const ContainerDetails = styled.div`
   height: 100%;
   padding: 0 20px;
 
+  .add {
+    background-color: ${theme.colors.green};
+    color: ${theme.colors.white};
+    width: 55px;
+    height: 40px;
+    border: 0;
+    margin: 20px 0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      color: ${theme.colors.white};
+    }
+  }
+
+  .flex-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button {
+      background-color: ${theme.colors.green};
+      color: ${theme.colors.white};
+      height: 40px;
+      width: 198px;
+      border: 0;
+      margin: 20px;
+
+      border-radius: 5px;
+
+      svg {
+        color: ${theme.colors.white};
+      }
+
+      &:last-child {
+        width: 55px;
+        height: 40px;
+        margin: 20px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
   .ant-switch-checked {
     background-color: #05debd !important;
   }
@@ -21,7 +65,7 @@ export const ContainerDetails = styled.div`
   }
 
   .ant-switch-checked .ant-switch-handle {
-    left: calc(100% - 25px - 2px);
+    left: calc(100% - 25px - 10px);
   }
 
   .ant-switch-handle::before {
@@ -38,9 +82,9 @@ export const ContainerDetails = styled.div`
   }
 
   .ant-switch-handle {
-    width: 22px;
-    height: 22px;
-    top: 2px;
+    width: 32px;
+    height: 32px;
+    top: 4px;
     border-radius: 50%;
   }
 
@@ -149,5 +193,63 @@ export const Product = styled.div`
   img {
     width: 100px;
     height: 100px;
+  }
+`
+
+//
+
+export const Container = styled.form`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  div {
+    margin: 10px 0;
+  }
+
+  input[type='checkbox'] {
+    border-radius: 50% !important;
+    width: 20px;
+    height: 20px;
+  }
+
+  input {
+    width: 375px;
+    padding: 0 1.5rem;
+    height: 4rem;
+    border-radius: 0.25rem;
+
+    border: 1px solid #f2f2f2;
+    background: white;
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 1rem;
+
+    transition: 0.6s;
+
+    &:focus {
+      border: 1px solid ${theme.colors.green};
+    }
+  }
+`
+
+export const BtnsContent = styled.div`
+  padding: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    width: 165px;
+    height: 40px;
+
+    border: 0;
+    color: white;
+
+    background: #aa2323;
+    border-radius: 5px;
+
+    &:last-child {
+      background: #05debd;
+      margin: 0 20px;
+    }
   }
 `

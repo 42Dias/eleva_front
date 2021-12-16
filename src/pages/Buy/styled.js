@@ -1,61 +1,83 @@
 import styled from 'styled-components/macro'
 import { theme } from '../../ui/styles/theme'
 
-export const ContainerBuy = styled.div`
-  width: 100vw;
-  height: 100vh;
-`
+export const ContainerBuy = styled.div``
 
 export const BoxBuy = styled.div`
+  /* display: flex; */
+  padding: 0 20px;
   display: flex;
+  flex-direction: column;
+
+  .imageList {
+    margin: 20px auto;
+    width: 80%;
+    object-fit: cover;
+    padding: 0 20px;
+  }
 `
 
-/*
-export const Aside = styled.aside`
-  p {
-    color: ${theme.colors.neutral[400]};
-    margin-right: 50rem;
-    margin-top: 20px;
-    background: ${theme.colors.neutral[50]};
-    font-size: 14px;
-  }
-` */
-
 export const ContainerPurchases = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1280px;
+  margin: 0 auto;
+`
+
+export const BoxProd = styled.div`
+  width: 250px;
+  height: 377px;
+  margin: 0 21px;
+  background: #ffffff;
+  border-radius: 5px;
 
   h3 {
     color: ${theme.colors.blue};
+    font-size: 22px;
+    padding: 0 20px;
   }
 
   p {
-    color: ${theme.colors.neutral[500]};
+    color: ${theme.colors.neutral[700]};
+    padding: 0 20px;
   }
 
-  strong {
-    color: ${theme.colors.blue};
+  img {
+    width: 250px;
+    height: 180px;
+    left: 0px;
+    top: 0px;
+    border-radius: 5px 5px 0px 0px;
   }
 
-  button {
-    width: 30px;
-    height: 25px;
-    margin-left: 140px;
-    background: ${theme.colors.green};
-    border: none;
-    border-radius: 3px;
+  span {
+    margin-left: 0;
+    color: ${theme.colors.green};
+    font-weight: bold;
+    padding: 0 20px;
+    margin-bottom: 10px;
+  }
 
-    svg {
-      color: ${theme.colors.white};
+  .btnContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+
+    button {
+      width: 142px;
+      height: 35px;
+      border-radius: 5px;
+      background: ${theme.colors.green};
+      justify-content: center;
+      border: 0;
+      color: white;
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-left: 10px;
+      }
     }
   }
-`
-
-export const Items = styled.div`
-  width: 223px;
-  height: 223px;
-  background: ${theme.colors.neutral[50]};
-  margin: 0 -20px 0 75px;
-  background: ${theme.colors.neutral[200]};
 `
