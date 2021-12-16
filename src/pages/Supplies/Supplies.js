@@ -1,8 +1,9 @@
 import React from 'react'
 
 import { Switch } from 'antd'
-import { FiFilter, FiPlus, FiX } from 'react-icons/fi'
+import { FiFilter, FiX } from 'react-icons/fi'
 import Modal from 'react-modal'
+import { Link } from 'react-router-dom'
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 import 'antd/dist/antd.css'
@@ -23,14 +24,10 @@ export function Supplies() {
     <>
       <Navbar />
       <S.ContainerDetails>
-        <button className='add'>
-          <FiPlus size={22} />
-        </button>
-
         <div className='flex-title'>
-          <h2>Suprimentos</h2>
+          <h2 style={{ position: 'relative', top: '15px' }}>Suprimentos</h2>
           <div>
-            <button>Comprar 🤑</button>
+            <Link to='/listar-produtos'>Comprar 🤑</Link>
             <button
               onClick={openModal}
               style={{ position: 'relative', top: '3px' }}
@@ -116,10 +113,12 @@ export function Supplies() {
           >
             <FiX />
           </button>
+
           <div>
             <label htmlFor=''>Nome do produto</label>
             <input type='text' placeholder='oi' />
           </div>
+
           <div>
             <label htmlFor=''>Código</label>
             <input type='text' placeholder='oi' />

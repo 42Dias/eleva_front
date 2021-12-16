@@ -27,26 +27,30 @@ export const ContainerDetails = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    button {
+    margin: 10px 0;
+    a {
       background-color: ${theme.colors.green};
       color: ${theme.colors.white};
       height: 40px;
       width: 198px;
       border: 0;
       margin: 20px;
+      padding: 10px 40px;
 
       border-radius: 5px;
+    }
+
+    button {
+      width: 55px;
+      height: 40px;
+      border: 0;
 
       svg {
-        color: ${theme.colors.white};
+        color: white;
       }
 
-      &:last-child {
-        width: 55px;
-        height: 40px;
-        margin: 20px;
-        margin-bottom: 20px;
-      }
+      background: #05debd;
+      border-radius: 5px;
     }
   }
 
@@ -201,8 +205,11 @@ export const Product = styled.div`
 export const Container = styled.form`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+
   div {
     margin: 10px 0;
+    display: flex;
+    flex-direction: column;
   }
 
   input[type='checkbox'] {

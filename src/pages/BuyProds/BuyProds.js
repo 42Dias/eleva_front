@@ -1,5 +1,6 @@
 import React from 'react'
 import Modal from 'react-modal'
+import { Link } from 'react-router-dom'
 // FiFilter,
 import { FiPlus, FiX } from 'react-icons/fi'
 import Navbar from '../../components/Sidebar/Sidebar'
@@ -34,9 +35,9 @@ export function BuyProds() {
     <>
       <Navbar />
       <S.ContainerApprove>
-        <button className='add'>
+        <Link to='/listar-produtos' className='add'>
           <FiPlus size={22} />
-        </button>
+        </Link>
         <div className='flex-title'>
           <h2>Comprar</h2>
           <div>
