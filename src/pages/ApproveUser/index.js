@@ -35,7 +35,7 @@ export  default function ApproveUser() {
           </S.IconsActionsApprove>
         </S.ContentApproveUser>
 
-        <S.ContentApproveUser>
+        {/* <S.ContentApproveUser>
           <S.StoreUser>
             <p>Luciano</p>
             <p>CNPJ: XX. XXX. XXX/0001-XX.</p>
@@ -54,9 +54,9 @@ export  default function ApproveUser() {
               </Link>
             </S.Trash>
           </S.IconsActionsApprove>
-        </S.ContentApproveUser>
+        </S.ContentApproveUser> */}
 
-        <S.ContentApproveUser>
+        {/* <S.ContentApproveUser>
           <S.StoreUser>
             <p>Luciano</p>
             <p>CNPJ: XX. XXX. XXX/0001-XX.</p>
@@ -75,9 +75,9 @@ export  default function ApproveUser() {
               </Link>
             </S.Trash>
           </S.IconsActionsApprove>
-        </S.ContentApproveUser>
+        </S.ContentApproveUser> */}
 
-        <S.ContentApproveUser>
+        {/* <S.ContentApproveUser>
           <S.StoreUser>
             <p>Luciano</p>
             <p>CNPJ: XX. XXX. XXX/0001-XX.</p>
@@ -96,9 +96,9 @@ export  default function ApproveUser() {
               </Link>
             </S.Trash>
           </S.IconsActionsApprove>
-        </S.ContentApproveUser>
+        </S.ContentApproveUser> */}
 
-        <S.ContentApproveUser>
+        {/* <S.ContentApproveUser>
           <S.StoreUser>
             <p>Luciano</p>
             <p>CNPJ: XX. XXX. XXX/0001-XX.</p>
@@ -117,9 +117,9 @@ export  default function ApproveUser() {
               </Link>
             </S.Trash>
           </S.IconsActionsApprove>
-        </S.ContentApproveUser>
+        </S.ContentApproveUser> */}
 
-        <S.ContentApproveUser>
+        {/* <S.ContentApproveUser>
           <S.StoreUser>
             <p>Luciano</p>
             <p>CNPJ: XX. XXX. XXX/0001-XX.</p>
@@ -138,7 +138,7 @@ export  default function ApproveUser() {
               </Link>
             </S.Trash>
           </S.IconsActionsApprove>
-        </S.ContentApproveUser>
+        </S.ContentApproveUser> */}
       </S.ContainerApprove>
     </>
   )
