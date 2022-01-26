@@ -24,8 +24,16 @@ export const api = axios.create({
 
 export const apiWithoutTenant = axios.create({
   baseURL: `${ip}:${porta}/api/`,
-  // baseURL: 'http://'+ip+':8157/api/tenant/'+tenantId || "fa22705e-cf27-41d0-bebf-9a6ab52948c4" +"/",
   timeout: 50000,
-  // headers: {'Authorization': 'Bearer '+ token}
 });
+
+export const apiWithoutTenantAndWithToken = axios.create({
+  baseURL: `${ip}:${porta}/api/`,
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + token
+  },
+  timeout: 50000
+})
 
