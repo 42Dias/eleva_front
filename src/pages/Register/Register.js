@@ -17,14 +17,6 @@ export function Register() {
   const [phoneNumber, setphoneNumber] = useState('')
   const [phoneMaskedNumber, setphoneMaskedNumber] = useState('')
 
-
-  useEffect(
-    () => {
-      loadUser(token)
-
-    }, []
-  )
-
   const [loading, setLoading] = useState(false);
   function handleLocalStorage(emailA, passwordB) {
 
