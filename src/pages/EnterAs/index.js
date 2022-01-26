@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FiUser, FiBriefcase, FiTruck } from 'react-icons/fi'
+import { FiUser, FiBriefcase, FiTruck, FiGlobe } from 'react-icons/fi'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import * as S from './styled'
@@ -42,25 +42,50 @@ export default function EnterAs() {
           data-aos-mirror='true'
           data-aos-once='false'
         >
-          <Link to='/login'>
+          <Link 
+          to='/login'
+          onClick={() => {
+            localStorage.setItem('loginHelper', '1')
+          }}
+          >
             <S.IconContent>
               <FiUser />
             </S.IconContent>
             <span>Cliente</span>
           </Link>
 
-          <Link to='/login'>
+          <Link to='/login'
+          onClick={() => {
+            localStorage.setItem('loginHelper', '2')
+          }}
+          >
             <S.IconContent>
               <FiBriefcase />
             </S.IconContent>
             <span>Administrador</span>
           </Link>
 
-          <Link to='/login'>
+          <Link 
+          to='/login'
+          onClick={() => {
+            localStorage.setItem('loginHelper', '3')
+          }}
+          >
             <S.IconContent>
               <FiTruck />
             </S.IconContent>
             <span>Fornecedor</span>
+          </Link>
+
+          <Link
+          to='/login'
+          onClick={() => {
+            localStorage.setItem('loginHelper', '4')
+          }}>
+            <S.IconContent>
+              <FiGlobe />
+            </S.IconContent>
+            <span>Rede</span>
           </Link>
         </S.ContentLinks>
       </S.ContentEnterAs>
