@@ -62,7 +62,8 @@ export const Form = styled.form`
     color: ${theme.colors.green};
   }
 
-  a {
+  button {
+    border: 0;
     padding: 10px 20px;
     font-size: 15px;
     text-decoration: none;
