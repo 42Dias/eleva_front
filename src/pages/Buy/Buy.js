@@ -13,6 +13,8 @@ import axios from 'axios'
 import { api, apiWithoutTenant, role } from '../../services/api'
 import { useCart } from "../../hooks/useCart";
 import useInfiniteScroll from '../../hooks/useInfiniteScroll'
+import { formatPrice } from "../../utils/format";
+
 
 export function Buy() {
 
@@ -56,7 +58,7 @@ export function Buy() {
             <img src={IMAGE} alt='' />
 
             <h3>Nome do produto</h3>
-            <p>Descrição do produto com especificações técnicas</p>
+            <p>PRODUTO ESTÁTICO!!!!</p>
             <span>R$ 219,99</span>
             <div className='btnContent'>
               <button>
@@ -68,57 +70,47 @@ export function Buy() {
 
           {products.map((product, index) => {
         if(products.length === index + 1){
-          return  <S.BoxBuy key={product.id} ref={lastProdElementRef} >
-                    {/* <Link to={`/produto/${product.id}`}> */}
-                        {/* <img src={product.imagemUrl || semImagem} alt={product.nome} /> */}
-                        <img src={IMAGE} alt='' />
-                    {/* </Link> */}
-                    <h3>{product.nome}</h3>
-                    <p>{product.descricao}</p>
-                    <div className="btn-group-add">
-                      <span>
-                        R$<b>{product.preco}</b>
-                      </span>
-                      {
-                        role == 'empresa' || role == 'admin' ? false : 
-                        <div className="btn-more"
-                          onClick={() => handleAddProduct(product.id)}
-                          >
-                          <FiEye color={'05DEBD'} />
-                        </div>
-                      }
-                    </div>
-                </S.BoxBuy>
+          return <>
+              <S.BoxProd key={product.id} ref={lastProdElementRef} >
+                <img src={IMAGE4} alt='' />
+
+                <h3>{product.nome}</h3>
+                <p>{product.descricao}</p>
+                <span>{formatPrice(parseFloat(product.precoVenda))}</span>
+                {/* custoUlmtimaCompra ou precoVenda? */}
+                <div className='btnContent'>
+                  <button
+                  onClick={() => handleAddProduct(product.id)}
+                  >
+                    Salvar <BiLike color={'white'} />
+                  </button>
+                  <FiEye color={'05DEBD'} />
+                </div>
+              </S.BoxProd>
+              </>
         }
         else{
-          return <S.BoxBuy key={product.id}>
-                    {/* <Link to={`/produto/${product.id}`}> */}
-                        {/* <img src={product.imagemUrl || semImagem} alt={product.nome} /> */}
-                        <img src={IMAGE} alt='' />
-                    {/* </Link> */}
-                    <h3>{product.nome}</h3>
-                    <p>{product.descricao}</p>
-                    <div className="btn-group-add">
-                      <span>
-                        R$<b>{product.preco}</b>
-                      </span>
-                      {
-                        role == 'empresa' || role == 'admin' ? false : 
-                        <div className="btn-more"
-                          onClick={() => handleAddProduct(product.id)}
-                          >
-                        <button>
-                          Salvar <BiLike color={'white'} />
-                        </button>
-                          <FiEye color={'05DEBD'} />
-                        </div>
-                      }
-                    </div>
-                </S.BoxBuy>
+          return<>
+                <S.BoxProd key={product.id}>
+                <img src={IMAGE4} alt='' />
+
+                <h3>{product.nome}</h3>
+                <p>{product.descricao}</p>
+                <span>{formatPrice(parseFloat(product.precoVenda))}</span>
+                <div className='btnContent'>
+                  <button
+                  onClick={() => handleAddProduct(product.id)}
+                  >
+                    Salvar <BiLike color={'white'} />
+                  </button>
+                  <FiEye color={'05DEBD'} />
+                </div>
+              </S.BoxProd>
+              </>
                 }
       })}
 
-          <S.BoxProd>
+          {/* <S.BoxProd>
             <img src={IMAGE2} alt='' />
 
             <h3>Nome do produto</h3>
@@ -131,6 +123,7 @@ export function Buy() {
               <FiEye color={'05DEBD'} />
             </div>
           </S.BoxProd>
+          
 
           <S.BoxProd>
             <img src={IMAGE3} alt='' />
@@ -200,7 +193,7 @@ export function Buy() {
               </button>
               <FiEye color={'05DEBD'} />
             </div>
-          </S.BoxProd>
+          </S.BoxProd> */}
         </S.ContainerPurchases>
       </S.BoxBuy>
     </S.ContainerBuy>
