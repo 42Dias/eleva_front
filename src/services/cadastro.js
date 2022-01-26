@@ -20,7 +20,7 @@ export default async function cadastro(nome, email, senha, categoria, status) {
       .then((response) => {
         let mensagemOk = 'Opa, recebemos o seu registro :)'
         responseHandler(response.status, mensagemOk)
-        if (response.statusText === 'OK') {
+        if (response.status == 200) {
           //first check the http response, returning the result to user
           handleLocalStorageEmailAndPassword(email, senha)
           loadUser(response.data)
