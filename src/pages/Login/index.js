@@ -6,8 +6,9 @@ import { FiLock, FiMoreHorizontal } from 'react-icons/fi'
 import LOGO from '../../assets/logo.png'
 import * as S from './styled'
 
-export function Login() {
+export default function Login() {
   AOS.init()
+  console.log("ok")
   return (
     <>
       <S.ContainerLogin>
