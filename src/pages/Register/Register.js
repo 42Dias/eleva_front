@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import LOGO from '../../assets/logo.png'
 import { apiWithoutTenant, loadingGif, porta, token,  id, ip} from '../../services/api'
@@ -16,6 +16,14 @@ export function Register() {
   const [category, setCategory] = useState('1');
   const [phoneNumber, setphoneNumber] = useState('')
   const [phoneMaskedNumber, setphoneMaskedNumber] = useState('')
+
+
+  useEffect(
+    () => {
+      loadUser(token)
+
+    }, []
+  )
 
   const [loading, setLoading] = useState(false);
   function handleLocalStorage(emailA, passwordB) {
@@ -72,7 +80,7 @@ export function Register() {
     localStorage.setItem("tenantId", JSON.stringify(response.tenants[0].tenant.id))
     localStorage.setItem("id", JSON.stringify(response.id))
     localStorage.setItem("status", JSON.stringify(response.tenants[0].status))
-    sendEmail();
+    // sendEmail();
   }
   function handleLocalStorageToken(token) {
     const setLocalStorage = (data) => {
