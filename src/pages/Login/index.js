@@ -14,32 +14,26 @@ import { toast } from "react-toastify";
 
 export default function Login() {
 
+  let history = useHistory();
+
+
+  function goHome() {
+    history.push("/home");
+  }
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  let history = useHistory();
 
-  function handleLocalStorage(emailA, passwordB) {
-    localStorage.setItem("email", JSON.stringify(emailA)); //saves client's data into localStorage:
-    localStorage.setItem("password", JSON.stringify(passwordB)); //saves client's data into localStorage:
-    console.log();
-  }
-  function handleLocalStorageToken(token) {
-    const setLocalStorage = (data) => {
-      localStorage.setItem("token", JSON.stringify(data)); //saves client's data into localStorage:
-      console.log("OK!!!");
-    };
-    setLocalStorage(token);
-    loadUser();
-  }
-
-  function handleClickLogin() {
-      history.push("/home");
-  }
-
-  async function login(e) {
+  function handleLogin(e){
     e.preventDefault()
+
+    login()
+  }
+
+  async function login() {
+
     setLoading(true);
     apiWithoutTenant.post(`/auth/sign-in`, {
       email: email,
@@ -62,7 +56,6 @@ export default function Login() {
         setLoading(false);
 
 
-        document.location.reload(true);
       }
        else if (response.statusText == "Forbidden") {
         setLoading(false);
@@ -109,7 +102,7 @@ export default function Login() {
         />
         <S.Form 
         onSubmit={(e) => {
-          login(e)
+          handleLogin(e)
           // console.log(email)
           // console.log(password)
         }}
