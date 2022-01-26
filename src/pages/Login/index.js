@@ -8,7 +8,9 @@ import LOGO from '../../assets/logo.png'
 import * as S from './styled'
 import axios from 'axios'
 import { apiWithoutTenant, loadingGif, ip } from '../../services/api'
+import login from '../../services/login'
 import { toast } from "react-toastify";
+import servidorErrorMessage from "../../utils/servidorErrorMessage";
 
 
 
@@ -32,61 +34,29 @@ export default function Login() {
     login()
   }
 
-  async function login() {
+  function handleLogin(e) {
+    e.preventDefault()
 
-    setLoading(true);
-    apiWithoutTenant.post(`/auth/sign-in`, {
-      email: email,
-      password: password,
-    })  
-    // let response = axios.post(ip + ":8144/api/auth/sign-in", {
-    //   email: email,
-    //   password: password,
-    // })
-    .then((response) => {
-     console.log("response")
-      console.log(response.data)
-      if (response.statusText == "OK") {
-        toast.info('Login efetuado com sucesso! :)');
-        console.log(response.data)
+    toast.info('Carregando')
+    setLoading(true)
+    console.log(email, password)
 
-
-        // handleLocalStorage(email, password);
-        // handleLocalStorageToken(response.data);
-        setLoading(false);
-
-
+    // email senha
+    login(email, password)
+    .then(
+      (loginStatus) => {
+        setLoading(false)
+        loginStatus == 'ok' ? goHome() : toast.error("Algo deu errado :(")
       }
-       else if (response.statusText == "Forbidden") {
-        setLoading(false);
-        toast.error("Ops, Não tem permisão!");
+    )
+    .catch(
+      () => {
+        setLoading(false)
       }
-       else {
-        setLoading(false);
-        toast.error("Ops, Dados Incorretos!");
-      }
-    })
-  .catch((error) => {
-     console.log("error")
-     console.log(error)
-      if (error.response) {
-        toast.error(error.response.data);
-      }
-      else {
-        toast.error("Erro no servidor, tente mais tarde :(");
-      }
-      setLoading(false)
-    }); 
-
+    )
   }
 
-
-
-
-
-
   AOS.init()
-  console.log("ok")
   return (
     <>
       <S.ContainerLogin>
