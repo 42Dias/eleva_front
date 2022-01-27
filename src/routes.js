@@ -45,7 +45,7 @@ const Routes = () => {
           <Route path='/aprovar-produtos' exact component={ApproveOrders} />
           <Route path='/confirmacao-dos-pedidos' exact component={OrderConfirmation} />
           <Route path='/comprar' exact component={BuyProds} />
-          <Route path='/produto-1' exact component={ProdSingle} />
+          <Route path='/produto/:id' exact component={ProdSingle} />
           <Route path='/precos-negociados' exact component={PriceNegotiation} />
           <Route path='/meus-pedidos' exact component={MyRequests} />
           <Route path='/historico-de-pedidos' exact component={History} />
