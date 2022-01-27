@@ -40,6 +40,7 @@ const Routes = () => {
           <Route path='/register' exact component={Register} />
           <Route path='/aceitar-termos' exact component={AcceptTerms} />
           <Route path='/cadastrar-fornecedor' exact component={RegisterSupplier} />
+          <Route path='/cadastrar-dados-empresa' exact component={RegisterSupplier} />
           <Route path='/aprovar-usuario' exact component={ApproveUser} />
           <Route path='/detalhes-da-venda' exact component={SaleDetails} />
           <Route path='/aprovar-produtos' exact component={ApproveOrders} />
