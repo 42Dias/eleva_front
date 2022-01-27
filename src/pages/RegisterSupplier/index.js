@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/Sidebar/Sidebar'
 // import Footer from './../../components/Footer'
@@ -450,12 +450,18 @@ export default  function RegisterProduct() {
             </select>
           </S.SelectItems>
         </S.RegisterSupplier>
-        <Button  style={{ background: '#AA2323' }}>
-          Cancelar
-        </Button>
-        <Button
-        onClick = { () => createProduct()} 
-        >Salvar</Button>
+        <S.Button>
+          
+          <button
+          style={{ background: '#AA2323' }}
+          >Cancelar</button>
+
+          <button
+          style={{marginLeft: '20px !important'}}
+          onSubmit = { () => createProduct()} 
+          >Salvar</button>
+          
+        </S.Button>
       </S.ContainerRegisterSupplier>
     </>
   )
