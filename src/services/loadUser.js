@@ -1,13 +1,23 @@
 /*
 Aqui ficará o loadUser
 */
-
 import HandleLocalStorageData from '../utils/handleLocalStorage'
-import {apiWithoutTenantAndWithToken} from './api'
+import axios from 'axios';
+import {ip, porta} from './api'
 
 export default async function loadUser(token) {
-    const response = await apiWithoutTenantAndWithToken.get(`auth/me`)
+    const response = await axios({
+      method: "get",
+      url: `${ip}:${porta}/api/auth/me`,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      timeout: 50000,
+    })
     .then(response => {
+      console.log(response.data)
       return response.data;
     })
 
