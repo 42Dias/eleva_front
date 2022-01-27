@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+
 import Modal from 'react-modal'
 import { Link } from 'react-router-dom'
 // FiFilter,
@@ -31,6 +32,9 @@ export default function BuyProds() {
   function closeModal2() {
     setIsOpen2(false)
   }
+  /*
+  Aqui é o carrinho
+  */
   return (
     <>
       <Navbar />
