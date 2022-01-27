@@ -1,26 +1,52 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/Sidebar/Sidebar'
 import luminariaSingle from './../../assets/luminariaSingle.png'
 import * as S from './styled'
 
+import productFind from '../../services/productFind'
+import { formatPrice } from '../../utils/format'
+
 export default function ProdSingle() {
+  const [produto, setProduto ] = useState({})
+  
+  function getProductId(){
+    // gets the product id throught the page url!!!
+    const rawUrl = window.location.hash
+    const id = rawUrl.replace('#/produto/', '')
+    return id
+  }
+
+  async function loadProductData(){
+    const id  = getProductId()
+    let productData = await productFind(id)
+  
+    setProduto(productData)
+  }
+
+  useEffect(
+    async () => {
+      loadProductData()
+    },[]
+  )
+
   return (
     <>
       <Navbar />
       <S.ContainerProdSingle>
         <S.ProdImage>
-          <h1>Luminária</h1>
+          <h1>{produto.nome}</h1>
           <img src={luminariaSingle} alt='' />
-          <strong>R$ 339,90</strong>
+          <strong>{formatPrice(parseFloat(produto.precoVenda))}</strong>
         </S.ProdImage>
 
         <S.ProdDetailsSingle>
           <h2>Descrição do produto</h2>
           <p>
-            Headset Gamer Redragon Zeus X, USB, RGB Chroma Mk.II, Surround 7.1,
-            Drivers 53mm, Preto/Vermelho
+            {produto.descricao}
           </p>
+
+          {/* o que seriam os recursos??????? */}
 
           <h3>Recursos:</h3>
 
