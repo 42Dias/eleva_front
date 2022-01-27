@@ -14,12 +14,20 @@ export  default function Supplies() {
   function openModal() {
     setIsOpen(true)
   }
-
   function afterOpenModal() {}
 
   function closeModal() {
     setIsOpen(false)
   }
+
+  /*
+  Verifico e escolho os item que será comprado
+  prática e rápida
+
+  duas tabelas =!  
+  
+  a plataforma vasculha o melhor preço com o sku
+  */
   return (
     <>
       <Navbar />
@@ -127,23 +135,23 @@ export  default function Supplies() {
             <label htmlFor=''>Descrição</label>
             <input type='text' placeholder='oi' />
           </div>
-          <div>
+          {/* <div>
             <label htmlFor=''>Referência técnica</label>
             <input type='text' placeholder='oi' />
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <label htmlFor=''>Tipo de material</label>
             <input type='text' placeholder='oi' />
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <label htmlFor=''>Data de inatividade</label>
             <input type='text' placeholder='oi' />
-          </div>
+          </div> */}
           <div>
             <label htmlFor=''>Categoria</label>
             <input type='text' placeholder='oi' />
           </div>
-          <div>
+          {/* <div>
             <label htmlFor=''>Quantia em estoque</label>
             <input type='text' placeholder='oi' />
           </div>
@@ -162,19 +170,19 @@ export  default function Supplies() {
           <div>
             <label htmlFor=''>Modulo mínimo</label>
             <input type='text' placeholder='oi' />
-          </div>
+          </div> */}
           <div>
             <label htmlFor=''>Marca</label>
             <input type='text' placeholder='oi' />
           </div>
-          <div>
+          {/* <div>
             <label htmlFor=''>Entrega mínima</label>
             <input type='text' placeholder='oi' />
           </div>
           <div>
             <label htmlFor=''>Pedido mínimo (Quant/Valor)</label>
             <input type='text' placeholder='oi' />
-          </div>
+          </div> */}
           <div>
             <label htmlFor=''>Preço</label>
             <input type='text' placeholder='oi' />
@@ -187,7 +195,7 @@ export  default function Supplies() {
             <label htmlFor=''>Comprimento (cm)</label>
             <input type='text' placeholder='oi' />
           </div>
-          <div>
+          {/* <div>
             <label htmlFor=''>Cubagem da embalagem</label>
             <input type='text' placeholder='oi' />
           </div>
@@ -211,7 +219,6 @@ export  default function Supplies() {
             <label htmlFor=''>Data da primeira venda</label>
             <input type='text' placeholder='oi' />
           </div>
-
           <div>
             <label htmlFor=''>NCM</label>
             <input type='text' placeholder='oi' />
@@ -219,7 +226,7 @@ export  default function Supplies() {
           <div>
             <label htmlFor=''>Descrição NCM</label>
             <input type='text' placeholder='oi' />
-          </div>
+          </div> */}
 
           <div>
             <label htmlFor=''>Rede SKU</label>

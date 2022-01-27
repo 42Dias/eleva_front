@@ -11,13 +11,16 @@ import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 import axios from 'axios'
 import { api, apiWithoutTenant, role } from '../../services/api'
-import { useCart } from "../../hooks/useCart";
 import useInfiniteScroll from '../../hooks/useInfiniteScroll'
 import { formatPrice } from "../../utils/format";
 import { toast } from "react-toastify";
-
+import { useSuprimento } from "../../hooks/useSuprimentos";
 
 export default function Buy() {
+
+  const { addProduct, cart } = useSuprimento();
+  // const { addProduct, cart } = useCart();
+  
 
   
   useEffect(
@@ -48,7 +51,9 @@ export default function Buy() {
   
   
     function handleAddProduct(id) {
-    // addProduct(id);
+    console.log(id)
+    addProduct(id,  1);
+
     }
   
 
