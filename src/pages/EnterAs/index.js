@@ -1,12 +1,30 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
 import { FiUser, FiBriefcase, FiTruck, FiGlobe } from 'react-icons/fi'
+import { Link, useHistory } from "react-router-dom";
+
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import * as S from './styled'
 import logo from './../../assets/logo.png'
+import { Email, tenantId } from '../../services/api'
 
 export default function EnterAs() {
+
+  let history = useHistory();
+
+  function goHome() {
+    history.push("/home");
+  }
+
+  useEffect(
+  () => {
+    console.log(Email)
+    if(Email || tenantId){
+      goHome()
+    }
+  }, []
+
+  )
   AOS.init()
   return (
     <S.Home>
