@@ -1,467 +1,180 @@
-import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom'
+import React from 'react'
 import Navbar from '../../components/Sidebar/Sidebar'
-// import Footer from './../../components/Footer'
-import IMAGE from '../../assets/upload.png'
 import * as S from './styled'
 
-export default  function RegisterProduct() {
-  const [codigo, setcodigo] = useState('')
-  const [nome, setnome] = useState('')
-  const [descricao, setdescricao] = useState('')
-  const [unidadeMedida, setunidadeMedida] = useState('')
-  const [tipoMaterial, settipoMaterial] = useState('')
-  const [precoVenda, setprecoVenda] = useState('')
-  const [referenciaTec, setreferenciaTec] = useState('')
-  const [demandaDiaria, setdemandaDiaria] = useState('')
-  const [estoque, setestoque] = useState('')
-  const [estoqueFornecedor, setestoqueFornecedor] = useState('')
-  const [leadTime, setleadTime] = useState('')
-  const [ativo, setativo] = useState('')
-  const [dataInatividade, setdataInatividade] = useState('')
-  const [redeSKU, setredeSKU] = useState('')
-  const [pedidoMinimo, setpedidoMinimo] = useState('')
-  const [entregaMinima, setentregaMinima] = useState('')
-  const [qtdEmbalagem, setqtdEmbalagem] = useState('')
-  const [moduloMinimo, setmoduloMinimo] = useState('')
-  const [moduloMaster, setmoduloMaster] = useState('')
-  const [comprimento_cm, setcomprimento_cm] = useState('')
-  const [largura_cm, setlargura_cm] = useState('')
-  const [altura_cm, setaltura_cm] = useState('')
-  const [cubagemEmbalagem, setcubagemEmbalagem] = useState('')
-  const [pesoLiq, setpesoLiq] = useState('')
-  const [pesoBruto, setpesoBruto] = useState('')
-  const [estoqueMinimo, setestoqueMinimo] = useState('')
-  const [estoqueMaximo, setestoqueMaximo] = useState('')
-  const [curva, setcurva] = useState('')
-  const [mediaDeVendaA, setmediaDeVendaA] = useState('')
-  const [mediaDeVendaB, setmediaDeVendaB] = useState('')
-  const [dtUltimaVenda, setdtUltimaVenda] = useState('')
-  const [departamentoCategoria, setdepartamentoCategoria] = useState('')
-  const [ncm, setncm] = useState('')
-  const [descricaoNCM, setdescricaoNCM] = useState('')
-  const [marca, setmarca] = useState('')
-  const [custoUltimaCompra, setcustoUltimaCompra] = useState('')
-  const [dataPrimeiraVenda, setdataPrimeiraVenda] = useState('')
-  const [statusProduto, setstatusProduto] = useState('')
-  const [origem, setorigem] = useState('')
-  const [departamentoId, setdepartamentoId] = useState('')
-  const [empresaId, setempresaId] = useState('')
-
-  function createProduct(){
-    const prodData = generateProductData()
-    console.log(prodData)
-  }
-  function generateProductData(){
-  const data = {
-    data: {
-      codigo: codigo,
-      nome: nome,
-      descricao: descricao,
-      unidadeMedida: unidadeMedida,
-      tipoMaterial: tipoMaterial,
-      precoVenda: precoVenda,
-      referenciaTec: referenciaTec,
-      demandaDiaria: demandaDiaria,
-      estoque: estoque,
-      estoqueFornecedor: estoqueFornecedor,
-      leadTime: leadTime,
-      ativo: ativo,
-      dataInatividade: dataInatividade,
-      redeSKU: redeSKU,
-      pedidoMinimo: pedidoMinimo,
-      entregaMinima: entregaMinima,
-      qtdEmbalagem: qtdEmbalagem,
-      moduloMinimo: moduloMinimo,
-      moduloMaster: moduloMaster,
-      comprimento_cm: comprimento_cm,
-      largura_cm: largura_cm,
-      altura_cm: altura_cm,
-      cubagemEmbalagem: cubagemEmbalagem,
-      pesoLiq: pesoLiq,
-      pesoBruto: pesoBruto,
-      estoqueMinimo: estoqueMinimo,
-      estoqueMaximo: estoqueMaximo,
-      curva: curva,
-      mediaDeVendaA: mediaDeVendaA,
-      mediaDeVendaB: mediaDeVendaB,
-      dtUltimaVenda: dtUltimaVenda,
-      departamentoCategoria: departamentoCategoria,
-      ncm: ncm,
-      descricaoNCM: descricaoNCM,
-      marca: marca,
-      custoUltimaCompra: custoUltimaCompra,
-      dataPrimeiraVenda: dataPrimeiraVenda,
-      statusProduto: statusProduto,
-      origem: origem,
-      departamentoId: departamentoId,
-      empresaId: empresaId,
-    }
-  }
-  return data
-  }
-
-
-
-
-
+export function RegisterSupplier() {
   return (
     <>
       <Navbar />
       <S.ContainerRegisterSupplier>
-        {/* <S.BoxImage>
-          <img src={IMAGE} alt='upload image' />
-        </S.BoxImage> */}
         <S.RegisterSupplier>
-          <h2>Novo produto</h2>
+          <h2>Novo fornecedor</h2>
 
           <S.RegisterSupplierForm>
             <S.ContentSupplierForm>
-              <label htmlFor='name-product'>Nome do produto</label>
-              <input
-                required
-                type='text'
-                id='name-product'
-                onChange={(text) => setnome(text.target.value)}
-              />
+              <label htmlFor='codigo'>Código</label>
+              <input type='text' id='codigo' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='code'>Código</label>
-              <input
-                required
-                type='text'
-                id='code'
-                onChange={(text) => setcodigo(text.target.value)}
-              />
+              <label htmlFor='razao-social'>Razão social</label>
+              <input type='text' id='razao-social' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='description'>Descrição</label>
-              <input
-                required
-                type='text'
-                id='description'
-                onChange={(text) => setdescricao(text.target.value)}
-              />
+              <label htmlFor='nome-fantasia'>Nome fantasia</label>
+              <input type='text' id='nome-fantasia' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='ref'>Referência técnica</label>
-              <input
-                required
-                type='text'
-                id='ref'
-                onChange={(text) => setreferenciaTec(text.target.value)}
-              />
+              <label htmlFor='cnpj'>CNPJ</label>
+              <input type='text' id='cnpj' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='material'>Tipo de material</label>
-              <input
-                required
-                type='text'
-                id='material'
-                onChange={(text) => settipoMaterial(text.target.value)}
-              />
+              <label htmlFor='inscricao-estadual'>Inscrição estadual</label>
+              <input type='text' id='inscricao-estadual' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='inactivity'>Data de inatividade</label>
-              <input
-                required
-                type='text'
-                id='inactivity'
-                onChange={(text) => setdataInatividade(text.target.value)}
-              />
+              <label htmlFor='inscricao-municipal'>Inscrição municipal</label>
+              <input type='text' id='inscricao-municipal' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='category'>Categoria</label>
-              <input
-                required
-                type='text'
-                id='category'
-                // onChange={(text) => setcategoria(text.target.value)} // HA CATEGORIA???
-              />
+              <label htmlFor='cnae-principal'>Cnae principal</label>
+              <input type='text' id='cnae-principal' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='stock'>Quantia em estoque</label>
-              <input
-                required
-                type='text'
-                id='stock'
-                onChange={(text) => setestoque(text.target.value)}
-              />
-              {/* HÁ OUTROS TIPOS DE ESTOQUE? */}
+              <label htmlFor='cnae-secundario'>Cnae secundário</label>
+              <input type='text' id='cnae-secundario' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='demand'>Demanda</label>
-              <input
-                required
-                type='text'
-                id='demand'
-                onChange={(text) => setdemandaDiaria(text.target.value)}
-              />
+              <label htmlFor='logradouro'>Logradouro</label>
+              <input type='text' id='logradouro' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='safety-stock'>Estoque de segurança</label>
-              <input
-                required
-                type='text'
-                id='safety-stock'
-                onChange={(text) => setestoqueFornecedor(text.target.value)}
-              />
+              <label htmlFor='numero'>Número</label>
+              <input type='text' id='numero' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='maximum-stock'>Estoque máximo</label>
-              <input
-                required
-                type='text'
-                id='maximum-stock'
-                onChange={(text) => setestoqueMaximo(text.target.value)}
-              />
+              <label htmlFor='bairro'>Bairro</label>
+              <input type='text' id='bairro' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='minimum-module'>Módulo mínimo</label>
-              <input
-                required
-                type='text'
-                id='minimum-module'
-                onChange={(text) => setestoqueMinimo(text.target.value)}
-              />
+              <label htmlFor='cidade'>Cidade</label>
+              <input type='text' id='cidade' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='brand'>Marca</label>
-              <input
-                required
-                type='text'
-                id='brand'
-                onChange={(text) => setmarca(text.target.value)}
-              />
+              <label htmlFor='estado'>Estado</label>
+              <input type='text' id='estado' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='minimum-delivery'>Entrega mínima</label>
-              <input
-                required
-                type='email'
-                id='minimum-delivery'
-                onChange={(text) => setentregaMinima(text.target.value)}
-              />
+              <label htmlFor='complemento'>Complemento</label>
+              <input type='text' id='complemento' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='minimum-order'>Pedido mínimo (Quant/Valor)</label>
-              <input
-                required
-                type='text'
-                id='minimum-order'
-                onChange={(text) => setpedidoMinimo(text.target.value)}
-              />
+              <label htmlFor='telefone'>Telefone</label>
+              <input type='text' id='telefone' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='price'>Preço</label>
-              <input
-                required
-                type='text'
-                id='price'
-                onChange={(text) => setprecoVenda(text.target.value)}
-              />
+              <label htmlFor='telefone-secundario'>Telefone secundário</label>
+              <input type='text' id='telefone-secundario' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='height'>Altura(cm)</label>
-              <input
-                required
-                type='text'
-                id='height'
-                onChange={(text) => setaltura_cm(text.target.value)}
-              />
+              <label htmlFor='email-da-empresa'>Email da empresa</label>
+              <input type='email' id='email-da-empresa' />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='length'>Comprimento(cm)</label>
-              <input
-                required
-                type='text'
-                id='length'
-                onChange={(text) => setcomprimento_cm(text.target.value)}
-              />
-            </S.ContentSupplierForm>
-
-            <S.ContentSupplierForm>
-              <label htmlFor='packaging'>Cubagem da embalagem</label>
-              <input
-                required
-                type='text'
-                id='packaging'
-                onChange={(text) => setcubagemEmbalagem(text.target.value)}
-              />
-            </S.ContentSupplierForm>
-
-            <S.ContentSupplierForm>
-              <label htmlFor='width'>Largura(cm)</label>
-              <input
-                required
-                type='text'
-                id='width'
-                onChange={(text) => setlargura_cm(text.target.value)}
-              />
-            </S.ContentSupplierForm>
-
-            <S.ContentSupplierForm>
-              <label htmlFor='gross-weight'>Peso bruto(g)</label>
-              <input
-                required
-                type='text'
-                id='gross-weight'
-                onChange={(text) => setpesoBruto(text.target.value)}
-              />
-            </S.ContentSupplierForm>
-
-            <S.ContentSupplierForm>
-              <label htmlFor='liquid-weight'>Peso líquido(g)</label>
-              <input
-                required
-                type='text'
-                id='liquid-weight'
-                onChange={(text) => setpesoLiq(text.target.value)}
-              />
-            </S.ContentSupplierForm>
-
-            <S.ContentSupplierForm>
-              <label htmlFor='last-sale'>Data da última venda</label>
-              <input
-                required
-                type='date'
-                id='last-sale'
-                onChange={(text) => setNome(text.target.value)}
-              />
-            </S.ContentSupplierForm>
-
-            <S.ContentSupplierForm>
-              <label htmlFor='first-sale'>Data da primeira venda</label>
-              <input
-                required
-                type='date'
-                id='first-sale'
-                onChange={(text) => setNome(text.target.value)}
-              />
-            </S.ContentSupplierForm>
-
-            <S.ContentSupplierForm>
-              <label htmlFor='ncm'>NCM</label>
-              <input
-                required
-                type='text'
-                id='ncm'
-                onChange={(text) => setNome(text.target.value)}
-              />
-            </S.ContentSupplierForm>
-
-            <S.ContentSupplierForm>
-              <label htmlFor='ncm-description'>Descrição NCM</label>
-              <input
-                required
-                type='text'
-                id='ncm-description'
-                onChange={(text) => setNome(text.target.value)}
-              />
+              <label htmlFor='perfil-comercial'>Perfil comercial</label>
+              <input type='text' id='perfil-comercial' />
             </S.ContentSupplierForm>
           </S.RegisterSupplierForm>
-
-          {/* <S.ContentSupplierFormRadio>
-            <span>Rede SKU</span>
-            <S.Radio>
-              <S.RadioContainer>
-                <input
-                  required type='radio' name='' id='' />
-                <p>Sim</p>
-              </S.RadioContainer>
-
-              <S.RadioContainer>
-                <input
-                  required type='radio' name='' id='' />
-                <p>Não</p>
-              </S.RadioContainer>
-            </S.Radio>
-          </S.ContentSupplierFormRadio>
-
-          <S.ContentSupplierFormRadio>
-            <span>Origem do produto</span>
-            <S.Radio>
-              <S.RadioContainer>
-                <input
-                  required type='radio' name='' id='' />
-                <p>Nacional</p>
-              </S.RadioContainer>
-
-              <S.RadioContainer>
-                <input
-                  required type='radio' name='' id='' />
-                <p>Importado</p>
-              </S.RadioContainer>
-            </S.Radio>
-          </S.ContentSupplierFormRadio> */}
-
           <S.ContentSupplierForm>
             <S.LeadTime>
               <label htmlFor='lead-time'>Lead time</label>
-              <input
-                required
-                type='text'
-                id='lead-time'
-                onChange={(text) => setNome(text.target.value)}
-              />
+              <input type='text' id='lead-time' />
             </S.LeadTime>
           </S.ContentSupplierForm>
 
+          <S.ContentResponsavel>
+            <span>Contato Comercial</span>
+            <S.ContainerResponsavel>
+              <S.Responsavel>
+                <S.StoreResponsavel>
+                  <label htmlFor='nome-do-responsável-comercial'>
+                    Nome do responsável comercial
+                  </label>
+                  <input type='text' id='nome-do-responsável-comercial' />
+                </S.StoreResponsavel>
+
+                <S.StoreResponsavel>
+                  <label htmlFor='telefone-do-responsável'>
+                    Telefone do responsável
+                  </label>
+                  <input type='text' id='telefone-do-responsável' />
+                </S.StoreResponsavel>
+              </S.Responsavel>
+
+              <S.ResponsavelAlone>
+                <label htmlFor='email-do-responsavel'>
+                  E-mail do responsável
+                </label>
+                <input type='email' id='email-do-responsavel' />
+              </S.ResponsavelAlone>
+            </S.ContainerResponsavel>
+          </S.ContentResponsavel>
+
+          <S.ContentSupplierFormCheckbox>
+            <span>Condições de pagamento</span>
+            <S.Check>
+              <S.CheckContainer>
+                <input type='checkbox' name='' id='' />
+                <p>30 dias</p>
+              </S.CheckContainer>
+
+              <S.CheckContainer>
+                <input type='checkbox' name='' id='' />
+                <p>60 dias</p>
+              </S.CheckContainer>
+
+              <S.CheckContainer>
+                <input type='checkbox' name='' id='' />
+                <p>90 dias</p>
+              </S.CheckContainer>
+
+              <S.CheckContainer>
+                <input type='checkbox' name='' id='' />
+                <p>120 dias</p>
+              </S.CheckContainer>
+            </S.Check>
+          </S.ContentSupplierFormCheckbox>
+
           <S.SelectItems>
-            <label htmlFor='product-sku'>Produto SKU</label>
-            <select
-              required 
-              id='product-sku'>
-              <option>informação 1</option>
-              <option>informação 2</option>
+            <label htmlFor='forma-de-pagamento'>Forma de pagamento</label>
+            <select id='forma-de-pagamento'>
+              <option>Boleto</option>
+              <option>Cartão</option>
             </select>
 
-            <label htmlFor='bar-code'>Código de barras</label>
-            <select
-              required 
-              id='bar-code'>
-              <option>informação 1</option>
-              <option>informação 2</option>
-            </select>
+            <label htmlFor='matriz'>Matriz</label>
+            <input type='text' id='matriz' />
 
-            <label htmlFor='unit-of-measurement'>Unidade de medida</label>
-            <select 
-              required 
-              id='unit-of-measurement'>
-              <option>informação 1</option>
-              <option>informação 2</option>
-            </select>
+            <label htmlFor='rede'>Rede</label>
+            <input type='text' id='rede' />
           </S.SelectItems>
         </S.RegisterSupplier>
-        <S.Button>
-          
-          <button
-          style={{ background: '#AA2323' }}
-          >Cancelar</button>
-
-          <button
-          style={{marginLeft: '20px !important'}}
-          onSubmit = { () => createProduct()} 
-          >Salvar</button>
-          
-        </S.Button>
       </S.ContainerRegisterSupplier>
     </>
   )
