@@ -37,7 +37,7 @@ export const FormRegister = styled.form`
     margin-top: 12px;
   }
 
-  a {
+  button {
     text-align: center;
     margin: 0 auto;
   }
@@ -97,13 +97,14 @@ export const FormRegister = styled.form`
     padding-left: 5px;
   }
 
-  .checkbox a {
+  .checkbox button {
     color: ${theme.colors.green};
   }
 
   .link {
     background: ${theme.colors.green};
     color: ${theme.colors.white};
+    border: 0;
     width: 335px;
     height: 48px;
     display: flex;
@@ -111,5 +112,19 @@ export const FormRegister = styled.form`
     justify-content: center;
     font-size: 15px;
     border-radius: 5px;
+  }
+  .input {
+    margin-top: 12px;
+    width: 335px;
+    height: 48px;
+    background: transparent;
+    border: 1px solid ${theme.colors.green};
+    padding: 0 7px;
+    color: ${theme.colors.green};
+    border-radius: 5px;
+  }
+  
+  .input::placeholder {
+    color: ${theme.colors.green};
   }
 `
