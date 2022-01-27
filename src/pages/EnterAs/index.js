@@ -45,7 +45,7 @@ export default function EnterAs() {
           <Link 
           to='/login'
           onClick={() => {
-            localStorage.setItem('loginHelper', '1')
+            localStorage.setItem('chosedRole', '1')
           }}
           >
             <S.IconContent>
@@ -56,7 +56,7 @@ export default function EnterAs() {
 
           <Link to='/login'
           onClick={() => {
-            localStorage.setItem('loginHelper', '2')
+            localStorage.setItem('chosedRole', '2')
           }}
           >
             <S.IconContent>
@@ -68,7 +68,7 @@ export default function EnterAs() {
           <Link 
           to='/login'
           onClick={() => {
-            localStorage.setItem('loginHelper', '3')
+            localStorage.setItem('chosedRole', '3')
           }}
           >
             <S.IconContent>
@@ -80,7 +80,7 @@ export default function EnterAs() {
           <Link
           to='/login'
           onClick={() => {
-            localStorage.setItem('loginHelper', '4')
+            localStorage.setItem('chosedRole', '4')
           }}>
             <S.IconContent>
               <FiGlobe />
