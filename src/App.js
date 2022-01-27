@@ -5,23 +5,28 @@ import { ToastContainer } from "react-toastify";
 import Routes from "./routes";
 import { GlobalStyle } from './ui'
 import { CartProvider } from "./hooks/useCart";
+import { SuprimentoProvider } from "./hooks/useSuprimentos";
 
 const App = () => {
   return (
     <BrowserRouter>
-        <GlobalStyle />
-        <Routes />
-        <ToastContainer
-        position='top-right'
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+        <SuprimentoProvider>
+          <CartProvider>
+            <GlobalStyle />
+            <Routes />
+            <ToastContainer
+            position='top-right'
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            />
+          </CartProvider>
+        </SuprimentoProvider>
     </BrowserRouter>
   );
 };
