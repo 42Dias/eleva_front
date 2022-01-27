@@ -26,6 +26,14 @@ export  default function Register() {
   const [phoneMaskedNumber, setphoneMaskedNumber] = useState('')
 
   const [loading, setLoading] = useState(false);
+
+
+  useEffect(
+    () => {
+      const chosedRole = localStorage.getItem("chosedRole")
+      setCategory(chosedRole)
+    }
+  )
   
   let history = useHistory();
 
@@ -80,6 +88,7 @@ export  default function Register() {
                     required
                     mask="(99) 9999-99999"
                     value={phoneMaskedNumber} 
+                    className='input'
                     onChange={
                       (e) => {
                         let celular = e.target.value
@@ -111,16 +120,6 @@ export  default function Register() {
             />
             <div>
               <label htmlFor="cadastrar">Cadastrar como:</label>
-
-              <select
-                required
-                value={category}
-                onChange={event => setCategory(event.target.value)}
-              >
-                <option value={"1"}>Cliente</option>
-                <option value={"2"}>Empresa</option>
-                <option value={"3"}>Admin</option>
-              </select>
             </div>
             <div className='checkbox'>
               <input required type='checkbox' name='' id='' />
@@ -137,7 +136,8 @@ export  default function Register() {
             src={loadingGif}
             alt="Loading" />) : (
             <button 
-            type="submit">
+            type="submit"
+            className='link'>
               Criar Conta
             </button>
             )
