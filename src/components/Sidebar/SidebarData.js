@@ -63,10 +63,4 @@ export const SidebarData = [
     icon: <FaIcons.FaCheck />,
     cName: 'nav-text',
   },
-  {
-    title: 'Sair',
-    path: '/login',
-    icon: <FaIcons.FaArrowLeft />,
-    cName: 'nav-exit',
-  },
 ]

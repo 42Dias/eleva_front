@@ -12,6 +12,10 @@ function Navbar() {
 
   const showSidebar = () => setSidebar(!sidebar)
 
+  function logOff(){
+    localStorage.clear()
+  }
+
   return (
     <>
       <IconContext.Provider value={{}}>
@@ -51,14 +55,33 @@ function Navbar() {
             <ul>
               {SidebarData.map((item, index) => {
                 return (
-                  <li key={index} className={item.cName}>
+                  <li key={index}
+                  className={item.cName}
+                  >
                     <Link to={item.path}>
                       {item.icon}
-                      <span>{item.title}</span>
+                      <span>
+                        {item.title}
+                      </span>
                     </Link>
                   </li>
                 )
               })}
+               
+            <li
+            className='nav-exit'
+            onClick={
+              () => {
+                logOff()
+              }
+            }
+            >
+            <Link 
+            to="/login">
+            <FaIcons.FaArrowLeft />
+            <span>Sair</span>
+            </Link>
+            </li>
             </ul>
           </div>
         </nav>
