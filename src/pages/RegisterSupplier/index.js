@@ -2,6 +2,8 @@ import React, { useState ,useEffect, useRef, useCallback } from "react";
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 
+import cepInformation from '../../utils/cepInformation'
+
 export default function RegisterSupplier() {
  const [codigo                      , setCodigo] = useState('')
  const [razao                       , setRazao] = useState('')
@@ -12,6 +14,7 @@ export default function RegisterSupplier() {
  const [cnaePrincipal               , setCnaePrincipal] = useState('')
  const [cnaececundário              , setCnaececundario] = useState('')
  const [logradouro                  , setLogradouro] = useState('')
+ const [cep                         , setCep] = useState('')
  const [numero                      , setNumero] = useState('')
  const [bairro                      , setBairro] = useState('')         
  const [cidade                      , setCidade] = useState('')
@@ -27,6 +30,19 @@ export default function RegisterSupplier() {
  const [emailDoResponsavel          , setEmailDoResponsavel] = useState('')
  const [condicoesDePagamento        , setCondicoesDePagamento] = useState('') 
  const [formadePagamento            , setFormadePagamento] = useState('')
+
+  function handleChangeCEP(e){
+    const cep = e.replace(/[^0-9]/g, '')
+
+    if(cep.length == 8){
+      const data = cepInformation(ev)
+      setCep(data.cep)
+      setLogradouro(data.logradouro)
+      setBairro(data.bairro)
+      setCidade(data.localidade)
+      setEstado(data.uf) 
+    }
+  }
 
   return (
     <>
@@ -92,6 +108,14 @@ export default function RegisterSupplier() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
+              <label htmlFor='logradouro'>CEP</label>
+              <input type='text' id='logradouro'
+              // onBlur={(ev) => handleChangeCEP(ev)}
+              onChange={(text) => handleChangeCEP(text.target.value)}
+              />
+            </S.ContentSupplierForm>
+
+            <S.ContentSupplierForm>
               <label htmlFor='logradouro'>Logradouro</label>
               <input type='text' id='logradouro'
               onChange={(e) => setCodigo(e.target.value)}
@@ -120,10 +144,43 @@ export default function RegisterSupplier() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='estado'>Estado</label>
-              <input type='text' id='estado'
-              onChange={(e) => setCodigo(e.target.value)}
-              />
+                      <label>Estado*</label>
+                      <select 
+                      required
+                      value={estado}
+                      component='select' 
+                      name='uf'
+                      onChange={(text) => setEstado(text.target.value)}
+                      >
+                        <option value=''>Selecione o Estado</option>
+                        <option value='AC'>Acre</option>
+                        <option value='AL'>Alagoas</option>
+                        <option value='AP'>Amapá</option>
+                        <option value='AM'>Amazonas</option>
+                        <option value='BA'>Bahia</option>
+                        <option value='CE'>Ceará</option>
+                        <option value='DF'>Distrito Federal</option>
+                        <option value='ES'>Espírito Santo</option>
+                        <option value='GO'>Goiás</option>
+                        <option value='MA'>Maranhão</option>
+                        <option value='MT'>Mato Grosso</option>
+                        <option value='MS'>Mato Grosso do Sul</option>
+                        <option value='MG'>Minas Gerais</option>
+                        <option value='PA'>Pará</option>
+                        <option value='PB'>Paraíba</option>
+                        <option value='PR'>Paraná</option>
+                        <option value='PE'>Pernambuco</option>
+                        <option value='PI'>Piauí</option>
+                        <option value='RJ'>Rio de Janeiro</option>
+                        <option value='RN'>Rio Grande do Norte</option>
+                        <option value='RS'>Rio Grande do Sul</option>
+                        <option value='RO'>Rondônia</option>
+                        <option value='RR'>Roraima</option>
+                        <option value='SC'>Santa Catarina</option>
+                        <option value='SP'>São Paulo</option>
+                        <option value='SE'>Sergipe</option>
+                        <option value='TO'>Tocantins</option>
+                      </select>
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
@@ -221,7 +278,7 @@ export default function RegisterSupplier() {
               </S.CheckContainer>
 
               <S.CheckContainer>
-                <input type='checkbox' name='' id='' />
+                <input type='radio' name='pagamento' id='1200' />
                 <p>120 dias</p>
               </S.CheckContainer>
             </S.Check>
