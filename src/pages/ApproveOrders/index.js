@@ -6,6 +6,12 @@ import deleteIcon from './../../assets/delete.svg'
 import * as S from './styled'
 
 export default function ApproveOrders() {
+
+  /*  
+  Listar os pedidos da empresa
+  MESMO DA CONSTAL -> ADMIN: TODOS, EMPRESA: DELA
+  */
+ 
   return (
     <>
       <Navbar />
