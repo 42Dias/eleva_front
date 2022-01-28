@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FiChevronLeft } from 'react-icons/fi'
 import Navbar from '../../components/Sidebar/Sidebar'
 import IMAGE from '../../assets/luminaria.png'
 import * as S from './styled'
+import getIdFromUrl from '../../utils/getIdFromUrl'
 
 export  default  function SaleDetails() {
+  useEffect(
+    () => {
+      const vendaId = getIdFromUrl('#/detalhes-da-venda/')
+      console.log(vendaId)
+    }
+  )
   return (
     <>
       <Navbar />
