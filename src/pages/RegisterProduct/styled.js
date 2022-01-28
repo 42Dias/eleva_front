@@ -22,7 +22,7 @@ export const Input = styled.input`
     width: 10px;
   }
 `
-export const ContainerRegisterSupplier = styled.aside`
+export const ContainerRegisterSupplier = styled.form`
   max-width: 780px;
   margin: 0 auto;
 

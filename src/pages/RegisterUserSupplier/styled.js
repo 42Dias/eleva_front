@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro'
 import { theme } from '../../ui/styles/theme'
 
-export const ContainerRegisterSupplier = styled.aside`
+export const ContainerRegisterSupplier = styled.form`
   max-width: 780px;
   margin: 0 auto;
 `
