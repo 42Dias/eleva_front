@@ -6,7 +6,9 @@ export default function RegisterUserSupplier() {
   return (
     <>
       <Navbar />
-      <S.ContainerRegisterSupplier>
+      <S.ContainerRegisterSupplier
+      onSubmit= { () => createProduct()}
+      >
         <S.RegisterSupplier>
           <h2>Novo fornecedor</h2>
 
@@ -180,6 +182,14 @@ export default function RegisterUserSupplier() {
             <label htmlFor='rede'>Rede</label>
             <input type='text' id='rede' />
           </S.SelectItems>
+          <S.Button>
+          <button  style={{ background: '#AA2323' }}>
+            Cancelar
+          </button>
+          <button
+          onSubmit= { () => createProduct()}
+          >Salvar</button>
+        </S.Button>
         </S.RegisterSupplier>
       </S.ContainerRegisterSupplier>
     </>
