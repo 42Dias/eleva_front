@@ -21,6 +21,7 @@ export default  function RegisterProduct() {
   const [ativo, setativo] = useState('')
   const [dataInatividade, setdataInatividade] = useState('')
   const [redeSKU, setredeSKU] = useState('')
+  const [isSKU, setIsSKU] = useState('')
   const [pedidoMinimo, setpedidoMinimo] = useState('')
   const [entregaMinima, setentregaMinima] = useState('')
   const [qtdEmbalagem, setqtdEmbalagem] = useState('')
@@ -344,7 +345,7 @@ export default  function RegisterProduct() {
                 required
                 type='date'
                 id='last-sale'
-                onChange={(text) => setNome(text.target.value)}
+                onChange={(text) => setdtUltimaVenda(text.target.value)}
               />
             </S.ContentSupplierForm>
 
@@ -354,7 +355,7 @@ export default  function RegisterProduct() {
                 required
                 type='date'
                 id='first-sale'
-                onChange={(text) => setNome(text.target.value)}
+                onChange={(text) => setdataPrimeiraVenda(text.target.value)}
               />
             </S.ContentSupplierForm>
 
@@ -364,7 +365,7 @@ export default  function RegisterProduct() {
                 required
                 type='text'
                 id='ncm'
-                onChange={(text) => setNome(text.target.value)}
+                onChange={(text) => setncm(text.target.value)}
               />
             </S.ContentSupplierForm>
 
@@ -374,7 +375,7 @@ export default  function RegisterProduct() {
                 required
                 type='text'
                 id='ncm-description'
-                onChange={(text) => setNome(text.target.value)}
+                onChange={(text) => setdescricaoNCM(text.target.value)}
               />
             </S.ContentSupplierForm>
           </S.RegisterSupplierForm>
@@ -384,13 +385,31 @@ export default  function RegisterProduct() {
             <S.Radio>
               <S.RadioContainer>
                 <input
-                  required type='radio' name='' id='' />
+                  onClick={(e) => {
+                    let value  = e.target.value
+                    setIsSKU(value)
+                  }}
+                  required 
+                  type='radio' 
+                  name='redeSku' 
+                  id='s'
+                  value="Sim"
+                  />
                 <p>Sim</p>
               </S.RadioContainer>
 
               <S.RadioContainer>
                 <input
-                  required type='radio' name='' id='' />
+                  onClick={(e) => {
+                    let value  = e.target.value
+                    setIsSKU(value)
+                  }}
+                  required
+                  type='radio'
+                  name='redeSku'
+                  id='n'
+                  value="Não"
+                  />
                 <p>Não</p>
               </S.RadioContainer>
             </S.Radio>
@@ -401,13 +420,21 @@ export default  function RegisterProduct() {
             <S.Radio>
               <S.RadioContainer>
                 <input
-                  required type='radio' name='' id='' />
+                  required 
+                  type='radio' 
+                  name='produtoOrigem' 
+                  id='n' 
+                  />
                 <p>Nacional</p>
               </S.RadioContainer>
 
               <S.RadioContainer>
                 <input
-                  required type='radio' name='' id='' />
+                  required 
+                  type='radio' 
+                  name='produtoOrigem' 
+                  id='i' 
+                  />
                 <p>Importado</p>
               </S.RadioContainer>
             </S.Radio>
@@ -420,7 +447,7 @@ export default  function RegisterProduct() {
                 required
                 type='text'
                 id='lead-time'
-                onChange={(text) => setNome(text.target.value)}
+                onChange={(text) => setleadTime(text.target.value)}
               />
             </S.LeadTime>
           </S.ContentSupplierForm>
@@ -429,7 +456,9 @@ export default  function RegisterProduct() {
             <label htmlFor='product-sku'>Produto SKU</label>
             <select
               required 
-              id='product-sku'>
+              id='product-sku'
+              onChange={(text) => setredeSKU(text.target.value)}
+              >
               <option>informação 1</option>
               <option>informação 2</option>
             </select>
@@ -437,6 +466,8 @@ export default  function RegisterProduct() {
             <label htmlFor='bar-code'>Código de barras</label>
             <select
               required 
+              onChange={(text) => setcodigo(text.target.value)}
+              
               id='bar-code'>
               <option>informação 1</option>
               <option>informação 2</option>
@@ -445,6 +476,7 @@ export default  function RegisterProduct() {
             <label htmlFor='unit-of-measurement'>Unidade de medida</label>
             <select 
               required 
+              onChange={(text) => setunidadeMedida(text.target.value)}
               id='unit-of-measurement'>
               <option>informação 1</option>
               <option>informação 2</option>
