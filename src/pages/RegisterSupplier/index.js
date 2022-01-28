@@ -263,17 +263,17 @@ export default function RegisterSupplier() {
             <span>Condições de pagamento</span>
             <S.Check>
               <S.CheckContainer>
-                <input type='checkbox' name='' id='' />
+                <input type='radio' name='pagamento' id='30' />
                 <p>30 dias</p>
               </S.CheckContainer>
 
               <S.CheckContainer>
-                <input type='checkbox' name='' id='' />
+                <input type='radio' name='pagamento' id='60' />
                 <p>60 dias</p>
               </S.CheckContainer>
 
               <S.CheckContainer>
-                <input type='checkbox' name='' id='' />
+                <input type='radio' name='pagamento' id='90' />
                 <p>90 dias</p>
               </S.CheckContainer>
 
