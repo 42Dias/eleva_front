@@ -110,7 +110,9 @@ export default  function RegisterProduct() {
   return (
     <>
       <Navbar />
-      <S.ContainerRegisterSupplier>
+      <S.ContainerRegisterSupplier
+      onSubmit= { () => createProduct()}
+      >
         <S.BoxImage>
           <img src={IMAGE} alt='upload image' />
         </S.BoxImage>
@@ -421,6 +423,7 @@ export default  function RegisterProduct() {
               <S.RadioContainer>
                 <input
                   required 
+                  onChange={(text) => setleadTime(text.target.value)}
                   type='radio' 
                   name='produtoOrigem' 
                   id='n' 
@@ -483,12 +486,14 @@ export default  function RegisterProduct() {
             </select>
           </S.SelectItems>
         </S.RegisterSupplier>
-        <button  style={{ background: '#AA2323' }}>
-          Cancelar
-        </button>
-        <button
-        onClick = { () => createProduct()} 
-        >Salvar</button>
+        <S.Button>
+          <button  style={{ background: '#AA2323' }}>
+            Cancelar
+          </button>
+          <button
+          onSubmit= { () => createProduct()}
+          >Salvar</button>
+        </S.Button>
       </S.ContainerRegisterSupplier>
     </>
   )
