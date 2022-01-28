@@ -13,6 +13,7 @@ import RegisterProduct from './pages/RegisterProduct'
 import Register from './pages/Register'
 import AcceptTerms from './pages/AcceptTerms'
 import RegisterSupplier from './pages/RegisterSupplier'
+import RegisterUserSupplier from './pages/RegisterUserSupplier'
 import ApproveUser from './pages/ApproveUser'
 import SaleDetails from './pages/SaleDetails'
 import ApproveOrders from './pages/ApproveOrders'
@@ -24,7 +25,6 @@ import MyRequests from './pages/MyRequests'
 import History from './pages/History'
 import ErrorPage from './pages/ErrorPage'
 import Supplies from './pages/Supplies'
-
 const Routes = () => {
   return (
     <HashRouter>
@@ -40,7 +40,7 @@ const Routes = () => {
           <Route path='/register' exact component={Register} />
           <Route path='/aceitar-termos' exact component={AcceptTerms} />
           <Route path='/cadastrar-fornecedor' exact component={RegisterSupplier} />
-          <Route path='/cadastrar-dados-empresa' exact component={RegisterSupplier} />
+          <Route path='/cadastrar-dados-empresa' exact component={RegisterUserSupplier} />
           <Route path='/aprovar-usuario' exact component={ApproveUser} />
           <Route path='/detalhes-da-venda' exact component={SaleDetails} />
           <Route path='/aprovar-produtos' exact component={ApproveOrders} />
