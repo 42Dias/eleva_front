@@ -1,4 +1,4 @@
-export default function cepInformation (cep) {
+export default async function cepInformation (cep) {
 
     if (cep.length !== 8) {
       return
