@@ -31,11 +31,12 @@ export default function RegisterSupplier() {
  const [condicoesDePagamento        , setCondicoesDePagamento] = useState('') 
  const [formadePagamento            , setFormadePagamento] = useState('')
 
-  function handleChangeCEP(e){
+  async function handleChangeCEP(e){
     const cep = e.replace(/[^0-9]/g, '')
 
     if(cep.length == 8){
-      const data = cepInformation(ev)
+      const data = await cepInformation(cep)
+      console.log(data)
       setCep(data.cep)
       setLogradouro(data.logradouro)
       setBairro(data.bairro)
@@ -110,7 +111,6 @@ export default function RegisterSupplier() {
             <S.ContentSupplierForm>
               <label htmlFor='logradouro'>CEP</label>
               <input type='text' id='logradouro'
-              // onBlur={(ev) => handleChangeCEP(ev)}
               onChange={(text) => handleChangeCEP(text.target.value)}
               />
             </S.ContentSupplierForm>
@@ -118,6 +118,7 @@ export default function RegisterSupplier() {
             <S.ContentSupplierForm>
               <label htmlFor='logradouro'>Logradouro</label>
               <input type='text' id='logradouro'
+              value={logradouro}
               onChange={(e) => setCodigo(e.target.value)}
               />
             </S.ContentSupplierForm>
@@ -125,6 +126,7 @@ export default function RegisterSupplier() {
             <S.ContentSupplierForm>
               <label htmlFor='numero'>Número</label>
               <input type='text' id='numero'
+              value={numero}
               onChange={(e) => setCodigo(e.target.value)}
               />
             </S.ContentSupplierForm>
@@ -132,6 +134,7 @@ export default function RegisterSupplier() {
             <S.ContentSupplierForm>
               <label htmlFor='bairro'>Bairro</label>
               <input type='text' id='bairro' 
+              value={bairro}
               onChange={(e) => setCodigo(e.target.value)}
               />
             </S.ContentSupplierForm>
@@ -139,6 +142,7 @@ export default function RegisterSupplier() {
             <S.ContentSupplierForm>
               <label htmlFor='cidade'>Cidade</label>
               <input type='text' id='cidade'
+              value={cidade}
               onChange={(e) => setCodigo(e.target.value)}
               />
             </S.ContentSupplierForm>
