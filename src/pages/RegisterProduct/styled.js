@@ -179,3 +179,31 @@ export const SelectItems = styled.form`
     color: ${theme.colors.green};
   }
 `
+export const Button = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+
+  button {
+    padding: 10px 20px;
+    font-size: 15px;
+    border: 0;
+    text-decoration: none;
+    color: ${theme.colors.white};
+    background: ${theme.colors.green};
+    border-radius: 5px;
+    margin: 35px 0 0 0;
+    width: 256px;
+    height: 48px;
+    text-align: center;
+  }
+
+  button :hover {
+    opacity: 70%;
+    transition: 0.5s;
+  }
+
+
+  
+`
