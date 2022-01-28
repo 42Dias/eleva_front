@@ -2,7 +2,6 @@ import React, { useState ,useEffect, useRef, useCallback } from "react";
 
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/Sidebar/Sidebar'
-// import Footer from './../../components/Footer'
 import IMAGE from '../../assets/upload.png'
 import * as S from './styled'
 

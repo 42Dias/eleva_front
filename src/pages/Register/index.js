@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from "react-router-dom";
 
 import LOGO from '../../assets/logo.png'
-import { apiWithoutTenant, loadingGif, porta, token,  id, ip, apiWithoutTenantAndWithToken} from '../../services/api'
-
-import loadUser from '../../services/loadUser' 
+import {  loadingGif } from '../../services/api'
 
 import * as S from './styled'
 import InputMask from 'react-input-mask';

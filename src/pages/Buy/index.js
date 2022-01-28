@@ -9,13 +9,9 @@ import IMAGE4 from '../../assets/prodItem4.png'
 import bannerList from '../../assets/bannerList.png'
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
-import axios from 'axios'
-import { api, apiWithoutTenant, role } from '../../services/api'
 import useInfiniteScroll from '../../hooks/useInfiniteScroll'
 import { formatPrice } from "../../utils/format";
-import { toast } from "react-toastify";
 import { useSuprimento } from "../../hooks/useSuprimentos";
-import checkAuth from "../../utils/checkAuth";
 
 export default function Buy() {
 

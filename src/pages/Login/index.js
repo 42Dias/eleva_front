@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -6,11 +6,9 @@ import { Link, useHistory } from 'react-router-dom'
 import { FiLock, FiMoreHorizontal } from 'react-icons/fi'
 import LOGO from '../../assets/logo.png'
 import * as S from './styled'
-import axios from 'axios'
-import { apiWithoutTenant, loadingGif, ip } from '../../services/api'
+import {  loadingGif } from '../../services/api'
 import login from '../../services/login'
 import { toast } from "react-toastify";
-import servidorErrorMessage from "../../utils/servidorErrorMessage";
 
 
 
