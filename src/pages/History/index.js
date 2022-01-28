@@ -5,6 +5,12 @@ import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 
 export default function History() {
+
+  /*
+  
+  histórico de pedidos da pessoa
+  
+  */
   return (
     <>
       <Navbar />
