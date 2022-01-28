@@ -38,6 +38,7 @@
     "react-bootstrap": "^2.0.0",
     "react-icons": "^4.3.1",
     "react-input-mask": "^2.0.4",
+    "react-intl-currency-input": "^0.2.6",
     "react-modal": "^3.14.4",
     "react-router-dom": "5.2.0",
     "react-toastify": "^8.1.0",
