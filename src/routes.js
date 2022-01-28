@@ -42,7 +42,7 @@ const Routes = () => {
           <Route path='/cadastrar-fornecedor' exact component={RegisterSupplier} />
           <Route path='/cadastrar-dados-empresa' exact component={RegisterUserSupplier} />
           <Route path='/aprovar-usuario' exact component={ApproveUser} />
-          <Route path='/detalhes-da-venda' exact component={SaleDetails} />
+          <Route path='/detalhes-da-venda/:id' exact component={SaleDetails} />
           <Route path='/aprovar-produtos' exact component={ApproveOrders} />
           <Route path='/confirmacao-dos-pedidos' exact component={OrderConfirmation} />
           <Route path='/comprar' exact component={BuyProds} />
