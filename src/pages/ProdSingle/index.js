@@ -7,18 +7,13 @@ import * as S from './styled'
 import productFind from '../../services/productFind'
 import { formatPrice } from '../../utils/format'
 
+import getIdFromUrl from '../../utils/getIdFromUrl'
+
 export default function ProdSingle() {
   const [produto, setProduto ] = useState({})
   
-  function getProductId(){
-    // gets the product id throught the page url!!!
-    const rawUrl = window.location.hash
-    const id = rawUrl.replace('#/produto/', '')
-    return id
-  }
-
   async function loadProductData(){
-    const id  = getProductId()
+    const id  = getIdFromUrl('#/produto/')
     let productData = await productFind(id)
   
     setProduto(productData)
