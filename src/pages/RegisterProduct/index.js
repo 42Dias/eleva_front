@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom'
 import Navbar from '../../components/Sidebar/Sidebar'
 import IMAGE from '../../assets/upload.png'
 import * as S from './styled'
+import IntlCurrencyInput from "react-intl-currency-input"
+import InputMask from 'react-input-mask';
+
+import currencyConfig from '../../utils/currenryConfig'
 
 export default  function RegisterProduct() {
   const [codigo, setcodigo] = useState('')
@@ -48,6 +52,8 @@ export default  function RegisterProduct() {
   const [origem, setorigem] = useState('')
   const [departamentoId, setdepartamentoId] = useState('')
   const [empresaId, setempresaId] = useState('')
+  const [priceFormated,   setPriceFormated] = useState('')
+  const [preco,   setPreco]                 = useState('')
 
   function createProduct(){
     const prodData = generateProductData()
@@ -102,8 +108,12 @@ export default  function RegisterProduct() {
   return data
   }
 
+  const handleChangePrice = (event, value, maskedValue) => {
+    event.preventDefault();
 
-
+    setPreco(value); // value without mask (ex: 1234.56)
+    setPriceFormated(maskedValue); // masked value (ex: R$1234,56)
+  };
 
 
   return (
@@ -279,6 +289,12 @@ export default  function RegisterProduct() {
                 onChange={(text) => setprecoVenda(text.target.value)}
               />
             </S.ContentSupplierForm>
+            <IntlCurrencyInput 
+                  currency="BRL" 
+                  config={currencyConfig}
+                  onChange={handleChangePrice} 
+                  value={priceFormated}
+            />
 
             <S.ContentSupplierForm>
               <label htmlFor='height'>Altura(cm)</label>
@@ -422,10 +438,10 @@ export default  function RegisterProduct() {
               <S.RadioContainer>
                 <input
                   required 
-                  onChange={(text) => setleadTime(text.target.value)}
                   type='radio' 
                   name='produtoOrigem' 
                   id='n' 
+                  onChange={(text) => setorigem('Nacional')}
                   />
                 <p>Nacional</p>
               </S.RadioContainer>
@@ -436,6 +452,7 @@ export default  function RegisterProduct() {
                   type='radio' 
                   name='produtoOrigem' 
                   id='i' 
+                  onChange={(text) => setorigem('Importado')}
                   />
                 <p>Importado</p>
               </S.RadioContainer>
