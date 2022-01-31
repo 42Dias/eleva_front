@@ -1,4 +1,4 @@
-export default currencyConfig = {
+const currencyConfig = {
     locale: "pt-BR",
     formats: {
       number: {
@@ -11,3 +11,5 @@ export default currencyConfig = {
       },
     },
   };
+  
+export default currencyConfig
