@@ -1,6 +1,9 @@
 import React, { useState ,useEffect, useRef, useCallback } from "react";
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
+import IntlCurrencyInput from "react-intl-currency-input"
+import InputMask from 'react-input-mask';
+
 
 import cepInformation from '../../utils/cepInformation'
 
@@ -30,6 +33,12 @@ export default function RegisterSupplier() {
  const [emailDoResponsavel          , setEmailDoResponsavel] = useState('')
  const [condicoesDePagamento        , setCondicoesDePagamento] = useState('') 
  const [formadePagamento            , setFormadePagamento] = useState('')
+ const [phoneNumber                 , setphoneNumber] = useState('')
+ const [phoneMaskedNumber           , setphoneMaskedNumber] = useState('')
+ const [phoneNumberSecondary        , setphoneNumberSecondary] = useState('')
+ const [phoneMaskedNumberSecondary  , setphoneMaskedNumberSecondary] = useState('')
+ const [matiz                       , setMatiz] = useState('')
+ const [rede                        , setRede] = useState('')
 
   async function handleChangeCEP(e){
     const cep = e.replace(/[^0-9]/g, '')
@@ -57,7 +66,9 @@ export default function RegisterSupplier() {
           <S.RegisterSupplierForm>
             <S.ContentSupplierForm>
               <label htmlFor='codigo'>Código</label>
-              <input type='text' id='codigo'
+              <input 
+              type='text' 
+              id='codigo'
               onChange={(e) => setCodigo(e.target.value)}
               />
             </S.ContentSupplierForm>
@@ -65,47 +76,51 @@ export default function RegisterSupplier() {
             <S.ContentSupplierForm>
               <label htmlFor='razao-social'>Razão social</label>
               <input type='text' id='razao-social'
-              onChange={(e) => setCodigo(e.target.value)}
+              onChange={(e) => setRazao(e.target.value)}
               />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='nome-fantasia'>Nome fantasia</label>
-              <input type='text' id='nome-fantasia' />
+              <input
+              type='text' 
+              id='nome-fantasia'
+              onChange={(e) => setNome(e.target.value)}
+              />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='cnpj'>CNPJ</label>
               <input type='text' id='cnpj'
-              onChange={(e) => setCodigo(e.target.value)}
+              onChange={(e) => setCNPJ(e.target.value)}
               />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='inscricao-estadual'>Inscrição estadual</label>
               <input type='text' id='inscricao-estadual'
-              onChange={(e) => setCodigo(e.target.value)}
+              onChange={(e) => setInscricaoEstadual(e.target.value)}
               />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='inscricao-municipal'>Inscrição municipal</label>
               <input type='text' id='inscricao-municipal'
-              onChange={(e) => setCodigo(e.target.value)}
+              onChange={(e) => setInscricaoMunicipal(e.target.value)}
                />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='cnae-principal'>Cnae principal</label>
               <input type='text' id='cnae-principal'
-              onChange={(e) => setCodigo(e.target.value)}
+              onChange={(e) => setCnaePrincipal(e.target.value)}
                />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='cnae-secundario'>Cnae secundário</label>
               <input type='text' id='cnae-secundario' 
-              onChange={(e) => setCodigo(e.target.value)}/>
+              onChange={(e) => setCnaececundario(e.target.value)}/>
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
@@ -119,7 +134,7 @@ export default function RegisterSupplier() {
               <label htmlFor='logradouro'>Logradouro</label>
               <input type='text' id='logradouro'
               value={logradouro}
-              onChange={(e) => setCodigo(e.target.value)}
+              onChange={(e) => setLogradouro(e.target.value)}
               />
             </S.ContentSupplierForm>
 
@@ -127,7 +142,7 @@ export default function RegisterSupplier() {
               <label htmlFor='numero'>Número</label>
               <input type='text' id='numero'
               value={numero}
-              onChange={(e) => setCodigo(e.target.value)}
+              onChange={(e) => setNumero(e.target.value)}
               />
             </S.ContentSupplierForm>
 
@@ -135,7 +150,7 @@ export default function RegisterSupplier() {
               <label htmlFor='bairro'>Bairro</label>
               <input type='text' id='bairro' 
               value={bairro}
-              onChange={(e) => setCodigo(e.target.value)}
+              onChange={(e) => setBairro(e.target.value)}
               />
             </S.ContentSupplierForm>
 
@@ -143,82 +158,118 @@ export default function RegisterSupplier() {
               <label htmlFor='cidade'>Cidade</label>
               <input type='text' id='cidade'
               value={cidade}
-              onChange={(e) => setCodigo(e.target.value)}
+              onChange={(e) => setCidade(e.target.value)}
               />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-                      <label>Estado*</label>
-                      <select 
-                      required
-                      value={estado}
-                      component='select' 
-                      name='uf'
-                      onChange={(text) => setEstado(text.target.value)}
-                      >
-                        <option value=''>Selecione o Estado</option>
-                        <option value='AC'>Acre</option>
-                        <option value='AL'>Alagoas</option>
-                        <option value='AP'>Amapá</option>
-                        <option value='AM'>Amazonas</option>
-                        <option value='BA'>Bahia</option>
-                        <option value='CE'>Ceará</option>
-                        <option value='DF'>Distrito Federal</option>
-                        <option value='ES'>Espírito Santo</option>
-                        <option value='GO'>Goiás</option>
-                        <option value='MA'>Maranhão</option>
-                        <option value='MT'>Mato Grosso</option>
-                        <option value='MS'>Mato Grosso do Sul</option>
-                        <option value='MG'>Minas Gerais</option>
-                        <option value='PA'>Pará</option>
-                        <option value='PB'>Paraíba</option>
-                        <option value='PR'>Paraná</option>
-                        <option value='PE'>Pernambuco</option>
-                        <option value='PI'>Piauí</option>
-                        <option value='RJ'>Rio de Janeiro</option>
-                        <option value='RN'>Rio Grande do Norte</option>
-                        <option value='RS'>Rio Grande do Sul</option>
-                        <option value='RO'>Rondônia</option>
-                        <option value='RR'>Roraima</option>
-                        <option value='SC'>Santa Catarina</option>
-                        <option value='SP'>São Paulo</option>
-                        <option value='SE'>Sergipe</option>
-                        <option value='TO'>Tocantins</option>
-                      </select>
+              <label>Estado*</label>
+              <select 
+              required
+              value={estado}
+              component='select' 
+              name='uf'
+              onChange={(text) => setEstado(text.target.value)}
+              >
+                <option value=''>Selecione o Estado</option>
+                <option value='AC'>Acre</option>
+                <option value='AL'>Alagoas</option>
+                <option value='AP'>Amapá</option>
+                <option value='AM'>Amazonas</option>
+                <option value='BA'>Bahia</option>
+                <option value='CE'>Ceará</option>
+                <option value='DF'>Distrito Federal</option>
+                <option value='ES'>Espírito Santo</option>
+                <option value='GO'>Goiás</option>
+                <option value='MA'>Maranhão</option>
+                <option value='MT'>Mato Grosso</option>
+                <option value='MS'>Mato Grosso do Sul</option>
+                <option value='MG'>Minas Gerais</option>
+                <option value='PA'>Pará</option>
+                <option value='PB'>Paraíba</option>
+                <option value='PR'>Paraná</option>
+                <option value='PE'>Pernambuco</option>
+                <option value='PI'>Piauí</option>
+                <option value='RJ'>Rio de Janeiro</option>
+                <option value='RN'>Rio Grande do Norte</option>
+                <option value='RS'>Rio Grande do Sul</option>
+                <option value='RO'>Rondônia</option>
+                <option value='RR'>Roraima</option>
+                <option value='SC'>Santa Catarina</option>
+                <option value='SP'>São Paulo</option>
+                <option value='SE'>Sergipe</option>
+                <option value='TO'>Tocantins</option>
+              </select>
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='complemento'>Complemento</label>
               <input type='text' id='complemento'
-              onChange={(e) => setCodigo(e.target.value)}
+              onChange={(e) => setComplemento(e.target.value)}
               />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='telefone'>Telefone</label>
-              <input type='text' id='telefone' 
-              onChange={(e) => setCodigo(e.target.value)}
+              {/* <input type='text' id='telefone' 
+              onChange={(e) => setTelefone(e.target.value)}
+              /> */}
+              <InputMask
+                    required
+                    mask="(99) 9999-99999"
+                    value={phoneMaskedNumber} 
+                    className='input'
+                    onChange={
+                      (e) => {
+                        let telefone = e.target.value
+                        console.log(
+                          telefone.replace(/\D/g, '')
+                          )
+                          setphoneNumber(
+                          telefone.replace(/[\(\)\.\s-]+/g,'')
+                          )
+                        setphoneMaskedNumber(e.target.value)
+                      }
+                    }
               />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='telefone-secundario'>Telefone secundário</label>
-              <input type='text' id='telefone-secundario' 
+              {/* <input type='text' id='telefone-secundario' 
               onChange={(e) => setCodigo(e.target.value)}
+              /> */}
+              <InputMask
+                    required
+                    mask="(99) 9999-99999"
+                    value={phoneMaskedNumberSecondary} 
+                    className='input'
+                    onChange={
+                      (e) => {
+                        let telefone = e.target.value
+                        console.log(
+                          telefone.replace(/\D/g, '')
+                          )
+                          setphoneNumberSecondary(
+                          telefone.replace(/[\(\)\.\s-]+/g,'')
+                          )
+                        setphoneMaskedNumberSecondary(e.target.value)
+                      }
+                    }
               />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='email-da-empresa'>Email da empresa</label>
               <input type='email' id='email-da-empresa'
-              onChange={(e) => setCodigo(e.target.value)}
+              onChange={(e) => setEmailDaEmpresa(e.target.value)}
               />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='perfil-comercial'>Perfil comercial</label>
               <input type='text' id='perfil-comercial'
-              onChange={(e) => setCodigo(e.target.value)}
+              onChange={(e) => setPerfilComercial(e.target.value)}
               />
             </S.ContentSupplierForm>
           </S.RegisterSupplierForm>
@@ -226,7 +277,7 @@ export default function RegisterSupplier() {
             <S.LeadTime>
               <label htmlFor='lead-time'>Lead time</label>
               <input type='text' id='lead-time'
-              onChange={(e) => setCodigo(e.target.value)}
+              onChange={(e) => setLeadTime(e.target.value)}
               />
             </S.LeadTime>
           </S.ContentSupplierForm>
@@ -240,7 +291,7 @@ export default function RegisterSupplier() {
                     Nome do responsável comercial
                   </label>
                   <input type='text' id='nome-do-responsável-comercial'
-                  onChange={(e) => setCodigo(e.target.value)} />
+                  onChange={(e) => setNomeDoResponsavelComercial(e.target.value)} />
                 </S.StoreResponsavel>
 
                 <S.StoreResponsavel>
@@ -248,7 +299,7 @@ export default function RegisterSupplier() {
                     Telefone do responsável
                   </label>
                   <input type='text' id='telefone-do-responsável'
-                  onChange={(e) => setCodigo(e.target.value)}
+                  onChange={(e) => setTelefoneDoResponsavel(e.target.value)}
                    />
                 </S.StoreResponsavel>
               </S.Responsavel>
@@ -258,7 +309,7 @@ export default function RegisterSupplier() {
                   E-mail do responsável
                 </label>
                 <input type='email' id='email-do-responsavel'
-                onChange={(e) => setCodigo(e.target.value)} />
+                onChange={(e) => setEmailDoResponsavel(e.target.value)} />
               </S.ResponsavelAlone>
             </S.ContainerResponsavel>
           </S.ContentResponsavel>
@@ -267,22 +318,31 @@ export default function RegisterSupplier() {
             <span>Condições de pagamento</span>
             <S.Check>
               <S.CheckContainer>
-                <input type='radio' name='pagamento' id='30' />
+                <input type='radio' name='pagamento' id='30'
+                onChange={(e) => setCondicoesDePagamento(e.target.value)}
+                />
                 <p>30 dias</p>
               </S.CheckContainer>
 
               <S.CheckContainer>
-                <input type='radio' name='pagamento' id='60' />
+                <input type='radio' name='pagamento' id='60'
+                onChange={(e) => setCondicoesDePagamento(e.target.value)}
+                 />
                 <p>60 dias</p>
               </S.CheckContainer>
 
               <S.CheckContainer>
-                <input type='radio' name='pagamento' id='90' />
+                <input type='radio' name='pagamento' id='90'
+                onChange={(e) => setCondicoesDePagamento(e.target.value)}
+                />
                 <p>90 dias</p>
               </S.CheckContainer>
 
               <S.CheckContainer>
-                <input type='radio' name='pagamento' id='1200' />
+                <input type='radio' name='pagamento' id='1200'
+                onChange={(e) => setCondicoesDePagamento(e.target.value)}
+                
+                />
                 <p>120 dias</p>
               </S.CheckContainer>
             </S.Check>
@@ -290,16 +350,22 @@ export default function RegisterSupplier() {
 
           <S.SelectItems>
             <label htmlFor='forma-de-pagamento'>Forma de pagamento</label>
-            <select id='forma-de-pagamento'>
-              <option>Boleto</option>
-              <option>Cartão</option>
+            <select id='forma-de-pagamento'
+              onChange={(e) => setFormadePagamento(e.target.value)}
+            >
+              <option value="Boleto" >Boleto</option>
+              <option value="Cartão" >Cartão</option>
             </select>
 
             <label htmlFor='matriz'>Matriz</label>
-            <input type='text' id='matriz' />
+            <input type='text' id='matriz'
+            onChange={(e) => setMatiz(e.target.value)}
+            />
 
             <label htmlFor='rede'>Rede</label>
-            <input type='text' id='rede' />
+            <input type='text' id='rede'
+            onChange={(e) => setRede(e.target.value)}
+            />
           </S.SelectItems>
           <S.Button>
           <button  style={{ background: '#AA2323' }}>
