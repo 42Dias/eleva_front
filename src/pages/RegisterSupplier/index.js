@@ -6,6 +6,7 @@ import InputMask from 'react-input-mask';
 
 
 import cepInformation from '../../utils/cepInformation'
+import loadEmpresaQuantidade from "../../services/loadEmpresaQuantidade";
 /*
 
 CAMPOS COM FORMATAÇÃO ESPECÍFICA!!!!
@@ -100,8 +101,19 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
       formaPagamento:      formadePagamento ,
     }
     console.log(data)
-
   }
+
+
+  async function loadQuantidadeDeEmpresas(){
+    const quantidadeDeEmpresas = await loadEmpresaQuantidade()
+    setCodigo(quantidadeDeEmpresas + 1000)
+  }
+
+  useEffect(
+    () => {
+      loadQuantidadeDeEmpresas()
+    }, []
+  )
 
   return (
     <>
@@ -115,11 +127,13 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
           <S.RegisterSupplierForm>
             <S.ContentSupplierForm>
               <label htmlFor='codigo'>Código</label>
-              <label htmlFor='codigo'>Gerado automaticamente</label>
+              {/* Gerado automaticamente */}
               <input 
+              style={{cursor: 'not-allowed'}}
+              value={codigo}
               type='text' 
               id='codigo'
-              onChange={(e) => setCodigo(e.target.value)}
+              // onChange={(e) => setCodigo(e.target.value)}
               />
             </S.ContentSupplierForm>
 
@@ -524,7 +538,7 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
               </option>
             </select>
 
-            <label htmlFor='matriz'>Matriz</label>
+            {/* <label htmlFor='matriz'>Matriz</label>
             <input type='text' id='matriz'
             onChange={(e) => setMatiz(e.target.value)}
             />
@@ -532,7 +546,7 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
             <label htmlFor='rede'>Rede</label>
             <input type='text' id='rede'
             onChange={(e) => setRede(e.target.value)}
-            />
+            /> */}
           </S.SelectItems>
           <S.Button>
           <button  style={{ background: '#AA2323' }}>
