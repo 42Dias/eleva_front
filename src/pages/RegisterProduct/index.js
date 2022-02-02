@@ -178,7 +178,6 @@ export default  function RegisterProduct() {
             <S.ContentSupplierForm>
               <label htmlFor='ref'>Referência técnica</label>
               <input
-                required
                 type='text'
                 id='ref'
                 onChange={(text) => setreferenciaTec(text.target.value)}
@@ -198,7 +197,6 @@ export default  function RegisterProduct() {
             <S.ContentSupplierForm>
               <label htmlFor='inactivity'>Data de inatividade</label>
               <input
-                required
                 type='text'
                 id='inactivity'
                 onChange={(text) => setdataInatividade(text.target.value)}
@@ -257,7 +255,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='safety-stock'>Estoque de segurança</label>
+              <label htmlFor='safety-stock'>Estoque de segurança*</label>
               <input
                 required
                 type='number'
@@ -342,7 +340,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='price'>Preço</label>
+              <label htmlFor='price'>Preço*</label>
               {/* <input
                 required
                 type='text'
@@ -350,6 +348,7 @@ export default  function RegisterProduct() {
                 onChange={(text) => setprecoVenda(text.target.value)}
               /> */}
             <IntlCurrencyInput 
+                  required
                   currency="BRL" 
                   config={currencyConfig}
                   onChange={handleChangePrice} 
@@ -464,7 +463,6 @@ export default  function RegisterProduct() {
             <S.ContentSupplierForm>
               <label htmlFor='last-sale'>Data da última venda</label>
               <input
-                required
                 type='date'
                 id='last-sale'
                 onChange={(text) => setdtUltimaVenda(text.target.value)}
@@ -474,7 +472,6 @@ export default  function RegisterProduct() {
             <S.ContentSupplierForm>
               <label htmlFor='first-sale'>Data da primeira venda</label>
               <input
-                required
                 type='date'
                 id='first-sale'
                 onChange={(text) => setdataPrimeiraVenda(text.target.value)}
@@ -484,7 +481,6 @@ export default  function RegisterProduct() {
             <S.ContentSupplierForm>
               <label htmlFor='ncm'>NCM</label>
               <input
-                required
                 type='text'
                 id='ncm'
                 onChange={(text) => setncm(text.target.value)}
@@ -494,7 +490,6 @@ export default  function RegisterProduct() {
             <S.ContentSupplierForm>
               <label htmlFor='ncm-description'>Descrição NCM</label>
               <input
-                required
                 type='text'
                 id='ncm-description'
                 onChange={(text) => setdescricaoNCM(text.target.value)}
@@ -503,7 +498,7 @@ export default  function RegisterProduct() {
           </S.RegisterSupplierForm>
 
           <S.ContentSupplierFormRadio>
-            <span>Rede SKU</span>
+            <span>Rede SKU*</span>
             <S.Radio>
               <S.RadioContainer>
                 <input
@@ -511,7 +506,6 @@ export default  function RegisterProduct() {
                     let value  = e.target.value
                     setIsSKU(value)
                   }}
-                  required 
                   type='radio' 
                   name='redeSku' 
                   id='s'
@@ -526,7 +520,6 @@ export default  function RegisterProduct() {
                     let value  = e.target.value
                     setIsSKU(value)
                   }}
-                  required
                   type='radio'
                   name='redeSku'
                   id='n'
@@ -542,7 +535,6 @@ export default  function RegisterProduct() {
             <S.Radio>
               <S.RadioContainer>
                 <input
-                  required 
                   type='radio' 
                   name='produtoOrigem' 
                   id='n' 
@@ -553,7 +545,6 @@ export default  function RegisterProduct() {
 
               <S.RadioContainer>
                 <input
-                  required 
                   type='radio' 
                   name='produtoOrigem' 
                   id='i' 
@@ -577,7 +568,7 @@ export default  function RegisterProduct() {
           </S.ContentSupplierForm>
 
           <S.SelectItems>
-            <label htmlFor='product-sku'>Produto SKU</label>
+            <label htmlFor='product-sku'>Produto SKU*</label>
             <select
               required 
               id='product-sku'
