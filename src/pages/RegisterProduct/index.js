@@ -12,6 +12,7 @@ import { FaSortNumericUp } from "react-icons/fa";
 import handleSetNumber from "../../utils/handleSetNumber";
 import handleCubagem from "../../utils/handleCubagem";
 import { api } from "../../services/api";
+import loadCategorias from "../../services/loadCategorias";
 export default  function RegisterProduct() {
   const [categorias, setcategorias] = useState([])
 
@@ -121,15 +122,6 @@ export default  function RegisterProduct() {
     setPriceFormated(maskedValue); // masked value (ex: R$1234,56)
   };
 
-  function loadCategorias(setFunction){
-    api.get('departamento').then(
-      (response) => {
-        console.log(response)
-        console.log(response.data.rows)
-        return setFunction(response.data.rows)
-      }
-    )
-  }
   useEffect(
     () => {
       loadCategorias(setcategorias)
