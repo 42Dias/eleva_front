@@ -111,7 +111,8 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
 
   useEffect(
     () => {
-      loadQuantidadeDeEmpresas()
+      let delay = 60
+      setTimeout(() => loadQuantidadeDeEmpresas(), delay * 1000);
     }, []
   )
 
