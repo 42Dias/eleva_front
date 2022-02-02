@@ -1,8 +1,4 @@
-
-
-
 import { Switch, Route, HashRouter } from 'react-router-dom'
-
 // import Home from './pages/Home'
 import Login from './pages/Login'
 import MyProducts from './pages/MyProducts'
