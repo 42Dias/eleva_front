@@ -46,10 +46,16 @@ export default function RegisterSupplier() {
  const [phoneMaskedNumber           , setphoneMaskedNumber] = useState('')
  const [phoneNumberSecondary        , setphoneNumberSecondary] = useState('')
  const [phoneMaskedNumberSecondary  , setphoneMaskedNumberSecondary] = useState('')
-//  const [matiz                       , setMatiz] = useState('')
-//  const [rede                        , setRede] = useState('')
+ const [matiz                       , setMatiz] = useState('')
+ const [rede                        , setRede] = useState('')
  const [condicaoEmpresa             , setCondicaoEmpresa] = useState('')
+/*
+falta = 
+Cnae secundário
+E outras informações do responsável
 
+MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
+*/
  
  const [maskedCnpj, setMaskedCnpj] = useState('')
  const [maskedCep, setMaskedCep] = useState('')
@@ -68,11 +74,40 @@ export default function RegisterSupplier() {
     }
   }
 
+  async function hangleCreateEmpresa(e){
+    e.preventDefault()
+    const data = {
+      codigo:              codigo ,
+      razaoSocial:         razao ,
+      nomeFantasia:        nome ,
+      cnpj:                CNPJ ,
+      inscricaoEstadual:   inscricaoEstadual ,
+      inscricaoMunicipal:  inscricaoMunicipal ,
+      cnae:                cnaePrincipal ,
+      cep:                 cep ,
+      estado:              estado ,
+      cidade:              cidade ,
+      bairro:              bairro ,
+      logradouro:          logradouro ,
+      numero:              numero ,
+      complemento:         complemento ,
+      telefone:            telefone ,
+      email:               email ,
+      ativo:               ativo ,
+      perfilComercial:     perfilComercial ,
+      leadTime:            leadTime ,
+      condicaoPagamento:   condicoesDePagamento ,
+      formaPagamento:      formadePagamento ,
+    }
+    console.log(data)
+
+  }
+
   return (
     <>
       <Navbar />
       <S.ContainerRegisterSupplier
-      onSubmit= { () => createProduct()}
+      onSubmit= { (e) => hangleCreateEmpresa(e)}
       >
         <S.RegisterSupplier>
           <h2>Novo fornecedor</h2>
@@ -114,7 +149,7 @@ export default function RegisterSupplier() {
               onChange={(e) => setCNPJ(e.target.value)}
               /> */}
               <InputMask
-
+              
               required
 
               id='cnpj'
@@ -489,7 +524,7 @@ export default function RegisterSupplier() {
               </option>
             </select>
 
-            {/* <label htmlFor='matriz'>Matriz</label>
+            <label htmlFor='matriz'>Matriz</label>
             <input type='text' id='matriz'
             onChange={(e) => setMatiz(e.target.value)}
             />
@@ -497,7 +532,7 @@ export default function RegisterSupplier() {
             <label htmlFor='rede'>Rede</label>
             <input type='text' id='rede'
             onChange={(e) => setRede(e.target.value)}
-            /> */}
+            />
           </S.SelectItems>
           <S.Button>
           <button  style={{ background: '#AA2323' }}>
