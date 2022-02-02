@@ -253,12 +253,30 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='minimum-module'>Módulo mínimo é numero?</label>
+              <label htmlFor='minimum-module'>Módulo mínimo</label>
               <input
+                value={moduloMinimo}
                 required
                 type='text'
                 id='minimum-module'
-                onChange={(text) => setestoqueMinimo(text.target.value)}
+                // onChange={(text) => setestoqueMinimo(text.target.value)}
+                onChange={(text) => {
+                  handleSetNumber(text.target.value, setmoduloMinimo)
+                }}
+              />
+            </S.ContentSupplierForm>
+
+            <S.ContentSupplierForm>
+              <label htmlFor='minimum-module'>Módulo Máximo</label>
+              <input
+                value={moduloMaster}
+                required
+                type='text'
+                id='minimum-module'
+                // onChange={(text) => setestoqueMinimo(text.target.value)}
+                onChange={(text) => {
+                  handleSetNumber(text.target.value, setmoduloMaster)
+                }}
               />
             </S.ContentSupplierForm>
 
@@ -273,13 +291,15 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='minimum-delivery'>Entrega mínima é numero?</label>
+              <label htmlFor='minimum-delivery'>Entrega mínima</label>
               <input
                 required
                 type='email'
                 id='minimum-delivery'
-                onChange={(text) => setentregaMinima(text.target.value)}
-                
+                // onChange={(text) => setentregaMinima(text.target.value)}
+                onChange={(text) => {
+                  handleSetNumber(text.target.value, setentregaMinima)
+                }}
               />
             </S.ContentSupplierForm>
 
