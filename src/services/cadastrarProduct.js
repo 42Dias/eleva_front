@@ -7,7 +7,7 @@ import responseHandler from '../utils/responseHandler'
 import servidorErrorMessage from '../utils/servidorErrorMessage'
 
 
-export default async function cadastro(data) {
+export default async function cadastrarProduct(data) {
     return api.post('produto', {
       codigo: data.codigo,
       nome: data.nome,
