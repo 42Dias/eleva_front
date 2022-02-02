@@ -76,7 +76,45 @@ export const ContentSupplierForm = styled.div`
     font-size: 14px;
     color: ${theme.colors.neutral[0]};
   }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+ 
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
 `
+
+/*
+
+  .flex-holder{
+    display: flex;
+  }
+  .flex-holder .current-measure{
+    align-self: center;
+    padding-top: 15px;
+    -webkit-border-top-right-radius:    5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright:        5px;
+    -moz-border-radius-bottomright:     5px;
+    border-top-right-radius:            5px;
+    border-bottom-right-radius:         5px;
+    transform: translateX(-20px);
+    color: ${theme.colors.white};
+    background-color: ${theme.colors.darkBlue};
+  }
+
+
+  input:focus .flex-holder .current-measure{
+    border: 1px solid ${theme.colors.green};
+    background: transparent;
+    color: ${theme.colors.green};
+  }
+
+*/
 
 export const ContentLeadTime = styled.form`
   display: grid;
