@@ -71,7 +71,13 @@ export default  function RegisterProduct() {
     // console.log(prodData)
     let bodyRequisition = data
 
-    cadastrarProduct(bodyRequisition)
+    cadastrarProduct(bodyRequisition).then(
+      (funcReturn) => {
+        if(funcReturn == 'ok'){
+          window.location.hash = '#/home'
+        }
+      }
+    )
   }
   function generateProductData(){
   const data = {
@@ -86,7 +92,7 @@ export default  function RegisterProduct() {
     estoque: estoque,
     estoqueFornecedor: estoqueFornecedor,
     leadTime: leadTime,
-    ativo: "Sim",
+    ativo: "Sim", // PARA TESTE !!!!!!
     dataInatividade: dataInatividade,
     redeSKU: redeSKU,
     pedidoMinimo: pedidoMinimo,
@@ -245,7 +251,6 @@ export default  function RegisterProduct() {
               /> */}
               <select
               required 
-              id='product-sku'
               onChange={(e) => {
                 // console.log(e.target.id)
                 console.log(e.target.value)
@@ -625,7 +630,6 @@ export default  function RegisterProduct() {
           </S.ContentSupplierForm>
 
           <S.SelectItems>
-            <label htmlFor='product-sku'>Produto SKU*</label>
             {/* <select
               required 
               id='product-sku'
@@ -634,12 +638,13 @@ export default  function RegisterProduct() {
               <option>informação 1</option>
               <option>informação 2</option>
             </select> */}
+            {/* <label htmlFor='product-sku'>Produto SKU*</label>
             <input
                 required
                 type='text'
                 id='lead-time'
                 onChange={(text) => setredeSKU(text.target.value)}
-              />
+              /> */}
 
             <label htmlFor='bar-code'>Código de barras</label>
             {/* <select
