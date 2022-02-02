@@ -15,6 +15,10 @@ import { api } from "../../services/api";
 import loadCategorias from "../../services/loadCategorias";
 export default  function RegisterProduct() {
   const [categorias, setcategorias] = useState([])
+  const [medidas, setMedidas] = useState([])
+  const [tipoMateriais, settipoMateriais] = useState([])
+  const [curvaTipos, setcurvaTipos] = useState('')
+
 
 
   const [codigo, setcodigo] = useState('')
@@ -63,10 +67,11 @@ export default  function RegisterProduct() {
   const [preco,   setPreco]                 = useState('')
 
   function createProduct(){
-    const prodData = generateProductData()
-    console.log(prodData)
+    const data = generateProductData()
+    // console.log(prodData)
+    let bodyRequisition = data
 
-    // cadastrarProduct(data)
+    cadastrarProduct(bodyRequisition)
   }
   function generateProductData(){
   const data = {
@@ -75,13 +80,13 @@ export default  function RegisterProduct() {
     descricao: descricao,
     unidadeMedida: unidadeMedida,
     tipoMaterial: tipoMaterial,
-    precoVenda: precoVenda,
+    precoVenda: preco,
     referenciaTec: referenciaTec,
     demandaDiaria: demandaDiaria,
     estoque: estoque,
     estoqueFornecedor: estoqueFornecedor,
     leadTime: leadTime,
-    ativo: ativo,
+    ativo: "Sim",
     dataInatividade: dataInatividade,
     redeSKU: redeSKU,
     pedidoMinimo: pedidoMinimo,
@@ -125,6 +130,13 @@ export default  function RegisterProduct() {
   useEffect(
     () => {
       loadCategorias(setcategorias)
+
+      // Estas são os padrões aceitos pelo back
+      setMedidas(["AMP", "BUI", "BG", "BOLS", "CX", "CAP", "CARP", "COM", "DOSE", "ENV", "FLAC", "FR", "FA", "GAL", "GTS", "G", "L", "MCG", "MUI", "MG", "ML", "OVL", "PAS", "LT", "PER", "PIL", "PT", "KG", "SER", "SUP", "TABLE", "TUB", "TB", "UN", "UI", "CM", "CONJ", "KIT", "MÇ", "M", "PC", "PEÇA", "RL", "GY", "CGY", "PAR", "ADES", "COM EFEV", "COM MST", "SACHE"])
+      
+      settipoMateriais(["Matéria Prima", "Produto Improdutivo", "Embalagens", "Produto Acabado", "Fabricado", "Revenda"])
+      
+      setcurvaTipos(["A","B","C","D","E","F","G"])
     }, []
   )
 
@@ -183,28 +195,46 @@ export default  function RegisterProduct() {
                 onChange={(text) => setreferenciaTec(text.target.value)}
               />
             </S.ContentSupplierForm>
-
-            <S.ContentSupplierForm>
+            <S.SelectItems
+              style={{width: '95%', padding: 0}}
+            >
               <label htmlFor='material'>Tipo de material*</label>
-              <input
+              {/* <input
                 required
                 type='text'
                 id='material'
                 onChange={(text) => settipoMaterial(text.target.value)}
-              />
-            </S.ContentSupplierForm>
+              /> */}
+    
+            <select
+              required 
+              id='product-sku'
+              onChange={(text) => {
+                console.log(text.target.value)
+                settipoMaterial(text.target.value)}
+              }
+              >
+              {tipoMateriais.map(
+                (materialDisponivel) => (
+                  <option
+                  value={materialDisponivel}
+                  >{materialDisponivel}</option>
+                )
+              )}
+            </select>
+            </S.SelectItems>
 
             <S.ContentSupplierForm>
               <label htmlFor='inactivity'>Data de inatividade</label>
               <input
-                type='text'
+                type='date'
                 id='inactivity'
                 onChange={(text) => setdataInatividade(text.target.value)}
               />
             </S.ContentSupplierForm>
 
             <S.SelectItems
-            style={{width: '100%'}}
+            style={{width: '95%', padding: 0}}
             >
               <label htmlFor='category'>Departamento / Categoria*</label>
               {/* <input
@@ -216,13 +246,21 @@ export default  function RegisterProduct() {
               <select
               required 
               id='product-sku'
-              onChange={(text) => setdepartamentoId(text.target.value)}
+              onChange={(e) => {
+                // console.log(e.target.id)
+                console.log(e.target.value)
+                setdepartamentoId(e.target.value)}
+              }
               >
               {categorias.map(
                 (categoria) => (
                   <option
                   value={categoria.id}
-                  >{categoria.nome}</option>
+                  id={categoria.nome}
+                  onClick={(e) => console.log(e.target.id)}
+                  >
+                    {categoria.nome}
+                  </option>
                 )
               )}
             </select>
@@ -239,6 +277,7 @@ export default  function RegisterProduct() {
                 id='stock'
                 onChange={(text) => {
                   handleSetNumber(text.target.value, setestoque)
+                  handleSetNumber(text.target.value, setestoqueFornecedor)
                 }}
               />
               {/* HÁ OUTROS TIPOS DE ESTOQUE? */}
@@ -261,7 +300,7 @@ export default  function RegisterProduct() {
                 type='number'
                 id='safety-stock'
                 onChange={(text) => {
-                  handleSetNumber(text.target.value, setestoqueFornecedor)
+                  handleSetNumber(text.target.value, setestoqueMinimo)
                 }}
               />
             </S.ContentSupplierForm>
@@ -432,6 +471,21 @@ export default  function RegisterProduct() {
               </div>
             </S.ContentSupplierForm>
 
+            <S.ContentSupplierForm>
+              <label htmlFor='packaging'>Quantidade da embalagem*</label>
+              <div>
+                <input
+                  value={qtdEmbalagem}
+                  required
+                  type='number'
+                  id='packaging'
+                  onChange={(text) => {
+                  handleSetNumber(text.target.value, setqtdEmbalagem)
+                  }}
+                />
+              </div>
+            </S.ContentSupplierForm>
+
 
             <S.ContentSupplierForm>
               <label htmlFor='gross-weight'>Peso bruto(g)*</label>
@@ -504,7 +558,8 @@ export default  function RegisterProduct() {
                 <input
                   onClick={(e) => {
                     let value  = e.target.value
-                    setIsSKU(value)
+                    console.log(value)
+                    setredeSKU(value)
                   }}
                   type='radio' 
                   name='redeSku' 
@@ -518,7 +573,9 @@ export default  function RegisterProduct() {
                 <input
                   onClick={(e) => {
                     let value  = e.target.value
-                    setIsSKU(value)
+                    console.log(value)
+
+                    setredeSKU(value)
                   }}
                   type='radio'
                   name='redeSku'
@@ -557,7 +614,7 @@ export default  function RegisterProduct() {
 
           <S.ContentSupplierForm>
             <S.LeadTime>
-              <label htmlFor='lead-time'>Lead time</label>
+              <label htmlFor='lead-time'>Lead time*</label>
               <input
                 required
                 type='text'
@@ -569,14 +626,20 @@ export default  function RegisterProduct() {
 
           <S.SelectItems>
             <label htmlFor='product-sku'>Produto SKU*</label>
-            <select
+            {/* <select
               required 
               id='product-sku'
               onChange={(text) => setredeSKU(text.target.value)}
               >
               <option>informação 1</option>
               <option>informação 2</option>
-            </select>
+            </select> */}
+            <input
+                required
+                type='text'
+                id='lead-time'
+                onChange={(text) => setredeSKU(text.target.value)}
+              />
 
             <label htmlFor='bar-code'>Código de barras</label>
             {/* <select
@@ -600,8 +663,42 @@ export default  function RegisterProduct() {
               required 
               onChange={(text) => setunidadeMedida(text.target.value)}
               id='unit-of-measurement'>
-              <option>informação 1</option>
-              <option>informação 2</option>
+              {/* <option>informação 1</option> */}
+              {/* <option>informação 2</option> */}
+              {medidas.map(
+                (medida) => (
+                  <option value={medida}>{medida}</option>
+                )
+              )}
+            </select>
+          </S.SelectItems>
+          <S.SelectItems>
+          <input
+                required
+                type='text'
+                id='lead-time'
+                onChange={(text) => setredeSKU(text.target.value)}
+              />
+
+            <label htmlFor='bar-code'>Curva</label>
+
+            {/* <input
+                required
+                type='text'
+                id='lead-time'
+                onChange={(text) => setCodigoDeBarras(text.target.value)}
+              /> */}
+
+            {/* <label htmlFor='unit-of-measurement'>Unidade de medida</label> */}
+            <select 
+              required 
+              onChange={(text) => setcurva(text.target.value)}
+              id='unit-of-measurement'>
+              {curvaTipos.map(
+                (curvaTipo) => (
+                  <option value={curvaTipo}>{curvaTipo}</option>
+                )
+              )}
             </select>
           </S.SelectItems>
         </S.RegisterSupplier>
