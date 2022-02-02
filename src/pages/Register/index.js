@@ -22,6 +22,8 @@ export  default function Register() {
   const [category, setCategory] = useState('1');
   const [phoneNumber, setphoneNumber] = useState('')
   const [phoneMaskedNumber, setphoneMaskedNumber] = useState('')
+  const [cnpj, setCnpj] = useState('')
+  const [maskedCnpj, setMaskedCnpj] = useState('')
 
   const [loading, setLoading] = useState(false);
 
@@ -46,7 +48,16 @@ export  default function Register() {
     setLoading(true)
 
     // email senha role e status
-    cadastro(nome, email, senha, parseInt(category), '')
+    /*
+      req.body.email,
+      req.body.password,
+      req.body.cnpj,
+      req.body.phoneNumber,
+      req.body.invitationToken,
+      req.body.tenantId,
+      req,
+    */
+    cadastro(email, senha, cnpj, phoneNumber)
     .then(
       (cadastroStatus) => {
         setLoading(false)
@@ -99,7 +110,29 @@ export  default function Register() {
                         setphoneMaskedNumber(e.target.value)
                       }
                     }
-                    />
+              />
+          <label htmlFor='cnpj'>Cnpj</label>
+            <InputMask
+              id='cnpj'
+              htmlFor='cnpj'
+              required
+              mask="99.999.999/9999-99"
+              value={maskedCnpj} 
+              className='input'
+              onChange={
+                (e) => {
+                  let cnpj = e.target.value
+                  console.log(
+                    cnpj.replace(/\D/g, '')
+                    )
+                  setCnpj(
+                    cnpj.replace(/\D/g, '')
+                  )
+                  setMaskedCnpj(e.target.value)
+                  console.log(maskedCnpj)
+                }
+              }
+            />
             <label htmlFor='email'>E-mail</label>
             <input
               required
