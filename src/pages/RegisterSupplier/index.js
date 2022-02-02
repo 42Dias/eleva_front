@@ -39,6 +39,9 @@ export default function RegisterSupplier() {
  const [phoneMaskedNumberSecondary  , setphoneMaskedNumberSecondary] = useState('')
  const [matiz                       , setMatiz] = useState('')
  const [rede                        , setRede] = useState('')
+ 
+ const [maskedCnpj, setMaskedCnpj] = useState('')
+ const [maskedCep, setMaskedCep] = useState('')
 
   async function handleChangeCEP(e){
     const cep = e.replace(/[^0-9]/g, '')
@@ -91,9 +94,30 @@ export default function RegisterSupplier() {
 
             <S.ContentSupplierForm>
               <label htmlFor='cnpj'>CNPJ</label>
-              <input type='text' id='cnpj'
+              {/* <input type='text' id='cnpj'
               onChange={(e) => setCNPJ(e.target.value)}
-              />
+              /> */}
+              <InputMask
+              id='cnpj'
+              htmlFor='cnpj'
+              required
+              mask="99.999.999/9999-99"
+              value={maskedCnpj} 
+              className='input'
+              onChange={
+                (e) => {
+                  let cnpj = e.target.value
+                  console.log(
+                    cnpj.replace(/\D/g, '')
+                    )
+                    setCNPJ(
+                    cnpj.replace(/\D/g, '')
+                  )
+                  setMaskedCnpj(e.target.value)
+                  console.log(maskedCnpj)
+                }
+              }
+            />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
@@ -125,9 +149,30 @@ export default function RegisterSupplier() {
 
             <S.ContentSupplierForm>
               <label htmlFor='logradouro'>CEP</label>
-              <input type='text' id='logradouro'
+              {/* <input type='text' id='logradouro'
               onChange={(text) => handleChangeCEP(text.target.value)}
-              />
+              /> */}
+              <InputMask
+              id='cnpj'
+              htmlFor='cnpj'
+              required
+              mask="99999-999"
+              value={maskedCep} 
+              className='input'
+              onChange={
+                (e) => {
+                  let cep = e.target.value
+                  console.log(
+                    cep.replace(/\D/g, '')
+                    )
+                    handleChangeCEP(
+                    cep.replace(/\D/g, '')
+                  )
+                  setMaskedCep(e.target.value)
+                  console.log(maskedCep)
+                }
+              }
+            />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
