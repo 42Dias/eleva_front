@@ -286,8 +286,9 @@ export default function RegisterSupplier() {
               /> */}
               <InputMask
                     required
+                    // (34) 2578-4854
+                    // value={phoneMaskedNumberSecondary} 
                     mask="(99) 9999-99999"
-                    value={phoneMaskedNumberSecondary} 
                     className='input'
                     onChange={
                       (e) => {
@@ -298,7 +299,7 @@ export default function RegisterSupplier() {
                           setphoneNumberSecondary(
                           telefone.replace(/[\(\)\.\s-]+/g,'')
                           )
-                        setphoneMaskedNumberSecondary(e.target.value)
+                        // setphoneMaskedNumberSecondary(e.target.value)
                       }
                     }
               />
@@ -320,6 +321,7 @@ export default function RegisterSupplier() {
           </S.RegisterSupplierForm>
           <S.ContentSupplierForm>
             <S.LeadTime>
+              {/* tempo de espera */}
               <label htmlFor='lead-time'>Lead time</label>
               <input type='text' id='lead-time'
               onChange={(e) => setLeadTime(e.target.value)}
@@ -337,15 +339,35 @@ export default function RegisterSupplier() {
                   </label>
                   <input type='text' id='nome-do-responsável-comercial'
                   onChange={(e) => setNomeDoResponsavelComercial(e.target.value)} />
+                  
                 </S.StoreResponsavel>
 
                 <S.StoreResponsavel>
                   <label htmlFor='telefone-do-responsável'>
                     Telefone do responsável
                   </label>
-                  <input type='text' id='telefone-do-responsável'
+                  {/* <input type='text' id='telefone-do-responsável'
                   onChange={(e) => setTelefoneDoResponsavel(e.target.value)}
-                   />
+                   /> */}
+                   <InputMask
+                    required
+                    // (34) 2578-4854
+                    // value={phoneMaskedNumberSecondary} 
+                    className='input'
+                    mask="(99) 9999-99999"
+                    onChange={
+                      (e) => {
+                        let telefone = e.target.value
+                        console.log(
+                          telefone.replace(/\D/g, '')
+                          )
+                          setTelefoneDoResponsavel(
+                          telefone.replace(/[\(\)\.\s-]+/g,'')
+                          )
+                        // setphoneMaskedNumberSecondary(e.target.value)
+                      }
+                    }
+              />
                 </S.StoreResponsavel>
               </S.Responsavel>
 
