@@ -146,7 +146,7 @@ export default  function RegisterProduct() {
 
           <S.RegisterSupplierForm>
             <S.ContentSupplierForm>
-              <label htmlFor='name-product'>Nome do produto/</label>
+              <label htmlFor='name-product'>Nome do produto*</label>
               <input
                 required
                 type='text'
@@ -233,7 +233,7 @@ export default  function RegisterProduct() {
             </S.SelectItems>
 
             <S.ContentSupplierForm>
-              <label htmlFor='stock'>Quantia em estoque</label>
+              <label htmlFor='stock'>Quantia em estoque*</label>
               <input
                 value={estoque}
                 required
@@ -247,7 +247,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='demand'>Demanda</label>
+              <label htmlFor='demand'>Demanda*</label>
               <input
                 required
                 type='text'
@@ -269,7 +269,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='maximum-stock'>Estoque máximo</label>
+              <label htmlFor='maximum-stock'>Estoque máximo*</label>
               <input
                 required
                 type='number'
@@ -281,7 +281,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='minimum-module'>Módulo mínimo</label>
+              <label htmlFor='minimum-module'>Módulo mínimo*</label>
               <input
                 value={moduloMinimo}
                 required
@@ -295,7 +295,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='minimum-module'>Módulo Máximo</label>
+              <label htmlFor='minimum-module'>Módulo Máximo*</label>
               <input
                 value={moduloMaster}
                 required
@@ -309,7 +309,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='brand'>Marca</label>
+              <label htmlFor='brand'>Marca*</label>
               <input
                 required
                 type='text'
@@ -319,7 +319,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='minimum-delivery'>Entrega mínima</label>
+              <label htmlFor='minimum-delivery'>Entrega mínima*</label>
               <input
                 required
                 type='email'
@@ -332,7 +332,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='minimum-order'>Pedido mínimo (Quant/Valor)</label>
+              <label htmlFor='minimum-order'>Pedido mínimo (Quant/Valor)*</label>
               <input
                 required
                 type='text'
@@ -358,7 +358,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='height'>Altura(cm)</label>
+              <label htmlFor='height'>Altura(cm)*</label>
               <div>
                 <input
                   value={altura_cm}
@@ -379,7 +379,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='length'>Comprimento(cm)</label>
+              <label htmlFor='length'>Comprimento(cm)*</label>
               <div>
                 <input
                   value={comprimento_cm}
@@ -400,7 +400,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='width'>Largura(cm)</label>
+              <label htmlFor='width'>Largura(cm)*</label>
               <div>
                 <input
                   value={largura_cm}
@@ -421,7 +421,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='packaging'>Cubagem da embalagem (cm<sup>3</sup>)</label>
+              <label htmlFor='packaging'>Cubagem da embalagem (cm<sup>3</sup>)*</label>
               <div>
                 <input
                   value={cubagemEmbalagem}
@@ -435,7 +435,7 @@ export default  function RegisterProduct() {
 
 
             <S.ContentSupplierForm>
-              <label htmlFor='gross-weight'>Peso bruto(g)</label>
+              <label htmlFor='gross-weight'>Peso bruto(g)*</label>
               <input
                 required
                 value={pesoBruto}
@@ -448,7 +448,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='liquid-weight'>Peso líquido(g)</label>
+              <label htmlFor='liquid-weight'>Peso líquido(g)*</label>
               <input
                 required
                 value={pesoLiq}
