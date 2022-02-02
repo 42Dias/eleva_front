@@ -6,8 +6,10 @@ import IMAGE from '../../assets/upload.png'
 import * as S from './styled'
 import IntlCurrencyInput from "react-intl-currency-input"
 import InputMask from 'react-input-mask';
-
+import cadastrarProduct from "../../services/cadastrarProduct";
 import currencyConfig from '../../utils/currenryConfig'
+import { FaSortNumericUp } from "react-icons/fa";
+import handleSetNumber from "../../utils/handleSetNumber";
 
 export default  function RegisterProduct() {
   const [codigo, setcodigo] = useState('')
@@ -59,7 +61,7 @@ export default  function RegisterProduct() {
     const prodData = generateProductData()
     console.log(prodData)
 
-    cadastrarProduct
+    // cadastrarProduct(data)
   }
   function generateProductData(){
   const data = {
@@ -203,9 +205,11 @@ export default  function RegisterProduct() {
               <label htmlFor='stock'>Quantia em estoque</label>
               <input
                 required
-                type='text'
+                type='number'
                 id='stock'
-                onChange={(text) => setestoque(text.target.value)}
+                onChange={(text) => {
+                  handleSetNumber(text.target.value, setestoque)
+                }}
               />
               {/* HÁ OUTROS TIPOS DE ESTOQUE? */}
             </S.ContentSupplierForm>
@@ -224,9 +228,11 @@ export default  function RegisterProduct() {
               <label htmlFor='safety-stock'>Estoque de segurança</label>
               <input
                 required
-                type='text'
+                type='number'
                 id='safety-stock'
-                onChange={(text) => setestoqueFornecedor(text.target.value)}
+                onChange={(text) => {
+                  handleSetNumber(text.target.value, setestoqueFornecedor)
+                }}
               />
             </S.ContentSupplierForm>
 
@@ -234,14 +240,16 @@ export default  function RegisterProduct() {
               <label htmlFor='maximum-stock'>Estoque máximo</label>
               <input
                 required
-                type='text'
+                type='number'
                 id='maximum-stock'
-                onChange={(text) => setestoqueMaximo(text.target.value)}
+                onChange={(text) => {
+                  handleSetNumber(text.target.value, setestoqueMaximo)
+                }}
               />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='minimum-module'>Módulo mínimo</label>
+              <label htmlFor='minimum-module'>Módulo mínimo é numero?</label>
               <input
                 required
                 type='text'
@@ -261,12 +269,13 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='minimum-delivery'>Entrega mínima</label>
+              <label htmlFor='minimum-delivery'>Entrega mínima é numero?</label>
               <input
                 required
                 type='email'
                 id='minimum-delivery'
                 onChange={(text) => setentregaMinima(text.target.value)}
+                
               />
             </S.ContentSupplierForm>
 
@@ -282,12 +291,12 @@ export default  function RegisterProduct() {
 
             <S.ContentSupplierForm>
               <label htmlFor='price'>Preço</label>
-              <input
+              {/* <input
                 required
                 type='text'
                 id='price'
                 onChange={(text) => setprecoVenda(text.target.value)}
-              />
+              /> */}
             </S.ContentSupplierForm>
             <IntlCurrencyInput 
                   currency="BRL" 
@@ -300,9 +309,12 @@ export default  function RegisterProduct() {
               <label htmlFor='height'>Altura(cm)</label>
               <input
                 required
-                type='text'
+                type='number'
                 id='height'
-                onChange={(text) => setaltura_cm(text.target.value)}
+                // onChange={(text) => setaltura_cm(text.target.value)}
+                onChange={(text) => {
+                  handleSetNumber(text.target.value, setaltura_cm)
+                }}
               />
             </S.ContentSupplierForm>
 
@@ -310,9 +322,12 @@ export default  function RegisterProduct() {
               <label htmlFor='length'>Comprimento(cm)</label>
               <input
                 required
-                type='text'
+                type='number'
                 id='length'
-                onChange={(text) => setcomprimento_cm(text.target.value)}
+                // onChange={(text) => setcomprimento_cm(text.target.value)}
+                onChange={(text) => {
+                  handleSetNumber(text.target.value, setcomprimento_cm)
+                }}
               />
             </S.ContentSupplierForm>
 
@@ -330,9 +345,12 @@ export default  function RegisterProduct() {
               <label htmlFor='width'>Largura(cm)</label>
               <input
                 required
-                type='text'
+                type='number'
                 id='width'
-                onChange={(text) => setlargura_cm(text.target.value)}
+                // onChange={(text) => setlargura_cm(text.target.value)}
+                onChange={(text) => {
+                  handleSetNumber(text.target.value, setlargura_cm)
+                }}
               />
             </S.ContentSupplierForm>
 
@@ -340,9 +358,12 @@ export default  function RegisterProduct() {
               <label htmlFor='gross-weight'>Peso bruto(g)</label>
               <input
                 required
-                type='text'
+                type='number'
                 id='gross-weight'
-                onChange={(text) => setpesoBruto(text.target.value)}
+                // onChange={(text) => setpesoBruto(text.target.value)}
+                onChange={(text) => {
+                  handleSetNumber(text.target.value, setpesoBruto)
+                }}
               />
             </S.ContentSupplierForm>
 
@@ -350,9 +371,12 @@ export default  function RegisterProduct() {
               <label htmlFor='liquid-weight'>Peso líquido(g)</label>
               <input
                 required
-                type='text'
+                type='number'
                 id='liquid-weight'
-                onChange={(text) => setpesoLiq(text.target.value)}
+                // onChange={(text) => setpesoLiq(text.target.value)}
+                onChange={(text) => {
+                  handleSetNumber(text.target.value, setpesoLiq)
+                }}
               />
             </S.ContentSupplierForm>
 
