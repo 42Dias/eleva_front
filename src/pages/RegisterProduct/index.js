@@ -11,7 +11,11 @@ import currencyConfig from '../../utils/currenryConfig'
 import { FaSortNumericUp } from "react-icons/fa";
 import handleSetNumber from "../../utils/handleSetNumber";
 import handleCubagem from "../../utils/handleCubagem";
+import { api } from "../../services/api";
 export default  function RegisterProduct() {
+  const [categorias, setcategorias] = useState([])
+
+
   const [codigo, setcodigo] = useState('')
   const [nome, setnome] = useState('')
   const [descricao, setdescricao] = useState('')
@@ -117,6 +121,21 @@ export default  function RegisterProduct() {
     setPriceFormated(maskedValue); // masked value (ex: R$1234,56)
   };
 
+  function loadCategorias(setFunction){
+    api.get('departamento').then(
+      (response) => {
+        console.log(response)
+        console.log(response.data.rows)
+        return setFunction(response.data.rows)
+      }
+    )
+  }
+  useEffect(
+    () => {
+      loadCategorias(setcategorias)
+    }, []
+  )
+
 
   return (
     <>
@@ -135,7 +154,7 @@ export default  function RegisterProduct() {
 
           <S.RegisterSupplierForm>
             <S.ContentSupplierForm>
-              <label htmlFor='name-product'>Nome do produto</label>
+              <label htmlFor='name-product'>Nome do produto/</label>
               <input
                 required
                 type='text'
@@ -145,7 +164,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='code'>Código</label>
+              <label htmlFor='code'>Código*</label>
               <input
                 required
                 type='text'
@@ -155,7 +174,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='description'>Descrição</label>
+              <label htmlFor='description'>Descrição*</label>
               <input
                 required
                 type='text'
@@ -175,7 +194,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='material'>Tipo de material</label>
+              <label htmlFor='material'>Tipo de material*</label>
               <input
                 required
                 type='text'
@@ -194,15 +213,32 @@ export default  function RegisterProduct() {
               />
             </S.ContentSupplierForm>
 
-            <S.ContentSupplierForm>
-              <label htmlFor='category'>Categoria</label>
-              <input
+            <S.SelectItems
+            style={{width: '100%'}}
+            >
+              <label htmlFor='category'>Departamento / Categoria*</label>
+              {/* <input
                 required
                 type='text'
                 id='category'
-                // onChange={(text) => setcategoria(text.target.value)} // HA CATEGORIA???
-              />
-            </S.ContentSupplierForm>
+                // onChange={(text) => setcategoria(text.target.value)} // HA CATEGORIAS???
+              /> */}
+              <select
+              required 
+              id='product-sku'
+              onChange={(text) => setdepartamentoId(text.target.value)}
+              >
+              {categorias.map(
+                (categoria) => (
+                  <option
+                  value={categoria.id}
+                  >{categoria.nome}</option>
+                )
+              )}
+            </select>
+
+
+            </S.SelectItems>
 
             <S.ContentSupplierForm>
               <label htmlFor='stock'>Quantia em estoque</label>
