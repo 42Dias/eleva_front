@@ -10,7 +10,7 @@ import cadastrarProduct from "../../services/cadastrarProduct";
 import currencyConfig from '../../utils/currenryConfig'
 import { FaSortNumericUp } from "react-icons/fa";
 import handleSetNumber from "../../utils/handleSetNumber";
-
+import handleCubagem from "../../utils/handleCubagem";
 export default  function RegisterProduct() {
   const [codigo, setcodigo] = useState('')
   const [nome, setnome] = useState('')
@@ -207,6 +207,7 @@ export default  function RegisterProduct() {
             <S.ContentSupplierForm>
               <label htmlFor='stock'>Quantia em estoque</label>
               <input
+                value={estoque}
                 required
                 type='number'
                 id='stock'
@@ -300,70 +301,98 @@ export default  function RegisterProduct() {
                 id='price'
                 onChange={(text) => setprecoVenda(text.target.value)}
               /> */}
-            </S.ContentSupplierForm>
             <IntlCurrencyInput 
                   currency="BRL" 
                   config={currencyConfig}
                   onChange={handleChangePrice} 
                   value={priceFormated}
             />
+            </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='height'>Altura(cm)</label>
-              <input
-                required
-                type='number'
-                id='height'
-                // onChange={(text) => setaltura_cm(text.target.value)}
-                onChange={(text) => {
-                  handleSetNumber(text.target.value, setaltura_cm)
-                }}
-              />
+              <div>
+                <input
+                  value={altura_cm}
+                  required
+                  type='number'
+                  id='height'
+                  onChange={(text) => {
+                    handleSetNumber(text.target.value, setaltura_cm)
+                  }}
+                  onBlur={
+                    (e) => {
+                      console.log(e.target.value)  
+                      handleCubagem(altura_cm, largura_cm, comprimento_cm, setcubagemEmbalagem)
+                    }
+                  }
+                />
+              </div>
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='length'>Comprimento(cm)</label>
-              <input
-                required
-                type='number'
-                id='length'
-                // onChange={(text) => setcomprimento_cm(text.target.value)}
-                onChange={(text) => {
-                  handleSetNumber(text.target.value, setcomprimento_cm)
-                }}
-              />
-            </S.ContentSupplierForm>
-
-            <S.ContentSupplierForm>
-              <label htmlFor='packaging'>Cubagem da embalagem</label>
-              <input
-                required
-                type='text'
-                id='packaging'
-                onChange={(text) => setcubagemEmbalagem(text.target.value)}
-              />
+              <div>
+                <input
+                  value={comprimento_cm}
+                  required
+                  type='number'
+                  id='length'
+                  onChange={(text) => {
+                    handleSetNumber(text.target.value, setcomprimento_cm)
+                  }}
+                  onBlur={
+                    (e) => {
+                      console.log(e.target.value)  
+                      handleCubagem(altura_cm, largura_cm, comprimento_cm, setcubagemEmbalagem)
+                    }
+                  }
+                />
+              </div>
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
               <label htmlFor='width'>Largura(cm)</label>
-              <input
-                required
-                type='number'
-                id='width'
-                // onChange={(text) => setlargura_cm(text.target.value)}
-                onChange={(text) => {
-                  handleSetNumber(text.target.value, setlargura_cm)
-                }}
-              />
+              <div>
+                <input
+                  value={largura_cm}
+                  required
+                  type='number'
+                  id='width'
+                  onChange={(text) => {
+                    handleSetNumber(text.target.value, setlargura_cm)
+                  }}
+                  onBlur={
+                    (e) => {
+                      console.log(e.target.value)  
+                      handleCubagem(altura_cm, largura_cm, comprimento_cm, setcubagemEmbalagem)
+                    }
+                  }
+                />
+              </div>
             </S.ContentSupplierForm>
+
+            <S.ContentSupplierForm>
+              <label htmlFor='packaging'>Cubagem da embalagem (cm<sup>3</sup>)</label>
+              <div>
+                <input
+                  value={cubagemEmbalagem}
+                  required
+                  type='text'
+                  id='packaging'
+                  onChange={(text) => setcubagemEmbalagem(text.target.value)}
+                />
+              </div>
+            </S.ContentSupplierForm>
+
 
             <S.ContentSupplierForm>
               <label htmlFor='gross-weight'>Peso bruto(g)</label>
               <input
                 required
+                value={pesoBruto}
                 type='number'
                 id='gross-weight'
-                // onChange={(text) => setpesoBruto(text.target.value)}
                 onChange={(text) => {
                   handleSetNumber(text.target.value, setpesoBruto)
                 }}
@@ -374,6 +403,7 @@ export default  function RegisterProduct() {
               <label htmlFor='liquid-weight'>Peso líquido(g)</label>
               <input
                 required
+                value={pesoLiq}
                 type='number'
                 id='liquid-weight'
                 // onChange={(text) => setpesoLiq(text.target.value)}
@@ -510,14 +540,21 @@ export default  function RegisterProduct() {
             </select>
 
             <label htmlFor='bar-code'>Código de barras</label>
-            <select
+            {/* <select
               required 
               onChange={(text) => setcodigo(text.target.value)}
               
               id='bar-code'>
               <option>informação 1</option>
               <option>informação 2</option>
-            </select>
+            </select> */}
+
+            <input
+                required
+                type='text'
+                id='lead-time'
+                onChange={(text) => setCodigoDeBarras(text.target.value)}
+              />
 
             <label htmlFor='unit-of-measurement'>Unidade de medida</label>
             <select 
