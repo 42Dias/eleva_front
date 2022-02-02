@@ -7,7 +7,7 @@ import loadUser from './loadUser'
 import servidorErrorMessage from '../utils/servidorErrorMessage'
 
 export default async function login(email, password) {
-    return apiWithoutTenant.post(`/auth/sign-in`, {
+    return apiWithoutTenant.post(`auth/sign-in`, {
       email: email,
       password: password,
     })  
@@ -32,6 +32,5 @@ export default async function login(email, password) {
       else {
         servidorErrorMessage()
       }
-      setLoading(false)
     })
 } 
