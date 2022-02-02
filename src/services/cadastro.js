@@ -8,14 +8,16 @@ import responseHandler from '../utils/responseHandler'
 import loadUser from './loadUser'
 import servidorErrorMessage from '../utils/servidorErrorMessage'
 
+// NÃO POSSUI NOME
 
-export default async function cadastro(nome, email, senha, categoria, status) {
+export default async function cadastro(email, password, cnpj, phoneNumber, invitationToken,  tenantId) {
     return apiWithoutTenant.post('auth/sign-up', {
-        fullName: nome,
-        email: email,
-        password: senha,
-        role: categoria,
-        status: status
+      email:           email,
+      password:        password,
+      cnpj:            cnpj,
+      phoneNumber:     phoneNumber,
+      invitationToken: invitationToken,
+      tenantId:        tenantId,
       })
       .then((response) => {
         let mensagemOk = 'Opa, recebemos o seu registro :)'
