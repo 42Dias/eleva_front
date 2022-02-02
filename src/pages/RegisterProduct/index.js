@@ -122,7 +122,10 @@ export default  function RegisterProduct() {
     <>
       <Navbar />
       <S.ContainerRegisterSupplier
-      onSubmit= { () => createProduct()}
+      onSubmit= { (e) => {
+        e.preventDefault()
+        createProduct()
+      }}
       >
         <S.BoxImage>
           <img src={IMAGE} alt='upload image' />
