@@ -1,7 +1,8 @@
 import responseHandler from "../utils/responseHandler"
 import { api } from "./api"
+import { toast } from "react-toastify";
 
-export default async function criarEmpresa(data) {
+export default async function cadastrarEmpresa(data) {
     return await api.post('empresa', data).then(
       (response) => {
         const status = response.status;
