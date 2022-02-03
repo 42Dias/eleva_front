@@ -611,14 +611,6 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
           // onClick = { () => createProduct()}
           >Salvar</button>
         </S.Button>
-        <p>
-
-        ativo: 
-            "Ativo","Inativo"
-        perfilComercial: 
-            "Compra","Compra e Venda","Venda"
-            
-        </p>
         </S.RegisterSupplier>
       </S.ContainerRegisterSupplier>
     </>
