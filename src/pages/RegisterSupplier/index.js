@@ -7,6 +7,8 @@ import InputMask from 'react-input-mask';
 
 import cepInformation from '../../utils/cepInformation'
 import loadEmpresaQuantidade from "../../services/loadEmpresaQuantidade";
+import loadRedes from "../../services/loadRedes";
+import cadastrarEmpresa from "../../services/cadastrarEmpresa";
 /*
 
 CAMPOS COM FORMATAÇÃO ESPECÍFICA!!!!
@@ -50,6 +52,9 @@ export default function RegisterSupplier() {
  const [matiz                       , setMatiz] = useState('')
  const [rede                        , setRede] = useState('')
  const [condicaoEmpresa             , setCondicaoEmpresa] = useState('')
+
+ const [redes                        , setRedes] = useState('')
+
 /*
 falta = 
 Cnae secundário
@@ -78,35 +83,40 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
   async function hangleCreateEmpresa(e){
     e.preventDefault()
     const data = {
-      codigo:              codigo ,
-      razaoSocial:         razao ,
-      nomeFantasia:        nome ,
-      cnpj:                CNPJ ,
-      inscricaoEstadual:   inscricaoEstadual ,
-      inscricaoMunicipal:  inscricaoMunicipal ,
-      cnae:                cnaePrincipal ,
-      cep:                 cep ,
-      estado:              estado ,
-      cidade:              cidade ,
-      bairro:              bairro ,
-      logradouro:          logradouro ,
-      numero:              numero ,
-      complemento:         complemento ,
-      telefone:            telefone ,
-      email:               email ,
-      ativo:               ativo ,
-      perfilComercial:     perfilComercial ,
-      leadTime:            leadTime ,
-      condicaoPagamento:   condicoesDePagamento ,
-      formaPagamento:      formadePagamento ,
+        data:{
+        codigo:              codigo ,
+        razaoSocial:         razao ,
+        nomeFantasia:        nome ,
+        cnpj:                CNPJ ,
+        inscricaoEstadual:   inscricaoEstadual ,
+        inscricaoMunicipal:  inscricaoMunicipal ,
+        cnae:                cnaePrincipal ,
+        cep:                 cep ,
+        estado:              estado ,
+        cidade:              cidade ,
+        bairro:              bairro ,
+        logradouro:          logradouro ,
+        numero:              numero ,
+        complemento:         complemento ,
+        telefone:            telefone ,
+        email:               emailDaEmpresa ,
+        ativo:               'Ativo' , // Ativo out Inativo
+        perfilComercial:     "Compra e Venda" , // "Compra","Compra e Venda","Venda"
+        leadTime:            leadTime ,
+        condicaoPagamento:   condicoesDePagamento ,
+        formaPagamento:      formadePagamento ,
+      }
     }
     console.log(data)
+    cadastrarEmpresa(data).then(
+      (res) => res == 'ok' ? console.log('foi') : console.log('num') 
+    )
   }
 
 
   async function loadQuantidadeDeEmpresas(){
     const quantidadeDeEmpresas = await loadEmpresaQuantidade()
-    setCodigo(quantidadeDeEmpresas + 1000)
+    setCodigo(`${quantidadeDeEmpresas + 1000}`)
   }
 
   useEffect(
@@ -115,6 +125,13 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
       setTimeout(() => loadQuantidadeDeEmpresas(), delay * 1000);
     }, []
   )
+
+  // useEffect(
+  //   () => {
+  //     let createdRedes = loadRedes()
+  //     setRedes(createdRedes)
+  //   }, []
+  // )
 
   return (
     <>
@@ -127,7 +144,7 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
 
           <S.RegisterSupplierForm>
             <S.ContentSupplierForm>
-              <label htmlFor='codigo'>Código</label>
+              <label htmlFor='codigo'>Código*</label>
               {/* Gerado automaticamente */}
               <input 
               style={{cursor: 'not-allowed'}}
@@ -350,7 +367,7 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
                         console.log(
                           telefone.replace(/\D/g, '')
                           )
-                          setphoneNumber(
+                          setTelefone(
                           telefone.replace(/[\(\)\.\s-]+/g,'')
                           )
                         setphoneMaskedNumber(e.target.value)
@@ -397,11 +414,15 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
 
             <S.ContentSupplierForm>
               <label htmlFor='perfil-comercial'>Perfil comercial</label>
-              <input
-              type='text'
-              id='perfil-comercial'
+              <select id='forma-de-pagamento'
               onChange={(e) => setPerfilComercial(e.target.value)}
-              />
+            >
+              <option value="Compra" >Compra</option>
+              <option value="Venda" >Venda</option>
+              <option value="Compra e Venda" >"Compra e Venda"</option>
+            </select>
+
+
             </S.ContentSupplierForm>
           </S.RegisterSupplierForm>
           <S.ContentSupplierForm>
@@ -437,7 +458,7 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
                   onChange={(e) => setTelefoneDoResponsavel(e.target.value)}
                    /> */}
                    <InputMask
-                    required
+                    // required
                     // (34) 2578-4854
                     // value={phoneMaskedNumberSecondary} 
                     className='input'
@@ -539,6 +560,38 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
               </option>
             </select>
 
+            {/* {
+              condicaoEmpresa == 'Rede' ? (
+              <>
+            <label htmlFor='forma-de-pagamento'>Rede</label>
+            <select id='forma-de-pagamento'
+              onChange={(e) => setCondicaoEmpresa(e.target.value)}
+              >
+              <option value="Matriz">
+                Matriz
+              </option>
+              <option value="Rede"  >
+                Rede
+              </option>
+            </select>
+              </>
+              ):(
+            <>
+              <label htmlFor='forma-de-pagamento'>Matriz // DEVE SER CRIADO NO BANCO????</label>
+              <select id='forma-de-pagamento'
+                onChange={(e) => setCondicaoEmpresa(e.target.value)}
+                >
+                <option value="Matriz">
+                  Matriz
+                </option>
+                <option value="Rede"  >
+                  Rede
+                </option>
+              </select>
+            </>
+              )
+            } */}
+
             {/* <label htmlFor='matriz'>Matriz</label>
             <input type='text' id='matriz'
             onChange={(e) => setMatiz(e.target.value)}
@@ -554,7 +607,8 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
             Cancelar
           </button>
           <button
-          onClick = { () => createProduct()}
+          type="submits"
+          // onClick = { () => createProduct()}
           >Salvar</button>
         </S.Button>
         <p>
