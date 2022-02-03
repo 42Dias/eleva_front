@@ -5,6 +5,7 @@ import { FiEye } from 'react-icons/fi'
 import IMAGE from '../../assets/prodItem.png'
 import IMAGE2 from '../../assets/prodItem2.png'
 import IMAGE3 from '../../assets/prodItem3.png'
+import { Link } from 'react-router-dom'
 import IMAGE4 from '../../assets/prodItem4.png'
 import bannerList from '../../assets/bannerList.png'
 import Navbar from '../../components/Sidebar/Sidebar'
@@ -12,11 +13,11 @@ import * as S from './styled'
 import useInfiniteScroll from '../../hooks/useInfiniteScroll'
 import { formatPrice } from "../../utils/format";
 import { useSuprimento } from "../../hooks/useSuprimentos";
-
+import { useCart } from "../../hooks/useCart";
 export default function Buy() {
 
-  const { addProduct, cart } = useSuprimento();
-  // const { addProduct, cart } = useCart();
+  // const { addProduct, cart } = useSuprimento();
+  const { addProduct, cart } = useCart();
   
   
   useEffect(
@@ -77,8 +78,9 @@ export default function Buy() {
         if(products.length === index + 1){
           return <>
               <S.BoxProd key={product.id} ref={lastProdElementRef} >
-                <img src={IMAGE4} alt='' />
-
+                <Link to={`/produto/${product.id}`}>
+                    <img src={IMAGE4} alt='' />
+                </Link>
                 <h3>{product.nome}</h3>
                 <p>{product.descricao}</p>
                 <span>{formatPrice(parseFloat(product.precoVenda))}</span>
@@ -97,8 +99,9 @@ export default function Buy() {
         else{
           return<>
                 <S.BoxProd key={product.id}>
-                <img src={IMAGE4} alt='' />
-
+                <Link to={`/produto/${product.id}`}>
+                  <img src={IMAGE4} alt='' />
+                </Link>
                 <h3>{product.nome}</h3>
                 <p>{product.descricao}</p>
                 <span>{formatPrice(parseFloat(product.precoVenda))}</span>
