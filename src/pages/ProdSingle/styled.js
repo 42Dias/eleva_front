@@ -15,6 +15,8 @@ export const ContainerProdSingle = styled.div`
   }
 `
 
+// padding: 30px 0;
+
 export const ProdImage = styled.div`
   display: flex;
   align-items: center;
@@ -22,8 +24,25 @@ export const ProdImage = styled.div`
   flex-direction: column;
   margin: 50px auto 0 auto;
 
+  .border-helper{
+    overflow: hidden;
+    border-radius: 50px;
+    
+    margin: 30px 0;
+    @media (max-width: 768px) { 
+      border-radius: 25px;
+      margin: 0 20px;
+    }
+  }
+  
   img {
-    padding: 30px 0;
+    object-fit: cover;
+    width: 906px; 
+    height: 450px;
+    @media (max-width: 768px) { 
+      width: 100%;
+      height: 280px; 
+    }
   }
 
   h1,
