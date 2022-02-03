@@ -31,7 +31,11 @@ export default function ProdSingle() {
       <S.ContainerProdSingle>
         <S.ProdImage>
           <h1>{produto.nome}</h1>
-          <img src={luminariaSingle} alt='' />
+          <div className='border-helper'>
+            <img src="https://wallpapercave.com/wp/wp9024378.jpg" alt='' />
+            </div>
+
+
           <strong>{formatPrice(parseFloat(produto.precoVenda))}</strong>
         </S.ProdImage>
 
@@ -41,12 +45,23 @@ export default function ProdSingle() {
             {produto.descricao}
           </p>
 
-          {/* o que seriam os recursos??????? */}
+          {/* terá botão de adicionar ao carrinho??????? */}
 
-          <h3>Recursos:</h3>
+          <h2>categoria</h2> 
+            <nav>
+              <p>
+                {produto.departamentoCategoria}
+              </p>
+            </nav>
+
+            <h2>referência Tecnica</h2> 
+            <p>
+              {produto.referenciaTec}
+            </p>
+
 
           <nav>
-            <ul>
+            {/* <ul>
               <li>Iluminação RGB Redragon Chroma Mk.II com 4 efeitos.</li>
               <li>
                 Almofadas e revestimento interno do arco em tecido para
@@ -68,8 +83,7 @@ export default function ProdSingle() {
                 personalizadas como equalização e controle de volume
                 independente.
               </li>
-            </ul>
-
+            </ul> */}
             <Link to='/comprar'>Voltar</Link>
           </nav>
         </S.ProdDetailsSingle>
