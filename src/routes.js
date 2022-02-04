@@ -24,6 +24,7 @@ import Supplies from './pages/Supplies'
 import Categories from './pages/Categories'
 import Redes from './pages/Redes'
 import Especialidades from './pages/Especialidades'
+import CodigoDeBarras from './pages/CodigoDeBarras'
 
 const Routes = () => {
   return (
@@ -54,6 +55,7 @@ const Routes = () => {
           <Route path='/categorias' exact component={Categories} />
           <Route path='/redes' exact component={Redes} />
           <Route path='/especialidades' exact component={Especialidades} />
+          <Route path='/CodigoDeBarras' exact component={CodigoDeBarras} />
           <Route path='*' exact component={ErrorPage} />
         </Switch>
       </HashRouter>
