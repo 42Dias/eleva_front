@@ -4,7 +4,7 @@ import Navbar from '../../components/Sidebar/Sidebar'
 import luminariaSingle from './../../assets/luminariaSingle.png'
 import * as S from './styled'
 
-import productFind from '../../services/productFind'
+import productFind from '../../services/produto/productFind'
 import { formatPrice } from '../../utils/format'
 
 import getIdFromUrl from '../../utils/getIdFromUrl'

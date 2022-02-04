@@ -6,9 +6,9 @@ import InputMask from 'react-input-mask';
 
 
 import cepInformation from '../../utils/cepInformation'
-import loadEmpresaQuantidade from "../../services/loadEmpresaQuantidade";
-import loadRedes from "../../services/loadRedes";
-import cadastrarEmpresa from "../../services/cadastrarEmpresa";
+import loadEmpresaQuantidade from "../../services/empresa/loadEmpresaQuantidade";
+import loadRedes from "../../services/rede/loadRedes";
+import cadastrarEmpresa from "../../services/empresa/cadastrarEmpresa";
 /*
 
 CAMPOS COM FORMATAÇÃO ESPECÍFICA!!!!

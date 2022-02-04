@@ -26,11 +26,11 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
 
-  function handleLogin(e){
-    e.preventDefault()
+  // function handleLogin(e){
+  //   e.preventDefault()
 
-    login()
-  }
+  //   login(email, password)
+  // }
 
   function handleLogin(e) {
     e.preventDefault()

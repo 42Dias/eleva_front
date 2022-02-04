@@ -6,18 +6,18 @@ import IMAGE from '../../assets/upload.png'
 import * as S from './styled'
 import IntlCurrencyInput from "react-intl-currency-input"
 import InputMask from 'react-input-mask';
-import cadastrarProduct from "../../services/cadastrarProduct";
+import cadastrarProduct from "../../services/produto/cadastrarProduct";
 import currencyConfig from '../../utils/currenryConfig'
 import { FaSortNumericUp } from "react-icons/fa";
 import handleSetNumber from "../../utils/handleSetNumber";
 import handleCubagem from "../../utils/handleCubagem";
 import { api } from "../../services/api";
-import loadCategorias from "../../services/loadCategorias";
+import loadCategorias from "../../services/categoria/loadCategorias";
 export default  function RegisterProduct() {
   const [categorias, setcategorias] = useState([])
   const [medidas, setMedidas] = useState([])
   const [tipoMateriais, settipoMateriais] = useState([])
-  const [curvaTipos, setcurvaTipos] = useState('')
+  const [curvaTipos, setcurvaTipos] = useState([])
 
 
 
@@ -135,8 +135,13 @@ export default  function RegisterProduct() {
 
   useEffect(
     () => {
-      loadCategorias(setcategorias)
 
+      loadCategorias(setcategorias)
+    }, []
+  )
+
+  useEffect(
+    () => {
       // Estas são os padrões aceitos pelo back
       setMedidas(["AMP", "BUI", "BG", "BOLS", "CX", "CAP", "CARP", "COM", "DOSE", "ENV", "FLAC", "FR", "FA", "GAL", "GTS", "G", "L", "MCG", "MUI", "MG", "ML", "OVL", "PAS", "LT", "PER", "PIL", "PT", "KG", "SER", "SUP", "TABLE", "TUB", "TB", "UN", "UI", "CM", "CONJ", "KIT", "MÇ", "M", "PC", "PEÇA", "RL", "GY", "CGY", "PAR", "ADES", "COM EFEV", "COM MST", "SACHE"])
       
@@ -696,7 +701,6 @@ export default  function RegisterProduct() {
 
             {/* <label htmlFor='unit-of-measurement'>Unidade de medida</label> */}
             <select 
-              required 
               onChange={(text) => setcurva(text.target.value)}
               id='unit-of-measurement'>
               {curvaTipos.map(
