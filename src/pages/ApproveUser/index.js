@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FiChevronLeft, FiCheck, FiTrash } from 'react-icons/fi'
+import { FiChevronLeft, FiCheck, FiTrash, FiX } from 'react-icons/fi'
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 import loadUsers from '../../services/loadUsers'
+import loadEmpresas from '../../services/empresa/loadEmpresas'
+import { AiOutlineConsoleSql } from 'react-icons/ai'
+import changeEmpresa from '../../services/empresa/changeEmpresa'
 
 export  default function ApproveUser() {
 
@@ -12,9 +15,40 @@ export  default function ApproveUser() {
   async function load(){
     // valor passadados para o filter
     // let tenantIdUsers = await loadUsers('ativo', 'inativo')
-    let tenantIdUsers = await loadUsers()
+    let tenantIdUsers = await loadEmpresas('ativo', 'Inativo')
     setUsers(tenantIdUsers)
+
+
   }
+
+  async function approve(id, userData){
+    console.log(id)
+    console.log("approve")
+    let newUserData = {
+      data: {
+        ...userData,
+        ativo: 'Ativo'
+      }
+    }
+    console.log(newUserData)
+    await changeEmpresa(id, newUserData)
+    load()
+  }
+
+  async function disapprove(id, userData){
+    console.log(id)
+    console.log("disapprove")
+    let newUserData = {
+      data: {
+        ...userData,
+        ativo: 'Ativo'
+      }
+    }
+    await changeEmpresa(id, newUserData)
+    load()
+  }
+
+
 
   useEffect(
     () => {
@@ -32,22 +66,34 @@ export  default function ApproveUser() {
         {
           users.map(
             (user) => (      
-              <S.ContentApproveUser>
+              <S.ContentApproveUser
+              key={
+                user.id
+              }>
                 <S.StoreUser>
-                  <p>{user.fullName}</p>
-                  <p>CNPJ: user.cnpj</p>
-                  <p>user.email</p>
-                  <p>user.telefone</p>
+                  <p>{user.nomeFantasia}</p>
+                  <p>CNPJ: {user.cnpj}</p>
+                  <p>{user.email}</p>
+                  <p>{user.telefone}</p>
                 </S.StoreUser>
                 <S.IconsActionsApprove>
-                  <S.Check>
+                  <S.Check
+                  onClick={
+                    () => approve(user.id, user)
+                  }
+                  >
                     <Link>
                       <FiCheck />
                     </Link>
                   </S.Check>
-                  <S.Trash>
+                  <S.Trash
+                  onClick={
+                    () => disapprove(user.id, user)
+                  }
+                  >
                     <Link>
-                      <FiTrash />
+                      <FiX />
+                      {/* <FiTrash /> */}
                     </Link>
                   </S.Trash>
                 </S.IconsActionsApprove>
