@@ -22,7 +22,7 @@ import History from './pages/History'
 import ErrorPage from './pages/ErrorPage'
 import Supplies from './pages/Supplies'
 import Categories from './pages/Categories'
-
+import Redes from './pages/Redes'
 
 const Routes = () => {
   return (
@@ -51,6 +51,7 @@ const Routes = () => {
           <Route path='/historico-de-pedidos' exact component={History} />
           <Route path='/home' exact component={Supplies} />
           <Route path='/categorias' exact component={Categories} />
+          <Route path='/redes' exact component={Redes} />
           <Route path='*' exact component={ErrorPage} />
         </Switch>
       </HashRouter>
