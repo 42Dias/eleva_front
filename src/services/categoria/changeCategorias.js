@@ -1,5 +1,5 @@
-import responseHandler from "../utils/responseHandler";
-import { api } from "./api";
+import responseHandler from '../../utils/responseHandler'
+import {api} from '../api'
 
 
 export default async function changeCategorias(id, data){

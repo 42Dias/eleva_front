@@ -2,9 +2,10 @@
 Função usada no cadastro
 */
 
-import {api} from './api'
-import responseHandler from '../utils/responseHandler'
-import servidorErrorMessage from '../utils/servidorErrorMessage'
+import {api} from '../api'
+
+import responseHandler from '../../utils/responseHandler'
+import servidorErrorMessage from '../../utils/servidorErrorMessage'
 
 
 export default async function cadastrarProduct(data) {

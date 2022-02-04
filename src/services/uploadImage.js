@@ -7,12 +7,12 @@ import responseHandler from '../utils/responseHandler'
 import servidorErrorMessage from '../utils/servidorErrorMessage'
 
 
-export default async function cadastrarCategory(data) {
-    return await api.post('departamento', {
+export default async function uploadImage(data) {
+    return await api.post('imagemCreate', {
       data
       })
       .then((response) => {
-        let mensagemOk = 'Categoria / Departamento criado com sucesso! :)'
+        let mensagemOk = 'Imagem aceita com sucesso! :)'
         let mensagemNaoOK = 'Algo deu errado :('
         responseHandler(response.status, mensagemOk, mensagemNaoOK)
         if (response.status == 200) {
