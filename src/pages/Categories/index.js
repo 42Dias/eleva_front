@@ -34,17 +34,20 @@ export  default function Categories() {
     }, []
   )
 
-  function handleCategoryCreate(newCategory){
-    console.log(newCategory)
+  async function handleCategoryCreate(e){
+    e.preventDefault()
+    e.target.reset();  // reset all form data
 
     let data =  {
         nome: newCategory
       }
-      cadastrarCategory(data)
+      await cadastrarCategory(data)
+      loadData()
     }
 
   async function changeCategory(e){
     e.preventDefault()
+    e.target.reset();  // reset all form data
     console.log(id)
     console.log(changeCategoryName)
     let data = {
@@ -69,9 +72,7 @@ export  default function Categories() {
         </Link>
           <form
           onSubmit={(e) => {
-            e.preventDefault()
-            console.log(newCategory)
-            handleCategoryCreate(newCategory)
+            handleCategoryCreate(e)
           }}
           >
             <h2>
