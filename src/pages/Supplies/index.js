@@ -171,10 +171,10 @@ export  default function Supplies() {
             <label htmlFor=''>Modulo mínimo</label>
             <input type='text' placeholder='oi' />
           </div> */}
-          <div>
+          {/* <div>
             <label htmlFor=''>Marca</label>
             <input type='text' placeholder='oi' />
-          </div>
+          </div> */}
           {/* <div>
             <label htmlFor=''>Entrega mínima</label>
             <input type='text' placeholder='oi' />
@@ -187,14 +187,14 @@ export  default function Supplies() {
             <label htmlFor=''>Preço</label>
             <input type='text' placeholder='oi' />
           </div>
-          <div>
+          {/* <div>
             <label htmlFor=''>Altura (cm)</label>
             <input type='text' placeholder='oi' />
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <label htmlFor=''>Comprimento (cm)</label>
             <input type='text' placeholder='oi' />
-          </div>
+          </div> */}
           {/* <div>
             <label htmlFor=''>Cubagem da embalagem</label>
             <input type='text' placeholder='oi' />
@@ -228,7 +228,7 @@ export  default function Supplies() {
             <input type='text' placeholder='oi' />
           </div> */}
 
-          <div>
+          {/* <div>
             <label htmlFor=''>Rede SKU</label>
             <div style={{ display: 'flex' }}>
               <input type='checkbox' name='' id='' />
@@ -239,9 +239,9 @@ export  default function Supplies() {
               <input type='checkbox' name='' id='' />
               <label htmlFor=''>Não</label>
             </div>
-          </div>
+          </div> */}
 
-          <div>
+          {/* <div>
             <label htmlFor=''>Status de atividade</label>
             <div style={{ display: 'flex' }}>
               <input type='checkbox' name='' id='' />
@@ -257,9 +257,9 @@ export  default function Supplies() {
               <input type='checkbox' name='' id='' />
               <label htmlFor=''>Pesquisa</label>
             </div>
-          </div>
+          </div> */}
 
-          <div>
+          {/* <div>
             <label htmlFor=''>Origem do produto</label>
             <div style={{ display: 'flex' }}>
               <input type='checkbox' name='' id='' />
@@ -270,29 +270,27 @@ export  default function Supplies() {
               <input type='checkbox' name='' id='' />
               <label htmlFor=''>Importado</label>
             </div>
-          </div>
-
-          <div>
+          </div> */}
+          {/* <div>
             <label htmlFor=''>Lead time</label>
             <input type='text' placeholder='oi' />
-          </div>
-
-          <div>
+          </div> */}
+          {/* <div>
             <label htmlFor=''>Descrição NCM</label>
             <input type='text' placeholder='oi' />
-          </div>
+          </div> */}
           <div>
             <label htmlFor=''>Produto SKU</label>
             <input type='text' placeholder='oi' />
           </div>
-          <div>
+          {/* <div>
             <label htmlFor=''>Código de barras</label>
             <input type='text' placeholder='oi' />
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <label htmlFor=''>Unidade de medida</label>
             <input type='text' placeholder='oi' />
-          </div>
+          </div> */}
         </S.Container>
 
         <S.BtnsContent>
