@@ -12,13 +12,12 @@ import servidorErrorMessage from '../utils/servidorErrorMessage'
 
 export default async function cadastro(name, email, password, cnpj, phoneNumber, invitationToken,  tenantId) {
     return apiWithoutTenant.post('auth/sign-up', {
-      name,            name,
-      email:           email,
-      password:        password,
-      cnpj:            cnpj,
-      phoneNumber:     phoneNumber,
+      email:           email, 
+      password:        password, 
+      cnpj:            cnpj, 
+      phoneNumber:     phoneNumber, 
+      name:            name, 
       invitationToken: invitationToken,
-      tenantId:        tenantId,
       })
       .then((response) => {
         let mensagemOk = 'Opa, recebemos o seu registro :)'
