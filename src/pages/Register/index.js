@@ -13,6 +13,7 @@ import axios from 'axios'
 import cadastro from '../../services/cadastro'
 
 import { toast } from 'react-toastify';
+import sendEmailAprovado from '../../services/email/sendEmailAprovado';
 
 
 export  default function Register() {
@@ -46,7 +47,7 @@ export  default function Register() {
 
     toast.info('Carregando')
     setLoading(true)
-
+    
     // email senha role e status
     /*
       req.body.email,
@@ -57,11 +58,16 @@ export  default function Register() {
       req.body.tenantId,
       req,
     */
-    cadastro(email, senha, cnpj, phoneNumber)
+    cadastro(nome, email, senha, cnpj, phoneNumber)
     .then(
       (cadastroStatus) => {
         setLoading(false)
-        cadastroStatus == 'ok' ? goHome() : toast.error("Algo deu errado :(")
+        if(cadastroStatus == 'ok'){
+          toast.info('Aguarde sua empresa ser aprovada...')
+        }
+        else{ 
+          toast.error("Algo deu errado :(")
+        }
       }
     )
     .catch(
