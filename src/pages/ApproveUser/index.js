@@ -7,6 +7,7 @@ import loadUsers from '../../services/loadUsers'
 import loadEmpresas from '../../services/empresa/loadEmpresas'
 import { AiOutlineConsoleSql } from 'react-icons/ai'
 import changeEmpresa from '../../services/empresa/changeEmpresa'
+import sendEmailAprovado from '../../services/email/sendEmailAprovado'
 
 export  default function ApproveUser() {
 
@@ -17,8 +18,15 @@ export  default function ApproveUser() {
     // let tenantIdUsers = await loadUsers('ativo', 'inativo')
     let tenantIdUsers = await loadEmpresas('ativo', 'Inativo')
     setUsers(tenantIdUsers)
+  }
 
 
+  async function handleSendEmail(email){
+    let data = {
+      email: email
+    }
+    let isOK =  await sendEmailAprovado(data)
+    console.log(isOK)
   }
 
   async function approve(id, userData){
@@ -32,6 +40,9 @@ export  default function ApproveUser() {
     }
     console.log(newUserData)
     await changeEmpresa(id, newUserData)
+    console.log(userData.email)
+    await handleSendEmail(userData.email)
+    
     load()
   }
 
@@ -45,6 +56,7 @@ export  default function ApproveUser() {
       }
     }
     await changeEmpresa(id, newUserData)
+    // await handleSendEmail(newUserData.email)
     load()
   }
 
