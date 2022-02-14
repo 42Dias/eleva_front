@@ -47,6 +47,23 @@ export const ContentSupplierForm = styled.div`
     font-size: 14px;
     color: ${theme.colors.neutral[0]};
   }
+  select {
+    width: 326px;
+    height: 48px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin: 10px 0;
+    padding: 0 7px;
+    border: 0;
+    transition: 0.4s;
+    background: ${theme.colors.neutral[150]};
+  }
+
+  select:focus {
+    border: 1px solid ${theme.colors.green};
+    background: transparent;
+    color: ${theme.colors.green};
+  }
 `
 
 export const ContentLeadTime = styled.form`
