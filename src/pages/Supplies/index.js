@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Switch } from 'antd'
 import { FiFilter, FiX } from 'react-icons/fi'
@@ -7,10 +7,12 @@ import { Link } from 'react-router-dom'
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 import 'antd/dist/antd.css'
+import loadSuprimento from '../../services/suprimento/loadSuprimento'
+
 
 export  default function Supplies() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
-
+  const [suprimentos, setSuprimentos] = useState([])
   function openModal() {
     setIsOpen(true)
   }
@@ -28,6 +30,20 @@ export  default function Supplies() {
   
   a plataforma vasculha o melhor preço com o sku
   */
+  async function handleLoadSuprimentos(){
+    let suprimentos = await loadSuprimento()
+      console.log(suprimentos)
+      setSuprimentos(suprimentos)
+  }
+
+  useEffect(
+    () => {
+      handleLoadSuprimentos()
+    }, []
+  )
+
+
+  
   return (
     <>
       <Navbar />
@@ -63,45 +79,28 @@ export  default function Supplies() {
               <td>Macbook Pro M1X</td>
               {/* <td>400</td> */}
               <Switch
-                // checkedChildren='adcionar'
-                // unCheckedChildren='adicionado'
                 checkedChildren='Adicionado'
                 unCheckedChildren='Adicionar'
               />
             </tr>
-            <tr>
-              <td>123123412</td>
-              <td>Macbook </td>
-              <td>XXXXX</td>
-              <td>Macbook Pro M1X</td>
-              {/* <td>400</td> */}
-              <Switch
-                checkedChildren='Adicionado'
-                unCheckedChildren='Adicionar'
-              />
-            </tr>
-            <tr>
-              <td>123123412</td>
-              <td>Macbook </td>
-              <td>XXXXX</td>
-              <td>Macbook Pro M1X</td>
-              {/* <td>400</td> */}
-              <Switch
-                checkedChildren='Adicionado'
-                unCheckedChildren='Adicionar'
-              />
-            </tr>
-            <tr>
-              <td>123123412</td>
-              <td>Macbook </td>
-              <td>XXXXX</td>
-              <td>Macbook Pro M1X</td>
-              {/* <td>400</td> */}
-              <Switch
-                checkedChildren='Adicionado'
-                unCheckedChildren='Adicionar'
-              />
-            </tr>
+            {
+            suprimentos.map(
+              (suprimento, index) => (
+                <tr
+                key={index}
+                >
+                  <td>123123412</td>
+                  <td>Macbook </td>
+                  <td>XXXXX</td>
+                  <td>{suprimento.produto.nome}</td>
+                  <Switch
+                    checkedChildren='Adicionado'
+                    unCheckedChildren='Adicionar'
+                  />
+                </tr>
+              )
+            )
+            }
           </tbody>
         </table>
       </S.ContainerDetails>
