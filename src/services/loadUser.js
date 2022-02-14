@@ -26,4 +26,6 @@ export default async function loadUser(token) {
     let newId = response.id
     let newStatus = response.tenants[0].status
     HandleLocalStorageData(newRoleLocal, newTenatId, newId, newStatus, token)
+
+    return response
   }
