@@ -63,4 +63,10 @@ export const SidebarData = [
     icon: <FaIcons.FaCheck />,
     cName: 'nav-text',
   },
+  {
+    title: 'Meus Dados',
+    path: '/meus-dados-empresa',
+    icon: <FaIcons.FaDisease />,
+    cName: 'nav-text',
+  },
 ]
