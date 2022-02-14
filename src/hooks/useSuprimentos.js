@@ -1,6 +1,10 @@
 import { createContext,  useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
+import addInSuprimento from '../services/suprimento/addInSuprimento';
+import changeSuprimento from '../services/suprimento/changeSuprimento';
+import deleteProductOfSuprimento from '../services/suprimento/deleteProductOfSuprimento';
+import loadSuprimento from '../services/suprimento/loadSuprimento';
 import responseHandler from '../utils/responseHandler';
 
 const SuprimentoContext = createContext();
@@ -8,7 +12,7 @@ const SuprimentoContext = createContext();
 export function SuprimentoProvider({ children }) {
     const [update, setUpdate] = useState(0);
 
-    function isInSuprimento(suprimento){
+    function isInSuprimento(suprimento, productId){
       return suprimento.filter((suprimento) => {
         if(suprimento.produto.id == productId){
           console.log(suprimento)      
@@ -20,12 +24,8 @@ export function SuprimentoProvider({ children }) {
       let productResponse = await api.get(`produto/${productId}`);
       return productResponse.data;
     }
-    async function loadSuprimento(){
-      const suprimentoResponse = await api.get(`suprimento`)
-      return suprimentoResponse.data.rows;
-    }
 
-     function somaQuantidade(suprimento){
+    function somaQuantidade(suprimento){
       let somaDeItens = 0 
 
         suprimento.map((suprimento) =>
@@ -34,73 +34,6 @@ export function SuprimentoProvider({ children }) {
         return somaDeItens
     }
 
-    async function addInSuprimento(product, quantidade){
-      const response = await api.post(`suprimentoProduto/`, { product, 'quantidade': quantidade })
-      .then(
-        (response) => {
-          let status = response.status
-          responseHandler(status,"Produto adicionado ao suprimento com sucesso!",  "Erro na adição do produto")
-          if(response.status == 200){
-            setUpdate(prevValue => {
-              return prevValue+1	
-               })
-
-            console.log("update 1")
-            console.log(update)
-
-            return response.data
-          }
-          else if(response.status == 500){
-            toast.error("Problemas com o servidor :(")
-          }
-        }
-      )
-      return response
-    }
-
-    async function changeSuprimento(productAlreadyInSuprimento){
-      const response = await api.put(`suprimento/`, { productAlreadyInSuprimento })
-      .then(
-        (response) => {
-          let status = response.status
-          responseHandler(status,"Produto adicionado ao suprimento com sucesso!",  "Erro na adição do produto")
-          if(response.status == 200){
-            setUpdate(prevValue => {
-              return prevValue+1	
-               })
-
-            console.log("update 1")
-            console.log(update)
-
-            return response.data
-          }
-          else if(response.status == 500){
-            toast.error("Problemas com o servidor :(")
-          }
-        }
-      )
-      return response
-    }
-
-    async function deleteProductOfSuprimento(productAlreadyInSuprimento){
-      const response = api.delete('suprimentoProduto/', { productAlreadyInSuprimento })
-      .then(
-        (response) => {
-          let status = response.status
-          responseHandler(status, "Produto removido com sucesso!", "Erro :(")
-          if(response.status == 200){
-
-            setUpdate(prevValue => {
-              return prevValue-1	
-               })
-          }
-          return response.data
-
-        }
-      )
-
-      return response 
-    }
 
 
     const suprimento = async () => {
@@ -109,7 +42,7 @@ export function SuprimentoProvider({ children }) {
       console.log(allSuprimento.data.count)
 
       return allSuprimento.data.count;
-      }
+    }
     
 
   const addProduct = async (productId, quantidade) => {
@@ -118,20 +51,20 @@ export function SuprimentoProvider({ children }) {
     console.log("productId")
     console.log(productId)
 
-    const suprimento = loadSuprimento()
+    const suprimento = await loadSuprimento()
 
     console.log("suprimento");
     console.log(suprimento);
 
 
 
-    const produtoNosuprimento = isInSuprimento(suprimento)
+    const produtoNosuprimento = isInSuprimento(suprimento, productId)
   
     const productAlreadyInSuprimento = produtoNosuprimento[0]  
     console.log("productAlreadyInSuprimento")
     console.log(productAlreadyInSuprimento)
 
-    const  product  =  loadProduct(productId)
+    const  product  =  await loadProduct(productId)
 
     if(product.isOferta === true){
       console.log("product.isOferta == true")
@@ -170,9 +103,10 @@ export function SuprimentoProvider({ children }) {
         console.log("product");
         console.log(product); 
         
-        if(stock > 0) {
+        // if(stock > 0) {
+        if(true) {
 
-          const newSuprimento = addInSuprimento(product, quantidade)
+          const newSuprimento = await addInSuprimento(product, quantidade, suprimento, setUpdate)
 
                         
           console.log(JSON.stringify( { product, quantidade: quantidade }))
@@ -193,12 +127,13 @@ export function SuprimentoProvider({ children }) {
         const  stock  = product.quantidadeNoEstoque;
         console.log(productAlreadyInSuprimento)
         
-        if (stock > productAlreadyInSuprimento.quantidade + quantidade) {
+        // if (stock > productAlreadyInSuprimento.quantidade + quantidade) {
+        if (true) {
 
         productAlreadyInSuprimento.quantidade = productAlreadyInSuprimento.quantidade + quantidade;
           
           
-          const newSuprimento = changeSuprimento(productAlreadyInSuprimento)
+          const newSuprimento = await changeSuprimento(productAlreadyInSuprimento, setUpdate)
           console.log(newSuprimento)
         } 
         
@@ -224,11 +159,11 @@ export function SuprimentoProvider({ children }) {
 
       console.log(productId)
 
-      const suprimento = loadSuprimento()
+      const suprimento = await loadSuprimento()
     
       console.log(suprimento)
 
-      const produtoNosuprimento = isInSuprimento(suprimento)
+      const produtoNosuprimento = isInSuprimento(suprimento, productId)
     
       console.log("produtoNosuprimento")
       console.log(produtoNosuprimento)
@@ -249,7 +184,7 @@ export function SuprimentoProvider({ children }) {
         return
       }
   
-      const deletedProduct = deleteProductOfSuprimento(productAlreadyInSuprimento)
+      const deletedProduct = deleteProductOfSuprimento(productAlreadyInSuprimento, setUpdate)
       console.log(deletedProduct)
       return deletedProduct
 
@@ -270,18 +205,18 @@ export function SuprimentoProvider({ children }) {
       }
 
       toast.info("Carregando...")
-      const suprimento = loadSuprimento()
+      const suprimento = await loadSuprimento()
     
       console.log("suprimento")
       console.log(suprimento)
 
-      const produtoNosuprimento = isInSuprimento(suprimento)
+      const produtoNosuprimento = isInSuprimento(suprimento, productId)
       const productAlreadyInSuprimento = produtoNosuprimento[0]  
 
       console.log("productAlreadyInSuprimento")
       console.log(productAlreadyInSuprimento)
       
-      const  product  = loadProduct(productId)
+      const  product  =  await loadProduct(productId)
 
       console.log("product")
       console.log(product)
@@ -305,7 +240,7 @@ export function SuprimentoProvider({ children }) {
       }
       productAlreadyInSuprimento.quantidade = quantidade           
       
-      const newSuprimento = changeSuprimento(productAlreadyInSuprimento)
+      const newSuprimento = await changeSuprimento(productAlreadyInSuprimento, setUpdate)
       console.log("newSuprimento")
       console.log(newSuprimento)
 
