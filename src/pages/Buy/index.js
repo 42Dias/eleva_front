@@ -16,8 +16,8 @@ import { useSuprimento } from "../../hooks/useSuprimentos";
 import { useCart } from "../../hooks/useCart";
 export default function Buy() {
 
-  // const { addProduct, cart } = useSuprimento();
-  const { addProduct, cart } = useCart();
+  const { addProduct, cart } = useSuprimento();
+  // const { addProduct, cart } = useCart();
   
   
   useEffect(
@@ -34,6 +34,7 @@ export default function Buy() {
     
   
     const observer = useRef()
+    
     const lastProdElementRef = useCallback(node => {
       if (loading) return
       if (observer.current) observer.current.disconnect()
