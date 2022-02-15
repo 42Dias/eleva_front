@@ -260,3 +260,13 @@ export const BtnsContent = styled.div`
     }
   }
 `
+
+export const FlexContainer = styled.div`
+display: flex;
+align-items: center;
+
+  .deleteBtn {
+    margin-top: 30px;
+    margin-right: 10px;
+  }
+`
