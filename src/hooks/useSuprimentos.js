@@ -250,9 +250,85 @@ export function SuprimentoProvider({ children }) {
     }
   };
 
+
+  const addProductSuprimentoInCart = async (//apenas dar um post com a nova quantidade com o id do suprimento
+    
+    productId,
+    quantidade,
+    status,
+    addProduct
+
+  ) => {
+    try {
+
+      if(quantidade < 1){
+        toast.error('Erro na alteração de quantidade do produto');
+        return
+      }
+
+
+      console.log("productId")
+      console.log(productId)
+
+      toast.info("Carregando...")
+      const suprimento = await loadSuprimento()
+    
+      console.log("suprimento")
+      console.log(suprimento)
+
+      const produtoNosuprimento = isInSuprimento(suprimento, productId)
+      const productAlreadyInSuprimento = produtoNosuprimento[0]  
+
+      console.log("productAlreadyInSuprimento")
+      console.log(productAlreadyInSuprimento)
+      
+      const  product  =  await loadProduct(productId)
+
+      console.log("product")
+      console.log(product)
+
+      let stock = product.quantidadeNoEstoque;
+
+      if( stock == null ){
+        stock = 999
+      }
+
+      
+      console.log('stock: ' + stock)
+
+      const stockIsFree = quantidade > stock
+
+      console.log('stockIsFree: ' + stockIsFree)
+
+      if(stockIsFree) {
+        toast.error('Quantidade solicitada fora de estoque')
+        return
+      }
+      productAlreadyInSuprimento.quantidade = quantidade           
+
+      
+      status ? productAlreadyInSuprimento.status = status : false           
+      
+      const newSuprimento = await changeSuprimento(productAlreadyInSuprimento, setUpdate)
+      console.log("newSuprimento")
+      console.log(newSuprimento)
+
+
+      let addInCart = await addProduct( productId, quantidade)
+
+      console.log("addInCart")
+      console.log(addInCart)
+
+
+    } catch(e) {
+      toast.error('Erro na adição do no carrinho');
+      console.log(e)
+    }
+  };
+
   return (
     <SuprimentoContext.Provider
-      value={{ suprimento, addProduct, removeProduct, updateProductAmount, update }}
+      value={{ suprimento, addProduct, removeProduct, updateProductAmount, update, addProductSuprimentoInCart }}
     >
       {children}
     </SuprimentoContext.Provider>
