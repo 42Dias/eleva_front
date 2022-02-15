@@ -12,7 +12,7 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
     const [update, setUpdate] = useState(0);
 
-    function isInCart(cart){
+    function isInCart(cart,productId){
       return cart.filter((cart) => {
         if(cart.produto.id == productId){
           console.log(cart)      
@@ -61,13 +61,13 @@ export function CartProvider({ children }) {
 
 
 
-    const produtoNoCarrinho = isInCart(cart)
+    const produtoNoCarrinho = isInCart(cart, productId)
   
     const productAlreadyInCart = produtoNoCarrinho[0]  
     console.log("productAlreadyInCart")
     console.log(productAlreadyInCart)
 
-    const  product  =  loadProduct(productId)
+    const  product  = await loadProduct(productId)
 
     if(product.isOferta === true){
       console.log("product.isOferta == true")
@@ -98,15 +98,16 @@ export function CartProvider({ children }) {
 
     try {
       
+      // if(!productAlreadyInCart) {
       if(!productAlreadyInCart) {
-      
         console.log("ARRIVA");
       
 
         console.log("product");
         console.log(product); 
         
-        if(stock > 0) {
+        // if(stock > 0) {
+        if(true) {
 
           const newCart = await addInCart(product, quantidade)
 
@@ -123,13 +124,14 @@ export function CartProvider({ children }) {
         }
       }
 
-      else if(productAlreadyInCart) {
+      else if(productAlreadyInCart != null &&  productAlreadyInCart != undefined) {
         console.log("PRODUTO ESTÁ EN EL CARIÑO")
 
         const  stock  = product.quantidadeNoEstoque;
         console.log(productAlreadyInCart)
         
-        if (stock > productAlreadyInCart.quantidade + quantidade) {
+        // if (stock > productAlreadyInCart.quantidade + quantidade) {
+        if (true) {
 
         productAlreadyInCart.quantidade = productAlreadyInCart.quantidade + quantidade;
           
@@ -139,6 +141,7 @@ export function CartProvider({ children }) {
         } 
         
         else {
+          console.log(productAlreadyInCart)
           toast.error('Quantidade solicitada fora de estoque')
         }
       }
@@ -164,7 +167,7 @@ export function CartProvider({ children }) {
     
       console.log(cart)
 
-      const produtoNoCarrinho = isInCart(cart)
+      const produtoNoCarrinho = isInCart(cart, productId)
     
       console.log("produtoNoCarrinho")
       console.log(produtoNoCarrinho)
@@ -211,13 +214,13 @@ export function CartProvider({ children }) {
       console.log("cart")
       console.log(cart)
 
-      const produtoNoCarrinho = isInCart(cart)
+      const produtoNoCarrinho = isInCart(cart, productId)
       const productAlreadyInCart = produtoNoCarrinho[0]  
 
       console.log("productAlreadyInCart")
       console.log(productAlreadyInCart)
       
-      const  product  = loadProduct(productId)
+      const  product  = await loadProduct(productId)
 
       console.log("product")
       console.log(product)
@@ -235,7 +238,8 @@ export function CartProvider({ children }) {
 
       console.log('stockIsFree: ' + stockIsFree)
 
-      if(stockIsFree) {
+      // if(stockIsFree) {
+      if(false) {
         toast.error('Quantidade solicitada fora de estoque')
         return
       }
