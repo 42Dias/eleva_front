@@ -12,6 +12,8 @@ import loadSuprimento from '../../services/suprimento/loadSuprimento'
 import ButtonDelete from '../../components/ButtonDelete'
 import { useSuprimento } from '../../hooks/useSuprimentos'
 
+import { useCart } from '../../hooks/useCart'
+
 export  default function Supplies() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
   const [suprimentos, setSuprimentos] = useState([])
@@ -32,7 +34,9 @@ export  default function Supplies() {
   
   a plataforma vasculha o melhor preço com o sku
   */
- const { removeProduct } = useSuprimento();
+
+ const { addProduct } = useCart();
+ const { removeProduct, addProductSuprimentoInCart } = useSuprimento();
 
 
   function handleRemoveProduct(productId, index) {
@@ -48,6 +52,16 @@ export  default function Supplies() {
     let suprimentos = await loadSuprimento()
       console.log(suprimentos)
       setSuprimentos(suprimentos)
+  }
+
+
+  async function handleAddProductInCart(productId, index) {
+    console.log(productId)
+
+    const a  = await addProductSuprimentoInCart(productId,  1 , 'ativo', addProduct );
+    console.log(a)
+
+    
   }
 
   useEffect(
@@ -92,6 +106,7 @@ export  default function Supplies() {
               <td>XXXXX</td>
               <td>Macbook Pro M1X</td>
               <Switch
+                defaultChecked
                 checkedChildren='Adicionado'
                 unCheckedChildren='Adicionar'
               />
@@ -123,6 +138,16 @@ export  default function Supplies() {
                         checkedChildren='Adicionado'
                         unCheckedChildren='Adicionar'
                       />
+                      <button
+                      type='button'
+                      onClick={
+                        () => {
+                          handleAddProductInCart(suprimento.produto.id, index)
+                        }
+                      }
+                      >
+                        aaaaa
+                      </button>
                     </S.FlexContainer>
                   </td>
                 </tr>
