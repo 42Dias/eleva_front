@@ -9,6 +9,8 @@ import * as S from './styled'
 import 'antd/dist/antd.css'
 import loadSuprimento from '../../services/suprimento/loadSuprimento'
 
+import ButtonDelete from '../../components/ButtonDelete'
+import { useSuprimento } from '../../hooks/useSuprimentos'
 
 export  default function Supplies() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
@@ -30,6 +32,18 @@ export  default function Supplies() {
   
   a plataforma vasculha o melhor preço com o sku
   */
+ const { removeProduct } = useSuprimento();
+
+
+  function handleRemoveProduct(productId, index) {
+    removeProduct(productId);
+    
+    let newSuprimentoList = [...suprimentos]
+    newSuprimentoList.splice(index, 1)
+    setSuprimentos(newSuprimentoList)
+    
+  }
+
   async function handleLoadSuprimentos(){
     let suprimentos = await loadSuprimento()
       console.log(suprimentos)
@@ -93,10 +107,23 @@ export  default function Supplies() {
                   <td>{suprimento.produto.codigo}</td>
                   <td>{suprimento.produto.nome}</td>
                   <td>
-                    <Switch
-                      checkedChildren='Adicionado'
-                      unCheckedChildren='Adicionar'
-                    />
+                    <S.FlexContainer>
+                      <div
+                      className='deleteBtn'
+                      onClick={
+                        () => {
+                          console.log(suprimento)
+                          handleRemoveProduct(suprimento.produto.id, index)
+                        }
+                      }>
+                        <ButtonDelete
+                        />
+                      </div>
+                      <Switch
+                        checkedChildren='Adicionado'
+                        unCheckedChildren='Adicionar'
+                      />
+                    </S.FlexContainer>
                   </td>
                 </tr>
               )
