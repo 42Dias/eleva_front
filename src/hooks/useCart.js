@@ -1,6 +1,10 @@
 import { createContext,  useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
+import addInCart from '../services/carrinho/addInCart';
+import changeCart from '../services/carrinho/changeCart';
+import deleteProductOfCart from '../services/carrinho/deleteProductOfCart';
+import loadCart from '../services/carrinho/loadCart';
 import responseHandler from '../utils/responseHandler';
 
 const CartContext = createContext();
@@ -20,10 +24,6 @@ export function CartProvider({ children }) {
       let productResponse = await api.get(`produto/${productId}`);
       return productResponse.data;
     }
-    async function loadCart(){
-      const cartResponse = await api.get(`carrinho`)
-      return cartResponse.data.rows;
-    }
 
      function somaQuantidade(cart){
       let somaDeItens = 0 
@@ -34,73 +34,6 @@ export function CartProvider({ children }) {
         return somaDeItens
     }
 
-    async function addInCart(product, quantidade){
-      const response = await api.post(`carrinhoProduto/`, { product, 'quantidade': quantidade })
-      .then(
-        (response) => {
-          let status = response.status
-          responseHandler(status,"Produto adicionado ao carrinho com sucesso!",  "Erro na adição do produto")
-          if(response.status == 200){
-            setUpdate(prevValue => {
-              return prevValue+1	
-               })
-
-            console.log("update 1")
-            console.log(update)
-
-            return response.data
-          }
-          else if(response.status == 500){
-            toast.error("Problemas com o servidor :(")
-          }
-        }
-      )
-      return response
-    }
-
-    async function changeCart(productAlreadyInCart){
-      const response = await api.put(`carrinho/`, { productAlreadyInCart })
-      .then(
-        (response) => {
-          let status = response.status
-          responseHandler(status,"Produto adicionado ao carrinho com sucesso!",  "Erro na adição do produto")
-          if(response.status == 200){
-            setUpdate(prevValue => {
-              return prevValue+1	
-               })
-
-            console.log("update 1")
-            console.log(update)
-
-            return response.data
-          }
-          else if(response.status == 500){
-            toast.error("Problemas com o servidor :(")
-          }
-        }
-      )
-      return response
-    }
-
-    async function deleteProductOfCart(productAlreadyInCart){
-      const response = api.delete('carrinhoProduto/', { productAlreadyInCart })
-      .then(
-        (response) => {
-          let status = response.status
-          responseHandler(status, "Produto removido com sucesso!", "Erro :(")
-          if(response.status == 200){
-
-            setUpdate(prevValue => {
-              return prevValue-1	
-               })
-          }
-          return response.data
-
-        }
-      )
-
-      return response 
-    }
 
 
     const cart = async () => {
@@ -118,7 +51,10 @@ export function CartProvider({ children }) {
     console.log("productId")
     console.log(productId)
 
-    const cart = loadCart()
+    console.log("productId")
+    console.log(productId)
+
+    const cart = await loadCart()
 
     console.log("cart");
     console.log(cart);
@@ -172,7 +108,7 @@ export function CartProvider({ children }) {
         
         if(stock > 0) {
 
-          const newCart = addInCart(product, quantidade)
+          const newCart = await addInCart(product, quantidade)
 
                         
           console.log(JSON.stringify( { product, quantidade: quantidade }))
@@ -198,7 +134,7 @@ export function CartProvider({ children }) {
         productAlreadyInCart.quantidade = productAlreadyInCart.quantidade + quantidade;
           
           
-          const newCart = changeCart(productAlreadyInCart)
+          const newCart = await changeCart(productAlreadyInCart)
           console.log(newCart)
         } 
         
@@ -224,7 +160,7 @@ export function CartProvider({ children }) {
 
       console.log(productId)
 
-      const cart = loadCart()
+      const cart = await loadCart()
     
       console.log(cart)
 
@@ -249,7 +185,7 @@ export function CartProvider({ children }) {
         return
       }
   
-      const deletedProduct = deleteProductOfCart(productAlreadyInCart)
+      const deletedProduct = await deleteProductOfCart(productAlreadyInCart)
       console.log(deletedProduct)
       return deletedProduct
 
@@ -270,7 +206,7 @@ export function CartProvider({ children }) {
       }
 
       toast.info("Carregando...")
-      const cart = loadCart()
+      const cart = await loadCart()
     
       console.log("cart")
       console.log(cart)
@@ -305,7 +241,7 @@ export function CartProvider({ children }) {
       }
       productAlreadyInCart.quantidade = quantidade           
       
-      const newCart = changeCart(productAlreadyInCart)
+      const newCart = await changeCart(productAlreadyInCart)
       console.log("newCart")
       console.log(newCart)
 
