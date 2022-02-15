@@ -10,12 +10,12 @@ export default async function addInCart(product, quantidade){
       let status = response.status
       responseHandler(status,"Produto adicionado ao carrinho com sucesso!",  "Erro na adição do produto")
       if(response.status == 200){
-        setUpdate(prevValue => {
-          return prevValue+1	
-           })
+        // setUpdate(prevValue => {
+        //   return prevValue+1	
+        //    })
 
-        console.log("update 1")
-        console.log(update)
+        // console.log("update 1")
+        // console.log(update)
 
         return response.data
       }

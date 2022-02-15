@@ -10,9 +10,9 @@ export default async function deleteProductOfCart(productAlreadyInCart){
       responseHandler(status, "Produto removido com sucesso!", "Erro :(")
       if(response.status == 200){
 
-        setUpdate(prevValue => {
-          return prevValue-1	
-           })
+        // setUpdate(prevValue => {
+        //   return prevValue-1	
+        //    })
       }
       return response.data
 
