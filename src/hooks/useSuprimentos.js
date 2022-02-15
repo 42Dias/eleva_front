@@ -184,7 +184,7 @@ export function SuprimentoProvider({ children }) {
         return
       }
   
-      const deletedProduct = deleteProductOfSuprimento(productAlreadyInSuprimento, setUpdate)
+      const deletedProduct = await deleteProductOfSuprimento(productAlreadyInSuprimento, setUpdate)
       console.log(deletedProduct)
       return deletedProduct
 
