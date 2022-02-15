@@ -8,10 +8,14 @@ import Navbar from '../../components/Sidebar/Sidebar'
 import Accordion from '../../components/Accordion/Accordion'
 import item from './../../assets/item.png'
 import * as S from './styled'
+import loadCart from "../../services/carrinho/loadCart";
+import { formatPrice } from "../../utils/format";
 
 export default function BuyProds() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
   const [modalIsOpen2, setIsOpen2] = React.useState(false)
+
+  const [carrinho, setCarrinho] = React.useState([])
 
   function openModal() {
     setIsOpen(true)
@@ -32,9 +36,41 @@ export default function BuyProds() {
   function closeModal2() {
     setIsOpen2(false)
   }
+
+
   /*
   Aqui é o carrinho
   */
+
+  /*
+  LISTAR 
+  DELETAR
+  EXCLUIR DA TELA
+  */
+
+  /*
+  
+  NO TAB IR PARA O MODAL, FAZENDO O PUSH NO FORNECEDOR
+  ele continua na tela!
+
+  toast de finalizado!
+
+  salvar compra adiciona na lista
+  
+  */
+
+  async function handleLoadCart(){
+    let cartData =  await loadCart()
+    console.log(cartData)
+    setCarrinho(cartData)
+  }
+
+  useEffect(
+    () => {
+      handleLoadCart()
+    }, []
+  )
+
   return (
     <>
       <Navbar />
@@ -58,18 +94,22 @@ export default function BuyProds() {
           <span>Status</span>
           <span>Quantidade</span>
         </S.GridValidation>
-        <Accordion
+      {
+        carrinho.map(
+          (item, index) => (
+          <Accordion
+          key={index}
           codeBarras='321312421321321'
           prodSku='Mackbook'
-          code='XXXXX'
-          name='Macbook Pro M1X'
-          amount='2 '
+          code={`${item.produto.codigo}`}
+          name={`${item.produto.nome}`}
+          amount={`${item.quantidade} `}
           content={item}
-          lote=' 400'
-          info=' 400'
-          lastprice=' 400'
-          quantidadeporembalagem=' 400'
-          leadtime=' 400'
+          lote={` ${item.produto.moduloMinimo}`} 
+          info={` ${item.produto.descricao} `}
+          lastprice={` ${formatPrice(item.produto.custoUltimaCompra)}`}
+          quantidadeporembalagem={` ${item.produto.qtdEmbalagem} `}
+          leadtime={`${item.produto.leadTime}`}
           datadefaturamento=' 400'
           myProp={
             <input
@@ -81,7 +121,10 @@ export default function BuyProds() {
             />
           }
         />
-        <Accordion
+          )
+        )
+        }
+        {/* <Accordion
           codeBarras='321312421321321'
           prodSku='Mackbook'
           code='XXXXX'
@@ -126,7 +169,7 @@ export default function BuyProds() {
               max='9999999'
             />
           }
-        />
+        /> */}
       </S.ContainerApprove>
 
       <Modal
