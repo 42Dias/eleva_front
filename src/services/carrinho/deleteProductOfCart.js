@@ -3,7 +3,7 @@ import { api } from '../api'
 import responseHandler from '../../utils/responseHandler';
 
 export default async function deleteProductOfCart(productAlreadyInCart){
-  const response = api.delete('carrinhoProduto/', { productAlreadyInCart })
+  const response = api.delete(`carrinhoProdutoOne/${productAlreadyInCart.id}`, { productAlreadyInCart })
   .then(
     (response) => {
       let status = response.status
