@@ -102,7 +102,8 @@ export  default function Supplies() {
           </thead>
 
           <tbody className='body'>
-            {/* <tr>
+            {/*
+             <tr>
               <td>123123412</td>
               <td>Macbook </td>
               <td>XXXXX</td>
@@ -112,7 +113,8 @@ export  default function Supplies() {
                 checkedChildren='Adicionado'
                 unCheckedChildren='Adicionar'
               />
-            </tr> */}
+            </tr>
+            */}
             {
             suprimentos.map(
               (suprimento, index) => (
