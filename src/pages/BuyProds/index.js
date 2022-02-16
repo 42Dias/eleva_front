@@ -10,12 +10,16 @@ import item from './../../assets/item.png'
 import * as S from './styled'
 import loadCart from "../../services/carrinho/loadCart";
 import { formatPrice } from "../../utils/format";
+import handleSetNumber from "../../utils/handleSetNumber";
+import filterFornecedores from "../../utils/filterFornecedores";
 
 export default function BuyProds() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
   const [modalIsOpen2, setIsOpen2] = React.useState(false)
 
   const [carrinho, setCarrinho] = React.useState([])
+
+  const [produtosDosFornecedores, setProdutosDosFornecedores] = React.useState([])
 
   function openModal() {
     setIsOpen(true)
@@ -61,7 +65,6 @@ export default function BuyProds() {
 
   async function handleLoadCart(){
     let cartData =  await loadCart()
-    console.log(cartData)
     setCarrinho(cartData)
   }
 
@@ -70,6 +73,20 @@ export default function BuyProds() {
       handleLoadCart()
     }, []
   )
+
+  let returnFunc = (e) => e;
+
+
+  function handlePushInForcedor(item){
+    console.log(item)
+    let produtosDosFornecedoresHelper = produtosDosFornecedores
+    
+    produtosDosFornecedoresHelper.push(item)
+
+    filterFornecedores(produtosDosFornecedoresHelper, setProdutosDosFornecedores)
+  }
+
+  console.log(produtosDosFornecedores)
 
   return (
     <>
@@ -83,6 +100,9 @@ export default function BuyProds() {
           <div>
             <button onClick={openModal2}>Lista de compras +</button>
             <button onClick={openModal}>Finalizar compra</button>
+            <button onClick={() => {
+              console.log(carrinho)
+            }}>AAAAAAAAAAAAAAAAA</button>
           </div>
         </div>
 
@@ -113,6 +133,25 @@ export default function BuyProds() {
           datadefaturamento=' 400'
           myProp={
             <input
+              onChange={(e) => {
+                let stringNumber = e.target.value
+
+                let formatedNumber = handleSetNumber(stringNumber, returnFunc)
+
+                item.quantidade = formatedNumber
+              }}
+
+              onKeyDown={(e) => {
+                if(e.key == 'Tab'){
+                  console.log(item.quantidade)
+
+                  handlePushInForcedor(item)
+
+
+
+                }
+              }}
+              
               type='number'
               id='quantity'
               name='quantity'
