@@ -223,57 +223,90 @@ export default function BuyProds() {
           >
             <FiX />
           </button>
-          <h4>Fornecedor 1</h4>
-          <table>
-            <thead>
-              <tr className='firts'>
-                <th>Produto SKU</th>
-                <th>Descrição</th>
-                <th>Valor unitario</th>
-                <th>Quantidade</th>
-                <th>Peso</th>
-                <th>Volume</th>
-                <th>Valor</th>
-              </tr>
-            </thead>
+          {/* 
+          
+          NECESSIDADE: PUXAR MAIS DADOS DO FORNECEDOR!
 
-            <tbody className='body'>
-              <tr>
-                <td>Macbook</td>
-                <td>Notebook</td>
-                <td>R$42,56</td>
-                <td>Macbook Pro M1X</td>
-                <td>200g</td>
-                <td>100g</td>
-                <td>R$122,87</td>
-              </tr>
-              <tr>
-                <td>Macbook</td>
-                <td>Notebook</td>
-                <td>R$42,56</td>
-                <td>Macbook Pro M1X</td>
-                <td>200g</td>
-                <td>100g</td>
-                <td>R$122,87</td>
-              </tr>
-              <tr
-                style={{
-                  background: '#05DEBD',
-                  color: 'white',
-                  width: '100vw',
-                  borderRadius: '0px 0px 5px 5px',
-                }}
+          
+          
+          */}
+          {
+          produtosDosFornecedores.map(
+              (fornecedor)  => (
+              <div
+              key={fornecedor.id}
               >
-                <td>Tipo de frete: FOB</td>
-                <td>Valor do frete: R$14,65</td>
-                <td>Peso total: 200g</td>
-                <td>Volume total: 100g</td>
-                <td>Quantidade de produtos: 15</td>
-                <td>Valor unitario: R$ 136,74</td>
-                <td>Valor total: R$ 136,74</td>
-              </tr>
-            </tbody>
-          </table>
+              <h4
+              key={fornecedor.id}
+              >
+              Fornecedor 1</h4>
+              {
+                  <table
+                  key={fornecedor.id}
+                  >
+                    <thead>
+                      <tr className='firts'>
+                        <th>Produto SKU</th>
+                        <th>Descrição</th>
+                        <th>Valor unitario</th>
+                        <th>Quantidade</th>
+                        <th>Peso</th>
+                        <th>Volume</th>
+                        <th>Valor</th>
+                      </tr>
+                    </thead>
+                    <tbody className='body'>
+                    {
+                    fornecedor.produtos.map(
+                    carrinho => (
+                        <tr
+                        key={
+                          carrinho.id
+                        }
+                        >
+                          <td>Macbook</td>
+                          <td>
+                            {carrinho.produto.descricao}
+                          </td>
+                          <td>
+                            {formatPrice(Number(carrinho.produto.preco))}
+                          </td>
+                          <td>
+                            {carrinho.quantidade}
+                          </td>
+                          <td>200g</td>
+                          <td>100g</td>
+                          <td>
+                            {formatPrice(Number(carrinho.produto.preco) * carrinho.quantidade)}
+                          </td>
+                        </tr>
+                      )
+                    )}
+                    <tr
+                      style={{
+                        background: '#05DEBD',
+                        color: 'white',
+                        width: '100vw',
+                        borderRadius: '0px 0px 5px 5px',
+                      }}
+                    >
+                      <td>Tipo de frete: FOB</td>
+                      <td>Valor do frete: R$14,65</td>
+                      <td>Peso total: 200g</td>
+                      <td>Volume total: 100g</td>
+                      <td>Quantidade de produtos: 15</td>
+                      <td>Valor unitario: R$ 136,74</td>
+                      <td>Valor total: R$ 136,74</td>
+                    </tr>
+                </tbody>
+              </table>
+              }
+            </div>
+              )
+            )
+          }
+
+          {/*
           <h4>Fornecedor 2</h4>
           <table>
             <thead>
@@ -325,6 +358,8 @@ export default function BuyProds() {
               </tr>
             </tbody>
           </table>
+          */}
+        
         </S.Container>
 
         <S.BtnsContent>
