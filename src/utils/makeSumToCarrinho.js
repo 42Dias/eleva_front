@@ -1,10 +1,15 @@
+import { formatPrice } from "./format";
+
 export default function makeSumToCarrinho(carrinhos){
-    const total =  formatPrice(
-        carrinhos.reduce((sumTotal, carrinho) => {
-        sumTotal += carrinho.produto.preco * carrinho.quantidade;
+    const total = carrinhos.reduce((sumTotal, carrinho) => {
+            carrinho.produtos.filter(
+                ({produto, quantidade}) => {
+                    let precoFormatado =  parseFloat(produto.preco) 
+                    sumTotal += precoFormatado * quantidade
+                }
+            )
         return sumTotal;
         }, 0)
-    );
     
     return total
 }
