@@ -12,6 +12,7 @@ import loadCart from "../../services/carrinho/loadCart";
 import { formatPrice } from "../../utils/format";
 import handleSetNumber from "../../utils/handleSetNumber";
 import filterFornecedores from "../../utils/filterFornecedores";
+import makeSumToCarrinho from "../../utils/makeSumToCarrinho";
 
 export default function BuyProds() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
@@ -19,6 +20,8 @@ export default function BuyProds() {
 
   const [carrinho, setCarrinho] = React.useState([])
   const [produtosDosFornecedores, setProdutosDosFornecedores] = React.useState([])
+
+  const [valorTotal, setValorTotal] = React.useState(0)
 
   function openModal() {
     setIsOpen(true)
@@ -85,6 +88,14 @@ export default function BuyProds() {
 
   console.log(produtosDosFornecedores)
 
+  useEffect(
+    () =>{
+    let somaDoCarrinho = makeSumToCarrinho(produtosDosFornecedores)
+    setValorTotal(
+      prevValue => prevValue + somaDoCarrinho)
+    }
+    , [produtosDosFornecedores]
+  )
   return (
     <>
       <Navbar />
@@ -137,15 +148,9 @@ export default function BuyProds() {
 
                 item.quantidade = formatedNumber
               }}
-
               onKeyDown={(e) => {
                 if(e.key == 'Tab'){
-                  console.log(item.quantidade)
-
                   handlePushInForcedor(item)
-
-
-
                 }
               }}
               
@@ -363,7 +368,11 @@ export default function BuyProds() {
         </S.Container>
 
         <S.BtnsContent>
-          <span>R$270,08</span>
+          <span>
+            {
+              formatPrice(valorTotal)
+            }
+          </span>
           <div>
             <button>Salvar compra</button>
             <button
