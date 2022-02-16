@@ -256,7 +256,7 @@ export function SuprimentoProvider({ children }) {
     productId,
     quantidade,
     status,
-    addProduct
+    toggleFunction
 
   ) => {
     try {
@@ -306,20 +306,12 @@ export function SuprimentoProvider({ children }) {
       }
       productAlreadyInSuprimento.quantidade = quantidade           
 
-      
-      status ? productAlreadyInSuprimento.status = status : false           
+      productAlreadyInSuprimento.status = status
       
       const newSuprimento = await changeSuprimento(productAlreadyInSuprimento, setUpdate)
-      console.log("newSuprimento")
-      console.log(newSuprimento)
 
-
-      let addInCart = await addProduct( productId, quantidade)
-
-      console.log("addInCart")
-      console.log(addInCart)
-
-
+      let addInCart = await toggleFunction( productId, quantidade) // add or remove!
+      
     } catch(e) {
       toast.error('Erro na adição do no carrinho');
       console.log(e)
