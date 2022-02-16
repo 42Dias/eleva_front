@@ -108,7 +108,7 @@ export const ContainerPurchases = styled.div`
 
 export const BoxProd = styled.div`
   width: 250px;
-  height: 377px;
+  height: 400px;
   margin: 0 21px;
   background: #ffffff;
   border-radius: 5px;
@@ -117,11 +117,17 @@ export const BoxProd = styled.div`
   justify-content: space-between;
   margin-top: 50px;
   margin-bottom: 50px;
+  padding-bottom: 15px;
 
   h3 {
     color: ${theme.colors.blue};
     font-size: 18px;
-
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    overflow-wrap: break-word;
     padding: 0 20px;
   }
 
