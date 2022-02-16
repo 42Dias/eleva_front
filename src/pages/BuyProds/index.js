@@ -18,7 +18,6 @@ export default function BuyProds() {
   const [modalIsOpen2, setIsOpen2] = React.useState(false)
 
   const [carrinho, setCarrinho] = React.useState([])
-
   const [produtosDosFornecedores, setProdutosDosFornecedores] = React.useState([])
 
   function openModal() {
@@ -40,8 +39,6 @@ export default function BuyProds() {
   function closeModal2() {
     setIsOpen2(false)
   }
-
-
   /*
   Aqui é o carrinho
   */
