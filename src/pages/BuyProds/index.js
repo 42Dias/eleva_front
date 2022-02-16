@@ -366,7 +366,13 @@ export default function BuyProds() {
           <span>R$270,08</span>
           <div>
             <button>Salvar compra</button>
-            <button>Finalizar compra</button>
+            <button
+            style={
+              {
+                marginLeft: '20px'
+              }
+            }
+            >Finalizar compra</button>
           </div>
         </S.BtnsContent>
       </Modal>
