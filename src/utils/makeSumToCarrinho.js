@@ -1,7 +1,7 @@
-export default function makeSumToCarrinho(carrinho){
+export default function makeSumToCarrinho(carrinhos){
     const total =  formatPrice(
-        carrinho.reduce((sumTotal, product) => {
-        sumTotal += product.produto.preco * product.quantidade;
+        carrinhos.reduce((sumTotal, carrinho) => {
+        sumTotal += carrinho.produto.preco * carrinho.quantidade;
         return sumTotal;
         }, 0)
     );
