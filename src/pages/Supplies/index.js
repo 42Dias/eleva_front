@@ -35,7 +35,7 @@ export  default function Supplies() {
   a plataforma vasculha o melhor preço com o sku
   */
 
- const { addProduct } = useCart();
+ const { addProduct, removeProductFromCart } = useCart();
  const { removeProduct, addProductSuprimentoInCart } = useSuprimento();
 
 
@@ -55,13 +55,15 @@ export  default function Supplies() {
   }
 
 
-  async function handleAddProductInCart(productId, index) {
-    console.log(productId)
-
-    const a  = await addProductSuprimentoInCart(productId,  1 , 'ativo', addProduct );
-    console.log(a)
-
-    
+  async function handleAddProductInCart(productId, index, quantidade, status) {
+    if(status == true){
+      await addProductSuprimentoInCart(productId, quantidade , status, addProduct );
+      handleLoadSuprimentos()
+    }
+    else{
+      await addProductSuprimentoInCart(productId, quantidade , status, removeProductFromCart );
+      handleLoadSuprimentos()
+    }
   }
 
   useEffect(
@@ -134,20 +136,36 @@ export  default function Supplies() {
                         <ButtonDelete
                         />
                       </div>
-                      <Switch
+                      {
+                      Boolean(suprimento.status) == true ? (
+                        <Switch
+                        defaultChecked
                         checkedChildren='Adicionado'
                         unCheckedChildren='Adicionar'
-                      />
-                      <button
-                      type='button'
-                      onClick={
-                        () => {
-                          handleAddProductInCart(suprimento.produto.id, index)
+                        onClick={
+                          () => {
+                            handleAddProductInCart(suprimento.produto.id, index, suprimento.quantidade, false)
+                          }
                         }
+                         />
+                      ) : (
+
+                        <Switch
+                          checkedChildren='Adicionado'
+                          unCheckedChildren='Adicionar'
+                          onClick={
+                            () => {
+                              handleAddProductInCart(suprimento.produto.id, index, suprimento.quantidade, true)
+                            }
+                          }
+                        />
+                      )
                       }
+                      {/* <button
+                      type='button'
                       >
                         aaaaa
-                      </button>
+                      </button> */}
                     </S.FlexContainer>
                   </td>
                 </tr>
