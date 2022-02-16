@@ -158,7 +158,7 @@ export function CartProvider({ children }) {
     }
   };
 
-  const removeProduct = async (productId) => {
+  const removeProductFromCart = async (productId) => {
       toast.info("Carregando")
 
       console.log(productId)
@@ -257,7 +257,7 @@ export function CartProvider({ children }) {
 
   return (
     <CartContext.Provider
-      value={{ cart, addProduct, removeProduct, updateProductAmount, update }}
+      value={{ cart, addProduct, removeProductFromCart, updateProductAmount, update }}
     >
       {children}
     </CartContext.Provider>
