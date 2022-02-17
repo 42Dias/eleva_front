@@ -13,9 +13,12 @@ import ButtonDelete from '../../components/ButtonDelete'
 import { useSuprimento } from '../../hooks/useSuprimentos'
 
 import { useCart } from '../../hooks/useCart'
+import { FaPlus, FaShoppingCart } from 'react-icons/fa'
 
 export  default function Supplies() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
+  const [modalIsOpen2, setIsOpen2] = React.useState(false)
+
   const [suprimentos, setSuprimentos] = useState([])
   function openModal() {
     setIsOpen(true)
@@ -24,6 +27,16 @@ export  default function Supplies() {
 
   function closeModal() {
     setIsOpen(false)
+  }
+
+  function openModal2() {
+    setIsOpen2(true)
+  }
+
+  function afterOpenModal2() {}
+
+  function closeModal2() {
+    setIsOpen2(false)
   }
 
   /*
@@ -78,10 +91,13 @@ export  default function Supplies() {
     <>
       <Navbar />
       <S.ContainerDetails>
+        <Link to="/listar-produtos" className='add'>
+          <FaPlus />
+        </Link>
         <div className='flex-title'>
           <h2 style={{ position: 'relative', top: '15px' }}>Suprimentos</h2>
           <div>
-            <Link to='/listar-produtos'>Comprar 🤑</Link>
+            <button className='btnList'onClick={openModal2}>Lista de compras</button>
             <button
               onClick={openModal}
               style={{ position: 'relative', top: '3px' }}
@@ -369,6 +385,48 @@ export  default function Supplies() {
           <button>Cancelar</button>
           <button>Salvar</button>
         </S.BtnsContent>
+      </Modal>
+
+      <Modal
+        isOpen={modalIsOpen2}
+        onAfterOpen={afterOpenModal2}
+        onRequestClose={closeModal2}
+        overlayClassName='react-modal-overlay'
+        className='react-modal-content '
+      >
+        <S.Container>
+          <button
+            type='button'
+            onClick={closeModal2}
+            className='react-modal-close'
+          >
+            <FiX />
+          </button>
+          <h2>Lista de compras</h2>
+
+          <button className='buttonSecondModal'>
+            <h2>Essencial</h2>
+            <p>Copos</p>
+            <p>Sabonete</p>
+            <p>Biscoitos</p>
+            <p>Arroz</p>
+            <p>Feijão</p>
+          </button>
+
+          <button className='buttonSecondModal'>
+            <h2>Ingredientes</h2>
+            <p>Arroz</p>
+            <p>Feijão</p>
+            <p>Sal</p>
+            <p>Pimenta do reino</p>
+            <p>Oregano</p>
+            <p>Mostarda</p>
+          </button>
+
+          <S.BtnsContent>
+            <button>Comprar</button>
+          </S.BtnsContent>
+        </S.Container>
       </Modal>
     </>
   )
