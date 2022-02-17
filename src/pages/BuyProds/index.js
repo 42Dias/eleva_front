@@ -13,6 +13,8 @@ import { formatPrice } from "../../utils/format";
 import handleSetNumber from "../../utils/handleSetNumber";
 import filterFornecedores from "../../utils/filterFornecedores";
 import makeSumToCarrinho from "../../utils/makeSumToCarrinho";
+import makeSumToFornecedor from "../../utils/makeSumToFornecedor";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 
 export default function BuyProds() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
@@ -22,6 +24,10 @@ export default function BuyProds() {
   const [produtosDosFornecedores, setProdutosDosFornecedores] = React.useState([])
 
   const [valorTotal, setValorTotal] = React.useState(0)
+  const [containerDeObjetos,    setContainerDeObjetos] = React.useState([])
+  const [fornecedoresNoCarrinho,setFornecedoresNoCarrinho] = React.useState([])
+  
+  
 
   function openModal() {
     setIsOpen(true)
@@ -75,11 +81,84 @@ export default function BuyProds() {
   )
 
   let returnFunc = (e) => e;
+  
+  
+  async function filterFornecedores(produtosNoCarrinho, setFunction){
+    //variaveis para a ajuda do código  
+    // let containerDeObjetos = [];
+    // let fornecedoresNoCarrinho = [];
+    
+    // produtosNoCarrinho é um array com todos os produtos do carrinho
+    
+    produtosNoCarrinho.filter(
+      async (produtoNoCarrinho) => {
+
+        // caso o fornecedor já estiver na variavel fornecedoresNoCarrinho não é adicionado!
+        if(fornecedoresNoCarrinho.includes(produtoNoCarrinho.fornecedorId)) return
+
+        fornecedoresNoCarrinho.push(produtoNoCarrinho.fornecedorId)
+      }
+    )
+    
+    fornecedoresNoCarrinho.map(
+      (fornecedor) =>{ 
+        // cria um objeto novo para cada fornecedor!
+        const novoObj =  { "fornecedorId": fornecedor, "produtos": [] }
+        containerDeObjetos.push(novoObj)
+      }
+    )
+
+    containerDeObjetos.map( (fornecedor, index )=>{
+
+      produtosNoCarrinho.filter(
+        (produtoNoCarrinho) => {
+
+          if (!fornecedor.fornecedorId == produtoNoCarrinho.fornecedorId) return
+          
+          // caso produto já estiver no carrinho ele é atualizado
+          if(fornecedor.id == produtoNoCarrinho.id){
+            console.log("atualizou hahahahahahaha")
+            console.log("fornecedor")
+            console.log(fornecedor)
+            console.log("produtoNoCarrinho")
+            console.log(produtoNoCarrinho)
+            console.log(fornecedor = produtoNoCarrinho)
+            
+            return fornecedor = produtoNoCarrinho
+          }
+
+          else{
+            console.log("passsoussss  njndjnbvjdsnvjdsjçkbv ")
+
+
+            // adicionado o produto no fornecedor
+            fornecedor.produtos.push(produtoNoCarrinho)
+            
+            fornecedor.produtos.map(
+              (produtoDoFornecedor) => {
+                // faz a adequação do objeto
+                produtoDoFornecedor.fornecedorId = fornecedor.fornecedorId
+              }
+            )
+          }
+          }
+
+        )
+        // console.log(fornecedor, index)
+      }
+      )
+      // retorna a função do setState
+      return setFunction(containerDeObjetos)
+    }
+
 
 
   function handlePushInForcedor(item){
     console.log(item)
+
     let produtosDosFornecedoresHelper = produtosDosFornecedores
+    
+    if(produtosDosFornecedoresHelper.includes(item)) return console.log("nhfvfksdnvçlajksdfnhgvoçsnchkjusfdanvkjçs")
     
     produtosDosFornecedoresHelper.push(item)
 
@@ -301,7 +380,14 @@ export default function BuyProds() {
                       <td>Volume total: 100g</td>
                       <td>Quantidade de produtos: 15</td>
                       <td>Valor unitario: R$ 136,74</td>
-                      <td>Valor total: R$ 136,74</td>
+                      <td>Valor total:
+                      {
+                        Number(
+                            makeSumToFornecedor(fornecedor)
+                          )
+                      }
+                      
+                      </td>
                     </tr>
                 </tbody>
               </table>
