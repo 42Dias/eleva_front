@@ -10,8 +10,8 @@ export const semImagem = "https://upload.wikimedia.org/wikipedia/commons/thumb/e
 export const loadingGif = 'https://contribua.org/mb-static/images/loading.gif'
 
 
-//export let ip = "http://localhost";//teste local
-export let ip = "72.167.50.247";//servidor
+export let ip = "http://localhost";//teste local
+//export let ip = "72.167.50.247";//servidor
 
 export let porta = '8144'
 
