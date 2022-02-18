@@ -35,8 +35,9 @@ export const ContentApproveUser = styled.div`
   padding-right: 15px;
   display: flex;
   padding: 15px;
-  flex-direction: column;
+  flex-direction: row;
   margin-top: 35px;
+  justify-content: space-between;
 `
 
 export const IconsActionsApprove = styled.div`
@@ -81,15 +82,23 @@ export const Trash = styled.div`
 `
 
 export const StoreUser = styled.div`
-  display: grid;
+  /*display: grid;
   grid-template-columns: 0.4fr 0.4fr;
+  */
+  display:flex;
   padding: 0 15px;
   justify-items: start;
   align-items: center;
+  overflow: hidden;
+
+
   p {
     font-size: 14px;
+    overflow: hidden;
     color: ${theme.colors.neutral[700]};
     font-weight: 600;
+    margin-bottom: 0;
+    align-self: center;
   }
 `
 export const FormContainer = styled.form`
