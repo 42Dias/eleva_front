@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FiCheck, FiTrash, FiPlus, FiPenTool } from 'react-icons/fi'
+import { FiCheck, FiTrash, FiPlus, FiEdit } from 'react-icons/fi'
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 import loadCategorias from '../../services/categoria/loadCategorias'
@@ -122,7 +122,7 @@ export  default function Categories() {
                   }
                   >
                     <Link>
-                      <FiPenTool
+                      <FiEdit
                       />
                     </Link>
                   </S.Check>
