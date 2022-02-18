@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FiCheck, FiTrash, FiPlus } from 'react-icons/fi'
+import { FiCheck, FiTrash, FiPlus, FiPenTool } from 'react-icons/fi'
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 import loadCategorias from '../../services/categoria/loadCategorias'
@@ -72,7 +72,6 @@ export  default function Categories() {
 
   async function changeCategory(e){
     e.preventDefault()
-    e.target.reset();  // reset all form data
     console.log(id)
     console.log(changeCategoryName)
     let data = {
@@ -80,8 +79,9 @@ export  default function Categories() {
         nome: changeCategoryName
       }
     }
+    e.target.reset();  // reset all form data
+    closeModal()
     let res = await changeCategorias(id, data)
-    console.log(res)
     res == 'ok' ? loadData() : console.log('5465151654165160')
     
   }
@@ -114,11 +114,15 @@ export  default function Categories() {
                 <S.IconsActionsApprove>
                   <S.Check
                   onClick={
-                    () => setId(categorie.id)
+                    () => {
+                      setId(categorie.id)
+                      setIsOpenChange(true)
+                      setChangeCategoryName(categorie.nome)
+                    }
                   }
                   >
                     <Link>
-                      <FiCheck
+                      <FiPenTool
                       />
                     </Link>
                   </S.Check>
@@ -131,19 +135,6 @@ export  default function Categories() {
                     </Link>
                   </S.Trash>
                 </S.IconsActionsApprove>
-                  <S.FormContainer
-                    onSubmit={(e) => changeCategory(e)}
-                  >
-                      <GenericInput
-                      type='text'
-                      onChange={(e) => setChangeCategoryName(e.target.value)}
-                      />
-
-                      <GreenBtn
-                        type='submit'
-                        content='Alterar'
-                       />
-                  </S.FormContainer>
               </S.ContentApproveUser>
             ) 
           )
@@ -171,7 +162,7 @@ export  default function Categories() {
                   required
                   value={changeCategoryName}
                   type="text"
-                  onChange={(text) => setNewCategory(text.target.value)}
+                  onChange={(text) => setChangeCategoryName(text.target.value)}
                 />
               </S.ContentFormNew>
               {loading ? (
@@ -224,6 +215,59 @@ export  default function Categories() {
                   value={newCategory}
                   type="text"
                   onChange={(text) => setNewCategory(text.target.value)}
+                />
+              </S.ContentFormNew>
+              {loading ? (
+                <LoadingGif />
+              ) : (
+              <div className="buttonsNew">
+                <button type="button" 
+                onClick={
+                  () => {
+                    // messageCancel()
+                    closeModal()
+                  }
+                  }>
+                  Cancelar
+                </button>
+                {/* <button type="submit">
+                  Adicionar
+                </button> */}
+                <GreenBtn
+                  type='submit'
+                  content='Adicionar'
+                />
+            </div>
+            )}
+            </S.ModalContent>
+          </div>
+        </Modal>
+      </S.ModalContainer>
+
+
+      <S.ModalContainer>
+        <Modal
+          isOpen={modalIsOpenChange}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+        >
+          <div>
+            <S.ModalFlex>
+              <AiOutlineClose onClick={closeModal} />
+            </S.ModalFlex>
+
+            <S.ModalContent
+            onSubmit={e => changeCategory(e)}
+            >
+              <h3>Alterar categoria</h3>
+
+              <S.ContentFormNew>
+                <label htmlFor="">Novo Nome</label>
+                <input
+                  required
+                  value={changeCategoryName}
+                  type="text"
+                  onChange={(text) => setChangeCategoryName(text.target.value)}
                 />
               </S.ContentFormNew>
               {loading ? (
