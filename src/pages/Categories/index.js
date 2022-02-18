@@ -1,21 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FiChevronLeft, FiCheck, FiTrash } from 'react-icons/fi'
+import { FiCheck, FiTrash, FiPlus } from 'react-icons/fi'
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 import loadCategorias from '../../services/categoria/loadCategorias'
 import deleteCategory from '../../services/categoria/deleteCategory'
 import cadastrarCategory from '../../services/categoria/cadastrarCategory'
 import changeCategorias from '../../services/categoria/changeCategorias'
+import GenericInput from '../../components/GenericInput'
+import GreenBtn from '../../components/GreenBtn'
+import Modal from 'react-modal'
+import LoadingGif from '../../components/LoadingGif'
+import { AiOutlineClose } from "react-icons/ai";
+
 
 export  default function Categories() {
 
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+
+  const [modalIsOpenCreate, setIsOpenCreate] = React.useState(false)
+  const [modalIsOpenChange, setIsOpenChange] = React.useState(false)
+
+  const [loading, setLoading] = useState(false);
+
+  
 
   const [changeCategoryName, setChangeCategoryName] = useState('');
   const [id, setId] = useState('');
+
+
+  function afterOpenModal() {}
+
+  function closeModal() {
+    setIsOpenCreate(false)
+    setIsOpenChange(false)
+
+  }
 
   async function loadData(){
     loadCategorias(setCategories)
@@ -35,6 +56,7 @@ export  default function Categories() {
   )
 
   async function handleCategoryCreate(e){
+    setLoading(true)
     e.preventDefault()
     e.target.reset();  // reset all form data
 
@@ -43,6 +65,9 @@ export  default function Categories() {
       }
       await cadastrarCategory(data)
       loadData()
+      setNewCategory("")
+      closeModal()
+      setLoading(false)
     }
 
   async function changeCategory(e){
@@ -66,33 +91,23 @@ export  default function Categories() {
       <S.ContainerApprove>
         <h1>Categorias</h1>
 
-        <Link className='back'
+        <div className='back'
+
+        onClick={
+          () => {
+            // opens create modal!
+            setIsOpenCreate(true)
+          }
+        }
         >
-          <FiChevronLeft />
-        </Link>
-          <form
-          onSubmit={(e) => {
-            handleCategoryCreate(e)
-          }}
-          >
-            <h2>
-              Criar Categoria
-            </h2>
-            <input 
-              type="text"
-              required
-              onChange={(text) => setNewCategory(text.target.value)}
-            />
-            <button
-            type='submit'
-            >
-              Enviar
-            </button>
-          </form>
+          <FiPlus />
+        </div>
+        <br/>
         {
           categories.map(
             (categorie) => (      
-              <S.ContentApproveUser>
+              <S.ContentApproveUser
+              key={categorie.id}>
                 <S.StoreUser>
                   <p>{categorie.nome}</p>
                 </S.StoreUser>
@@ -116,18 +131,19 @@ export  default function Categories() {
                     </Link>
                   </S.Trash>
                 </S.IconsActionsApprove>
-                  <form 
-                  onSubmit={(e) => changeCategory(e)}
+                  <S.FormContainer
+                    onSubmit={(e) => changeCategory(e)}
                   >
-                    <input
-                    type='text'
-                    onChange={(e) => setChangeCategoryName(e.target.value)}
-                    />
-                    <button
-                    type='submit'>
-                      Alterar
-                    </button>
-                  </form>
+                      <GenericInput
+                      type='text'
+                      onChange={(e) => setChangeCategoryName(e.target.value)}
+                      />
+
+                      <GreenBtn
+                        type='submit'
+                        content='Alterar'
+                       />
+                  </S.FormContainer>
               </S.ContentApproveUser>
             ) 
           )
