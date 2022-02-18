@@ -17,7 +17,7 @@ export const SidebarData = [
   },
   {
     title: 'Suprimentos',
-    path: '/suprimentos',
+    path: '/home',
     icon: <FaIcons.FaShoppingCart />,
     cName: 'nav-text',
   },
