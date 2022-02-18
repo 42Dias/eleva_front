@@ -1,6 +1,6 @@
 import React from 'react'
 import * as FaIcons from 'react-icons/fa'
-import { FiTag } from 'react-icons/fi'
+import { FiTag, FiGrid } from 'react-icons/fi'
 
 export const SidebarData = [
   {
@@ -63,10 +63,16 @@ export const SidebarData = [
     icon: <FaIcons.FaCheck />,
     cName: 'nav-text',
   },
+  // {
+  //   title: 'Meus Dados',
+  //   path: '/meus-dados-empresa',
+  //   icon: <FaIcons.FaDisease />,
+  //   cName: 'nav-text',
+  // },
   {
-    title: 'Meus Dados',
-    path: '/meus-dados-empresa',
-    icon: <FaIcons.FaDisease />,
+    title: 'Categorias',
+    path: '/categorias',
+    icon: <FiGrid />,
     cName: 'nav-text',
   },
 ]
