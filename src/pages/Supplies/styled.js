@@ -379,8 +379,6 @@ export const Container = styled.form`
 export const BtnsContent = styled.div`
   padding: 30px 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
 
   button {
     width: 165px;
@@ -394,7 +392,6 @@ export const BtnsContent = styled.div`
 
     &:last-child {
       background: #05debd;
-      margin: 0 20px;
     }
   }
 `
