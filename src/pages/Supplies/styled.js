@@ -203,6 +203,22 @@ export const Product = styled.div`
 //
 
 export const Container = styled.form`
+  .add {
+    background-color: ${theme.colors.green};
+    color: ${theme.colors.white};
+    width: 55px !important;
+    height: 40px;
+    border: 0;
+    margin: 20px 0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      color: ${theme.colors.white};
+    }
+  }
 
   div {
     margin: 10px 0;
@@ -243,11 +259,19 @@ export const Container = styled.form`
     border-radius: 5px;
     padding: 20px;
     margin: 20px 0;
+    background: #F5F5F5;
     &:hover {
       opacity: 70%;
     }
     &:focus {
       border: 1px solid ${theme.colors.green};
+    }
+    
+    a {
+      width: 100% !important;
+      display: block;
+      text-decoration: none;
+      color: #000;
     }
   }
 
