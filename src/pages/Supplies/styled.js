@@ -242,7 +242,27 @@ export const Container = styled.form`
     background: white;
     border-radius: 5px;
     font-weight: 400;
-    font-size: 1rem;
+
+    transition: 0.6s;
+
+    &:focus {
+      border: 1px solid ${theme.colors.green};
+    }
+  }
+
+  textarea {
+    width: 375px;
+    padding: 0 1.5rem;
+    height: 6rem;
+    border-radius: 0.25rem;
+    padding: 10px;
+    font-size: 1.4rem;
+    margin-top: 10px;
+
+    border: 1px solid #f2f2f2;
+    background: white;
+    border-radius: 5px;
+    font-weight: 400;
 
     transition: 0.6s;
 
@@ -366,7 +386,6 @@ export const Container = styled.form`
     background: white;
     border-radius: 5px;
     font-weight: 400;
-    font-size: 1rem;
 
     transition: 0.6s;
 

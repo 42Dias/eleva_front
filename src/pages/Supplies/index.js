@@ -508,7 +508,10 @@ export  default function Supplies() {
 
           <h2>Criar lista</h2>
           
-          <input type="text" name="" id="" />
+          <div>
+            <input type="text" name="" id="" placeholder="Nome da lista" />
+            <textarea name="" id="" cols="30" rows="10" placeholder="Descrição da lista"></textarea>
+          </div>
           <S.BtnsContent>
             <button>Adicionar à lista</button>
           </S.BtnsContent>
