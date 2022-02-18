@@ -13,9 +13,14 @@ import ButtonDelete from '../../components/ButtonDelete'
 import { useSuprimento } from '../../hooks/useSuprimentos'
 
 import { useCart } from '../../hooks/useCart'
+import { FaPlus, FaShoppingCart } from 'react-icons/fa'
 
 export  default function Supplies() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
+  const [modalIsOpen2, setIsOpen2] = React.useState(false)
+  const [modalIsOpen3, setIsOpen3] = React.useState(false)
+  const [modalIsOpen4, setIsOpen4] = React.useState(false)
+
   const [suprimentos, setSuprimentos] = useState([])
   function openModal() {
     setIsOpen(true)
@@ -24,6 +29,36 @@ export  default function Supplies() {
 
   function closeModal() {
     setIsOpen(false)
+  }
+
+  function openModal2() {
+    setIsOpen2(true)
+  }
+
+  function afterOpenModal2() {}
+
+  function closeModal2() {
+    setIsOpen2(false)
+  }
+
+  function openModal3() {
+    setIsOpen3(true)
+  }
+
+  function afterOpenModal3() {}
+
+  function closeModal3() {
+    setIsOpen3(false)
+  }
+
+  function openModal4() {
+    setIsOpen4(true)
+  }
+
+  function afterOpenModal4() {}
+
+  function closeModal4() {
+    setIsOpen4(false)
   }
 
   /*
@@ -78,10 +113,13 @@ export  default function Supplies() {
     <>
       <Navbar />
       <S.ContainerDetails>
+        <Link to="/listar-produtos" className='add'>
+          <FaPlus />
+        </Link>
         <div className='flex-title'>
           <h2 style={{ position: 'relative', top: '15px' }}>Suprimentos</h2>
           <div>
-            <Link to='/listar-produtos'>Comprar 🤑</Link>
+            <button className='btnList'onClick={openModal2}>Listas de compras</button>
             <button
               onClick={openModal}
               style={{ position: 'relative', top: '3px' }}
@@ -367,8 +405,117 @@ export  default function Supplies() {
 
         <S.BtnsContent>
           <button>Cancelar</button>
-          <button>Salvar</button>
+          <button style={{ marginLeft: '10px' }}>Salvar</button>
         </S.BtnsContent>
+      </Modal>
+
+      <Modal
+        isOpen={modalIsOpen2}
+        onAfterOpen={afterOpenModal2}
+        onRequestClose={closeModal2}
+        overlayClassName='react-modal-overlay'
+        className='react-modal-content '
+      >
+        <S.Container>
+          <button
+            type='button'
+            onClick={closeModal2}
+            className='react-modal-close'
+          >
+            <FiX />
+          </button>
+          <h2>Listas de compras</h2>
+
+          <button className='buttonSecondModal'>
+            <Link to="/comprar">
+              <h2>Essencial</h2>
+              <p>Descrição da lista</p>
+            </Link>
+          </button>
+
+          <button className='buttonSecondModal'>
+            <Link to="/comprar">
+              <h2>Ingredientes</h2>
+              <p>Descrição  da lista</p>
+            </Link>
+          </button>
+
+          <S.BtnsContent>
+            <button>Adicionar à lista</button>
+          </S.BtnsContent>
+        </S.Container>
+      </Modal>
+
+      <Switch
+        defaultChecked
+        checkedChildren='Adicionado'
+        unCheckedChildren='Adicionar'
+        onClick={openModal4}
+      />
+
+      <Modal
+        isOpen={modalIsOpen4}
+        onAfterOpen={afterOpenModal4}
+        onRequestClose={closeModal4}
+        overlayClassName='react-modal-overlay'
+        className='react-modal-content '
+      >
+        <S.Container>
+          <button
+            type='button'
+            onClick={closeModal4}
+            className='react-modal-close'
+          >
+            <FiX />
+          </button>
+          <h2>Listas de compras</h2>
+
+          <button onClick={openModal3} className='add'>
+            <FaPlus />
+          </button>
+
+          <button className='buttonSecondModal'>
+            <h2>Essencial</h2>
+            <p>Descrição da lista</p>
+          </button>
+
+          <button className='buttonSecondModal'>
+            <h2>Ingredientes</h2>
+            <p>Descrição  da lista</p>
+          </button>
+
+          <S.BtnsContent>
+            <button>Adicionar à lista</button>
+          </S.BtnsContent>
+        </S.Container>
+      </Modal>
+
+      <Modal
+        isOpen={modalIsOpen3}
+        onAfterOpen={afterOpenModal3}
+        onRequestClose={closeModal3}
+        overlayClassName='react-modal-overlay'
+        className='react-modal-content '
+      >
+        <S.Container>
+          <button
+            type='button'
+            onClick={closeModal3}
+            className='react-modal-close'
+          >
+            <FiX />
+          </button>
+
+          <h2>Criar lista</h2>
+          
+          <div>
+            <input type="text" name="" id="" placeholder="Nome da lista" />
+            <textarea name="" id="" cols="30" rows="10" placeholder="Descrição da lista"></textarea>
+          </div>
+          <S.BtnsContent>
+            <button>Adicionar à lista</button>
+          </S.BtnsContent>
+        </S.Container>
       </Modal>
     </>
   )

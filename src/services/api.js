@@ -9,9 +9,8 @@ export let Email = localStorage.getItem("email")?.replace(/"/g, "");
 export const semImagem = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Item_sem_imagem.svg/1024px-Item_sem_imagem.svg.png"
 export const loadingGif = 'https://contribua.org/mb-static/images/loading.gif'
 
-
-//export let ip = "http://localhost";//teste local
-export let ip = "72.167.50.247";//servidor
+export let ip = "http://localhost"; //teste local
+// export let ip = "72.167.50.247";//servidor
 
 export let porta = '8144'
 

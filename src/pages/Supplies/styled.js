@@ -9,7 +9,7 @@ export const ContainerDetails = styled.div`
   .add {
     background-color: ${theme.colors.green};
     color: ${theme.colors.white};
-    width: 55px;
+    width: 55px !important;
     height: 40px;
     border: 0;
     margin: 20px 0;
@@ -28,15 +28,15 @@ export const ContainerDetails = styled.div`
     align-items: center;
     justify-content: space-between;
     margin: 10px 0;
-    a {
+
+    .btnList {
       background-color: ${theme.colors.green};
       color: ${theme.colors.white};
       height: 40px;
-      width: 198px;
+      width: 220px;
       border: 0;
       margin: 20px;
       padding: 10px 40px;
-
       border-radius: 5px;
     }
 
@@ -203,8 +203,22 @@ export const Product = styled.div`
 //
 
 export const Container = styled.form`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  .add {
+    background-color: ${theme.colors.green};
+    color: ${theme.colors.white};
+    width: 55px !important;
+    height: 40px;
+    border: 0;
+    margin: 20px 0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      color: ${theme.colors.white};
+    }
+  }
 
   div {
     margin: 10px 0;
@@ -228,7 +242,150 @@ export const Container = styled.form`
     background: white;
     border-radius: 5px;
     font-weight: 400;
-    font-size: 1rem;
+
+    transition: 0.6s;
+
+    &:focus {
+      border: 1px solid ${theme.colors.green};
+    }
+  }
+
+  textarea {
+    width: 375px;
+    padding: 0 1.5rem;
+    height: 6rem;
+    border-radius: 0.25rem;
+    padding: 10px;
+    font-size: 1.4rem;
+    margin-top: 10px;
+
+    border: 1px solid #f2f2f2;
+    background: white;
+    border-radius: 5px;
+    font-weight: 400;
+
+    transition: 0.6s;
+
+    &:focus {
+      border: 1px solid ${theme.colors.green};
+    }
+  }
+
+  button.buttonSecondModal {
+    width: 100% !important;
+    text-align: left !important;
+    border: 0;
+    transition: 0.7s;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0;
+    background: #F5F5F5;
+    &:hover {
+      opacity: 70%;
+    }
+    &:focus {
+      border: 1px solid ${theme.colors.green};
+    }
+    
+    a {
+      width: 100% !important;
+      display: block;
+      text-decoration: none;
+      color: #000;
+    }
+  }
+
+  h4 {
+    padding: 40px 0 10px 0;
+  }
+
+  div {
+    margin: 10px 0;
+  }
+
+  thead:first-child {
+    display: table-row-group;
+    background-color: ${theme.colors.neutral[50]};
+    border-radius: 5px !important;
+    height: 70px;
+
+    tr {
+      margin: 50px !important;
+    }
+
+    th {
+      padding: 20px;
+      font-size: 14px;
+      font-weight: 400;
+      color: ${theme.colors.neutral[400]};
+    }
+  }
+
+  tbody {
+    justify-items: center;
+    align-items: center;
+    color: ${theme.colors.neutral[400]};
+    background: ${theme.colors.neutral[200]};
+    border-radius: 5px;
+    height: 120px;
+    font-size: 14px;
+    tr {
+      gap: 20px;
+      margin-top: 10px !important;
+      padding: 20px;
+      td {
+        padding: 20px;
+        margin-top: 10px !important;
+        margin-left: 20px;
+      }
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  h1 {
+    color: ${theme.colors.neutral[0]};
+    font-size: 24px;
+    padding: 30px 0;
+  }
+
+  .back {
+    width: 45px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: ${theme.colors.green};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .back svg {
+    color: ${theme.colors.white};
+  }
+
+  input[type='checkbox'] {
+    border-radius: 50% !important;
+    width: 20px;
+    height: 20px;
+  }
+
+  input {
+    width: 375px;
+    padding: 0 1.5rem;
+    height: 4rem;
+    border-radius: 0.25rem;
+
+    border: 1px solid #f2f2f2;
+    background: white;
+    border-radius: 5px;
+    font-weight: 400;
 
     transition: 0.6s;
 
@@ -241,8 +398,6 @@ export const Container = styled.form`
 export const BtnsContent = styled.div`
   padding: 30px 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
 
   button {
     width: 165px;
@@ -256,7 +411,6 @@ export const BtnsContent = styled.div`
 
     &:last-child {
       background: #05debd;
-      margin: 0 20px;
     }
   }
 `
