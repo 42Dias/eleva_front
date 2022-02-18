@@ -148,6 +148,111 @@ export  default function Categories() {
             ) 
           )
         }
+
+    <S.ModalContainer>
+        <Modal
+          isOpen={modalIsOpenCreate}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+        >
+          <div>
+            <S.ModalFlex>
+              <AiOutlineClose onClick={closeModal} />
+            </S.ModalFlex>
+
+            <S.ModalContent
+            onSubmit={e => handleCategoryCreate(e)}
+            >
+              <h3>Nova Categoria</h3>
+
+              <S.ContentFormNew>
+                <label htmlFor="">Nova Categoria</label>
+                <input
+                  required
+                  value={changeCategoryName}
+                  type="text"
+                  onChange={(text) => setNewCategory(text.target.value)}
+                />
+              </S.ContentFormNew>
+              {loading ? (
+                <LoadingGif />
+              ) : false}
+              <div className="buttonsNew">
+                <button type="button" 
+                onClick={
+                  () => {
+                    // messageCancel()
+                    closeModal()
+                  }
+                  }>
+                  Cancelar
+                </button>
+                {/* <button type="submit">
+                  Adicionar
+                </button> */}
+                <GreenBtn
+                  type='submit'
+                  content='Adicionar'
+                />
+              </div>
+            </S.ModalContent>
+          </div>
+        </Modal>
+      </S.ModalContainer>
+
+
+      <S.ModalContainer>
+        <Modal
+          isOpen={modalIsOpenCreate}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+        >
+          <div>
+            <S.ModalFlex>
+              <AiOutlineClose onClick={closeModal} />
+            </S.ModalFlex>
+
+            <S.ModalContent
+            onSubmit={e => handleCategoryCreate(e)}
+            >
+              <h3>Nova Categoria</h3>
+
+              <S.ContentFormNew>
+                <label htmlFor="">Nova Categoria</label>
+                <input
+                  required
+                  value={newCategory}
+                  type="text"
+                  onChange={(text) => setNewCategory(text.target.value)}
+                />
+              </S.ContentFormNew>
+              {loading ? (
+                <LoadingGif />
+              ) : (
+              <div className="buttonsNew">
+                <button type="button" 
+                onClick={
+                  () => {
+                    // messageCancel()
+                    closeModal()
+                  }
+                  }>
+                  Cancelar
+                </button>
+                {/* <button type="submit">
+                  Adicionar
+                </button> */}
+                <GreenBtn
+                  type='submit'
+                  content='Adicionar'
+                />
+            </div>
+            )}
+            </S.ModalContent>
+          </div>
+        </Modal>
+      </S.ModalContainer>
+
       </S.ContainerApprove>
     </>
   )
