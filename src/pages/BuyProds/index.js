@@ -419,7 +419,7 @@ export default function BuyProds() {
           </button>
           <h2>Lista de compras</h2>
 
-
+          {/* 
           <button className='buttonSecondModal'>
             <h2>Essencial</h2>
             <p>Copos</p>
@@ -427,7 +427,8 @@ export default function BuyProds() {
             <p>Biscoitos</p>
             <p>Arroz</p>
             <p>Feijão</p>
-          </button>
+          </button> 
+          */}
 
 
           {
