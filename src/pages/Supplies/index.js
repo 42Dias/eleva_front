@@ -9,6 +9,8 @@ import * as S from './styled'
 import 'antd/dist/antd.css'
 import loadSuprimento from '../../services/suprimento/loadSuprimento'
 
+import loadLista from '../../services/lista/loadLista'
+
 import ButtonDelete from '../../components/ButtonDelete'
 import { useSuprimento } from '../../hooks/useSuprimentos'
 
@@ -16,17 +18,14 @@ import { useCart } from '../../hooks/useCart'
 import { FaPlus, FaShoppingCart } from 'react-icons/fa'
 
 export  default function Supplies() {
-  const [modalIsOpen, setIsOpen] = React.useState(false)
-  const [modalIsOpen2, setIsOpen2] = React.useState(false)
-  const [modalIsOpen3, setIsOpen3] = React.useState(false)
-  const [modalIsOpen4, setIsOpen4] = React.useState(false)
-
-  const [suprimentos, setSuprimentos] = useState([])
-
-  const [listas, setListas] = useState([])
-
-  const [newListaName, setNewListaName] = useState("")
-  const [newListaDesc, setNewListaDesc] = useState("")
+  const [modalIsOpen,  setIsOpen]       =  useState(false)
+  const [modalIsOpen2, setIsOpen2]      =  useState(false)
+  const [modalIsOpen3, setIsOpen3]      =  useState(false)
+  const [modalIsOpen4, setIsOpen4]      =  useState(false)
+  const [suprimentos,  setSuprimentos]  =  useState([])
+  const [listas,       setListas]       =  useState([])
+  const [newListaName, setNewListaName] =  useState("")
+  const [newListaDesc, setNewListaDesc] =  useState("")
 
 
   function openModal() {
@@ -96,6 +95,13 @@ export  default function Supplies() {
       setSuprimentos(suprimentos)
   }
 
+  async function handleLoadListas(){
+    let listas = await loadLista()
+      console.log("listas")
+      console.log(listas)
+      setListas(listas)
+  }
+
 
   async function handleAddProductInCart(productId, index, quantidade, status) {
     if(status == true){
@@ -110,12 +116,14 @@ export  default function Supplies() {
 
   useEffect(
     () => {
+
       handleLoadSuprimentos()
+
+      handleLoadListas()
+    
     }, []
   )
 
-
-  
   return (
     <>
       <Navbar />
