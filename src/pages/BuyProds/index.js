@@ -31,6 +31,7 @@ export default function BuyProds() {
   
   
   const [listas,       setListas      ]   =  useState([])
+  const [listaId,       setListaId      ]   =  useState("")
 
 
   function openModal() {
@@ -99,6 +100,15 @@ export default function BuyProds() {
     console.log(cleanUrl)
   }
 
+  function handleChangeUrl(id){
+    let cleanUrl = window.location.hash
+    
+    cleanUrl = `#/comprar/${id}`
+
+    window.location.hash = cleanUrl
+
+  }
+
   useEffect(
     () =>{
       GetIdFromUrl()
@@ -117,9 +127,6 @@ export default function BuyProds() {
           <div>
             <button onClick={openModal2}>Lista de compras +</button>
             <button onClick={openModal}>Finalizar compra</button>
-            <button onClick={() => {
-              console.log(carrinho)
-            }}>AAAAAAAAAAAAAAAAA</button>
           </div>
         </div>
 
@@ -437,7 +444,7 @@ export default function BuyProds() {
             <button
             key={lista.id}
             className='buttonSecondModal'
-            onClick={() => setListaId(lista.id)}
+            onClick={() => handleChangeUrl(lista.id)}
             >
               <h2>{lista.nome}</h2>
               <p>{lista.descricao}</p>
