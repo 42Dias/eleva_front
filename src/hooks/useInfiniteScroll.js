@@ -19,17 +19,12 @@ export default function useInfiniteScroll(number){
 
 	apiWithoutTenant.get(`produto/${number}`)
 	.then(res => {
- 		 console.log("res.data")
-		 console.log(res.data)
 	   setProducts(prevProducts => {
 	   		return [...new Set([...prevProducts, ...res.data])]	
 	   	   })
- 	  	console.log("products")	
-	  	console.log(products)
 			setLoading(false)
 			setHasMore(res.data.length!==0)
 			// setHasMore(true)
-		console.log(res)
 	}
 	).catch(error => console.log(error))
 	}, [number] )
