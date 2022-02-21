@@ -491,8 +491,8 @@ export  default function Supplies() {
             onClick={() => console.log("aa")}//setListaId(lista.id)
             >
               <Link to="/comprar">
-                <h2>lista.nome</h2>
-                <p>lista.descricao</p>
+                <h2>{lista.nome}</h2>
+                <p>{lista.descricao}</p>
               </Link>
            </button>
             )
@@ -500,7 +500,9 @@ export  default function Supplies() {
           }
 
           <S.BtnsContent>
-            <button>Adicionar à lista</button>
+            <button
+            onClick={() => console.log("adicionado a lista!! ghahahahahahaha")}
+            >Adicionar à lista</button>
           </S.BtnsContent>
         </S.Container>
       </Modal>
