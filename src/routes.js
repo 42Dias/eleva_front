@@ -46,7 +46,8 @@ const Routes = () => {
           <Route path='/detalhes-da-venda/:id' exact component={SaleDetails} />
           <Route path='/aprovar-produtos' exact component={ApproveOrders} />
           <Route path='/confirmacao-dos-pedidos' exact component={OrderConfirmation} />
-          <Route path='/comprar' exact component={BuyProds} />
+          <Route path='/comprar/' exact component={BuyProds} />
+          <Route path='/comprar/:id' exact component={BuyProds} />
           <Route path='/produto/:id' exact component={ProdSingle} />
           <Route path='/precos-negociados' exact component={PriceNegotiation} />
           <Route path='/meus-pedidos' exact component={MyRequests} />
@@ -81,7 +82,7 @@ export default Routes
 // export const SALEDETAILS = '/detalhes-da-venda'
 // export const APPROVEORDERS = '/aprovar-produtos'
 // export const ORDERCONFIRMATION = '/confirmacao-dos-pedidos'
-// export const BUYPRODS = '/comprar'
+// export const BUYPRODS = '/comprar/'
 // export const PRODSINGLE = '/produto-1'
 // export const PRICENEGOTIATION = '/precos-negociados'
 // export const MYREQUESTS = '/meus-pedidos'
