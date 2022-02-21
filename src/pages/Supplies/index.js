@@ -25,6 +25,9 @@ export  default function Supplies() {
 
   const [listas, setListas] = useState([])
 
+  const [newListaName, setNewListaName] = useState("")
+  const [newListaDesc, setNewListaDesc] = useState("")
+
 
   function openModal() {
     setIsOpen(true)
@@ -514,7 +517,15 @@ export  default function Supplies() {
         overlayClassName='react-modal-overlay'
         className='react-modal-content '
       >
-        <S.Container>
+        <S.Container
+        onSubmit={
+          e => {
+            e.preventDefault()
+            e.target.reset()
+            console.log(newListaName ,newListaDesc)
+          }
+        }
+        >
           <button
             type='button'
             onClick={closeModal3}
@@ -526,11 +537,30 @@ export  default function Supplies() {
           <h2>Criar lista</h2>
           
           <div>
-            <input type="text" name="" id="" placeholder="Nome da lista" />
-            <textarea name="" id="" cols="30" rows="10" placeholder="Descrição da lista"></textarea>
+            <input    
+            type="text"
+            name=""
+            id=""
+            placeholder="Nome da lista" 
+            required
+            onChange={(e) => setNewListaName(e.target.value)}
+            />
+            
+            <textarea 
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+            placeholder="Descrição da lista"
+            required
+            onChange={(e) => setNewListaDesc(e.target.value)}
+            />
+
           </div>
           <S.BtnsContent>
-            <button>Adicionar à lista</button>
+            <button
+            type='submit'
+            >Adicionar à lista</button>
           </S.BtnsContent>
         </S.Container>
       </Modal>
