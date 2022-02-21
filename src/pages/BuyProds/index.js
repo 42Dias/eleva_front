@@ -16,6 +16,7 @@ import makeSumToCarrinho from "../../utils/makeSumToCarrinho";
 import makeSumToFornecedor from "../../utils/makeSumToFornecedor";
 import { AiOutlineConsoleSql } from "react-icons/ai";
 import loadLista from '../../services/lista/loadLista'
+import findLista from "../../services/lista/findLista";
 
 
 export default function BuyProds() {
@@ -83,26 +84,34 @@ export default function BuyProds() {
     () => {
       handleLoadCart()
 
-      handleLoadListas()
+      handleFindLista()
     }, []
   )
+  const returnFunc = e => e
 
-  async function handleLoadListas(){
-    let listas = await loadLista()
-      console.log("listas")
-      console.log(listas)
-      setListas(listas)
+  async function findAndSetLista(id){
+
+    let lista = await findLista(id)
+      console.log("lista")
+      console.log(lista)
+      setListas(lista)
+
+  }
+
+  function handleFindLista(){
+    let listaId = GetIdFromUrl()
+    findAndSetLista(listaId)
   }
   
   function GetIdFromUrl(){
     let rawUrl = window.location.hash
     let cleanUrl = rawUrl.replace("#/comprar/" , "")
-    console.log(cleanUrl)
+    return cleanUrl
   }
 
   function handleChangeUrl(id){
     let cleanUrl = window.location.hash
-    
+
     cleanUrl = `#/comprar/${id}`
 
     window.location.hash = cleanUrl
@@ -139,7 +148,7 @@ export default function BuyProds() {
           <span>Quantidade</span>
         </S.GridValidation>
       {
-        carrinho.map(
+        listas.map(
           (item, index) => (
           <Accordion
           key={index}
