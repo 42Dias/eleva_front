@@ -120,9 +120,10 @@ export  default function Supplies() {
           <h2 style={{ position: 'relative', top: '15px' }}>Suprimentos</h2>
           <div>
             <button className='btnList'onClick={openModal4}>Listas de compras</button>
+            <button className='btnList'>Adicionar a lista</button>
             <button
               onClick={openModal}
-              style={{ position: 'relative', top: '3px' }}
+              style={{ position: 'relative', top: '2px' }}
             >
               <FiFilter size={22} />
             </button>
@@ -234,16 +235,16 @@ export  default function Supplies() {
 
           <div>
             <label htmlFor=''>Nome do produto</label>
-            <input type='text' placeholder='oi' />
+            <input type='text' placeholder='Nome do produto' />
           </div>
 
           <div>
             <label htmlFor=''>Código</label>
-            <input type='text' placeholder='oi' />
+            <input type='text' placeholder='Código' />
           </div>
           <div>
             <label htmlFor=''>Descrição</label>
-            <input type='text' placeholder='oi' />
+            <input type='text' placeholder='Descrição' />
           </div>
           {/* <div>
             <label htmlFor=''>Referência técnica</label>
@@ -259,7 +260,7 @@ export  default function Supplies() {
           </div> */}
           <div>
             <label htmlFor=''>Categoria</label>
-            <input type='text' placeholder='oi' />
+            <input type='text' placeholder='Categoria' />
           </div>
           {/* <div>
             <label htmlFor=''>Quantia em estoque</label>
@@ -295,7 +296,7 @@ export  default function Supplies() {
           </div> */}
           <div>
             <label htmlFor=''>Preço</label>
-            <input type='text' placeholder='oi' />
+            <input type='text' placeholder='Preço' />
           </div>
           {/* <div>
             <label htmlFor=''>Altura (cm)</label>
@@ -391,7 +392,7 @@ export  default function Supplies() {
           </div> */}
           <div>
             <label htmlFor=''>Produto SKU</label>
-            <input type='text' placeholder='oi' />
+            <input type='text' placeholder='Produto SKU' />
           </div>
           {/* <div>
             <label htmlFor=''>Código de barras</label>
@@ -401,6 +402,14 @@ export  default function Supplies() {
             <label htmlFor=''>Unidade de medida</label>
             <input type='text' placeholder='oi' />
           </div> */}
+          <div>
+            <label htmlFor=''>Produto compra</label>
+            <input type='text' placeholder='Produto compra' />
+          </div>
+          <div>
+            <label htmlFor=''>Produto venda</label>
+            <input type='text' placeholder='Produto venda' />
+          </div>
         </S.Container>
 
         <S.BtnsContent>

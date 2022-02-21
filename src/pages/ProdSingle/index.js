@@ -84,7 +84,7 @@ export default function ProdSingle() {
                 independente.
               </li>
             </ul> */}
-            <Link to='/comprar'>Voltar</Link>
+            <Link to='/listar-produtos'>Voltar</Link>
           </nav>
         </S.ProdDetailsSingle>
       </S.ContainerProdSingle>
