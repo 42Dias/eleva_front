@@ -1,4 +1,4 @@
-import React, { useState ,useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/Sidebar/Sidebar'
@@ -13,15 +13,15 @@ import handleSetNumber from "../../utils/handleSetNumber";
 import handleCubagem from "../../utils/handleCubagem";
 import { api } from "../../services/api";
 import loadCategorias from "../../services/categoria/loadCategorias";
-export default  function RegisterProduct() {
+import { toast } from "react-toastify";
+import axios from "axios";
+export default function RegisterProduct() {
   const [categorias, setcategorias] = useState([])
   const [medidas, setMedidas] = useState([])
   const [tipoMateriais, settipoMateriais] = useState([])
   const [curvaTipos, setcurvaTipos] = useState([])
-
-
-
   const [codigo, setcodigo] = useState('')
+  const [codigoDeBarras, setCodigoDeBarras] = useState('')
   const [nome, setnome] = useState('')
   const [descricao, setdescricao] = useState('')
   const [unidadeMedida, setunidadeMedida] = useState('')
@@ -63,67 +63,73 @@ export default  function RegisterProduct() {
   const [origem, setorigem] = useState('')
   const [departamentoId, setdepartamentoId] = useState('')
   const [empresaId, setempresaId] = useState('')
-  const [priceFormated,   setPriceFormated] = useState('')
-  const [preco,   setPreco]                 = useState('')
-
-  function createProduct(){
+  const [priceFormated, setPriceFormated] = useState('')
+  const [preco, setPreco] = useState('')
+  const [image, setImage] = useState(IMAGE)
+  let credencial = ''
+  var nameImage = ''
+  var Image
+  const formData = new FormData() 
+  
+  function createProduct() {
     const data = generateProductData()
     // console.log(prodData)
     let bodyRequisition = data
 
     cadastrarProduct(bodyRequisition).then(
       (funcReturn) => {
-        if(funcReturn == 'ok'){
-          window.location.hash = '#/home'
+        if (funcReturn == 'ok') {
+          window.location.hash = '#/home'                 
         }
       }
     )
   }
-  function generateProductData(){
-  const data = {
-    codigo: codigo,
-    nome: nome,
-    descricao: descricao,
-    unidadeMedida: unidadeMedida,
-    tipoMaterial: tipoMaterial,
-    precoVenda: preco,
-    referenciaTec: referenciaTec,
-    demandaDiaria: demandaDiaria,
-    estoque: estoque,
-    estoqueFornecedor: estoqueFornecedor,
-    leadTime: leadTime,
-    ativo: "Sim", // PARA TESTE !!!!!!
-    dataInatividade: dataInatividade,
-    redeSKU: redeSKU,
-    pedidoMinimo: pedidoMinimo,
-    entregaMinima: entregaMinima,
-    qtdEmbalagem: qtdEmbalagem,
-    moduloMinimo: moduloMinimo,
-    moduloMaster: moduloMaster,
-    comprimento_cm: comprimento_cm,
-    largura_cm: largura_cm,
-    altura_cm: altura_cm,
-    cubagemEmbalagem: cubagemEmbalagem,
-    pesoLiq: pesoLiq,
-    pesoBruto: pesoBruto,
-    estoqueMinimo: estoqueMinimo,
-    estoqueMaximo: estoqueMaximo,
-    curva: curva,
-    mediaDeVendaA: mediaDeVendaA,
-    mediaDeVendaB: mediaDeVendaB,
-    dtUltimaVenda: dtUltimaVenda,
-    departamentoCategoria: departamentoCategoria,
-    ncm: ncm,
-    descricaoNCM: descricaoNCM,
-    marca: marca,
-    custoUltimaCompra: custoUltimaCompra,
-    dataPrimeiraVenda: dataPrimeiraVenda,
-    statusProduto: statusProduto,
-    origem: origem,
-    departamentoId: departamentoId,
-    empresaId: empresaId,
-  }
-  return data
+  function generateProductData() {
+    const data = {
+      codigo: codigo,
+      nome: nome,
+      descricao: descricao,
+      unidadeMedida: unidadeMedida,
+      tipoMaterial: tipoMaterial,
+      precoVenda: preco,
+      referenciaTec: referenciaTec,
+      demandaDiaria: demandaDiaria,
+      estoque: estoque,
+      estoqueFornecedor: estoqueFornecedor,
+      leadTime: leadTime,
+      ativo: "Sim", // PARA TESTE !!!!!!
+      dataInatividade: dataInatividade,
+      redeSKU: redeSKU,
+      pedidoMinimo: pedidoMinimo,
+      entregaMinima: entregaMinima,
+      qtdEmbalagem: qtdEmbalagem,
+      moduloMinimo: moduloMinimo,
+      moduloMaster: moduloMaster,
+      comprimento_cm: comprimento_cm,
+      largura_cm: largura_cm,
+      altura_cm: altura_cm,
+      cubagemEmbalagem: cubagemEmbalagem,
+      pesoLiq: pesoLiq,
+      pesoBruto: pesoBruto,
+      estoqueMinimo: estoqueMinimo,
+      estoqueMaximo: estoqueMaximo,
+      curva: curva,
+      mediaDeVendaA: mediaDeVendaA,
+      mediaDeVendaB: mediaDeVendaB,
+      dtUltimaVenda: dtUltimaVenda,
+      departamentoCategoria: departamentoCategoria,
+      ncm: ncm,
+      descricaoNCM: descricaoNCM,
+      marca: marca,
+      custoUltimaCompra: custoUltimaCompra,
+      dataPrimeiraVenda: dataPrimeiraVenda,
+      statusProduto: statusProduto,
+      origem: origem,
+      departamentoId: departamentoId,
+      empresaId: empresaId,
+      image: image,
+    }
+    return data
   }
 
   const handleChangePrice = (event, value, maskedValue) => {
@@ -144,26 +150,146 @@ export default  function RegisterProduct() {
     () => {
       // Estas são os padrões aceitos pelo back
       setMedidas(["AMP", "BUI", "BG", "BOLS", "CX", "CAP", "CARP", "COM", "DOSE", "ENV", "FLAC", "FR", "FA", "GAL", "GTS", "G", "L", "MCG", "MUI", "MG", "ML", "OVL", "PAS", "LT", "PER", "PIL", "PT", "KG", "SER", "SUP", "TABLE", "TUB", "TB", "UN", "UI", "CM", "CONJ", "KIT", "MÇ", "M", "PC", "PEÇA", "RL", "GY", "CGY", "PAR", "ADES", "COM EFEV", "COM MST", "SACHE"])
-      
+
       settipoMateriais(["Matéria Prima", "Produto Improdutivo", "Embalagens", "Produto Acabado", "Fabricado", "Revenda"])
-      
-      setcurvaTipos(["A","B","C","D","E","F","G"])
+
+      setcurvaTipos(["A", "B", "C", "D", "E", "F", "G"])
     }, []
   )
 
+  const uploadImage = async (imagemNova) => {
+    
+    //console.log("upload")
+    formData.append('file', imagemNova)
+
+    // console.log(...formData)
+
+    const headers = {
+      headers: {
+        // 'Content-Type': 'application/json'
+        'Content-Type': 'multipart/form-data',
+
+      },
+    }
+    console.log(nameImage)
+    await api.get(`file/credentials`, {
+      params: {
+        filename: nameImage,
+        storageId: 'produtoImagem1',
+      },
+    })
+      .then((response) => {
+        console.log(response)
+        if (response.status == 200) {
+          credencial = response.data.uploadCredentials.url
+          setImage(response.data.downloadUrl)
+          console.log(credencial)
+          console.log(imagemNova)          
+          axios.post(credencial, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }).then((response) => {
+            console.log(response)
+            if (response.statusText === 'OK') {
+              //toast.success('Cadastrado realizado com sucesso!')
+              toast.success('Imagem Válida!')
+              
+            }
+          }).catch(res => {
+            //console.log(res)
+            toast.error(res.response)
+            setLoading(false)
+          })
+        } else {
+          toast.info('Imagem inválida, ou problemas com o servidor :(')
+        }
+      }).catch((err) => {
+        if (err.response) {
+          console.log(err)
+          toast.error('Erro: Tente mais tarde :(')
+        } else {
+          // setStatus({
+          //   type: 'error',
+          //   mensagem: "Erro: Tente mais tarde :("
+          // });
+        }
+        console.log(err)
+        toast.error('Erro: Tente mais tarde :(')
+      })
+  }
 
   return (
     <>
       <Navbar />
       <S.ContainerRegisterSupplier
-      onSubmit= { (e) => {
-        e.preventDefault()
-        createProduct()
-      }}
+        onSubmit={(e) => {
+          e.preventDefault()
+          createProduct()
+        }}
       >
-        <S.BoxImage>
-          <img src={IMAGE} alt='upload image' />
-        </S.BoxImage>
+        <S.ImageInput>
+          <div class="image-upload">
+            <label for="file-input">
+              <img className="inputImage" src={image} />
+            </label>
+
+            <input id="file-input" type='file'
+              name='image'
+              onChange={e => {
+                console.log(e)
+                // @ts-ignore
+                nameImage = e.target.files[0].name
+                // @ts-ignore
+                Image = e.target.files[0]
+                // @ts-ignore
+                console.log(e.target.files[0].name)
+                // @ts-ignore
+                //setName(name)
+                // @ts-ignore
+                console.log(e.target.files[0])
+                // @ts-ignore
+                //setImage(e.target.files[0])
+
+                // @ts-ignore
+                if (e.target.files[0].type.includes('image')) {
+                // @ts-ignore
+                uploadImage(e.target.files[0])
+                } else {
+                 toast.error('Arquivo inválido!')
+                }
+              }} />
+          </div>
+          {/* <img src={IMAGE}
+            alt='upload image'
+            type='file'
+            name='image'
+            onChange={e => {
+              //console.log(e)
+              // @ts-ignore
+              nameImage = e.target.files[0].name
+              // @ts-ignore
+              Image = e.target.files[0]
+              // @ts-ignore
+              console.log(e.target.files[0].name)
+              // @ts-ignore
+              setName(name)
+              // @ts-ignore
+              console.log(e.target.files[0])
+              // @ts-ignore
+              setImage(e.target.files[0])
+
+              // @ts-ignore
+              //if (e.target.files[0].type.includes('image') || e.target.files[0].type.includes('file')) {
+              // @ts-ignore
+              uploadImage(e.target.files[0])
+              //} else {
+              // toast.error('Arquivo não suportado')
+              // }
+            }}
+          /> */}
+
+        </S.ImageInput>
         <S.RegisterSupplier>
           <h2>Novo produto</h2>
 
@@ -207,7 +333,7 @@ export default  function RegisterProduct() {
               />
             </S.ContentSupplierForm>
             <S.SelectItems
-              style={{width: '95%', padding: 0}}
+              style={{ width: '95%', padding: 0 }}
             >
               <label htmlFor='material'>Tipo de material*</label>
               {/* <input
@@ -216,23 +342,24 @@ export default  function RegisterProduct() {
                 id='material'
                 onChange={(text) => settipoMaterial(text.target.value)}
               /> */}
-    
-            <select
-              required 
-              id='product-sku'
-              onChange={(text) => {
-                console.log(text.target.value)
-                settipoMaterial(text.target.value)}
-              }
+
+              <select
+                required
+                id='product-sku'
+                onChange={(text) => {
+                  console.log(text.target.value)
+                  settipoMaterial(text.target.value)
+                }
+                }
               >
-              {tipoMateriais.map(
-                (materialDisponivel) => (
-                  <option
-                  value={materialDisponivel}
-                  >{materialDisponivel}</option>
-                )
-              )}
-            </select>
+                {tipoMateriais.map(
+                  (materialDisponivel) => (
+                    <option
+                      value={materialDisponivel}
+                    >{materialDisponivel}</option>
+                  )
+                )}
+              </select>
             </S.SelectItems>
 
             <S.ContentSupplierForm>
@@ -245,7 +372,7 @@ export default  function RegisterProduct() {
             </S.ContentSupplierForm>
 
             <S.SelectItems
-            style={{width: '95%', padding: 0}}
+              style={{ width: '95%', padding: 0 }}
             >
               <label htmlFor='category'>Departamento / Categoria*</label>
               {/* <input
@@ -255,25 +382,26 @@ export default  function RegisterProduct() {
                 // onChange={(text) => setcategoria(text.target.value)} // HA CATEGORIAS???
               /> */}
               <select
-              required 
-              onChange={(e) => {
-                // console.log(e.target.id)
-                console.log(e.target.value)
-                setdepartamentoId(e.target.value)}
-              }
+                required
+                onChange={(e) => {
+                  // console.log(e.target.id)
+                  console.log(e.target.value)
+                  setdepartamentoId(e.target.value)
+                }
+                }
               >
-              {categorias.map(
-                (categoria) => (
-                  <option
-                  value={categoria.id}
-                  id={categoria.nome}
-                  onClick={(e) => console.log(e.target.id)}
-                  >
-                    {categoria.nome}
-                  </option>
-                )
-              )}
-            </select>
+                {categorias.map(
+                  (categoria) => (
+                    <option
+                      value={categoria.id}
+                      id={categoria.nome}
+                      onClick={(e) => console.log(e.target.id)}
+                    >
+                      {categoria.nome}
+                    </option>
+                  )
+                )}
+              </select>
 
 
             </S.SelectItems>
@@ -396,13 +524,13 @@ export default  function RegisterProduct() {
                 id='price'
                 onChange={(text) => setprecoVenda(text.target.value)}
               /> */}
-            <IntlCurrencyInput 
-                  required
-                  currency="BRL" 
-                  config={currencyConfig}
-                  onChange={handleChangePrice} 
-                  value={priceFormated}
-            />
+              <IntlCurrencyInput
+                required
+                currency="BRL"
+                config={currencyConfig}
+                onChange={handleChangePrice}
+                value={priceFormated}
+              />
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
@@ -418,7 +546,7 @@ export default  function RegisterProduct() {
                   }}
                   onBlur={
                     (e) => {
-                      console.log(e.target.value)  
+                      console.log(e.target.value)
                       handleCubagem(altura_cm, largura_cm, comprimento_cm, setcubagemEmbalagem)
                     }
                   }
@@ -439,7 +567,7 @@ export default  function RegisterProduct() {
                   }}
                   onBlur={
                     (e) => {
-                      console.log(e.target.value)  
+                      console.log(e.target.value)
                       handleCubagem(altura_cm, largura_cm, comprimento_cm, setcubagemEmbalagem)
                     }
                   }
@@ -460,7 +588,7 @@ export default  function RegisterProduct() {
                   }}
                   onBlur={
                     (e) => {
-                      console.log(e.target.value)  
+                      console.log(e.target.value)
                       handleCubagem(altura_cm, largura_cm, comprimento_cm, setcubagemEmbalagem)
                     }
                   }
@@ -490,7 +618,7 @@ export default  function RegisterProduct() {
                   type='number'
                   id='packaging'
                   onChange={(text) => {
-                  handleSetNumber(text.target.value, setqtdEmbalagem)
+                    handleSetNumber(text.target.value, setqtdEmbalagem)
                   }}
                 />
               </div>
@@ -567,22 +695,22 @@ export default  function RegisterProduct() {
               <S.RadioContainer>
                 <input
                   onClick={(e) => {
-                    let value  = e.target.value
+                    let value = e.target.value
                     console.log(value)
                     setredeSKU(value)
                   }}
-                  type='radio' 
-                  name='redeSku' 
+                  type='radio'
+                  name='redeSku'
                   id='s'
                   value="Sim"
-                  />
+                />
                 <p>Sim</p>
               </S.RadioContainer>
 
               <S.RadioContainer>
                 <input
                   onClick={(e) => {
-                    let value  = e.target.value
+                    let value = e.target.value
                     console.log(value)
 
                     setredeSKU(value)
@@ -591,7 +719,7 @@ export default  function RegisterProduct() {
                   name='redeSku'
                   id='n'
                   value="Não"
-                  />
+                />
                 <p>Não</p>
               </S.RadioContainer>
             </S.Radio>
@@ -602,21 +730,21 @@ export default  function RegisterProduct() {
             <S.Radio>
               <S.RadioContainer>
                 <input
-                  type='radio' 
-                  name='produtoOrigem' 
-                  id='n' 
+                  type='radio'
+                  name='produtoOrigem'
+                  id='n'
                   onChange={(text) => setorigem('Nacional')}
-                  />
+                />
                 <p>Nacional</p>
               </S.RadioContainer>
 
               <S.RadioContainer>
                 <input
-                  type='radio' 
-                  name='produtoOrigem' 
-                  id='i' 
+                  type='radio'
+                  name='produtoOrigem'
+                  id='i'
                   onChange={(text) => setorigem('Importado')}
-                  />
+                />
                 <p>Importado</p>
               </S.RadioContainer>
             </S.Radio>
@@ -662,15 +790,15 @@ export default  function RegisterProduct() {
             </select> */}
 
             <input
-                required
-                type='text'
-                id='lead-time'
-                onChange={(text) => setCodigoDeBarras(text.target.value)}
-              />
+              required
+              type='text'
+              id='lead-time'
+              onChange={(text) => setCodigoDeBarras(text.target.value)}
+            />
 
             <label htmlFor='unit-of-measurement'>Unidade de medida</label>
-            <select 
-              required 
+            <select
+              required
               onChange={(text) => setunidadeMedida(text.target.value)}
               id='unit-of-measurement'>
               {/* <option>informação 1</option> */}
@@ -683,12 +811,12 @@ export default  function RegisterProduct() {
             </select>
           </S.SelectItems>
           <S.SelectItems>
-          <input
-                required
-                type='text'
-                id='lead-time'
-                onChange={(text) => setredeSKU(text.target.value)}
-              />
+            <input
+              required
+              type='text'
+              id='lead-time'
+              onChange={(text) => setredeSKU(text.target.value)}
+            />
 
             <label htmlFor='bar-code'>Curva</label>
 
@@ -700,7 +828,7 @@ export default  function RegisterProduct() {
               /> */}
 
             {/* <label htmlFor='unit-of-measurement'>Unidade de medida</label> */}
-            <select 
+            <select
               onChange={(text) => setcurva(text.target.value)}
               id='unit-of-measurement'>
               {curvaTipos.map(
@@ -712,11 +840,11 @@ export default  function RegisterProduct() {
           </S.SelectItems>
         </S.RegisterSupplier>
         <S.Button>
-          <button  style={{ background: '#AA2323' }}>
+          <button style={{ background: '#AA2323' }}>
             Cancelar
           </button>
           <button
-          onSubmit= { () => createProduct()}
+            onSubmit={() => createProduct()}
           >Salvar</button>
         </S.Button>
       </S.ContainerRegisterSupplier>

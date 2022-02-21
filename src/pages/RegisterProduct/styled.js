@@ -44,6 +44,23 @@ export const RegisterSupplier = styled.div`
     padding: 30px 0;
   }
 `
+export const ImageInput = styled.div`
+
+.image-upload>input {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.inputImage {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+}
+
+`
 
 export const RegisterSupplierForm = styled.form`
   display: grid;

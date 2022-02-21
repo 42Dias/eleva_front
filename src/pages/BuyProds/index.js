@@ -26,8 +26,6 @@ export default function BuyProds() {
   const [valorTotal, setValorTotal] = React.useState(0)
   const [containerDeObjetos,    setContainerDeObjetos] = React.useState([])
   const [fornecedoresNoCarrinho,setFornecedoresNoCarrinho] = React.useState([])
-  
-  
 
   function openModal() {
     setIsOpen(true)
@@ -53,9 +51,9 @@ export default function BuyProds() {
   */
 
   /*
-  LISTAR 
-  DELETAR
-  EXCLUIR DA TELA
+    LISTAR 
+    DELETAR
+    EXCLUIR DA TELA
   */
 
   /*
