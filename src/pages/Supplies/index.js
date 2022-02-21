@@ -19,6 +19,7 @@ import createLista from '../../services/lista/createLista'
 import { useCart } from '../../hooks/useCart'
 
 import { FaPlus, FaShoppingCart } from 'react-icons/fa'
+import addManyInLista from '../../services/lista/addManyInLista'
 
 export  default function Supplies() {
   const [modalIsOpen,  setIsOpen      ]   =  useState(false)
@@ -29,10 +30,10 @@ export  default function Supplies() {
   const [listas,       setListas      ]   =  useState([])
   const [newListaName, setNewListaName]   =  useState("")
   const [newListaDesc, setNewListaDesc]   =  useState("")
-  const [listaId,      setListaId     ]   =  useState("")
-  
-  let listaParaAdd = [];
-  
+  const [lista,        setLista       ]   =  useState("")
+
+  const [listaParaAdd, setListaParaAdd]   =  useState([])
+
 
   function openModal() {
     setIsOpen(true)
@@ -129,25 +130,26 @@ export  default function Supplies() {
   
   function handleAddProductInList(index, productId){
     console.log("handleAddProductInList")
-    listaParaAdd.push(productId)
+    let listaHelper = listaParaAdd
 
-    console.log("listaParaAdd")
-    console.log(listaParaAdd)
+    listaHelper.push(productId)
+
+    setListaParaAdd(listaHelper)
   }
   
   function handleRemoveProductInList(index, productId){
 
     console.log("handleRemoveProductInList")
 
+    let listaHelper = listaParaAdd
+    
     listaParaAdd.filter(
       (produto, index) => {
-        produto == productId ? listaParaAdd.splice(index, 1) : false
+        produto == productId ? listaHelper.splice(index, 1) : false
       }
       )
-
-      console.log("listaParaAdd")
-      console.log(listaParaAdd)
-
+      
+    setListaParaAdd(listaHelper)
   }
 
   useEffect(
@@ -159,6 +161,12 @@ export  default function Supplies() {
     
     }, []
   )
+
+  async function handleAddInLista(lista){
+    console.log("lista")
+    console.log(lista)
+    await addManyInLista(lista, listaParaAdd)
+  }
 
   return (
     <>
@@ -244,7 +252,6 @@ export  default function Supplies() {
                       }
                         />
 
-                        
                     </S.FlexContainer>
                   </td>
                 </tr>
@@ -466,14 +473,14 @@ export  default function Supplies() {
           <h2>Listas de compras</h2>
 
           <button className='buttonSecondModal'>
-            <Link to="/comprar">
+            <Link to="/comprar/">
               <h2>Essencial</h2>
               <p>Descrição da lista</p>
             </Link>
           </button>
 
           {/* <button className='buttonSecondModal'>
-            <Link to="/comprar">
+            <Link to="/comprar/">
               <h2>Ingredientes</h2>
               <p>Descrição  da lista</p>
             </Link>
@@ -522,13 +529,17 @@ export  default function Supplies() {
          listas.map(
             (lista) => (
             <button
+            key={lista.id}
             className='buttonSecondModal'
-            onClick={() => setListaId(lista.id)}
+            onClick={() => setLista(lista)
+            }
             >
-              <Link to="/comprar">
+              <div 
+              // to="/comprar/"
+              >
                 <h2>{lista.nome}</h2>
                 <p>{lista.descricao}</p>
-              </Link>
+              </div>
            </button>
             )
           )
@@ -536,7 +547,7 @@ export  default function Supplies() {
 
           <S.BtnsContent>
             <button
-            onClick={() => console.log("adicionado a lista!! ghahahahahahaha", listaId)}
+            onClick={() => handleAddInLista(lista)}
             >Adicionar à lista</button>
           </S.BtnsContent>
         </S.Container>
