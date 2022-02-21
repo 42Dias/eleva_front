@@ -17,10 +17,13 @@ import makeSumToFornecedor from "../../utils/makeSumToFornecedor";
 import { AiOutlineConsoleSql } from "react-icons/ai";
 import loadLista from '../../services/lista/loadLista'
 import findLista from "../../services/lista/findLista";
-
+import { useCart } from '../../hooks/useCart'
 
 export default function BuyProds() {
-  const [modalIsOpen, setIsOpen] = React.useState(false)
+  const { addProduct, removeProductFromCart } = useCart();
+
+  
+  const [modalIsOpen, setIsOpen]   = React.useState(false)
   const [modalIsOpen2, setIsOpen2] = React.useState(false)
 
   const [carrinho, setCarrinho] = React.useState([])
@@ -31,7 +34,8 @@ export default function BuyProds() {
   const [fornecedoresNoCarrinho,setFornecedoresNoCarrinho] = React.useState([])
   
   
-  const [listas,       setListas      ]   =  useState([])
+  const [listas,        setListas      ]   =  useState([])
+  const [lista,         setLista      ]   =  useState([])
   const [listaId,       setListaId      ]   =  useState("")
 
 
@@ -85,6 +89,8 @@ export default function BuyProds() {
       handleLoadCart()
 
       handleFindLista()
+
+      handleLoadListas()
     }, []
   )
   const returnFunc = e => e
@@ -94,13 +100,20 @@ export default function BuyProds() {
     let lista = await findLista(id)
       console.log("lista")
       console.log(lista)
-      setListas(lista)
-
+      setLista(lista)
   }
+
 
   function handleFindLista(){
     let listaId = GetIdFromUrl()
     findAndSetLista(listaId)
+  }
+
+  async function handleLoadListas(){
+    let listas = await loadLista()
+      console.log("listas")
+      console.log(listas)
+      setListas(listas)
   }
   
   function GetIdFromUrl(){
@@ -115,15 +128,13 @@ export default function BuyProds() {
     cleanUrl = `#/comprar/${id}`
 
     window.location.hash = cleanUrl
-
   }
 
-  useEffect(
-    () =>{
-      GetIdFromUrl()
-    }
-    , []
-  )
+  function handlePushInCart(id){
+    console.log(id)
+    addProduct(id, 1);
+  }
+
   return (
     <>
       <Navbar />
@@ -148,7 +159,7 @@ export default function BuyProds() {
           <span>Quantidade</span>
         </S.GridValidation>
       {
-        listas.map(
+        lista.map(
           (item, index) => (
           <Accordion
           key={index}
@@ -175,7 +186,7 @@ export default function BuyProds() {
               }}
               onKeyDown={(e) => {
                 if(e.key == 'Tab'){
-                  handlePushInForcedor(item)
+                  handlePushInCart(item.produto.id)
                 }
               }}
               
@@ -260,8 +271,8 @@ export default function BuyProds() {
           
           
           */}
-          {
-          produtosDosFornecedores.map(
+          {/* {
+          carrinho.map(
               (fornecedor)  => (
               <div
               key={fornecedor.id}
@@ -341,7 +352,7 @@ export default function BuyProds() {
             </div>
               )
             )
-          }
+          } */}
 
           {/*
           <h4>Fornecedor 2</h4>
