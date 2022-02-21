@@ -22,6 +22,10 @@ export  default function Supplies() {
   const [modalIsOpen4, setIsOpen4] = React.useState(false)
 
   const [suprimentos, setSuprimentos] = useState([])
+
+  const [listas, setListas] = useState([])
+
+
   function openModal() {
     setIsOpen(true)
   }
@@ -236,13 +240,24 @@ export  default function Supplies() {
             <label htmlFor=''>Nome do produto</label>
             <input type='text' placeholder='oi' />
           </div>
-
           <div>
             <label htmlFor=''>Código</label>
             <input type='text' placeholder='oi' />
           </div>
           <div>
             <label htmlFor=''>Descrição</label>
+            <input type='text' placeholder='oi' />
+          </div>
+          <div>
+            <label htmlFor=''>Categoria</label>
+            <input type='text' placeholder='oi' />
+          </div>
+          <div>
+            <label htmlFor=''>Produto SKU</label>
+            <input type='text' placeholder='oi' />
+          </div>
+          <div>
+            <label htmlFor=''>Preço</label>
             <input type='text' placeholder='oi' />
           </div>
           {/* <div>
@@ -257,10 +272,6 @@ export  default function Supplies() {
             <label htmlFor=''>Data de inatividade</label>
             <input type='text' placeholder='oi' />
           </div> */}
-          <div>
-            <label htmlFor=''>Categoria</label>
-            <input type='text' placeholder='oi' />
-          </div>
           {/* <div>
             <label htmlFor=''>Quantia em estoque</label>
             <input type='text' placeholder='oi' />
@@ -293,10 +304,6 @@ export  default function Supplies() {
             <label htmlFor=''>Pedido mínimo (Quant/Valor)</label>
             <input type='text' placeholder='oi' />
           </div> */}
-          <div>
-            <label htmlFor=''>Preço</label>
-            <input type='text' placeholder='oi' />
-          </div>
           {/* <div>
             <label htmlFor=''>Altura (cm)</label>
             <input type='text' placeholder='oi' />
@@ -389,10 +396,7 @@ export  default function Supplies() {
             <label htmlFor=''>Descrição NCM</label>
             <input type='text' placeholder='oi' />
           </div> */}
-          <div>
-            <label htmlFor=''>Produto SKU</label>
-            <input type='text' placeholder='oi' />
-          </div>
+
           {/* <div>
             <label htmlFor=''>Código de barras</label>
             <input type='text' placeholder='oi' />
@@ -433,12 +437,12 @@ export  default function Supplies() {
             </Link>
           </button>
 
-          <button className='buttonSecondModal'>
+          {/* <button className='buttonSecondModal'>
             <Link to="/comprar">
               <h2>Ingredientes</h2>
               <p>Descrição  da lista</p>
             </Link>
-          </button>
+          </button> */}
 
           <S.BtnsContent>
             <button>Adicionar à lista</button>
@@ -479,10 +483,21 @@ export  default function Supplies() {
             <p>Descrição da lista</p>
           </button>
 
-          <button className='buttonSecondModal'>
-            <h2>Ingredientes</h2>
-            <p>Descrição  da lista</p>
-          </button>
+         {
+         listas.map(
+            (lista) => (
+            <button
+            className='buttonSecondModal'
+            onClick={() => console.log("aa")}//setListaId(lista.id)
+            >
+              <Link to="/comprar">
+                <h2>lista.nome</h2>
+                <p>lista.descricao</p>
+              </Link>
+           </button>
+            )
+          )
+          }
 
           <S.BtnsContent>
             <button>Adicionar à lista</button>
