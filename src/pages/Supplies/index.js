@@ -119,7 +119,7 @@ export  default function Supplies() {
         <div className='flex-title'>
           <h2 style={{ position: 'relative', top: '15px' }}>Suprimentos</h2>
           <div>
-            <button className='btnList'onClick={openModal2}>Listas de compras</button>
+            <button className='btnList'onClick={openModal4}>Listas de compras</button>
             <button
               onClick={openModal}
               style={{ position: 'relative', top: '3px' }}
@@ -446,12 +446,12 @@ export  default function Supplies() {
         </S.Container>
       </Modal>
 
-      <Switch
+      {/* <Switch
         defaultChecked
         checkedChildren='Adicionado'
         unCheckedChildren='Adicionar'
         onClick={openModal4}
-      />
+      /> */}
 
       <Modal
         isOpen={modalIsOpen4}
