@@ -128,6 +128,9 @@ export default function BuyProds() {
     cleanUrl = `#/comprar/${id}`
 
     window.location.hash = cleanUrl
+
+    findAndSetLista(id)
+    closeModal2()
   }
 
   function handlePushInCart(id){
