@@ -230,7 +230,6 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
               type='text' 
               id='codigo'
               // onChange={(e) => setCodigo(e.target.value)}
-              value={codigo}
               />
             </S.ContentSupplierForm>
 
