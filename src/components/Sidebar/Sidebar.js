@@ -35,7 +35,7 @@ function Navbar() {
           </div>
 
           <div className='user'>
-            <Link to="/comprar" className='bell'>
+            <Link to="/comprar/" className='bell'>
               <FaIcons.FaShoppingCart />
             </Link>
             <span className='bell'>
