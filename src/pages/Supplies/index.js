@@ -21,16 +21,17 @@ import { useCart } from '../../hooks/useCart'
 import { FaPlus, FaShoppingCart } from 'react-icons/fa'
 
 export  default function Supplies() {
-  const [modalIsOpen,  setIsOpen      ]  =  useState(false)
-  const [modalIsOpen2, setIsOpen2     ]  =  useState(false)
-  const [modalIsOpen3, setIsOpen3     ]  =  useState(false)
-  const [modalIsOpen4, setIsOpen4     ]  =  useState(false)
-  const [suprimentos,  setSuprimentos ]  =  useState([])
-  const [listas,       setListas      ]  =  useState([])
-  const [newListaName, setNewListaName]  =  useState("")
-  const [newListaDesc, setNewListaDesc]  =  useState("")
-  const [listaId,      setListaId     ]  =  useState("")
-
+  const [modalIsOpen,  setIsOpen      ]   =  useState(false)
+  const [modalIsOpen2, setIsOpen2     ]   =  useState(false)
+  const [modalIsOpen3, setIsOpen3     ]   =  useState(false)
+  const [modalIsOpen4, setIsOpen4     ]   =  useState(false)
+  const [suprimentos,  setSuprimentos ]   =  useState([])
+  const [listas,       setListas      ]   =  useState([])
+  const [newListaName, setNewListaName]   =  useState("")
+  const [newListaDesc, setNewListaDesc]   =  useState("")
+  const [listaId,      setListaId     ]   =  useState("")
+  
+  let listaParaAdd = [];
   
 
   function openModal() {
@@ -114,15 +115,39 @@ export  default function Supplies() {
   }
 
 
-  async function handleAddProductInCart(productId, index, quantidade, status) {
-    if(status == true){
-      await addProductSuprimentoInCart(productId, quantidade , status, addProduct );
-      handleLoadSuprimentos()
-    }
-    else{
-      await addProductSuprimentoInCart(productId, quantidade , status, removeProductFromCart );
-      handleLoadSuprimentos()
-    }
+  // async function handleAddProductInCart(productId, index, quantidade, status) {
+  //   if(status == true){
+  //     await addProductSuprimentoInCart(productId, quantidade , status, addProduct );
+  //     handleLoadSuprimentos()
+  //   }
+  //   else{
+  //     await addProductSuprimentoInCart(productId, quantidade , status, removeProductFromCart );
+  //     handleLoadSuprimentos()
+  //   }
+  // }
+
+  
+  function handleAddProductInList(index, productId){
+    console.log("handleAddProductInList")
+    listaParaAdd.push(productId)
+
+    console.log("listaParaAdd")
+    console.log(listaParaAdd)
+  }
+  
+  function handleRemoveProductInList(index, productId){
+
+    console.log("handleRemoveProductInList")
+
+    listaParaAdd.filter(
+      (produto, index) => {
+        produto == productId ? listaParaAdd.splice(index, 1) : false
+      }
+      )
+
+      console.log("listaParaAdd")
+      console.log(listaParaAdd)
+
   }
 
   useEffect(
@@ -202,36 +227,24 @@ export  default function Supplies() {
                         <ButtonDelete
                         />
                       </div>
-                      {
-                      Boolean(suprimento.status) == true ? (
-                        <Switch
-                        defaultChecked
-                        checkedChildren='Adicionado'
-                        unCheckedChildren='Adicionar'
-                        onClick={
-                          () => {
-                            handleAddProductInCart(suprimento.produto.id, index, suprimento.quantidade, false)
+                      
+
+                      <Switch
+                      checkedChildren='Adicionado'
+                      unCheckedChildren='Adicionar'
+                      onClick={
+                        (e) => {
+                          if(e == true ){
+                            handleAddProductInList(index, suprimento.produto.id)
+                          }
+                          else{
+                            handleRemoveProductInList(index, suprimento.produto.id)
                           }
                         }
-                         />
-                      ) : (
-
-                        <Switch
-                          checkedChildren='Adicionado'
-                          unCheckedChildren='Adicionar'
-                          onClick={
-                            () => {
-                              handleAddProductInCart(suprimento.produto.id, index, suprimento.quantidade, true)
-                            }
-                          }
-                        />
-                      )
                       }
-                      {/* <button
-                      type='button'
-                      >
-                        aaaaa
-                      </button> */}
+                        />
+
+                        
                     </S.FlexContainer>
                   </td>
                 </tr>
