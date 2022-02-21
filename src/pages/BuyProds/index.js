@@ -15,6 +15,8 @@ import filterFornecedores from "../../utils/filterFornecedores";
 import makeSumToCarrinho from "../../utils/makeSumToCarrinho";
 import makeSumToFornecedor from "../../utils/makeSumToFornecedor";
 import { AiOutlineConsoleSql } from "react-icons/ai";
+import loadLista from '../../services/lista/loadLista'
+
 
 export default function BuyProds() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
@@ -26,6 +28,10 @@ export default function BuyProds() {
   const [valorTotal, setValorTotal] = React.useState(0)
   const [containerDeObjetos,    setContainerDeObjetos] = React.useState([])
   const [fornecedoresNoCarrinho,setFornecedoresNoCarrinho] = React.useState([])
+  
+  
+  const [listas,       setListas      ]   =  useState([])
+
 
   function openModal() {
     setIsOpen(true)
@@ -75,103 +81,29 @@ export default function BuyProds() {
   useEffect(
     () => {
       handleLoadCart()
+
+      handleLoadListas()
     }, []
   )
 
-  let returnFunc = (e) => e;
-  
-  
-  async function filterFornecedores(produtosNoCarrinho, setFunction){
-    //variaveis para a ajuda do código  
-    // let containerDeObjetos = [];
-    // let fornecedoresNoCarrinho = [];
-    
-    // produtosNoCarrinho é um array com todos os produtos do carrinho
-    
-    produtosNoCarrinho.filter(
-      async (produtoNoCarrinho) => {
-
-        // caso o fornecedor já estiver na variavel fornecedoresNoCarrinho não é adicionado!
-        if(fornecedoresNoCarrinho.includes(produtoNoCarrinho.fornecedorId)) return
-
-        fornecedoresNoCarrinho.push(produtoNoCarrinho.fornecedorId)
-      }
-    )
-    
-    fornecedoresNoCarrinho.map(
-      (fornecedor) =>{ 
-        // cria um objeto novo para cada fornecedor!
-        const novoObj =  { "fornecedorId": fornecedor, "produtos": [] }
-        containerDeObjetos.push(novoObj)
-      }
-    )
-
-    containerDeObjetos.map( (fornecedor, index )=>{
-
-      produtosNoCarrinho.filter(
-        (produtoNoCarrinho) => {
-
-          if (!fornecedor.fornecedorId == produtoNoCarrinho.fornecedorId) return
-          
-          // caso produto já estiver no carrinho ele é atualizado
-          if(fornecedor.id == produtoNoCarrinho.id){
-            console.log("atualizou hahahahahahaha")
-            console.log("fornecedor")
-            console.log(fornecedor)
-            console.log("produtoNoCarrinho")
-            console.log(produtoNoCarrinho)
-            console.log(fornecedor = produtoNoCarrinho)
-            
-            return fornecedor = produtoNoCarrinho
-          }
-
-          else{
-            console.log("passsoussss  njndjnbvjdsnvjdsjçkbv ")
-
-
-            // adicionado o produto no fornecedor
-            fornecedor.produtos.push(produtoNoCarrinho)
-            
-            fornecedor.produtos.map(
-              (produtoDoFornecedor) => {
-                // faz a adequação do objeto
-                produtoDoFornecedor.fornecedorId = fornecedor.fornecedorId
-              }
-            )
-          }
-          }
-
-        )
-        // console.log(fornecedor, index)
-      }
-      )
-      // retorna a função do setState
-      return setFunction(containerDeObjetos)
-    }
-
-
-
-  function handlePushInForcedor(item){
-    console.log(item)
-
-    let produtosDosFornecedoresHelper = produtosDosFornecedores
-    
-    if(produtosDosFornecedoresHelper.includes(item)) return console.log("nhfvfksdnvçlajksdfnhgvoçsnchkjusfdanvkjçs")
-    
-    produtosDosFornecedoresHelper.push(item)
-
-    filterFornecedores(produtosDosFornecedoresHelper, setProdutosDosFornecedores)
+  async function handleLoadListas(){
+    let listas = await loadLista()
+      console.log("listas")
+      console.log(listas)
+      setListas(listas)
   }
-
-  console.log(produtosDosFornecedores)
+  
+  function GetIdFromUrl(){
+    let rawUrl = window.location.hash
+    let cleanUrl = rawUrl.replace("#/comprar/" , "")
+    console.log(cleanUrl)
+  }
 
   useEffect(
     () =>{
-    let somaDoCarrinho = makeSumToCarrinho(produtosDosFornecedores)
-    setValorTotal(
-      prevValue => prevValue + somaDoCarrinho)
+      GetIdFromUrl()
     }
-    , [produtosDosFornecedores]
+    , []
   )
   return (
     <>
@@ -487,6 +419,7 @@ export default function BuyProds() {
           </button>
           <h2>Lista de compras</h2>
 
+
           <button className='buttonSecondModal'>
             <h2>Essencial</h2>
             <p>Copos</p>
@@ -496,15 +429,22 @@ export default function BuyProds() {
             <p>Feijão</p>
           </button>
 
-          <button className='buttonSecondModal'>
-            <h2>Ingredientes</h2>
-            <p>Arroz</p>
-            <p>Feijão</p>
-            <p>Sal</p>
-            <p>Pimenta do reino</p>
-            <p>Oregano</p>
-            <p>Mostarda</p>
-          </button>
+
+          {
+         listas.map(
+            (lista) => (
+            <button
+            key={lista.id}
+            className='buttonSecondModal'
+            onClick={() => setListaId(lista.id)}
+            >
+              <h2>{lista.nome}</h2>
+              <p>{lista.descricao}</p>
+           </button>
+            )
+          )
+          }
+
 
           <S.BtnsContent>
             <button>Comprar</button>
