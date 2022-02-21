@@ -14,19 +14,24 @@ import loadLista from '../../services/lista/loadLista'
 import ButtonDelete from '../../components/ButtonDelete'
 import { useSuprimento } from '../../hooks/useSuprimentos'
 
+import createLista from '../../services/lista/createLista'
+
 import { useCart } from '../../hooks/useCart'
+
 import { FaPlus, FaShoppingCart } from 'react-icons/fa'
 
 export  default function Supplies() {
-  const [modalIsOpen,  setIsOpen]       =  useState(false)
-  const [modalIsOpen2, setIsOpen2]      =  useState(false)
-  const [modalIsOpen3, setIsOpen3]      =  useState(false)
-  const [modalIsOpen4, setIsOpen4]      =  useState(false)
-  const [suprimentos,  setSuprimentos]  =  useState([])
-  const [listas,       setListas]       =  useState([])
-  const [newListaName, setNewListaName] =  useState("")
-  const [newListaDesc, setNewListaDesc] =  useState("")
+  const [modalIsOpen,  setIsOpen      ]  =  useState(false)
+  const [modalIsOpen2, setIsOpen2     ]  =  useState(false)
+  const [modalIsOpen3, setIsOpen3     ]  =  useState(false)
+  const [modalIsOpen4, setIsOpen4     ]  =  useState(false)
+  const [suprimentos,  setSuprimentos ]  =  useState([])
+  const [listas,       setListas      ]  =  useState([])
+  const [newListaName, setNewListaName]  =  useState("")
+  const [newListaDesc, setNewListaDesc]  =  useState("")
+  const [listaId,      setListaId     ]  =  useState("")
 
+  
 
   function openModal() {
     setIsOpen(true)
@@ -100,6 +105,12 @@ export  default function Supplies() {
       console.log("listas")
       console.log(listas)
       setListas(listas)
+  }
+
+  async function handleCreateList(listaName , listaDesc){
+    await createLista(listaName , listaDesc)
+    closeModal3()
+    handleLoadListas()
   }
 
 
@@ -499,7 +510,7 @@ export  default function Supplies() {
             (lista) => (
             <button
             className='buttonSecondModal'
-            onClick={() => console.log("aa")}//setListaId(lista.id)
+            onClick={() => setListaId(lista.id)}
             >
               <Link to="/comprar">
                 <h2>{lista.nome}</h2>
@@ -512,7 +523,7 @@ export  default function Supplies() {
 
           <S.BtnsContent>
             <button
-            onClick={() => console.log("adicionado a lista!! ghahahahahahaha")}
+            onClick={() => console.log("adicionado a lista!! ghahahahahahaha", listaId)}
             >Adicionar à lista</button>
           </S.BtnsContent>
         </S.Container>
@@ -530,7 +541,7 @@ export  default function Supplies() {
           e => {
             e.preventDefault()
             e.target.reset()
-            console.log(newListaName ,newListaDesc)
+            handleCreateList(newListaName ,newListaDesc)
           }
         }
         >
