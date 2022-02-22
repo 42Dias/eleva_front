@@ -18,6 +18,9 @@ import { AiOutlineConsoleSql } from "react-icons/ai";
 import loadLista from '../../services/lista/loadLista'
 import findLista from "../../services/lista/findLista";
 import { useCart } from '../../hooks/useCart'
+import getIdFromUrl from "../../utils/getIdFromUrl";
+import createFatura from "../../services/fatura/createFatura";
+import createPedido from "../../services/pedido/createPedido";
 
 export default function BuyProds() {
   const { addProduct, removeProductFromCart } = useCart();
@@ -79,8 +82,6 @@ export default function BuyProds() {
     let cartData =  await loadCart()
     let formatedCart = await filterFornecedores(cartData, setCarrinho)
     let sumFromCarrinho = makeSumToCarrinho(formatedCart)
-
-    console.log(sumFromCarrinho)
     setValorTotal(sumFromCarrinho)
 
     
@@ -101,28 +102,18 @@ export default function BuyProds() {
   async function findAndSetLista(id){
 
     let lista = await findLista(id)
-      console.log("lista")
-      console.log(lista)
       setLista(lista)
   }
 
 
   function handleFindLista(){
-    let listaId = GetIdFromUrl()
+    let listaId = getIdFromUrl("#/comprar/")
     findAndSetLista(listaId)
   }
 
   async function handleLoadListas(){
     let listas = await loadLista()
-      console.log("listas")
-      console.log(listas)
       setListas(listas)
-  }
-  
-  function GetIdFromUrl(){
-    let rawUrl = window.location.hash
-    let cleanUrl = rawUrl.replace("#/comprar/" , "")
-    return cleanUrl
   }
 
   function handleChangeUrl(id){
@@ -137,10 +128,23 @@ export default function BuyProds() {
   }
 
   async function handlePushInCart(id, quantidade){
-    console.log(id)
     await addProduct(id, quantidade);
 
     await handleLoadCart()
+
+  }
+
+  async function handleSubmitPedido(){
+    carrinho.map(
+      async (produtosNoCarrinho) => {    
+        await createPedido({
+            fornecedorId: produtosNoCarrinho.fornecedorId, 
+            produtos: produtosNoCarrinho.produtos
+          })
+          closeModal()   
+      }
+    )
+
 
   }
 
@@ -348,7 +352,8 @@ export default function BuyProds() {
                       <td>Volume total: 100g</td>
                       <td>Quantidade de produtos: 15</td>
                       <td>Valor unitario: R$ 136,74</td>
-                      <td>Valor total:
+                      <td>Valor total: 
+                        <br/> 
                       {
                         formatPrice(
                           Number(
@@ -431,6 +436,7 @@ export default function BuyProds() {
           <div>
             <button>Salvar compra</button>
             <button
+            onClick={() => handleSubmitPedido()}
             style={
               {
                 marginLeft: '20px'
