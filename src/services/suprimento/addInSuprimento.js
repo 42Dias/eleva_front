@@ -10,13 +10,6 @@ export default async function addInSuprimento(product, quantidade, suprimento, s
           let status = response.status
           responseHandler(status,"Produto adicionado ao suprimento com sucesso!",  "Erro na adição do produto")
           if(response.status == 200){
-            setUpdate(prevValue => {
-              return prevValue+1	
-               })
-
-            console.log("update 1")
-            console.log(update)
-
             return response.data
           }
           else if(response.status == 500){
