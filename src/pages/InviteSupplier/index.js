@@ -124,9 +124,10 @@ export  default function InviteSupplier() {
                     </Link>
                   </S.Check>
                   <S.Trash
-                  onClick={() => {
-                    handleDeleteCategory(categorie.id)
-                  }}>
+                    onClick={() => {
+                      handleDeleteCategory(categorie.id)
+                    }}
+                  >
                     <Link>
                       <FiTrash/>
                     </Link>
