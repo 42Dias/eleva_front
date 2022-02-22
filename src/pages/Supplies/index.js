@@ -20,10 +20,10 @@ import { FaPlus, FaShoppingCart } from 'react-icons/fa'
 import addManyInLista from '../../services/lista/addManyInLista'
 
 export  default function Supplies() {
-  const [modalIsOpen,  setIsOpen      ]   =  useState(false)
-  const [modalIsOpen2, setIsOpen2     ]   =  useState(false)
-  const [modalIsOpen3, setIsOpen3     ]   =  useState(false)
-  const [modalIsOpen4, setIsOpen4     ]   =  useState(false)
+  const [modalIsOpen,  setIsOpen]   =  useState(false)
+  const [modalIsOpen2, setIsOpen2]   =  useState(false)
+  const [modalIsOpen3, setIsOpen3]   =  useState(false)
+  const [modalIsOpen4, setIsOpen4]   =  useState(false)
   const [suprimentos,  setSuprimentos ]   =  useState([])
   const [listas,       setListas      ]   =  useState([])
   const [newListaName, setNewListaName]   =  useState("")
@@ -177,7 +177,6 @@ export  default function Supplies() {
           <h2 style={{ position: 'relative', top: '15px' }}>Suprimentos</h2>
           <div>
             <button className='btnList'onClick={openModal4}>Listas de compras</button>
-            <button className='btnList'>Adicionar a lista</button>
             <button
               onClick={openModal}
               style={{ position: 'relative', top: '2px' }}
@@ -224,15 +223,15 @@ export  default function Supplies() {
                   <td>
                     <S.FlexContainer>
                       <div
-                      className='deleteBtn'
-                      onClick={
-                        () => {
-                          console.log(suprimento)
-                          handleRemoveProduct(suprimento.produto.id, index)
+                        className='deleteBtn'
+                        onClick={
+                          () => {
+                            console.log(suprimento)
+                            handleRemoveProduct(suprimento.produto.id, index)
+                          }
                         }
-                      }>
-                        <ButtonDelete
-                        />
+                      >
+                        <ButtonDelete />
                       </div>
                       
 

@@ -1,4 +1,4 @@
-import { FiHome, FiBox, FiPlus, FiClock, FiUserPlus, FiCheck, FiGlobe, FiShoppingCart, FiGrid } from "react-icons/fi";
+import { FiHome, FiBox, FiPlus, FiClock, FiUserPlus, FiCheck, FiGlobe, FiShoppingCart, FiGrid, FiUsers } from "react-icons/fi";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { BsCashCoin } from "react-icons/bs";
 
@@ -75,4 +75,12 @@ export const SidebarData = [
     icon:  <FiGrid />,
     cName: 'nav-text',
   },
+
+  {
+    title: 'Convidar fornecedor',
+    path:  '/convidar-fornecedor',
+    icon:  <FiUsers />,
+    cName: 'nav-text',
+  },
+  
 ]
