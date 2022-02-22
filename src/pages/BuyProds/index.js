@@ -23,20 +23,16 @@ export default function BuyProds() {
   const { addProduct, removeProductFromCart } = useCart();
 
   
-  const [modalIsOpen, setIsOpen]   = React.useState(false)
-  const [modalIsOpen2, setIsOpen2] = React.useState(false)
-
-  const [carrinho, setCarrinho] = React.useState([])
-  const [produtosDosFornecedores, setProdutosDosFornecedores] = React.useState([])
-
-  const [valorTotal, setValorTotal] = React.useState(0)
-  const [containerDeObjetos,    setContainerDeObjetos] = React.useState([])
-  const [fornecedoresNoCarrinho,setFornecedoresNoCarrinho] = React.useState([])
-  
-  
-  const [listas,        setListas      ]   =  useState([])
-  const [lista,         setLista      ]   =  useState([])
-  const [listaId,       setListaId      ]   =  useState("")
+  const [modalIsOpen,             setIsOpen                   ] =  useState(false)
+  const [modalIsOpen2,            setIsOpen2                  ] =  useState(false)
+  const [carrinho,                setCarrinho                 ] =  useState([])
+  const [produtosDosFornecedores, setProdutosDosFornecedores  ] =  useState([])
+  const [containerDeObjetos,     setContainerDeObjetos        ] =  useState([])
+  const [fornecedoresNoCarrinho, setFornecedoresNoCarrinho    ] =  useState([])
+  const [listas,                 setListas                    ] =  useState([])
+  const [lista,                  setLista                     ] =  useState([])
+  const [valorTotal,             setValorTotal                ] =  useState(0)
+  const [listaId,                setListaId                   ] =  useState("")
 
 
   function openModal() {
@@ -81,7 +77,13 @@ export default function BuyProds() {
 
   async function handleLoadCart(){
     let cartData =  await loadCart()
-    setCarrinho(cartData)
+    let formatedCart = await filterFornecedores(cartData, setCarrinho)
+    let sumFromCarrinho = makeSumToCarrinho(formatedCart)
+
+    console.log(sumFromCarrinho)
+    setValorTotal(sumFromCarrinho)
+
+    
   }
 
   useEffect(
@@ -93,6 +95,7 @@ export default function BuyProds() {
       handleLoadListas()
     }, []
   )
+
   const returnFunc = e => e
 
   async function findAndSetLista(id){
@@ -133,10 +136,15 @@ export default function BuyProds() {
     closeModal2()
   }
 
-  function handlePushInCart(id){
+  async function handlePushInCart(id, quantidade){
     console.log(id)
-    addProduct(id, 1);
+    await addProduct(id, quantidade);
+
+    await handleLoadCart()
+
   }
+
+
 
   return (
     <>
@@ -176,7 +184,7 @@ export default function BuyProds() {
           info={` ${item.produto.descricao} `}
           lastprice={` ${formatPrice(item.produto.custoUltimaCompra)}`}
           quantidadeporembalagem={` ${item.produto.qtdEmbalagem} `}
-          leadtime={`${item.produto.leadTime}`}
+          leadtime={` ${item.produto.leadTime}`}
           datadefaturamento=' 400'
           myProp={
             <input
@@ -189,7 +197,7 @@ export default function BuyProds() {
               }}
               onKeyDown={(e) => {
                 if(e.key == 'Tab'){
-                  handlePushInCart(item.produto.id)
+                  handlePushInCart(item.produto.id, item.quantidade)
                 }
               }}
               
@@ -274,7 +282,7 @@ export default function BuyProds() {
           
           
           */}
-          {/* {
+          {
           carrinho.map(
               (fornecedor)  => (
               <div
@@ -283,7 +291,7 @@ export default function BuyProds() {
               <h4
               key={fornecedor.id}
               >
-              Fornecedor 1</h4>
+              {fornecedor.produtos[0].empresaNome}</h4>
               {
                   <table
                   key={fornecedor.id}
@@ -335,16 +343,17 @@ export default function BuyProds() {
                       }}
                     >
                       <td>Tipo de frete: FOB</td>
-                      <td>Valor do frete: R$14,65</td>
+                      <td>Valor do frete?: R$14,65</td>
                       <td>Peso total: 200g</td>
                       <td>Volume total: 100g</td>
                       <td>Quantidade de produtos: 15</td>
                       <td>Valor unitario: R$ 136,74</td>
                       <td>Valor total:
                       {
-                        Number(
+                        formatPrice(
+                          Number(
                             makeSumToFornecedor(fornecedor)
-                          )
+                          ))
                       }
                       
                       </td>
@@ -355,7 +364,7 @@ export default function BuyProds() {
             </div>
               )
             )
-          } */}
+          }
 
           {/*
           <h4>Fornecedor 2</h4>
