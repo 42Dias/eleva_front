@@ -4,15 +4,12 @@ import { api } from '../api'
 
 
 export default async function addInLista(product, lista, setUpdate){
-      const response = await api.post(`listaProduto/`, { data: { product, lista: lista} })
+      const response = await api.post(`listaProduto/`, { data: { id, product, lista: lista} })
       .then(
         (response) => {
           let status = response.status
           responseHandler(status,"Produto adicionado ao lista com sucesso!",  "Erro na adição do produto")
           if(response.status == 200){
-            setUpdate(prevValue => {
-              return prevValue+1	
-               })
 
             console.log("update 1")
             console.log(update)
