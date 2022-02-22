@@ -21,11 +21,12 @@ import { useCart } from '../../hooks/useCart'
 import getIdFromUrl from "../../utils/getIdFromUrl";
 import createFatura from "../../services/fatura/createFatura";
 import createPedido from "../../services/pedido/createPedido";
+import deleteAllFromCart from "../../services/carrinho/deleteAllFromCart";
+import { id } from "../../services/api";
 
 export default function BuyProds() {
   const { addProduct, removeProductFromCart } = useCart();
 
-  
   const [modalIsOpen,             setIsOpen                   ] =  useState(false)
   const [modalIsOpen2,            setIsOpen2                  ] =  useState(false)
   const [carrinho,                setCarrinho                 ] =  useState([])
@@ -144,11 +145,13 @@ export default function BuyProds() {
       }
       )
     closeModal()   
-
-
+    await deleteAllFromCart(id)
+    await handleLoadCart()
   }
 
-
+  console.log("carrinho.length")
+  console.log(carrinho.length)
+  
 
   return (
     <>
@@ -360,7 +363,6 @@ export default function BuyProds() {
                             makeSumToFornecedor(fornecedor)
                           ))
                       }
-                      
                       </td>
                     </tr>
                 </tbody>
@@ -370,6 +372,14 @@ export default function BuyProds() {
               )
             )
           }
+          {
+          carrinho.length != 0 ? (false) : (
+            <h2>
+              Não há produtos no carrinho
+            </h2>
+
+          )
+        }
 
           {/*
           <h4>Fornecedor 2</h4>
