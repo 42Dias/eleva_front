@@ -370,7 +370,7 @@ export default function BuyProds() {
                         borderRadius: '0px 0px 5px 5px',
                       }}
                     >
-                      <td>Tipo de frete: FOB         </td>
+                      <td>Tipo de frete: {fornecedor.produtos[0].empresaFrete} </td>
                       
                       {/* SISTEMA DE FRETE NÃO CALCULADO COM O CLIENTE!!!!! */}
                       {/* <td>Valor do frete?: R$14,65   </td> */}
