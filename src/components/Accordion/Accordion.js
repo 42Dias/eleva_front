@@ -28,7 +28,7 @@ function Accordion(props) {
         <p>{props.name}</p>
         <span className={props.status}>{props.approve}</span>
         <p>
-        {  props.amount.replace("null", "") != ' ' ? (`${props.amount} Produtos`) : false}
+        {  props.amount.replace("null", "") != ' ' ? (`${props.amount} Produtos`) : ''}
           </p>
         <Chevron className={`${setRotate}`} width={10} fill={'#777'} />
       </button>
