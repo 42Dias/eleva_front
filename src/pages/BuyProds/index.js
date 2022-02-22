@@ -167,15 +167,20 @@ export default function BuyProds() {
             <button onClick={openModal}>Finalizar compra</button>
           </div>
         </div>
+        {
+          lista.length == 0 ? (false) : (
+           
+          <S.GridValidation>
+            <span>Cod. barras</span>
+            <span>Produto SKU</span>
+            <span>Código</span>
+            <span>Nome</span>
+            <span>Status</span>
+            <span>Quantidade</span>
+          </S.GridValidation>
 
-        <S.GridValidation>
-          <span>Cod. barras</span>
-          <span>Produto SKU</span>
-          <span>Código</span>
-          <span>Nome</span>
-          <span>Status</span>
-          <span>Quantidade</span>
-        </S.GridValidation>
+          )
+        }
       {
         lista.map(
           (item, index) => (
@@ -218,6 +223,18 @@ export default function BuyProds() {
         />
           )
         )
+        }
+        {
+          lista.length != 0 ? (false) : (
+            <h2 
+            style={{
+              textAlign: 'center'
+            }}
+            >
+              Não há produtos nesta lista, selecione outra no botão Lista de Compras +
+            </h2>
+
+          )
         }
         {/* <Accordion
           codeBarras='321312421321321'
