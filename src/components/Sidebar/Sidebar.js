@@ -70,15 +70,14 @@ function Navbar() {
                   </li>
                 )
               })}
-               
-            <li
-            className='nav-exit'
-            onClick={
-              () => {
-                logOff()
-              }
-            }
-            >
+              <li
+                className='nav-exit'
+                onClick={
+                  () => {
+                    logOff()
+                  }
+                }
+              >
             <Link 
             to="/login">
             <FaIcons.FaArrowLeft />
