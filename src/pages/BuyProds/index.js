@@ -14,18 +14,23 @@ import filterFornecedores from "../../utils/filterFornecedores";
 import makeSumToCarrinho from "../../utils/makeSumToCarrinho";
 import makeSumToFornecedor from "../../utils/makeSumToFornecedor";
 import { AiOutlineConsoleSql } from "react-icons/ai";
+import loadLista from '../../services/lista/loadLista'
+import findLista from "../../services/lista/findLista";
+import { useCart } from '../../hooks/useCart'
 
 export default function BuyProds() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
   const [modalIsOpen2, setIsOpen2] = React.useState(false)
   const [modalIsOpen3, setIsOpen3] = React.useState(false)
+  const [carrinho,                setCarrinho                 ] =  useState([])
+  const [produtosDosFornecedores, setProdutosDosFornecedores  ] =  useState([])
+  const [containerDeObjetos,     setContainerDeObjetos        ] =  useState([])
+  const [fornecedoresNoCarrinho, setFornecedoresNoCarrinho    ] =  useState([])
+  const [listas,                 setListas                    ] =  useState([])
+  const [lista,                  setLista                     ] =  useState([])
+  const [valorTotal,             setValorTotal                ] =  useState(0)
+  const [listaId,                setListaId                   ] =  useState("")
 
-  const [carrinho, setCarrinho] = React.useState([])
-  const [produtosDosFornecedores, setProdutosDosFornecedores] = React.useState([])
-
-  const [valorTotal, setValorTotal] = React.useState(0)
-  const [containerDeObjetos,    setContainerDeObjetos] = React.useState([])
-  const [fornecedoresNoCarrinho,setFornecedoresNoCarrinho] = React.useState([])
 
   function openModal() {
     setIsOpen(true)
@@ -80,110 +85,75 @@ export default function BuyProds() {
 
   async function handleLoadCart(){
     let cartData =  await loadCart()
-    setCarrinho(cartData)
+    let formatedCart = await filterFornecedores(cartData, setCarrinho)
+    let sumFromCarrinho = makeSumToCarrinho(formatedCart)
+
+    console.log(sumFromCarrinho)
+    setValorTotal(sumFromCarrinho)
+
+    
   }
 
   useEffect(
     () => {
       handleLoadCart()
+
+      handleFindLista()
+
+      handleLoadListas()
     }, []
   )
 
-  let returnFunc = (e) => e;
-  
-  
-  async function filterFornecedores(produtosNoCarrinho, setFunction){
-    //variaveis para a ajuda do código  
-    // let containerDeObjetos = [];
-    // let fornecedoresNoCarrinho = [];
-    
-    // produtosNoCarrinho é um array com todos os produtos do carrinho
-    
-    produtosNoCarrinho.filter(
-      async (produtoNoCarrinho) => {
+  const returnFunc = e => e
 
-        // caso o fornecedor já estiver na variavel fornecedoresNoCarrinho não é adicionado!
-        if(fornecedoresNoCarrinho.includes(produtoNoCarrinho.fornecedorId)) return
+  async function findAndSetLista(id){
 
-        fornecedoresNoCarrinho.push(produtoNoCarrinho.fornecedorId)
-      }
-    )
-    
-    fornecedoresNoCarrinho.map(
-      (fornecedor) =>{ 
-        // cria um objeto novo para cada fornecedor!
-        const novoObj =  { "fornecedorId": fornecedor, "produtos": [] }
-        containerDeObjetos.push(novoObj)
-      }
-    )
-
-    containerDeObjetos.map( (fornecedor, index )=>{
-
-      produtosNoCarrinho.filter(
-        (produtoNoCarrinho) => {
-
-          if (!fornecedor.fornecedorId == produtoNoCarrinho.fornecedorId) return
-          
-          // caso produto já estiver no carrinho ele é atualizado
-          if(fornecedor.id == produtoNoCarrinho.id){
-            console.log("atualizou hahahahahahaha")
-            console.log("fornecedor")
-            console.log(fornecedor)
-            console.log("produtoNoCarrinho")
-            console.log(produtoNoCarrinho)
-            console.log(fornecedor = produtoNoCarrinho)
-            
-            return fornecedor = produtoNoCarrinho
-          }
-
-          else{
-            console.log("passsoussss  njndjnbvjdsnvjdsjçkbv ")
-
-
-            // adicionado o produto no fornecedor
-            fornecedor.produtos.push(produtoNoCarrinho)
-            
-            fornecedor.produtos.map(
-              (produtoDoFornecedor) => {
-                // faz a adequação do objeto
-                produtoDoFornecedor.fornecedorId = fornecedor.fornecedorId
-              }
-            )
-          }
-          }
-
-        )
-        // console.log(fornecedor, index)
-      }
-      )
-      // retorna a função do setState
-      return setFunction(containerDeObjetos)
-    }
-
-
-
-  function handlePushInForcedor(item){
-    console.log(item)
-
-    let produtosDosFornecedoresHelper = produtosDosFornecedores
-    
-    if(produtosDosFornecedoresHelper.includes(item)) return console.log("nhfvfksdnvçlajksdfnhgvoçsnchkjusfdanvkjçs")
-    
-    produtosDosFornecedoresHelper.push(item)
-
-    filterFornecedores(produtosDosFornecedoresHelper, setProdutosDosFornecedores)
+    let lista = await findLista(id)
+      console.log("lista")
+      console.log(lista)
+      setLista(lista)
   }
 
-  console.log(produtosDosFornecedores)
 
-  useEffect(
-    () =>{
-    let somaDoCarrinho = makeSumToCarrinho(produtosDosFornecedores)
-    setValorTotal(
-      prevValue => prevValue + somaDoCarrinho)
-    }
-    , [produtosDosFornecedores]
-  )
+  function handleFindLista(){
+    let listaId = GetIdFromUrl()
+    findAndSetLista(listaId)
+  }
+
+  async function handleLoadListas(){
+    let listas = await loadLista()
+      console.log("listas")
+      console.log(listas)
+      setListas(listas)
+  }
+  
+  function GetIdFromUrl(){
+    let rawUrl = window.location.hash
+    let cleanUrl = rawUrl.replace("#/comprar/" , "")
+    return cleanUrl
+  }
+
+  function handleChangeUrl(id){
+    let cleanUrl = window.location.hash
+
+    cleanUrl = `#/comprar/${id}`
+
+    window.location.hash = cleanUrl
+
+    findAndSetLista(id)
+    closeModal2()
+  }
+
+  async function handlePushInCart(id, quantidade){
+    console.log(id)
+    await addProduct(id, quantidade);
+
+    await handleLoadCart()
+
+  }
+
+
+
   return (
     <>
       <Navbar />
@@ -196,9 +166,6 @@ export default function BuyProds() {
           <div>
             <button onClick={openModal2}>Lista de compras +</button>
             <button onClick={openModal}>Finalizar compra</button>
-            <button onClick={() => {
-              console.log(carrinho)
-            }}>AAAAAAAAAAAAAAAAA</button>
           </div>
         </div>
 
@@ -211,7 +178,7 @@ export default function BuyProds() {
           <span>Quantidade</span>
         </S.GridValidation>
       {
-        carrinho.map(
+        lista.map(
           (item, index) => (
           <Accordion
           key={index}
@@ -225,7 +192,7 @@ export default function BuyProds() {
           info={` ${item.produto.descricao} `}
           lastprice={` ${formatPrice(item.produto.custoUltimaCompra)}`}
           quantidadeporembalagem={` ${item.produto.qtdEmbalagem} `}
-          leadtime={`${item.produto.leadTime}`}
+          leadtime={` ${item.produto.leadTime}`}
           datadefaturamento=' 400'
           myProp={
             <input
@@ -238,7 +205,7 @@ export default function BuyProds() {
               }}
               onKeyDown={(e) => {
                 if(e.key == 'Tab'){
-                  handlePushInForcedor(item)
+                  handlePushInCart(item.produto.id, item.quantidade)
                 }
               }}
               
@@ -324,7 +291,7 @@ export default function BuyProds() {
           
           */}
           {
-          produtosDosFornecedores.map(
+          carrinho.map(
               (fornecedor)  => (
               <div
               key={fornecedor.id}
@@ -386,16 +353,17 @@ export default function BuyProds() {
                       }}
                     >
                       <td>Tipo de frete: FOB</td>
-                      <td>Valor do frete: R$14,65</td>
+                      <td>Valor do frete?: R$14,65</td>
                       <td>Peso total: 200g</td>
                       <td>Volume total: 100g</td>
                       <td>Quantidade de produtos: 15</td>
                       <td>Valor unitario: R$ 136,74</td>
                       <td>Valor total:
                       {
-                        Number(
+                        formatPrice(
+                          Number(
                             makeSumToFornecedor(fornecedor)
-                          )
+                          ))
                       }
                       </td>
                       <td></td>
@@ -500,6 +468,7 @@ export default function BuyProds() {
           </button>
           <h2>Lista de compras</h2>
 
+          {/* 
           <button className='buttonSecondModal'>
             <h2>Essencial</h2>
             <p>Copos</p>
@@ -507,17 +476,25 @@ export default function BuyProds() {
             <p>Biscoitos</p>
             <p>Arroz</p>
             <p>Feijão</p>
-          </button>
+          </button> 
+          */}
 
-          <button className='buttonSecondModal'>
-            <h2>Ingredientes</h2>
-            <p>Arroz</p>
-            <p>Feijão</p>
-            <p>Sal</p>
-            <p>Pimenta do reino</p>
-            <p>Oregano</p>
-            <p>Mostarda</p>
-          </button>
+
+          {
+         listas.map(
+            (lista) => (
+            <button
+            key={lista.id}
+            className='buttonSecondModal'
+            onClick={() => handleChangeUrl(lista.id)}
+            >
+              <h2>{lista.nome}</h2>
+              <p>{lista.descricao}</p>
+           </button>
+            )
+          )
+          }
+
 
           <S.BtnsContent>
             <button>Comprar</button>

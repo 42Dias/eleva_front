@@ -9,10 +9,10 @@ export default async function responseHandler(
     responseStatus, mensagemSeOk, mensagemSeNaoOk
     ) {
     if(responseStatus == 200 ){
-        mensagemSeOk ? toast.info(mensagemSeOk) : toast.info("Ação feita com sucesso!") 
+        mensagemSeOk ? toast.success(mensagemSeOk) : toast.success("Ação feita com sucesso!") 
     }
     else if(responseStatus != 200 ){
-        mensagemSeNaoOk ? toast.error(mensagemSeNaoOk) : toast.info("Algo deu errado :(") 
+        mensagemSeNaoOk ? toast.error(mensagemSeNaoOk) : toast.error("Algo deu errado :(") 
     }
 
 }

@@ -35,15 +35,17 @@ function Navbar() {
           </div>
 
           <div className='user'>
-            <Link to="/comprar" className='bell'>
+            <Link to="/comprar/" className='bell'>
               <FaIcons.FaShoppingCart />
             </Link>
             <span className='bell'>
               <FaIcons.FaRegBell />
             </span>
-            <span className='userIcon'>
+            <Link
+            to="/meus-dados-empresa"
+             className='userIcon'>
               <FaIcons.FaRegUser />
-            </span>
+            </Link>
           </div>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>

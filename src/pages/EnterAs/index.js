@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { FiUser, FiBriefcase, FiTruck, FiGlobe } from 'react-icons/fi'
 import { Link, useHistory } from "react-router-dom";
 
@@ -16,7 +16,7 @@ export default function EnterAs() {
     history.push("/home");
   }
 
-  useEffect(
+  useLayoutEffect(
   () => {
     console.log(Email)
     if(Email || tenantId){

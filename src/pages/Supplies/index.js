@@ -9,19 +9,30 @@ import * as S from './styled'
 import 'antd/dist/antd.css'
 import loadSuprimento from '../../services/suprimento/loadSuprimento'
 
+import loadLista from '../../services/lista/loadLista'
+
 import ButtonDelete from '../../components/ButtonDelete'
 import { useSuprimento } from '../../hooks/useSuprimentos'
 
-import { useCart } from '../../hooks/useCart'
+import createLista from '../../services/lista/createLista'
+
 import { FaPlus, FaShoppingCart } from 'react-icons/fa'
+import addManyInLista from '../../services/lista/addManyInLista'
 
 export  default function Supplies() {
-  const [modalIsOpen, setIsOpen] = React.useState(false)
-  const [modalIsOpen2, setIsOpen2] = React.useState(false)
-  const [modalIsOpen3, setIsOpen3] = React.useState(false)
-  const [modalIsOpen4, setIsOpen4] = React.useState(false)
+  const [modalIsOpen,  setIsOpen      ]   =  useState(false)
+  const [modalIsOpen2, setIsOpen2     ]   =  useState(false)
+  const [modalIsOpen3, setIsOpen3     ]   =  useState(false)
+  const [modalIsOpen4, setIsOpen4     ]   =  useState(false)
+  const [suprimentos,  setSuprimentos ]   =  useState([])
+  const [listas,       setListas      ]   =  useState([])
+  const [newListaName, setNewListaName]   =  useState("")
+  const [newListaDesc, setNewListaDesc]   =  useState("")
+  const [lista,        setLista       ]   =  useState("")
 
-  const [suprimentos, setSuprimentos] = useState([])
+  const [listaParaAdd, setListaParaAdd]   =  useState([])
+
+
   function openModal() {
     setIsOpen(true)
   }
@@ -70,7 +81,7 @@ export  default function Supplies() {
   a plataforma vasculha o melhor preço com o sku
   */
 
- const { addProduct, removeProductFromCart } = useCart();
+
  const { removeProduct, addProductSuprimentoInCart } = useSuprimento();
 
 
@@ -89,26 +100,72 @@ export  default function Supplies() {
       setSuprimentos(suprimentos)
   }
 
+  async function handleLoadListas(){
+    let listas = await loadLista()
+      console.log("listas")
+      console.log(listas)
+      setListas(listas)
+  }
 
-  async function handleAddProductInCart(productId, index, quantidade, status) {
-    if(status == true){
-      await addProductSuprimentoInCart(productId, quantidade , status, addProduct );
-      handleLoadSuprimentos()
-    }
-    else{
-      await addProductSuprimentoInCart(productId, quantidade , status, removeProductFromCart );
-      handleLoadSuprimentos()
-    }
+  async function handleCreateList(listaName , listaDesc){
+    await createLista(listaName , listaDesc)
+    closeModal3()
+    handleLoadListas()
+  }
+
+
+  // async function handleAddProductInCart(productId, index, quantidade, status) {
+  //   if(status == true){
+  //     await addProductSuprimentoInCart(productId, quantidade , status, addProduct );
+  //     handleLoadSuprimentos()
+  //   }
+  //   else{
+  //     await addProductSuprimentoInCart(productId, quantidade , status, removeProductFromCart );
+  //     handleLoadSuprimentos()
+  //   }
+  // }
+
+  
+  function handleAddProductInList(index, productId){
+    console.log("handleAddProductInList")
+    let listaHelper = listaParaAdd
+
+    listaHelper.push(productId)
+
+    setListaParaAdd(listaHelper)
+  }
+  
+  function handleRemoveProductInList(index, productId){
+
+    console.log("handleRemoveProductInList")
+
+    let listaHelper = listaParaAdd
+    
+    listaParaAdd.filter(
+      (produto, index) => {
+        produto == productId ? listaHelper.splice(index, 1) : false
+      }
+      )
+      
+    setListaParaAdd(listaHelper)
   }
 
   useEffect(
     () => {
+
       handleLoadSuprimentos()
+
+      handleLoadListas()
+    
     }, []
   )
 
+  async function handleAddInLista(lista){
+    console.log("lista")
+    console.log(lista)
+    await addManyInLista(lista, listaParaAdd)
+  }
 
-  
   return (
     <>
       <Navbar />
@@ -177,36 +234,23 @@ export  default function Supplies() {
                         <ButtonDelete
                         />
                       </div>
-                      {
-                      Boolean(suprimento.status) == true ? (
-                        <Switch
-                        defaultChecked
-                        checkedChildren='Adicionado'
-                        unCheckedChildren='Adicionar'
-                        onClick={
-                          () => {
-                            handleAddProductInCart(suprimento.produto.id, index, suprimento.quantidade, false)
+                      
+
+                      <Switch
+                      checkedChildren='Adicionado'
+                      unCheckedChildren='Adicionar'
+                      onClick={
+                        (e) => {
+                          if(e == true ){
+                            handleAddProductInList(index, suprimento.produto.id)
+                          }
+                          else{
+                            handleRemoveProductInList(index, suprimento.produto.id)
                           }
                         }
-                         />
-                      ) : (
-
-                        <Switch
-                          checkedChildren='Adicionado'
-                          unCheckedChildren='Adicionar'
-                          onClick={
-                            () => {
-                              handleAddProductInCart(suprimento.produto.id, index, suprimento.quantidade, true)
-                            }
-                          }
-                        />
-                      )
                       }
-                      {/* <button
-                      type='button'
-                      >
-                        aaaaa
-                      </button> */}
+                        />
+
                     </S.FlexContainer>
                   </td>
                 </tr>
@@ -237,7 +281,6 @@ export  default function Supplies() {
             <label htmlFor=''>Nome do produto</label>
             <input type='text' placeholder='Nome do produto' />
           </div>
-
           <div>
             <label htmlFor=''>Código</label>
             <input type='text' placeholder='Código' />
@@ -245,6 +288,18 @@ export  default function Supplies() {
           <div>
             <label htmlFor=''>Descrição</label>
             <input type='text' placeholder='Descrição' />
+          </div>
+          <div>
+            <label htmlFor=''>Categoria</label>
+            <input type='text' placeholder='oi' />
+          </div>
+          <div>
+            <label htmlFor=''>Produto SKU</label>
+            <input type='text' placeholder='oi' />
+          </div>
+          <div>
+            <label htmlFor=''>Preço</label>
+            <input type='text' placeholder='oi' />
           </div>
           {/* <div>
             <label htmlFor=''>Referência técnica</label>
@@ -436,18 +491,18 @@ export  default function Supplies() {
           <h2>Listas de compras</h2>
 
           <button className='buttonSecondModal'>
-            <Link to="/comprar">
+            {/* <Link to="/comprar/">
               <h2>Essencial</h2>
               <p>Descrição da lista</p>
-            </Link>
+            </Link> */}
           </button>
 
-          <button className='buttonSecondModal'>
-            <Link to="/comprar">
+          {/* <button className='buttonSecondModal'>
+            <Link to="/comprar/">
               <h2>Ingredientes</h2>
               <p>Descrição  da lista</p>
             </Link>
-          </button>
+          </button> */}
 
           <S.BtnsContent>
             <button>Adicionar à lista</button>
@@ -483,18 +538,35 @@ export  default function Supplies() {
             <FaPlus />
           </button>
 
-          <button className='buttonSecondModal'>
+          {/* <button className='buttonSecondModal'>
             <h2>Essencial</h2>
             <p>Descrição da lista</p>
-          </button>
+          </button> */}
 
-          <button className='buttonSecondModal'>
-            <h2>Ingredientes</h2>
-            <p>Descrição  da lista</p>
-          </button>
+         {
+         listas.map(
+            (lista) => (
+            <button
+            key={lista.id}
+            className='buttonSecondModal'
+            onClick={() => setLista(lista)
+            }
+            >
+              <div 
+              // to="/comprar/"
+              >
+                <h2>{lista.nome}</h2>
+                <p>{lista.descricao}</p>
+              </div>
+           </button>
+            )
+          )
+          }
 
           <S.BtnsContent>
-            <button>Adicionar à lista</button>
+            <button
+            onClick={() => handleAddInLista(lista)}
+            >Adicionar à lista</button>
           </S.BtnsContent>
         </S.Container>
       </Modal>
@@ -506,7 +578,15 @@ export  default function Supplies() {
         overlayClassName='react-modal-overlay'
         className='react-modal-content '
       >
-        <S.Container>
+        <S.Container
+        onSubmit={
+          e => {
+            e.preventDefault()
+            e.target.reset()
+            handleCreateList(newListaName ,newListaDesc)
+          }
+        }
+        >
           <button
             type='button'
             onClick={closeModal3}
@@ -518,11 +598,30 @@ export  default function Supplies() {
           <h2>Criar lista</h2>
           
           <div>
-            <input type="text" name="" id="" placeholder="Nome da lista" />
-            <textarea name="" id="" cols="30" rows="10" placeholder="Descrição da lista"></textarea>
+            <input    
+            type="text"
+            name=""
+            id=""
+            placeholder="Nome da lista" 
+            required
+            onChange={(e) => setNewListaName(e.target.value)}
+            />
+            
+            <textarea 
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+            placeholder="Descrição da lista"
+            required
+            onChange={(e) => setNewListaDesc(e.target.value)}
+            />
+
           </div>
           <S.BtnsContent>
-            <button>Adicionar à lista</button>
+            <button
+            type='submit'
+            >Adicionar à lista</button>
           </S.BtnsContent>
         </S.Container>
       </Modal>

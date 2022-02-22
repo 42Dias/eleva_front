@@ -3,13 +3,14 @@ import responseHandler from '../../utils/responseHandler';
 import { api } from '../api'
 
 
-export default async function addInSuprimento(product, quantidade, suprimento, setUpdate){
-      const response = await api.post(`suprimentoProduto/`, { data: { product, 'quantidade': quantidade, suprimento: suprimento} })
+export default async function addInLista(nome, descricao){
+      const response = await api.post(`lista/`, { data: { nome: nome, descricao: descricao } })
       .then(
         (response) => {
           let status = response.status
-          responseHandler(status,"Produto adicionado ao suprimento com sucesso!",  "Erro na adição do produto")
+          responseHandler(status, "Lista criada com sucesso!",  "Erro na criação da lista")
           if(response.status == 200){
+
             return response.data
           }
           else if(response.status == 500){

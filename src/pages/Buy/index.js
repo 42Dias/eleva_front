@@ -2,7 +2,7 @@ import { useState ,useEffect, useRef, useCallback } from "react";
 import Modal from 'react-modal'
 import { BiLike } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
-import IMAGE4 from '../../assets/prodItem4.png'
+import IMAGE4 from '../../assets/sem_imagem.png'
 import bannerList from '../../assets/bannerList.png'
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
@@ -27,8 +27,8 @@ export default function Buy() {
 
   const { addProduct, cart } = useSuprimento();
   // const { addProduct, cart } = useCart();
-  
-  
+
+
   useEffect(
     () => {
       // checkAuth()
@@ -81,7 +81,6 @@ export default function Buy() {
                 {/* custoUlmtimaCompra ou precoVenda? */}
                 <div className='btnContent'>
                   <button
-                  // onClick={() => handleAddProduct(product.id)}
                   onClick={openModal}
                   >
                     Salvar <BiLike color={'white'} />
@@ -89,9 +88,9 @@ export default function Buy() {
                 </div>
               </S.BoxProd>
               </>
-        }
-        else{
-          return<>
+            }
+            else {
+              return <>
                 <S.BoxProd key={product.id}>
                 <Link to={`/produto/${product.id}`}>
                   <img src={IMAGE4} alt='' />
@@ -101,7 +100,6 @@ export default function Buy() {
                 <span>{formatPrice(parseFloat(product.precoVenda))}</span>
                 <div className='btnContent'>
                   <button
-                    // onClick={() => handleAddProduct(product.id)}
                     onClick={openModal}
                   >
                     Salvar <BiLike color={'white'} />
@@ -109,8 +107,8 @@ export default function Buy() {
                 </div>
               </S.BoxProd>
               </>
-                }
-      })}
+            }
+          })}
 
           {/* <S.BoxProd>
             <img src={IMAGE2} alt='' />
@@ -397,7 +395,7 @@ export default function Buy() {
         </S.Container>
 
         <S.BtnsContent>
-          <button>Salvar</button>
+          <button onClick={() => handleAddProduct(product.id)}>Salvar</button>
           <button style={{ marginLeft: '10px' }} onClick={closeModal}>Cancelar</button>
         </S.BtnsContent>
       </Modal>

@@ -32,7 +32,7 @@ export default function MyProducts() {
         <img src={IMAGE} alt='imagem inicial' />
       </S.BoxImage>
       <S.Button>
-        <Link to='/comprar'>Comece a comprar</Link>
+        <Link to='/comprar/'>Comece a comprar</Link>
       </S.Button>
 
       <form className="file"

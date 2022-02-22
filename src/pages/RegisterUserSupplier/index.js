@@ -31,7 +31,7 @@ export default function RegisterUserSupplier() {
  const [inscricaoEstadual           , setInscricaoEstadual] =         useState('')
  const [inscricaoMunicipal          , setInscricaoMunicipal] =        useState('') 
  const [cnaePrincipal               , setCnaePrincipal] =             useState('')
- const [cnaececundário              , setCnaececundario] =            useState('')
+ const [cnaeSecundário              , setCnaeSecundario] =            useState('')
  const [logradouro                  , setLogradouro] =                useState('')
  const [cep                         , setCep] =                       useState('')
  const [numero                      , setNumero] =                    useState('')
@@ -57,7 +57,7 @@ export default function RegisterUserSupplier() {
  const [rede                        , setRede] =                      useState('')
  const [condicaoEmpresa             , setCondicaoEmpresa] =           useState('')
  const [redes                       , setRedes] =                     useState('')
-
+ const [celular                     , setCelular] =                   useState('')
 
  const [empresaId                    , setEmpresaId] =                useState('')
 
@@ -74,7 +74,8 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
 
   async function handleChangeCEP(e){
     const cep = e.replace(/[^0-9]/g, '')
-
+    console.log("cep")
+    console.log(cep)
     if(cep.length == 8){
       const data = await cepInformation(cep)
       console.log(data)
@@ -97,7 +98,7 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
         inscricaoEstadual:   inscricaoEstadual ,
         inscricaoMunicipal:  inscricaoMunicipal ,
         cnae:                cnaePrincipal ,
-        cep:                 cep ,
+        cep:                 cep === '' ? maskedCep:cep,
         estado:              estado ,
         cidade:              cidade ,
         bairro:              bairro ,
@@ -105,12 +106,17 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
         numero:              numero ,
         complemento:         complemento ,
         telefone:            telefone ,
-        email:               emailDaEmpresa ,
+        email:               emailDaEmpresa,
+        emailDoResponsavel:  emailDoResponsavel,
+        nomeDoResponsavel:    nomeDoResponsavelComercial,
+        telefoneDoResponsavel:telefoneDoResponsavel,
         ativo:               'Ativo' , // Ativo out Inativo
         perfilComercial:     "Compra e Venda" , // "Compra","Compra e Venda","Venda"
         leadTime:            leadTime ,
         condicaoPagamento:   condicoesDePagamento ,
         formaPagamento:      formadePagamento ,
+        cnaeSecundario:      cnaeSecundário,
+        celular:             phoneNumberSecondary,
       }
     }
     console.log(data)
@@ -169,22 +175,27 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
     setInscricaoEstadual(         userData.inscricaoEstadual)
     setInscricaoMunicipal(        userData.inscricaoMunicipal)
     setCnaePrincipal(             userData.cnae)
-    setCnaececundario(            userData.cep)
-    setLogradouro(                userData.estado)
-    setCep(                       userData.cidade)
-    setNumero(                    userData.bairro)
-    setBairro(                    userData.logradouro)
-    setCidade(                    userData.numero)
-    setEstado(                    userData.complemento)
-    setComplemento(               userData.telefone)
-    setTelefone(                  userData.email)
-    setTelefoneSecundario(        userData.ativo)
-    setEmailDaEmpresa(            userData.perfilComercial)
-    setPerfilComercial(           userData.leadTime)
-    // setLeadTime(                  userData.condicaoPagamento)
-    setNomeDoResponsavelComercial(userData.formaPagamento)
-    
-    userData.condicaoPagamento ? setLeadTime(userData.condicaoPagamento) : false
+    setCnaeSecundario(            userData.cnaeSecundario)
+    setLogradouro(                userData.logradouro)
+    setMaskedCep(                 userData.cep)
+    setNumero(                    userData.numero)
+    setBairro(                    userData.bairro)
+    setCidade(                    userData.cidade)
+    setEstado(                    userData.estado)
+    setComplemento(               userData.complemento)
+    setTelefone(                  userData.telefone)
+    setTelefoneSecundario(        userData.telefoneSecundario)
+    setEmailDaEmpresa(            userData.email)
+    setPerfilComercial(           userData.perfilComercial)
+    setTelefone(                  userData.setTelefone)
+    setphoneMaskedNumber(         userData.telefone)
+    setphoneNumberSecondary(      userData.celular)
+    setNomeDoResponsavelComercial(userData.nomeDoResponsavel)
+    setTelefoneDoResponsavel(     userData.telefoneDoResponsavel)
+    setEmailDoResponsavel(        userData.emailDoResponsavel)
+    setLeadTime(                  userData.leadTime)
+    setCelular(                   userData.celular)
+    userData.condicaoPagamento ? setCondicoesDePagamento(userData.condicaoPagamento) : false
     userData.codigo            ? setCodigo(userData.codigo)              : false
     
     handleNormalizeMaskedFields(userData.cnpj)
@@ -230,7 +241,6 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
               type='text' 
               id='codigo'
               // onChange={(e) => setCodigo(e.target.value)}
-              value={codigo}
               />
             </S.ContentSupplierForm>
 
@@ -315,13 +325,13 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
             <S.ContentSupplierForm>
               <label htmlFor='cnae-secundario'>Cnae secundário</label>
               <input type='text' id='cnae-secundario' 
-              value={cnaececundário}
+              value={cnaeSecundário}
               
-              onChange={(e) => setCnaececundario(e.target.value)}/>
+              onChange={(e) => setCnaeSecundario(e.target.value)}/>
             </S.ContentSupplierForm>
 
             <S.ContentSupplierForm>
-              <label htmlFor='logradouro'>CEP*</label>
+              <label htmlFor='cep'>CEP*</label>
               {/* <input type='text' id='logradouro'
               value={}
               
@@ -438,6 +448,7 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
             <S.ContentSupplierForm>
               <label htmlFor='complemento'>Complemento</label>
               <input type='text' id='complemento'
+              value={complemento}
               onChange={(e) => setComplemento(e.target.value)}
               />
             </S.ContentSupplierForm>
@@ -524,6 +535,7 @@ MATRIZ E REDE NECESSITAM DE INFOMAÇÕES....S
               {/* tempo de espera */}
               <label htmlFor='lead-time'>Lead time*</label>
               <input type='text' id='lead-time'
+              value={leadTime}
               onChange={(e) => setLeadTime(e.target.value)}
               />
             </S.LeadTime>
