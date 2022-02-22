@@ -16,8 +16,6 @@ import { useSuprimento } from '../../hooks/useSuprimentos'
 
 import createLista from '../../services/lista/createLista'
 
-import { useCart } from '../../hooks/useCart'
-
 import { FaPlus, FaShoppingCart } from 'react-icons/fa'
 import addManyInLista from '../../services/lista/addManyInLista'
 
@@ -83,7 +81,7 @@ export  default function Supplies() {
   a plataforma vasculha o melhor preço com o sku
   */
 
- const { addProduct, removeProductFromCart } = useCart();
+
  const { removeProduct, addProductSuprimentoInCart } = useSuprimento();
 
 
@@ -473,10 +471,10 @@ export  default function Supplies() {
           <h2>Listas de compras</h2>
 
           <button className='buttonSecondModal'>
-            <Link to="/comprar/">
+            {/* <Link to="/comprar/">
               <h2>Essencial</h2>
               <p>Descrição da lista</p>
-            </Link>
+            </Link> */}
           </button>
 
           {/* <button className='buttonSecondModal'>
@@ -520,10 +518,10 @@ export  default function Supplies() {
             <FaPlus />
           </button>
 
-          <button className='buttonSecondModal'>
+          {/* <button className='buttonSecondModal'>
             <h2>Essencial</h2>
             <p>Descrição da lista</p>
-          </button>
+          </button> */}
 
          {
          listas.map(
