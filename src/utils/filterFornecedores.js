@@ -20,11 +20,11 @@ export default async function filterFornecedores(produtosNoCarrinho, setFunction
     }
   )
 
-    console.log("containerDeObjetos")
-    console.log(containerDeObjetos)
+    // console.log("containerDeObjetos")
+    // console.log(containerDeObjetos)
 
-    console.log(produtosNoCarrinho)
-    console.log(fornecedoresNoCarrinho)
+    // console.log(produtosNoCarrinho)
+    // console.log(fornecedoresNoCarrinho)
 
     containerDeObjetos.map( (fornecedor, index )=>{
       produtosNoCarrinho.filter(
@@ -39,7 +39,7 @@ export default async function filterFornecedores(produtosNoCarrinho, setFunction
           }
         }
         )
-        console.log(fornecedor, index)
+        // console.log(fornecedor, index)
       }
       )
       setFunction(containerDeObjetos)
