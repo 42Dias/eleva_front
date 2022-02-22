@@ -23,6 +23,10 @@ import createFatura from "../../services/fatura/createFatura";
 import createPedido from "../../services/pedido/createPedido";
 import deleteAllFromCart from "../../services/carrinho/deleteAllFromCart";
 import { id } from "../../services/api";
+import makeSumToFornecedorOfQuantidade from "../../utils/makeSumToFornecedorOfQuantidade";
+import makeSumToFornecedorOfPeso from "../../utils/makeSumToFornecedorOfPeso";
+import makeSumToFornecedorOfCubagem from "../../utils/makeSumToFornecedorOfCubagem";
+import makeSumToFornecedorOfValorUnitario from "../../utils/makeSumToFornecedorOfValorUnitario";
 
 export default function BuyProds() {
   const { addProduct, removeProductFromCart } = useCart();
@@ -149,8 +153,8 @@ export default function BuyProds() {
     await handleLoadCart()
   }
 
-  console.log("carrinho.length")
-  console.log(carrinho.length)
+  console.log("carrinho")
+  console.log(carrinho )
   
 
   return (
@@ -340,7 +344,7 @@ export default function BuyProds() {
                           carrinho.id
                         }
                         >
-                          <td>Macbook</td>
+                          <td>????????</td>
                           <td>
                             {carrinho.produto.descricao}
                           </td>
@@ -350,8 +354,8 @@ export default function BuyProds() {
                           <td>
                             {carrinho.quantidade}
                           </td>
-                          <td>200g</td>
-                          <td>100g</td>
+                          <td>{(carrinho.produto.pesoLiq * carrinho.quantidade).toFixed(0)}g</td>
+                          <td>{(carrinho.produto.cubagemEmbalagem * carrinho.quantidade).toFixed(0)}g</td>
                           <td>
                             {formatPrice(Number(carrinho.produto.preco) * carrinho.quantidade)}
                           </td>
@@ -366,12 +370,37 @@ export default function BuyProds() {
                         borderRadius: '0px 0px 5px 5px',
                       }}
                     >
-                      <td>Tipo de frete: FOB</td>
-                      <td>Valor do frete?: R$14,65</td>
-                      <td>Peso total: 200g</td>
-                      <td>Volume total: 100g</td>
-                      <td>Quantidade de produtos: 15</td>
-                      <td>Valor unitario: R$ 136,74</td>
+                      <td>Tipo de frete: FOB         </td>
+                      
+                      {/* SISTEMA DE FRETE NÃO CALCULADO COM O CLIENTE!!!!! */}
+                      {/* <td>Valor do frete?: R$14,65   </td> */}
+                      <td></td>
+                      <td>Valor unitario: 
+                      {
+                        formatPrice(
+                          Number(
+                            makeSumToFornecedorOfValorUnitario(fornecedor)
+                          ))
+                      } </td>
+                      <td>Quantidade de produtos:  
+                      {` ${Number(
+                            makeSumToFornecedorOfQuantidade(fornecedor)
+                          )
+                        }`}
+                      </td>
+                      <td>
+                        Peso total:
+                         {` ${Number(
+                            makeSumToFornecedorOfPeso(fornecedor)
+                          )
+                        }g`}
+                      </td>
+                      <td>Volume total:
+                        {` ${Number(
+                            makeSumToFornecedorOfCubagem(fornecedor)
+                          )
+                        }g`}         
+                      </td>
                       <td>Valor total: 
                         <br/> 
                       {
