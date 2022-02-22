@@ -22,9 +22,7 @@ export  default function Categories() {
   const [modalIsOpenCreate, setIsOpenCreate] = React.useState(false)
   const [modalIsOpenChange, setIsOpenChange] = React.useState(false)
 
-  const [loading, setLoading] = useState(false);
-
-  
+  const [loading, setLoading] = useState(false);  
 
   const [changeCategoryName, setChangeCategoryName] = useState('');
   const [id, setId] = useState('');

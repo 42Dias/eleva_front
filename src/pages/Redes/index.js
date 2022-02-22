@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FiChevronLeft, FiCheck, FiTrash } from 'react-icons/fi'
+import { FiCheck, FiTrash, FiPlus, FiX } from 'react-icons/fi'
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 import loadRedes from '../../services/rede/loadRedes'
 import deleteRedes from '../../services/rede/deleteRedes'
 import cadastrarRedes from '../../services/rede/cadastrarRedes'
 import changeRedes from '../../services/rede/changeRedes'
+import Modal from 'react-modal'
 // import loadRedes from '../../services/loadRedes'
 
 export  default function Redes() {
 
   const [redes, setRedes] = useState([]);
   const [newRedes, setNewRedes] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false)
+
+
+  function openModal() {
+    setIsOpen(true)
+  }
+  function afterOpenModal() {}
+
+  function closeModal() {
+    setIsOpen(false)
+  }
+
 
   const [changeRedesName, setChangeRedesName] = useState('');
   const [id, setId] = useState('');
@@ -70,29 +82,10 @@ export  default function Redes() {
       <S.ContainerApprove>
         <h1>Redes</h1>
 
-        <Link className='back'
-        >
-          <FiChevronLeft />
-        </Link>
-          <form
-          onSubmit={(e) => {
-            handleRedesCreate(e)
-          }}
-          >
-            <h2>
-              Criar Rede
-            </h2>
-            <input 
-              type="text"
-              required
-              onChange={(text) => setNewRedes(text.target.value)}
-            />
-            <button
-            type='submit'
-            >
-              Enviar
-            </button>
-          </form>
+        <button onClick={openModal} className='back'>
+          <span>Criar rede</span>
+          <FiPlus />
+        </button>
         {
           redes.map(
             (categorie) => (      
@@ -137,6 +130,41 @@ export  default function Redes() {
           )
         }
       </S.ContainerApprove>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        overlayClassName='react-modal-overlay'
+        className='react-modal-content'
+      >
+        <S.Container>
+          <button
+            type='button'
+            onClick={closeModal}
+            className='react-modal-close'
+          >
+            <FiX />
+          </button>
+
+          <form onSubmit={(e) => { handleRedesCreate(e) }}>
+            <h2>
+              Criar Rede
+            </h2>
+            
+            <input 
+              type="text"
+              required
+              onChange={(text) => setNewRedes(text.target.value)}
+            />
+            
+            <button type='submit'>
+              Enviar
+            </button>
+          </form>
+          
+        </S.Container>
+      </Modal>
     </>
   )
 }

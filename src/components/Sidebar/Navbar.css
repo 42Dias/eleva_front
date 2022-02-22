@@ -15,6 +15,11 @@ body {
   font-size: 16px !important;
   background: transparent;
   color: #05DEBD;
+  transition: .5s;
+}
+
+.menu-bars:hover {
+  color: #02d4b5;
 }
 
 .nav-menu {
@@ -162,6 +167,11 @@ span {
   align-items: center;
   justify-content:center;
   color: #A1A8CF;
+  cursor: pointer;
+}
+
+.bell:hover {
+  color: #979ec4;
 }
 
 .bell svg {
