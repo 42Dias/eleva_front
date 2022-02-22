@@ -11,8 +11,8 @@ export default async function addInLista(product, lista, setUpdate){
           responseHandler(status,"Produto adicionado ao lista com sucesso!",  "Erro na adição do produto")
           if(response.status == 200){
 
-            console.log("update 1")
-            console.log(update)
+            // console.log("update 1")
+            // console.log(update)
 
             return response.data
           }
