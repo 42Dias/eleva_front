@@ -14,6 +14,9 @@ import { FiX } from "react-icons/fi";
 
 export default function Buy() {
   const [modalIsOpen, setIsOpen] = useState(false)
+  
+  const [id, setId] = useState('')
+
 
   function openModal() {
     setIsOpen(true)
@@ -58,6 +61,7 @@ export default function Buy() {
     function handleAddProduct(id) {
       console.log(id)
       addProduct(id,  1);
+      closeModal()
     }
 
   return (
@@ -100,7 +104,10 @@ export default function Buy() {
                 <span>{formatPrice(parseFloat(product.precoVenda))}</span>
                 <div className='btnContent'>
                   <button
-                    onClick={openModal}
+                    onClick={() => {
+                      openModal()
+                      setId(product.id)
+                    }}
                   >
                     Salvar <BiLike color={'white'} />
                   </button>
@@ -167,8 +174,8 @@ export default function Buy() {
         </S.Container>
 
         <S.BtnsContent>
-          <button onClick={() => handleAddProduct(product.id)}>Salvar</button>
-          <button style={{ marginLeft: '10px' }} onClick={closeModal}>Cancelar</button>
+          <button onClick={closeModal}>Cancelar</button>
+          <button style={{ marginLeft: '10px' }}  onClick={() => handleAddProduct(id)}>Salvar</button>
         </S.BtnsContent>
       </Modal>
 
