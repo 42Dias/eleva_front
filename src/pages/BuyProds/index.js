@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+
 import Modal from 'react-modal'
 import { Link } from 'react-router-dom'
 // FiFilter,
-import { FiEdit, FiPlus, FiX } from 'react-icons/fi'
+import { FiPlus, FiX } from 'react-icons/fi'
 import Navbar from '../../components/Sidebar/Sidebar'
 import Accordion from '../../components/Accordion/Accordion'
 import item from './../../assets/item.png'
@@ -22,9 +23,11 @@ import createFatura from "../../services/fatura/createFatura";
 import createPedido from "../../services/pedido/createPedido";
 
 export default function BuyProds() {
-  const [modalIsOpen, setIsOpen] = React.useState(false)
-  const [modalIsOpen2, setIsOpen2] = React.useState(false)
-  const [modalIsOpen3, setIsOpen3] = React.useState(false)
+  const { addProduct, removeProductFromCart } = useCart();
+
+  
+  const [modalIsOpen,             setIsOpen                   ] =  useState(false)
+  const [modalIsOpen2,            setIsOpen2                  ] =  useState(false)
   const [carrinho,                setCarrinho                 ] =  useState([])
   const [produtosDosFornecedores, setProdutosDosFornecedores  ] =  useState([])
   const [containerDeObjetos,     setContainerDeObjetos        ] =  useState([])
@@ -54,17 +57,6 @@ export default function BuyProds() {
   function closeModal2() {
     setIsOpen2(false)
   }
-
-  function openModal3() {
-    setIsOpen3(true)
-  }
-
-  function afterOpenModal3() {}
-
-  function closeModal3() {
-    setIsOpen3(false)
-  }
-
   /*
   Aqui é o carrinho
   */
@@ -149,9 +141,9 @@ export default function BuyProds() {
             fornecedorId: produtosNoCarrinho.fornecedorId, 
             produtos: produtosNoCarrinho.produtos
           })
-          closeModal()   
       }
-    )
+      )
+    closeModal()   
 
 
   }
@@ -301,9 +293,9 @@ export default function BuyProds() {
               key={fornecedor.id}
               >
               <h4
-                key={fornecedor.id}
+              key={fornecedor.id}
               >
-              Fornecedor 1 <FiEdit /></h4>
+              {fornecedor.produtos[0].empresaNome}</h4>
               {
                   <table
                   key={fornecedor.id}
@@ -317,7 +309,6 @@ export default function BuyProds() {
                         <th>Peso</th>
                         <th>Volume</th>
                         <th>Valor</th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody className='body'>
@@ -344,7 +335,6 @@ export default function BuyProds() {
                           <td>
                             {formatPrice(Number(carrinho.produto.preco) * carrinho.quantidade)}
                           </td>
-                          <td><button><FiEdit onClick={openModal3} /></button></td>
                         </tr>
                       )
                     )}
@@ -370,8 +360,8 @@ export default function BuyProds() {
                             makeSumToFornecedor(fornecedor)
                           ))
                       }
+                      
                       </td>
-                      <td></td>
                     </tr>
                 </tbody>
               </table>
@@ -504,45 +494,6 @@ export default function BuyProds() {
 
           <S.BtnsContent>
             <button>Comprar</button>
-          </S.BtnsContent>
-        </S.Container>
-      </Modal>
-
-      <Modal
-        isOpen={modalIsOpen3}
-        onAfterOpen={afterOpenModal3}
-        onRequestClose={closeModal3}
-        overlayClassName='react-modal-overlay'
-        className='react-modal-content '
-      >
-        <S.Container>
-          <button
-            type='button'
-            onClick={closeModal3}
-            className='react-modal-close'
-          >
-            <FiX />
-          </button>
-          <h2>Lista de fornecedores</h2>
-
-          <button className='buttonSecondModal'>
-            <h2>Sabonete</h2>
-            <p>Fornecedor: Evaldo 1,99</p>
-            <p>Preço padrão: R$ 199,00</p>
-            <p>Preço negociado: Não</p>
-            <h3>Total: R$199,00</h3>
-          </button>
-
-          <button className='buttonSecondModal'>
-            <h2>Sabonete</h2>
-            <p>Fornecedor: Ryan</p>
-            <p>Preço padrão: R$ 199,00</p>
-            <p>Preço negociado: Sim</p>
-            <h3>Total: R$169,00</h3>
-          </button>
-
-          <S.BtnsContent>
-            <button>Trocar</button>
           </S.BtnsContent>
         </S.Container>
       </Modal>
