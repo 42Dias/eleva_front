@@ -1,66 +1,60 @@
-import React from 'react'
-import * as FaIcons from 'react-icons/fa'
-import { FiTag, FiGrid } from 'react-icons/fi'
+import { FiHome, FiBox, FiPlus, FiClock, FiUserPlus, FiCheck, FiGlobe, FiShoppingCart, FiGrid } from "react-icons/fi";
+import { IoStorefrontOutline } from "react-icons/io5";
+import { BsCashCoin } from "react-icons/bs";
 
 export const SidebarData = [
   {
     title: 'Home',
-    path:  '/home',
-    icon:  <FaIcons.FaHome />,
+    path: '/home',
+    icon: <FiHome />,
     cName: 'nav-text',
   },
   {
     title: 'Comprar',
-    path:  '/comprar/',
-    icon:  <FaIcons.FaShoppingCart />,
-    cName: 'nav-text',
-  },
-  {
-    title: 'Suprimentos',
-    path:  '/home',
-    icon:  <FaIcons.FaShoppingCart />,
+    path: '/listar-produtos',
+    icon: <FiShoppingCart />,
     cName: 'nav-text',
   },
   {
     title: 'Meus pedidos',
-    path:  '/meus-pedidos',
-    icon:  <FaIcons.FaBox />,
-    cName: 'nav-text',
-  },
-  {
-    title: 'Cadastrar produto',
-    path:  '/cadastrar-produto',
-    icon:  <FiTag />,
+    path: '/meus-pedidos',
+    icon: <FiBox />,
     cName: 'nav-text',
   },
   {
     title: 'Cadastrar fornecedor',
-    path:  '/cadastrar-fornecedor',
-    icon:  <FaIcons.FaPlus />,
+    path: '/cadastrar-fornecedor',
+    icon: <IoStorefrontOutline />,
+    cName: 'nav-text',
+  },  
+  {
+    title: 'Cadastrar produto',
+    path: '/cadastrar-produto',
+    icon: <FiPlus />,
     cName: 'nav-text',
   },
   {
     title: 'Histórico de pedidos',
-    path:  '/historico-de-pedidos',
-    icon:  <FaIcons.FaHistory />,
+    path: '/historico-de-pedidos',
+    icon: <FiClock />,
     cName: 'nav-text',
   },
   {
-    title: 'Detalhes da venda',
-    path:  '/detalhes-da-venda',
-    icon:  <FaIcons.FaMoneyBillAlt />,
+    title: 'Detalhes das vendas',
+    path: '/detalhes-da-venda',
+    icon: <BsCashCoin />,
     cName: 'nav-text',
   },
   {
     title: 'Aprovar usuários',
-    path:  '/aprovar-usuario',
-    icon:  <FaIcons.FaUserPlus />,
+    path: '/aprovar-usuario',
+    icon: <FiUserPlus />,
     cName: 'nav-text',
   },
   {
     title: 'Aprovar produtos',
-    path:  '/aprovar-produtos',
-    icon:  <FaIcons.FaCheck />,
+    path: '/aprovar-produtos',
+    icon: <FiCheck />,
     cName: 'nav-text',
   },
   // {
@@ -70,14 +64,14 @@ export const SidebarData = [
   //   cName: 'nav-text',
   // },
   {
-    title: 'Categorias',
-    path:  '/categorias',
-    icon:  <FiGrid />,
+    title: 'Aprovar rede',
+    path: '/redes',
+    icon: <FiGlobe />,
     cName: 'nav-text',
   },
   {
     title: 'Categorias',
-    path:  '/listar-produtos',
+    path:  '/categorias',
     icon:  <FiGrid />,
     cName: 'nav-text',
   },

@@ -4,19 +4,19 @@ import { Link } from 'react-router-dom'
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 
-export default function MyRequests() {
+export default function Received() {
   return (
     <>
       <Navbar />
       <S.ContainerMyRequests>
-        <h1>Pedidos</h1>
+        <h1>Recebidos</h1>
         <Link className='history'>
           <FaHistory />
         </Link>
 
         <S.GridMyRequestTop>
-          <span>Enviados</span>
-          <Link to='/recebidos'>Recebidos</Link>
+          <Link to='/meus-pedidos'>Enviados</Link>
+          <span>Recebidos</span>
           <Link className='history-icon' to='/historico-de-pedidos'>Historico <FaHistory /></Link>
         </S.GridMyRequestTop>
 

@@ -5,6 +5,7 @@ import item from '../../assets/sem_imagem.png'
 import deleteIcon from './../../assets/delete.svg'
 import * as S from './styled'
 import productFindPendente from '../../services/produto/productFindPendente'
+import { role } from '../../services/api'
 
 export default function ApproveOrders() {
   const [produtos,  setProdutos ]   =  useState([]) 
@@ -13,13 +14,17 @@ export default function ApproveOrders() {
   MESMO DA CONSTAL -> ADMIN: TODOS, EMPRESA: DELA
   */
   async function loadProdutos() {
-    let prod = await productFindPendente()
+    let prod = await productFindPendente(role)
     setProdutos(prod.rows)
     console.log(produtos)
   }
-  useEffect(() => {
-    loadProdutos()
-  })
+  useEffect(
+    () => {
+
+      loadProdutos()
+    }, []
+  )
+
   return (
     <>
       <Navbar />
@@ -35,7 +40,7 @@ export default function ApproveOrders() {
           {/* <span>Produto SKU</span> */}
           <span>Código</span>
           <span>Nome</span>
-          <span>Status</span>
+          {/* <span>Status</span> */}
           <span>Quantidade</span>
         </S.GridValidation>
         {/* <Accordion
@@ -90,14 +95,15 @@ export default function ApproveOrders() {
               prodSku={'falta'}
               code={produto.codigo}
               name={produto.nome}
-              approve='Embalagem'
-              status={produto.statusProduto}
+              // approve={produto.status ? 'Aprovado':'Aguardando'}
+              //status={produto.statusProduto}
               amount={produto.estoque}
               content={produto.image ? produto.image:item}
               conteudo='falta'
               preco={'R$ '+produto.precoVenda}
               informacoes='falta'
               lote={produto.estoqueMinimo}
+              leadtime={produto.leadTime}
               iconClass='btnDelete'
               icon={deleteIcon}
             />

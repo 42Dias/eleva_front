@@ -22,9 +22,7 @@ export  default function Categories() {
   const [modalIsOpenCreate, setIsOpenCreate] = React.useState(false)
   const [modalIsOpenChange, setIsOpenChange] = React.useState(false)
 
-  const [loading, setLoading] = useState(false);
-
-  
+  const [loading, setLoading] = useState(false);  
 
   const [changeCategoryName, setChangeCategoryName] = useState('');
   const [id, setId] = useState('');
@@ -43,7 +41,7 @@ export  default function Categories() {
   }
 
   async function handleDeleteCategory(id){
-    console.log(id)
+    // console.log(id)
 
     await deleteCategory(id)
     loadData()
@@ -72,8 +70,8 @@ export  default function Categories() {
 
   async function changeCategory(e){
     e.preventDefault()
-    console.log(id)
-    console.log(changeCategoryName)
+    // console.log(id)
+    // console.log(changeCategoryName)
     let data = {
       data:{
         nome: changeCategoryName
@@ -82,7 +80,7 @@ export  default function Categories() {
     e.target.reset();  // reset all form data
     closeModal()
     let res = await changeCategorias(id, data)
-    res == 'ok' ? loadData() : console.log('5465151654165160')
+    res == 'ok' ? loadData() :  console('5465151654165160')
     
   }
   return (

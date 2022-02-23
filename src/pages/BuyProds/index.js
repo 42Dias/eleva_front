@@ -18,11 +18,19 @@ import { AiOutlineConsoleSql } from "react-icons/ai";
 import loadLista from '../../services/lista/loadLista'
 import findLista from "../../services/lista/findLista";
 import { useCart } from '../../hooks/useCart'
+import getIdFromUrl from "../../utils/getIdFromUrl";
+import createFatura from "../../services/fatura/createFatura";
+import createPedido from "../../services/pedido/createPedido";
+import deleteAllFromCart from "../../services/carrinho/deleteAllFromCart";
+import { id } from "../../services/api";
+import makeSumToFornecedorOfQuantidade from "../../utils/makeSumToFornecedorOfQuantidade";
+import makeSumToFornecedorOfPeso from "../../utils/makeSumToFornecedorOfPeso";
+import makeSumToFornecedorOfCubagem from "../../utils/makeSumToFornecedorOfCubagem";
+import makeSumToFornecedorOfValorUnitario from "../../utils/makeSumToFornecedorOfValorUnitario";
 
 export default function BuyProds() {
   const { addProduct, removeProductFromCart } = useCart();
 
-  
   const [modalIsOpen,             setIsOpen                   ] =  useState(false)
   const [modalIsOpen2,            setIsOpen2                  ] =  useState(false)
   const [carrinho,                setCarrinho                 ] =  useState([])
@@ -79,8 +87,6 @@ export default function BuyProds() {
     let cartData =  await loadCart()
     let formatedCart = await filterFornecedores(cartData, setCarrinho)
     let sumFromCarrinho = makeSumToCarrinho(formatedCart)
-
-    console.log(sumFromCarrinho)
     setValorTotal(sumFromCarrinho)
 
     
@@ -101,28 +107,18 @@ export default function BuyProds() {
   async function findAndSetLista(id){
 
     let lista = await findLista(id)
-      console.log("lista")
-      console.log(lista)
       setLista(lista)
   }
 
 
   function handleFindLista(){
-    let listaId = GetIdFromUrl()
+    let listaId = getIdFromUrl("#/comprar/")
     findAndSetLista(listaId)
   }
 
   async function handleLoadListas(){
     let listas = await loadLista()
-      console.log("listas")
-      console.log(listas)
       setListas(listas)
-  }
-  
-  function GetIdFromUrl(){
-    let rawUrl = window.location.hash
-    let cleanUrl = rawUrl.replace("#/comprar/" , "")
-    return cleanUrl
   }
 
   function handleChangeUrl(id){
@@ -137,14 +133,29 @@ export default function BuyProds() {
   }
 
   async function handlePushInCart(id, quantidade){
-    console.log(id)
     await addProduct(id, quantidade);
 
     await handleLoadCart()
 
   }
 
+  async function handleSubmitPedido(){
+    carrinho.map(
+      async (produtosNoCarrinho) => {    
+        await createPedido({
+            fornecedorId: produtosNoCarrinho.fornecedorId, 
+            produtos: produtosNoCarrinho.produtos
+          })
+      }
+      )
+    closeModal()   
+    await deleteAllFromCart(id)
+    await handleLoadCart()
+  }
 
+  console.log("carrinho")
+  console.log(carrinho )
+  
 
   return (
     <>
@@ -160,15 +171,20 @@ export default function BuyProds() {
             <button onClick={openModal}>Finalizar compra</button>
           </div>
         </div>
+        {
+          lista.length == 0 ? (false) : (
+           
+          <S.GridValidation>
+            <span>Cod. barras</span>
+            <span>Produto SKU</span>
+            <span>Código</span>
+            <span>Nome</span>
+            <span>Status</span>
+            <span>Quantidade</span>
+          </S.GridValidation>
 
-        <S.GridValidation>
-          <span>Cod. barras</span>
-          <span>Produto SKU</span>
-          <span>Código</span>
-          <span>Nome</span>
-          <span>Status</span>
-          <span>Quantidade</span>
-        </S.GridValidation>
+          )
+        }
       {
         lista.map(
           (item, index) => (
@@ -211,6 +227,18 @@ export default function BuyProds() {
         />
           )
         )
+        }
+        {
+          lista.length != 0 ? (false) : (
+            <h2 
+            style={{
+              textAlign: 'center'
+            }}
+            >
+              Não há produtos nesta lista, selecione outra no botão Lista de Compras +
+            </h2>
+
+          )
         }
         {/* <Accordion
           codeBarras='321312421321321'
@@ -316,7 +344,7 @@ export default function BuyProds() {
                           carrinho.id
                         }
                         >
-                          <td>Macbook</td>
+                          <td>????????</td>
                           <td>
                             {carrinho.produto.descricao}
                           </td>
@@ -326,8 +354,8 @@ export default function BuyProds() {
                           <td>
                             {carrinho.quantidade}
                           </td>
-                          <td>200g</td>
-                          <td>100g</td>
+                          <td>{(carrinho.produto.pesoLiq * carrinho.quantidade).toFixed(0)}g</td>
+                          <td>{(carrinho.produto.cubagemEmbalagem * carrinho.quantidade).toFixed(0)}g</td>
                           <td>
                             {formatPrice(Number(carrinho.produto.preco) * carrinho.quantidade)}
                           </td>
@@ -342,20 +370,45 @@ export default function BuyProds() {
                         borderRadius: '0px 0px 5px 5px',
                       }}
                     >
-                      <td>Tipo de frete: FOB</td>
-                      <td>Valor do frete?: R$14,65</td>
-                      <td>Peso total: 200g</td>
-                      <td>Volume total: 100g</td>
-                      <td>Quantidade de produtos: 15</td>
-                      <td>Valor unitario: R$ 136,74</td>
-                      <td>Valor total:
+                      <td>Tipo de frete: {fornecedor.produtos[0].empresaFrete} </td>
+                      
+                      {/* SISTEMA DE FRETE NÃO CALCULADO COM O CLIENTE!!!!! */}
+                      {/* <td>Valor do frete?: R$14,65   </td> */}
+                      <td></td>
+                      <td>Valor unitario: 
+                      {
+                        formatPrice(
+                          Number(
+                            makeSumToFornecedorOfValorUnitario(fornecedor)
+                          ))
+                      } </td>
+                      <td>Quantidade de produtos:  
+                      {` ${Number(
+                            makeSumToFornecedorOfQuantidade(fornecedor)
+                          )
+                        }`}
+                      </td>
+                      <td>
+                        Peso total:
+                         {` ${Number(
+                            makeSumToFornecedorOfPeso(fornecedor)
+                          )
+                        }g`}
+                      </td>
+                      <td>Volume total:
+                        {` ${Number(
+                            makeSumToFornecedorOfCubagem(fornecedor)
+                          )
+                        }g`}         
+                      </td>
+                      <td>Valor total: 
+                        <br/> 
                       {
                         formatPrice(
                           Number(
                             makeSumToFornecedor(fornecedor)
                           ))
                       }
-                      
                       </td>
                     </tr>
                 </tbody>
@@ -365,6 +418,14 @@ export default function BuyProds() {
               )
             )
           }
+          {
+          carrinho.length != 0 ? (false) : (
+            <h2>
+              Não há produtos no carrinho
+            </h2>
+
+          )
+        }
 
           {/*
           <h4>Fornecedor 2</h4>
@@ -431,6 +492,7 @@ export default function BuyProds() {
           <div>
             <button>Salvar compra</button>
             <button
+            onClick={() => handleSubmitPedido()}
             style={
               {
                 marginLeft: '20px'

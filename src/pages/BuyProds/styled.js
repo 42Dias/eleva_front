@@ -112,6 +112,12 @@ export const Container = styled.form`
     border-radius: 5px;
     height: 120px;
     font-size: 14px;
+
+    button {
+      border: 0;
+      background: transparent;
+    }
+
     tr {
       gap: 20px;
       margin-top: 10px !important;

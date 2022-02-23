@@ -5,7 +5,7 @@ import { api } from '../api'
 
 export default async function addManyInLista(lista, idsDosProdutos){
   
-  console.log(idsDosProdutos)
+  // console.log(idsDosProdutos)
   
   idsDosProdutos.map(
     /*  
@@ -16,7 +16,7 @@ export default async function addManyInLista(lista, idsDosProdutos){
   */
     async (prodId) => {
 
-      console.log(prodId)
+      // console.log(prodId)
       const response = await api.post(`listaProduto/`, { data: { produtoId: prodId, lista: lista} })
       .then(
         (response) => {
@@ -32,8 +32,8 @@ export default async function addManyInLista(lista, idsDosProdutos){
         }
       )
       // return response
-      console.log( "response" )
-      console.log( response )
+      // console.log( "response" )
+      // console.log( response )
       
     }
   ) 
