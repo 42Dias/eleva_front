@@ -10,10 +10,17 @@ import './Navbar.css'
 function Navbar() {
   const [sidebar, setSidebar] = useState(false)
 
+  const [search, setSearch] = useState("")
+  
   const showSidebar = () => setSidebar(!sidebar)
 
   function logOff(){
     localStorage.clear()
+  }
+  function handleSubmitSearch(search){
+    console.log("submit")
+    console.log("search")
+    console.log(search)
   }
 
   return (
@@ -28,8 +35,18 @@ function Navbar() {
               />
             </Link>
 
-            <input type='text' placeholder='Pesquise o seu produto' />
-            <button>
+            <input type='text' 
+            placeholder='Pesquise o seu produto'
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if(e.key == 'Enter'){
+                handleSubmitSearch(search)
+              }
+            }}
+            />
+            <button
+            onClick={(e) => handleSubmitSearch(search)}
+            >
               <FaIcons.FaSearch />
             </button>
           </div>
