@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FiCheck, FiTrash, FiPlus, FiX } from 'react-icons/fi'
+import { FiCheck, FiTrash, FiPlus, FiX, FiEdit2 } from 'react-icons/fi'
 import Navbar from '../../components/Sidebar/Sidebar'
 import * as S from './styled'
 import loadRedes from '../../services/rede/loadRedes'
@@ -15,6 +15,7 @@ export  default function Redes() {
   const [redes, setRedes] = useState([]);
   const [newRedes, setNewRedes] = useState('');
   const [modalIsOpen, setIsOpen] = useState(false)
+  const [modalIsOpen2, setIsOpen2] = useState(false)
 
 
   function openModal() {
@@ -24,6 +25,15 @@ export  default function Redes() {
 
   function closeModal() {
     setIsOpen(false)
+  }
+
+  function openModal2() {
+    setIsOpen2(true)
+  }
+  function afterOpenModal2() {}
+
+  function closeModal2() {
+    setIsOpen2(false)
   }
 
 
@@ -94,14 +104,16 @@ export  default function Redes() {
                   <p>{categorie.nome}</p>
                 </S.StoreUser>
                 <S.IconsActionsApprove>
+
                   <S.Check
-                  onClick={
-                    () => setId(categorie.id)
-                  }
+                    // onClick={
+                    //   () => setId(categorie.id)
+                    // }
+                    
+                    onClick={openModal2}
                   >
                     <Link>
-                      <FiCheck
-                      />
+                      <FiEdit2 />
                     </Link>
                   </S.Check>
                   <S.Trash
@@ -113,18 +125,6 @@ export  default function Redes() {
                     </Link>
                   </S.Trash>
                 </S.IconsActionsApprove>
-                  <form 
-                  onSubmit={(e) => handleChangeRedes(e)}
-                  >
-                    <input
-                    type='text'
-                    onChange={(e) => setChangeRedesName(e.target.value)}
-                    />
-                    <button
-                    type='submit'>
-                      Alterar
-                    </button>
-                  </form>
               </S.ContentApproveUser>
             ) 
           )
@@ -162,6 +162,42 @@ export  default function Redes() {
               Enviar
             </button>
           </form>
+          
+        </S.Container>
+      </Modal>
+
+      <Modal
+        isOpen={modalIsOpen2}
+        onAfterOpen={afterOpenModal2}
+        onRequestClose={closeModal2}
+        overlayClassName='react-modal-overlay'
+        className='react-modal-content'
+      >
+        <S.Container>
+          <button
+            type='button'
+            onClick={closeModal2}
+            className='react-modal-close'
+          >
+            <FiX />
+          </button>
+
+          <div>
+          <h2>Editar rede</h2>
+
+          <form 
+            onSubmit={(e) => handleChangeRedes(e)}
+          >
+            <input
+            type='text'
+            onChange={(e) => setChangeRedesName(e.target.value)}
+            />
+            <button
+            type='submit'>
+              Alterar
+            </button>
+          </form>
+          </div>
           
         </S.Container>
       </Modal>

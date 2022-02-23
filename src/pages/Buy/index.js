@@ -14,6 +14,9 @@ import { FiX } from "react-icons/fi";
 
 export default function Buy() {
   const [modalIsOpen, setIsOpen] = useState(false)
+  
+  const [id, setId] = useState('')
+
 
   function openModal() {
     setIsOpen(true)
@@ -58,6 +61,7 @@ export default function Buy() {
     function handleAddProduct(id) {
       console.log(id)
       addProduct(id,  1);
+      closeModal()
     }
 
   return (
@@ -100,7 +104,10 @@ export default function Buy() {
                 <span>{formatPrice(parseFloat(product.precoVenda))}</span>
                 <div className='btnContent'>
                   <button
-                    onClick={openModal}
+                    onClick={() => {
+                      openModal()
+                      setId(product.id)
+                    }}
                   >
                     Salvar <BiLike color={'white'} />
                   </button>
@@ -109,91 +116,6 @@ export default function Buy() {
               </>
             }
           })}
-
-          {/* <S.BoxProd>
-            <img src={IMAGE2} alt='' />
-
-            <h3>Nome do produto</h3>
-            <p>Descrição do produto com especificações técnicas</p>
-            <span>R$ 219,99</span>
-            <div className='btnContent'>
-              <button>
-                Salvar <BiLike color={'white'} />
-              </button>
-              <FiEye color={'05DEBD'} />
-            </div>
-          </S.BoxProd>
-          
-
-          <S.BoxProd>
-            <img src={IMAGE3} alt='' />
-
-            <h3>Nome do produto</h3>
-            <p>Descrição do produto com especificações técnicas</p>
-            <span>R$ 219,99</span>
-            <div className='btnContent'>
-              <button>
-                Salvar <BiLike color={'white'} />
-              </button>
-              <FiEye color={'05DEBD'} />
-            </div>
-          </S.BoxProd>
-
-          <S.BoxProd>
-            <img src={IMAGE4} alt='' />
-
-            <h3>Nome do produto</h3>
-            <p>Descrição do produto com especificações técnicas</p>
-            <span>R$ 219,99</span>
-            <div className='btnContent'>
-              <button>
-                Salvar <BiLike color={'white'} />
-              </button>
-              <FiEye color={'05DEBD'} />
-            </div>
-          </S.BoxProd>
-
-          <S.BoxProd>
-            <img src={IMAGE4} alt='' />
-
-            <h3>Nome do produto</h3>
-            <p>Descrição do produto com especificações técnicas</p>
-            <span>R$ 219,99</span>
-            <div className='btnContent'>
-              <button>
-                Salvar <BiLike color={'white'} />
-              </button>
-              <FiEye color={'05DEBD'} />
-            </div>
-          </S.BoxProd>
-
-          <S.BoxProd>
-            <img src={IMAGE4} alt='' />
-
-            <h3>Nome do produto</h3>
-            <p>Descrição do produto com especificações técnicas</p>
-            <span>R$ 219,99</span>
-            <div className='btnContent'>
-              <button>
-                Salvar <BiLike color={'white'} />
-              </button>
-              <FiEye color={'05DEBD'} />
-            </div>
-          </S.BoxProd>
-
-          <S.BoxProd>
-            <img src={IMAGE4} alt='' />
-
-            <h3>Nome do produto</h3>
-            <p>Descrição do produto com especificações técnicas</p>
-            <span>R$ 219,99</span>
-            <div className='btnContent'>
-              <button>
-                Salvar <BiLike color={'white'} />
-              </button>
-              <FiEye color={'05DEBD'} />
-            </div>
-          </S.BoxProd> */}
         </S.ContainerPurchases>
       </S.BoxBuy>
     </S.ContainerBuy>
@@ -215,175 +137,24 @@ export default function Buy() {
             <FiX />
           </button>
 
-          <div>
-            <label htmlFor=''>Nome do produto</label>
-            <input type='text' placeholder='Nome do produto' />
-          </div>
 
           <div>
             <label htmlFor=''>Código</label>
             <input type='text' placeholder='Código' />
           </div>
           <div>
-            <label htmlFor=''>Descrição</label>
-            <input type='text' placeholder='Descrição' />
-          </div>
-          {/* <div>
-            <label htmlFor=''>Referência técnica</label>
-            <input type='text' placeholder='oi' />
-          </div> */}
-          {/* <div>
-            <label htmlFor=''>Tipo de material</label>
-            <input type='text' placeholder='oi' />
-          </div> */}
-          {/* <div>
-            <label htmlFor=''>Data de inatividade</label>
-            <input type='text' placeholder='oi' />
-          </div> */}
-          <div>
-            <label htmlFor=''>Categoria</label>
-            <input type='text' placeholder='Categoria' />
-          </div>
-          {/* <div>
-            <label htmlFor=''>Quantia em estoque</label>
-            <input type='text' placeholder='oi' />
-          </div>
-          <div>
-            <label htmlFor=''>Demanda</label>
-            <input type='text' placeholder='oi' />
-          </div>
-          <div>
-            <label htmlFor=''>Estoque de segurança</label>
-            <input type='text' placeholder='oi' />
-          </div>
-          <div>
-            <label htmlFor=''>Estoque máximo</label>
-            <input type='text' placeholder='oi' />
-          </div>
-          <div>
-            <label htmlFor=''>Modulo mínimo</label>
-            <input type='text' placeholder='oi' />
-          </div> */}
-          {/* <div>
-            <label htmlFor=''>Marca</label>
-            <input type='text' placeholder='oi' />
-          </div> */}
-          {/* <div>
-            <label htmlFor=''>Entrega mínima</label>
-            <input type='text' placeholder='oi' />
-          </div>
-          <div>
-            <label htmlFor=''>Pedido mínimo (Quant/Valor)</label>
-            <input type='text' placeholder='oi' />
-          </div> */}
-          <div>
-            <label htmlFor=''>Preço</label>
-            <input type='text' placeholder='Preço' />
-          </div>
-          {/* <div>
-            <label htmlFor=''>Altura (cm)</label>
-            <input type='text' placeholder='oi' />
-          </div> */}
-          {/* <div>
-            <label htmlFor=''>Comprimento (cm)</label>
-            <input type='text' placeholder='oi' />
-          </div> */}
-          {/* <div>
-            <label htmlFor=''>Cubagem da embalagem</label>
-            <input type='text' placeholder='oi' />
-          </div>
-          <div>
-            <label htmlFor=''>Largura(cm)</label>
-            <input type='text' placeholder='oi' />
-          </div>
-          <div>
-            <label htmlFor=''>Peso bruto(g)</label>
-            <input type='text' placeholder='oi' />
-          </div>
-          <div>
-            <label htmlFor=''>Peso líquido(g)</label>
-            <input type='text' placeholder='oi' />
-          </div>
-          <div>
-            <label htmlFor=''>Data da última venda</label>
-            <input type='text' placeholder='oi' />
-          </div>
-          <div>
-            <label htmlFor=''>Data da primeira venda</label>
-            <input type='text' placeholder='oi' />
-          </div>
-          <div>
-            <label htmlFor=''>NCM</label>
-            <input type='text' placeholder='oi' />
-          </div>
-          <div>
-            <label htmlFor=''>Descrição NCM</label>
-            <input type='text' placeholder='oi' />
-          </div> */}
-
-          {/* <div>
-            <label htmlFor=''>Rede SKU</label>
-            <div style={{ display: 'flex' }}>
-              <input type='checkbox' name='' id='' />
-              <label htmlFor=''>Sim</label>
-            </div>
-
-            <div style={{ display: 'flex' }}>
-              <input type='checkbox' name='' id='' />
-              <label htmlFor=''>Não</label>
-            </div>
-          </div> */}
-
-          {/* <div>
-            <label htmlFor=''>Status de atividade</label>
-            <div style={{ display: 'flex' }}>
-              <input type='checkbox' name='' id='' />
-              <label htmlFor=''>Ativo</label>
-            </div>
-
-            <div style={{ display: 'flex' }}>
-              <input type='checkbox' name='' id='' />
-              <label htmlFor=''>Inativo</label>
-            </div>
-
-            <div style={{ display: 'flex' }}>
-              <input type='checkbox' name='' id='' />
-              <label htmlFor=''>Pesquisa</label>
-            </div>
-          </div> */}
-
-          {/* <div>
-            <label htmlFor=''>Origem do produto</label>
-            <div style={{ display: 'flex' }}>
-              <input type='checkbox' name='' id='' />
-              <label htmlFor=''>Nacional</label>
-            </div>
-
-            <div style={{ display: 'flex' }}>
-              <input type='checkbox' name='' id='' />
-              <label htmlFor=''>Importado</label>
-            </div>
-          </div> */}
-          {/* <div>
-            <label htmlFor=''>Lead time</label>
-            <input type='text' placeholder='oi' />
-          </div> */}
-          {/* <div>
-            <label htmlFor=''>Descrição NCM</label>
-            <input type='text' placeholder='oi' />
-          </div> */}
-          <div>
             <label htmlFor=''>Produto SKU</label>
             <input type='text' placeholder='Produto SKU' />
           </div>
-          {/* <div>
-            <label htmlFor=''>Código de barras</label>
-            <input type='text' placeholder='oi' />
-          </div> */}
-          {/* <div>
-            <label htmlFor=''>Unidade de medida</label>
-            <input type='text' placeholder='oi' />
-          </div> */}
+          {/*           
+          <div>
+            <label htmlFor=''>Nome do produto x</label>
+            <input type='text' placeholder='Nome do produto' />
+          </div>
+          <div>
+            <label htmlFor=''>Descrição x </label>
+            <input type='text' placeholder='Descrição' />
+          </div>
           <div>
             <label htmlFor=''>Produto compra</label>
             <input type='text' placeholder='Produto compra' />
@@ -392,11 +163,19 @@ export default function Buy() {
             <label htmlFor=''>Produto venda</label>
             <input type='text' placeholder='Produto venda' />
           </div>
+          <div>
+            <label htmlFor=''>Categoria</label>
+            <input type='text' placeholder='Categoria' />
+          </div>
+          <div>
+            <label htmlFor=''>Preço</label>
+            <input type='text' placeholder='Preço' />
+          </div> */}
         </S.Container>
 
         <S.BtnsContent>
-          <button onClick={() => handleAddProduct(product.id)}>Salvar</button>
-          <button style={{ marginLeft: '10px' }} onClick={closeModal}>Cancelar</button>
+          <button onClick={closeModal}>Cancelar</button>
+          <button style={{ marginLeft: '10px' }}  onClick={() => handleAddProduct(id)}>Salvar</button>
         </S.BtnsContent>
       </Modal>
 

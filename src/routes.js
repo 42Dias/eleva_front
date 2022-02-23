@@ -26,6 +26,7 @@ import Redes from './pages/Redes'
 import Especialidades from './pages/Especialidades'
 import CodigoDeBarras from './pages/CodigoDeBarras'
 import Received from './pages/Received'
+import InviteSupplier from './pages/InviteSupplier'
 
 const Routes = () => {
   return (
@@ -59,6 +60,7 @@ const Routes = () => {
           <Route path='/especialidades' exact component={Especialidades} />
           <Route path='/CodigoDeBarras' exact component={CodigoDeBarras} />
           <Route path='/recebidos' exact component={Received} />
+          <Route path='/convidar-fornecedor' exact component={InviteSupplier} />
           <Route path='*' exact component={ErrorPage} />
         </Switch>
       </HashRouter>

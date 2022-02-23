@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Modal from 'react-modal'
 import { Link } from 'react-router-dom'
 // FiFilter,
-import { FiPlus, FiX } from 'react-icons/fi'
+import { FiEdit, FiPlus, FiX } from 'react-icons/fi'
 import Navbar from '../../components/Sidebar/Sidebar'
 import Accordion from '../../components/Accordion/Accordion'
 import item from './../../assets/item.png'
@@ -33,6 +33,7 @@ export default function BuyProds() {
 
   const [modalIsOpen,             setIsOpen                   ] =  useState(false)
   const [modalIsOpen2,            setIsOpen2                  ] =  useState(false)
+  const [modalIsOpen3, setIsOpen3                             ] =  useState(false)
   const [carrinho,                setCarrinho                 ] =  useState([])
   const [produtosDosFornecedores, setProdutosDosFornecedores  ] =  useState([])
   const [containerDeObjetos,     setContainerDeObjetos        ] =  useState([])
@@ -62,25 +63,21 @@ export default function BuyProds() {
   function closeModal2() {
     setIsOpen2(false)
   }
-  /*
-  Aqui é o carrinho
-  */
+
+  function openModal3() {
+    setIsOpen3(true)
+  }
+
+  function afterOpenModal3() {}
+
+  function closeModal3() {
+    setIsOpen3(false)
+  }
 
   /*
     LISTAR 
     DELETAR
     EXCLUIR DA TELA
-  */
-
-  /*
-  
-  NO TAB IR PARA O MODAL, FAZENDO O PUSH NO FORNECEDOR
-  ele continua na tela!
-
-  toast de finalizado!
-
-  salvar compra adiciona na lista
-  
   */
 
   async function handleLoadCart(){
@@ -179,8 +176,9 @@ export default function BuyProds() {
             <span>Produto SKU</span>
             <span>Código</span>
             <span>Nome</span>
-            <span>Status</span>
+            <span></span>
             <span>Quantidade</span>
+      
           </S.GridValidation>
 
           )
@@ -316,9 +314,7 @@ export default function BuyProds() {
               <div
               key={fornecedor.id}
               >
-              <h4
-              key={fornecedor.id}
-              >
+              <h4>
               {fornecedor.produtos[0].empresaNome}</h4>
               {
                   <table
@@ -333,6 +329,7 @@ export default function BuyProds() {
                         <th>Peso</th>
                         <th>Volume</th>
                         <th>Valor</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody className='body'>
@@ -359,6 +356,8 @@ export default function BuyProds() {
                           <td>
                             {formatPrice(Number(carrinho.produto.preco) * carrinho.quantidade)}
                           </td>
+                          <td><button><FiEdit onClick={openModal3} /></button></td>
+
                         </tr>
                       )
                     )}
@@ -410,6 +409,7 @@ export default function BuyProds() {
                           ))
                       }
                       </td>
+                      <td></td>
                     </tr>
                 </tbody>
               </table>
@@ -425,62 +425,7 @@ export default function BuyProds() {
             </h2>
 
           )
-        }
-
-          {/*
-          <h4>Fornecedor 2</h4>
-          <table>
-            <thead>
-              <tr className='firts'>
-                <th>Produto SKU</th>
-                <th>Descrição</th>
-                <th>Valor unitario</th>
-                <th>Quantidade</th>
-                <th>Peso</th>
-                <th>Volume</th>
-                <th>Valor</th>
-              </tr>
-            </thead>
-
-            <tbody className='body'>
-              <tr>
-                <td>Macbook</td>
-                <td>Notebook</td>
-                <td>R$42,56</td>
-                <td>Macbook Pro M1X</td>
-                <td>200g</td>
-                <td>100g</td>
-                <td>R$122,87</td>
-              </tr>
-              <tr>
-                <td>Macbook</td>
-                <td>Notebook</td>
-                <td>R$42,56</td>
-                <td>Macbook Pro M1X</td>
-                <td>200g</td>
-                <td>100g</td>
-                <td>R$122,87</td>
-              </tr>
-              <tr
-                style={{
-                  background: '#05DEBD',
-                  color: 'white',
-                  width: '100vw',
-                  borderRadius: '0px 0px 5px 5px',
-                }}
-              >
-                <td>Tipo de frete: FOB</td>
-                <td>Valor do frete: R$14,65</td>
-                <td>Peso total: 200g</td>
-                <td>Volume total: 100g</td>
-                <td>Quantidade de produtos: 15</td>
-                <td>Valor unitario: R$ 136,74</td>
-                <td>Valor total: R$ 136,74</td>
-              </tr>
-            </tbody>
-          </table>
-          */}
-        
+        }        
         </S.Container>
 
         <S.BtnsContent>
@@ -550,6 +495,78 @@ export default function BuyProds() {
 
           <S.BtnsContent>
             <button>Comprar</button>
+          </S.BtnsContent>
+        </S.Container>
+      </Modal>
+
+      <Modal
+        isOpen={modalIsOpen3}
+        onAfterOpen={afterOpenModal3}
+        onRequestClose={closeModal3}
+        overlayClassName='react-modal-overlay'
+        className='react-modal-content '
+      >
+        {/* Lista de fornecedores que possuem este produto?? */}
+        {/* PROCURARIA PELO CÓDIGO INTERNO DO PRODUTO  */}
+        {/* => QUE O CLIENTE ATRIBUIU A ELE             */}
+        <S.Container>
+          <button
+            type='button'
+            onClick={closeModal3}
+            className='react-modal-close'
+          >
+            <FiX />
+          </button>
+          <h2>Lista de fornecedores</h2>
+         
+          <button className='buttonSecondModal'>
+            <h2>
+              fornecedor.produtos[0].empresaNome
+            </h2>
+            <p>Fornecedor: Evaldo 1,99</p>
+            <p>Preço padrão: R$ 199,00</p>
+            <p>Preço negociado: Não</p>
+            <h3>Total: R$199,00</h3>
+          </button>
+
+
+          <button className='buttonSecondModal'>
+            <h2>
+              fornecedor.produtos[0].empresaNome
+            </h2>
+            <p>Fornecedor: Evaldo 1,99</p>
+            <p>Preço padrão: R$ 199,00</p>
+            <p>Preço negociado: Não</p>
+            <h3>Total: R$199,00</h3>
+          </button>
+
+
+          <button className='buttonSecondModal'>
+            <h2>
+              fornecedor.produtos[0].empresaNome
+            </h2>
+            <p>Fornecedor: Evaldo 1,99</p>
+            <p>Preço padrão: R$ 199,00</p>
+            <p>Preço negociado: Não</p>
+            <h3>Total: R$199,00</h3>
+          </button>
+
+          <button className='buttonSecondModal'>
+            <h2>
+              fornecedor.produtos[0].empresaNome
+            </h2>
+            <p>Fornecedor: Evaldo 1,99</p>
+            <p>Preço padrão: R$ 199,00</p>
+            <p>Preço negociado: Não</p>
+            <h3>Total: R$199,00</h3>
+          </button>
+          <S.BtnsContent>
+            
+            <button>Trocar</button>
+
+            {/*
+            
+            */}
           </S.BtnsContent>
         </S.Container>
       </Modal>

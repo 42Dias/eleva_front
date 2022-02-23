@@ -190,8 +190,10 @@ export const BoxProd = styled.div`
 
 
 export const BtnsContent = styled.div`
+  justify-content: center;
   padding: 30px 0;
   display: flex;
+  margin: 0 auto;
 
   button {
     width: 165px;
@@ -203,7 +205,7 @@ export const BtnsContent = styled.div`
     background: #aa2323;
     border-radius: 5px;
 
-    &:first-child {
+    &:last-child {
       background: #05debd;
     }
   }
@@ -211,17 +213,19 @@ export const BtnsContent = styled.div`
 
 
 export const Container = styled.form`
+display: flex;
+flex-direction: column;
+align-items: center;
+
   .add {
     background-color: ${theme.colors.green};
     color: ${theme.colors.white};
     width: 55px !important;
     height: 40px;
     border: 0;
-    margin: 20px 0;
     border-radius: 5px;
     display: flex;
     align-items: center;
-    justify-content: center;
 
     svg {
       color: ${theme.colors.white};
@@ -232,6 +236,7 @@ export const Container = styled.form`
     margin: 10px 0;
     display: flex;
     flex-direction: column;
+    margin: 10px auto;
   }
 
   input[type='checkbox'] {

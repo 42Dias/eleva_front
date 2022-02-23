@@ -120,6 +120,9 @@ export const BtnsContent = styled.div`
 
 
 export const Container = styled.form`
+  display: flex;
+  flex-direction: column;
+
   .add {
     background-color: ${theme.colors.green};
     color: ${theme.colors.white};
@@ -141,6 +144,21 @@ export const Container = styled.form`
     margin: 10px 0;
     display: flex;
     flex-direction: column;
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      button {
+        height: 40px;
+        background: ${theme.colors.green};
+        border: 0;
+        color: white;
+        width: 257px;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+    }
   }
 
   input[type='checkbox'] {
