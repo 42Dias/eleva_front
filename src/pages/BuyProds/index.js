@@ -156,7 +156,28 @@ export default function BuyProds() {
     await handleLoadCart()
   }
 
- 
+  async function handleLoadProdutoCodigo(id){
+    const prodsCod = await findUserProduto(id)
+    console.log(prodsCod)
+    setProdutosCod(prodsCod)
+  }
+
+  async function handleDeleteProdutosOfFornecedor(produtos){
+    let ids = []
+
+    produtos.map(
+      produto => {
+        console.log(produto)
+        ids.push(produto.id)
+      }
+    )
+
+    await deleteManyFromCart(ids)
+
+    await handleLoadCart()
+  }
+  
+
   console.log("carrinho")
   console.log(carrinho )
   
@@ -336,7 +357,7 @@ export default function BuyProds() {
                         <th>Valor</th>
                         <th>
                           <DeleteButton
-                            // onClick={(e) => handleDeleteProdutosOfFornecedor(fornecedor.produtos)}
+                            onClick={(e) => handleDeleteProdutosOfFornecedor(fornecedor.produtos)}
                             >
                                 <FiTrash/>
                           </DeleteButton>
