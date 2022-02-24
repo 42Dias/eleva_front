@@ -11,11 +11,15 @@ import { formatPrice } from "../../utils/format";
 import { useSuprimento } from "../../hooks/useSuprimentos";
 import { useCart } from "../../hooks/useCart";
 import { FiX } from "react-icons/fi";
+import cadastrarUserProduto from "../../services/userProduto/cadastrarUserProduto";
 
 export default function Buy() {
   const [modalIsOpen, setIsOpen] = useState(false)
   
   const [id, setId] = useState('')
+
+  const [codigoSalvar, setCodigoSalvar] = useState('')
+  const [produtoSKUSalvar, setProdutoSKUSalvar] = useState('')
 
 
   function openModal() {
@@ -58,10 +62,21 @@ export default function Buy() {
       if (node) observer.current.observe(node)
     }, [loading, hasMore])
   
-    function handleAddProduct(id) {
+    async function handleAddProduct(id) {
       console.log(id)
-      addProduct(id,  1);
+      
+      let body = {
+        codigo:     codigoSalvar    ,
+        produtoSKU: produtoSKUSalvar,
+        produtoId: id
+      }
+      
       closeModal()
+      
+      await cadastrarUserProduto(body)
+      
+      await addProduct(id,  1);
+
     }
 
   return (
@@ -140,11 +155,11 @@ export default function Buy() {
 
           <div>
             <label htmlFor=''>Código</label>
-            <input type='text' placeholder='Código' />
+            <input onChange={(e) => setCodigoSalvar(e.target.value)} type='text' placeholder='Código' />
           </div>
           <div>
             <label htmlFor=''>Produto SKU</label>
-            <input type='text' placeholder='Produto SKU' />
+            <input onChange={(e) => setProdutoSKUSalvar(e.target.value)} type='text' placeholder='Produto SKU' />
           </div>
           {/*           
           <div>
