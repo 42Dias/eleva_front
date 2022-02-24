@@ -271,6 +271,10 @@ export default function BuyProds() {
               }}
               onKeyDown={(e) => {
                 if(e.key == 'Tab'){
+                  if(item.quantidade < 1){
+                    toast.error("Quantidade do item deve ser maior que 1")
+                    return
+                  }
                   handlePushInCart(item.produto.id, item.quantidade)
                 }
               }}
