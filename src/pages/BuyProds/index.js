@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Modal from 'react-modal'
 import { Link } from 'react-router-dom'
 // FiFilter,
-import { FiEdit, FiPlus, FiX } from 'react-icons/fi'
+import { FiEdit, FiPlus, FiTrash, FiX } from 'react-icons/fi'
 import Navbar from '../../components/Sidebar/Sidebar'
 import Accordion from '../../components/Accordion/Accordion'
 import item from './../../assets/item.png'
@@ -27,6 +27,9 @@ import makeSumToFornecedorOfQuantidade from "../../utils/makeSumToFornecedorOfQu
 import makeSumToFornecedorOfPeso from "../../utils/makeSumToFornecedorOfPeso";
 import makeSumToFornecedorOfCubagem from "../../utils/makeSumToFornecedorOfCubagem";
 import makeSumToFornecedorOfValorUnitario from "../../utils/makeSumToFornecedorOfValorUnitario";
+import findUserProduto from "../../services/userProduto/findUserProduto";
+import { DeleteButton } from "../../components/ButtonDelete/styled";
+import deleteManyFromCart from "../../services/carrinho/deleteManyFromCart";
 
 export default function BuyProds() {
   const { addProduct, removeProductFromCart } = useCart();
@@ -40,8 +43,11 @@ export default function BuyProds() {
   const [fornecedoresNoCarrinho, setFornecedoresNoCarrinho    ] =  useState([])
   const [listas,                 setListas                    ] =  useState([])
   const [lista,                  setLista                     ] =  useState([])
+  const [produtosCod,            setProdutosCod               ] =  useState([])
   const [valorTotal,             setValorTotal                ] =  useState(0)
   const [listaId,                setListaId                   ] =  useState("")
+  const [id,                     setId                        ] =  useState("")
+
 
 
   function openModal() {
@@ -150,6 +156,7 @@ export default function BuyProds() {
     await handleLoadCart()
   }
 
+ 
   console.log("carrinho")
   console.log(carrinho )
   
@@ -305,8 +312,6 @@ export default function BuyProds() {
           
           NECESSIDADE: PUXAR MAIS DADOS DO FORNECEDOR!
 
-          
-          
           */}
           {
           carrinho.map(
@@ -329,7 +334,13 @@ export default function BuyProds() {
                         <th>Peso</th>
                         <th>Volume</th>
                         <th>Valor</th>
-                        <th></th>
+                        <th>
+                          <DeleteButton
+                            // onClick={(e) => handleDeleteProdutosOfFornecedor(fornecedor.produtos)}
+                            >
+                                <FiTrash/>
+                          </DeleteButton>
+                        </th>
                       </tr>
                     </thead>
                     <tbody className='body'>
@@ -356,7 +367,18 @@ export default function BuyProds() {
                           <td>
                             {formatPrice(Number(carrinho.produto.preco) * carrinho.quantidade)}
                           </td>
-                          <td><button><FiEdit onClick={openModal3} /></button></td>
+                          <td
+                            onClick={() => {
+                              setId(carrinho.produto.id)
+                              handleLoadProdutoCodigo(carrinho.produto.id)
+                              }} 
+                          >
+                            <button>
+                              <FiEdit onClick={() => {
+                                openModal3()
+                                }} />
+                            </button>
+                          </td>
 
                         </tr>
                       )
@@ -518,48 +540,35 @@ export default function BuyProds() {
             <FiX />
           </button>
           <h2>Lista de fornecedores</h2>
-         
-          <button className='buttonSecondModal'>
-            <h2>
-              fornecedor.produtos[0].empresaNome
-            </h2>
-            <p>Fornecedor: Evaldo 1,99</p>
-            <p>Preço padrão: R$ 199,00</p>
-            <p>Preço negociado: Não</p>
-            <h3>Total: R$199,00</h3>
-          </button>
+          {
+          produtosCod.map(
+            (produto) => (
+              <button className='buttonSecondModal'>
+                <h2>
+                  {produto.nome}
+                </h2>
+                <p>Fornecedor: {produto.nomeFantasia}</p>
+                <p>
+                  Preço padrão:
+                  {
+                    formatPrice(Number(produto.precoVenda))
+                  }
+                </p>
+                <p>
+                   x Preço negociado: 
+                   {
+                     produto.precoNegociado ? formatPrice(Number(produto.precoNegociado)) : '  Não'
+                   }
+                </p>
+                <h3>Total: 
+                  {
+                    produto.precoNegociado ? formatPrice(Number(produto.precoNegociado)) : formatPrice(Number(produto.precoVenda))
+                  }
+                </h3>
+              </button>
+            )
+          )}
 
-
-          <button className='buttonSecondModal'>
-            <h2>
-              fornecedor.produtos[0].empresaNome
-            </h2>
-            <p>Fornecedor: Evaldo 1,99</p>
-            <p>Preço padrão: R$ 199,00</p>
-            <p>Preço negociado: Não</p>
-            <h3>Total: R$199,00</h3>
-          </button>
-
-
-          <button className='buttonSecondModal'>
-            <h2>
-              fornecedor.produtos[0].empresaNome
-            </h2>
-            <p>Fornecedor: Evaldo 1,99</p>
-            <p>Preço padrão: R$ 199,00</p>
-            <p>Preço negociado: Não</p>
-            <h3>Total: R$199,00</h3>
-          </button>
-
-          <button className='buttonSecondModal'>
-            <h2>
-              fornecedor.produtos[0].empresaNome
-            </h2>
-            <p>Fornecedor: Evaldo 1,99</p>
-            <p>Preço padrão: R$ 199,00</p>
-            <p>Preço negociado: Não</p>
-            <h3>Total: R$199,00</h3>
-          </button>
           <S.BtnsContent>
             
             <button>Trocar</button>
