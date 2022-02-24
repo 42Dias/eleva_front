@@ -129,6 +129,7 @@ export default function RegisterProduct() {
       departamentoId: departamentoId,
       empresaId: empresaId,
       image: image,
+      status: false,
     }
     return data
   }

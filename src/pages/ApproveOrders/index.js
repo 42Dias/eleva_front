@@ -8,7 +8,7 @@ import productFindPendente from '../../services/produto/productFindPendente'
 import { role } from '../../services/api'
 
 export default function ApproveOrders() {
-  const [produtos,  setProdutos ]   =  useState([]) 
+  const [produtos, setProdutos] = useState([])
   /*  
   Listar os pedidos da empresa
   MESMO DA CONSTAL -> ADMIN: TODOS, EMPRESA: DELA
@@ -18,11 +18,40 @@ export default function ApproveOrders() {
     setProdutos(prod.rows)
     console.log(produtos)
   }
-  useEffect(
-    () => {
+  async function approve(id, userData) {
+    console.log(id)
+    console.log("approve")
+    let newUserData = {
+      data: {
+        ...userData,
+        ativo: 'Ativo'
+      }
+    }
+    console.log(newUserData)
+    // await changeEmpresa(id, newUserData)
+    // console.log(userData.email)
+    // await handleSendEmail(userData.email)
 
-      loadProdutos()
-    }, []
+    loadProdutos()
+  }
+
+  async function disapprove(id, userData) {
+    console.log(id)
+    console.log("disapprove")
+    let newUserData = {
+      data: {
+        ...userData,
+        ativo: 'Ativo'
+      }
+    }
+    //await changeEmpresa(id, newUserData)
+    // await handleSendEmail(newUserData.email)
+    loadProdutos()
+  }
+  useEffect(() => {
+
+    loadProdutos()
+  }, []
   )
 
   return (
@@ -88,7 +117,7 @@ export default function ApproveOrders() {
           iconClass='btnDelete'
           icon={deleteIcon}
         /> */}
-        {produtos.length > 0?
+        {produtos.length > 0 ?
           produtos.map((produto) =>
             <Accordion
               codeBarras={produto.codigoDeBarras}
@@ -98,11 +127,12 @@ export default function ApproveOrders() {
               // approve={produto.status ? 'Aprovado':'Aguardando'}
               //status={produto.statusProduto}
               amount={produto.estoque}
-              content={produto.image ? produto.image:item}
+              content={produto.image ? produto.image : item}
               conteudo='falta'
-              preco={'R$ '+produto.precoVenda}
+              preco={'R$ ' + produto.precoVenda}
               informacoes='falta'
               lote={produto.estoqueMinimo}
+              quantidadeporembalagem={produto.qtdEmbalagem}
               leadtime={produto.leadTime}
               iconClass='btnDelete'
               icon={deleteIcon}
