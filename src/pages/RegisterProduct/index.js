@@ -15,6 +15,7 @@ import { api } from "../../services/api";
 import loadCategorias from "../../services/categoria/loadCategorias";
 import { toast } from "react-toastify";
 import axios from "axios";
+
 export default function RegisterProduct() {
   const [categorias, setcategorias] = useState([])
   const [medidas, setMedidas] = useState([])

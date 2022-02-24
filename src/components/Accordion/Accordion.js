@@ -28,7 +28,7 @@ function Accordion(props) {
         <p>{props.name}</p>
         <span className={props.status}>{props.approve}</span>
         <p>
-        {  props.amount.replace("null", "") != ' ' ? (`${props.amount} Produtos`) : ''}
+        {  props.amount >= 0 ? (`${props.amount} Produtos`) : false}
           </p>
         <Chevron className={`${setRotate}`} width={10} fill={'#777'} />
       </button>
@@ -38,7 +38,7 @@ function Accordion(props) {
         className='accordion_content'
       >
         <Link to='/produto-1'>
-          <img src={props.content} alt='' />
+          <img src={props.content} style={{height: '120px'}} alt='' />
         </Link>
         <p>{props.conteudo}</p>
         <p>{props.preco}</p>
