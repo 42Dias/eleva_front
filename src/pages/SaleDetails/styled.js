@@ -29,10 +29,11 @@ export const ContainerDetails = styled.div`
 
 export const Content = styled.div`
   width: 100%;
-  height: 160px;
+  /*min-height: 160px;*/
   background: ${theme.colors.neutral[300]};
   border-radius: 5px;
   padding-right: 15px;
+  padding-top: 15px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 35px;
