@@ -92,7 +92,7 @@ export default function Buy() {
           return <>
               <S.BoxProd key={product.id} ref={lastProdElementRef} >
                 <Link to={`/produto/${product.id}`}>
-                    <img src={IMAGE4} alt='' />
+                    <img src={product.image ? product.image :IMAGE4} alt='' />
                 </Link>
                 <h3>{product.nome}</h3>
                 <p>{product.descricao}</p>
@@ -115,7 +115,7 @@ export default function Buy() {
               return <>
                 <S.BoxProd key={product.id}>
                 <Link to={`/produto/${product.id}`}>
-                  <img src={IMAGE4} alt='' />
+                  <img src={product.image ? product.image :IMAGE4} alt='' />
                 </Link>
                 <h3>{product.nome}</h3>
                 <p>{product.descricao}</p>
