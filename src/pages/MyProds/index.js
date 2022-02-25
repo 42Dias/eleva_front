@@ -23,6 +23,7 @@ import changeProduct from "../../services/produto/changeProduct";
 
 import { empresaId as empresaUserId  } from "../../services/api" ;
 import LoadingGif from "../../components/LoadingGif";
+import loadCategorias from "../../services/categoria/loadCategorias";
 
 export default function MyProds() {
   const [modalIsOpen, setIsOpen] = useState(false)
