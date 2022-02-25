@@ -96,7 +96,10 @@ export default function Buy() {
                 </Link>
                 <h3>{product.nome}</h3>
                 <p>{product.descricao}</p>
-                <span>{formatPrice(parseFloat(product.precoVenda))}</span>
+                <span>{product.precoVendaNegociada}</span>
+
+                <span>{formatPrice(parseFloat(product.precoVendaNegociado || product.precoVenda))}</span>
+
                 {/* custoUlmtimaCompra ou precoVenda? */}
                 <div className='btnContent'>
                   <button
@@ -116,7 +119,7 @@ export default function Buy() {
                 </Link>
                 <h3>{product.nome}</h3>
                 <p>{product.descricao}</p>
-                <span>{formatPrice(parseFloat(product.precoVenda))}</span>
+                <span>{formatPrice(parseFloat(product.precoVendaNegociado || product.precoVenda))}</span>
                 <div className='btnContent'>
                   <button
                     onClick={() => {
