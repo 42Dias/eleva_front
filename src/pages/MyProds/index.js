@@ -19,6 +19,7 @@ import cadastrarProduct from "../../services/produto/cadastrarProduct";
 import currencyConfig from '../../utils/currenryConfig'
 
 import productFindWithFilter from "../../services/produto/productFindWithFilter";
+import changeProduct from "../../services/produto/changeProduct";
 
 export default function MyProds() {
   const [modalIsOpen, setIsOpen] = useState(false)
@@ -133,7 +134,7 @@ export default function MyProds() {
     let prodSelected = produtos[index]
 
     console.log(prodSelected)
-
+    setId(prodSelected.id)
     setcodigo(prodSelected.codigo)
     setCodigoDeBarras(prodSelected.codigoDeBarras)
     setnome(prodSelected.nome)
@@ -179,8 +180,70 @@ export default function MyProds() {
     setPriceFormated(formatPrice(Number(prodSelected.precoVenda)))
     setStatus(prodSelected.status)
     setImage(prodSelected.image)
-
   }
+
+  async function handleChangeProduct() {
+    const data = generateProductData()
+
+    await changeProduct(data, id).then(
+      async (funcReturn) => {
+        if (funcReturn == 'ok') {
+          await handleLoadProdutos()       
+        }
+      }
+    )
+  }
+
+  function generateProductData() {
+    const data = {
+      codigo: codigo,
+      nome: nome,
+      descricao: descricao,
+      unidadeMedida: unidadeMedida,
+      tipoMaterial: tipoMaterial,
+      precoVenda: preco,
+      referenciaTec: referenciaTec,
+      demandaDiaria: demandaDiaria,
+      estoque: estoque,
+      estoqueFornecedor: estoqueFornecedor,
+      leadTime: leadTime,
+      ativo: "Sim", // PARA TESTE !!!!!!
+      dataInatividade: dataInatividade,
+      redeSKU: redeSKU,
+      pedidoMinimo: pedidoMinimo,
+      entregaMinima: entregaMinima,
+      qtdEmbalagem: qtdEmbalagem,
+      moduloMinimo: moduloMinimo,
+      moduloMaster: moduloMaster,
+      comprimento_cm: comprimento_cm,
+      largura_cm: largura_cm,
+      altura_cm: altura_cm,
+      cubagemEmbalagem: cubagemEmbalagem,
+      pesoLiq: pesoLiq,
+      pesoBruto: pesoBruto,
+      estoqueMinimo: estoqueMinimo,
+      estoqueMaximo: estoqueMaximo,
+      curva: curva,
+      mediaDeVendaA: mediaDeVendaA,
+      mediaDeVendaB: mediaDeVendaB,
+      dtUltimaVenda: dtUltimaVenda,
+      departamentoCategoria: departamentoCategoria,
+      ncm: ncm,
+      descricaoNCM: descricaoNCM,
+      marca: marca,
+      custoUltimaCompra: custoUltimaCompra,
+      dataPrimeiraVenda: dataPrimeiraVenda,
+      statusProduto: statusProduto,
+      origem: origem,
+      departamentoId: departamentoId,
+      empresaId: empresaId,
+      image: image,
+      status: false,
+    }
+
+    return data
+  }
+
 
   return (
     <>
@@ -860,7 +923,7 @@ export default function MyProds() {
 
         <S.BtnsContent>
           <button onClick={closeModal}>Cancelar</button>
-          <button style={{ marginLeft: '10px' }}  onClick={() => handleAddProduct(id)}>Salvar</button>
+          <button style={{ marginLeft: '10px' }}  onClick={() => handleChangeProduct()}>Salvar</button>
         </S.BtnsContent>
       </Modal>
 
