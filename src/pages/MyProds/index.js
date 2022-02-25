@@ -72,6 +72,7 @@ export default function MyProds() {
   const [custoUltimaCompra, setcustoUltimaCompra] = useState('')
   const [dataPrimeiraVenda, setdataPrimeiraVenda] = useState('')
   const [statusProduto, setstatusProduto] = useState('')
+  const [status, setStatus] = useState('')
   const [origem, setorigem] = useState('')
   const [departamentoId, setdepartamentoId] = useState('')
   const [empresaId, setempresaId] = useState('')
@@ -92,13 +93,17 @@ export default function MyProds() {
   function closeModal() {
     setIsOpen(false)
   }
-  
-  const handleChangePrice = (event, value, maskedValue) => {
-    event.preventDefault();
 
-    setPreco(value); // value without mask (ex: 1234.56)
-    setPriceFormated(maskedValue); // masked value (ex: R$1234,56)
-  };
+  useEffect(
+    () => {
+      // Estas são os padrões aceitos pelo back
+      setMedidas(["AMP", "BUI", "BG", "BOLS", "CX", "CAP", "CARP", "COM", "DOSE", "ENV", "FLAC", "FR", "FA", "GAL", "GTS", "G", "L", "MCG", "MUI", "MG", "ML", "OVL", "PAS", "LT", "PER", "PIL", "PT", "KG", "SER", "SUP", "TABLE", "TUB", "TB", "UN", "UI", "CM", "CONJ", "KIT", "MÇ", "M", "PC", "PEÇA", "RL", "GY", "CGY", "PAR", "ADES", "COM EFEV", "COM MST", "SACHE"])
+
+      settipoMateriais(["Matéria Prima", "Produto Improdutivo", "Embalagens", "Produto Acabado", "Fabricado", "Revenda"])
+
+      setcurvaTipos(["A", "B", "C", "D", "E", "F", "G"])
+    }, []
+  )
 
   async function handleLoadProdutos(){
     let filter = 'empresa';
@@ -107,6 +112,22 @@ export default function MyProds() {
     console.log(prods)
     setProdutos(prods)
   }
+
+  useEffect(
+    () => {
+
+    handleLoadProdutos()
+
+    }, []
+  )
+  
+  const handleChangePrice = (event, value, maskedValue) => {
+    event.preventDefault();
+
+    setPreco(value); // value without mask (ex: 1234.56)
+    setPriceFormated(maskedValue); // masked value (ex: R$1234,56)
+  };
+
 
   function handleSetProdutoFields(index){
     let prodSelected = produtos[index]
@@ -155,23 +176,12 @@ export default function MyProds() {
     setorigem(prodSelected.origem)
     setdepartamentoId(prodSelected.departamentoId)
     setempresaId(prodSelected.empresaId)
-    setPriceFormated(prodSelected.image)
-    setPreco(prodSelected.status)
-
-    // setIsSKU()
-    // setImage()
+    setPriceFormated(formatPrice(Number(prodSelected.precoVenda)))
+    setStatus(prodSelected.status)
+    setImage(prodSelected.image)
 
   }
 
-
-  useEffect(
-    () => {
-
-    handleLoadProdutos()
-
-    }, []
-  )
-  
   return (
     <>
     <S.ContainerBuy>
@@ -237,7 +247,7 @@ export default function MyProds() {
         <S.ImageInput>
           <div className="image-upload">
             <label for="file-input">
-              <img className="inputImage" src={image} />
+              <img className="inputImage" src={image ? image : IMAGE4} />
             </label>
 
             <input id="file-input" type='file'
@@ -831,13 +841,6 @@ export default function MyProds() {
             </select>
           </S.SelectItems>
           <S.SelectItems>
-            <input
-              value={redeSKU}
-              required
-              type='text'
-              id='lead-time'
-              onChange={(text) => setredeSKU(text.target.value)}
-            />
 
             <label htmlFor='bar-code'>Curva</label>
             <select
