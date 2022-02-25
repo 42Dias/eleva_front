@@ -111,6 +111,8 @@ export default function MyProds() {
   function handleSetProdutoFields(index){
     let prodSelected = produtos[index]
 
+    console.log(prodSelected)
+
     setcodigo(prodSelected.codigo)
     setCodigoDeBarras(prodSelected.codigoDeBarras)
     setnome(prodSelected.nome)
@@ -170,6 +172,7 @@ export default function MyProds() {
     }, []
   )
   
+  console.log(redeSKU)
 
   return (
     <>
@@ -671,6 +674,8 @@ export default function MyProds() {
           <S.ContentSupplierFormRadio>
             <span>Rede SKU*</span>
             <S.Radio>
+              {
+              redeSKU == "Sim" ? (
               <S.ContainerButtons>
                 <S.RadioContainer>
                   <input
@@ -683,6 +688,7 @@ export default function MyProds() {
                     name='redeSku'
                     id='s'
                     value="Sim"
+                    checked
                   />
                   <p>Sim</p>
                 </S.RadioContainer>
@@ -701,6 +707,39 @@ export default function MyProds() {
                   <p>Não</p>
                 </S.RadioContainer>
               </S.ContainerButtons>
+              ):(
+              <S.ContainerButtons>
+                <S.RadioContainer>
+                  <input
+                    onClick={(e) => {
+                      let value = e.target.value
+                      console.log(value)
+                      setredeSKU(value)
+                    }}
+                    type='radio'
+                    name='redeSku1'
+                    id='s'
+                    value="Sim"
+                  />
+                  <p>Sim</p>
+                </S.RadioContainer>
+                <S.RadioContainer>
+                  <input
+                    onClick={(e) => {
+                      let value = e.target.value
+                      console.log(value)
+                      setredeSKU(value)
+                    }}
+                    type='radio'
+                    name='redeSku1'
+                    id='n'
+                    value="Não"
+                    checked
+                  />
+                  <p>Não</p>
+                </S.RadioContainer>
+              </S.ContainerButtons>)
+              }
             </S.Radio>
           </S.ContentSupplierFormRadio>
 
