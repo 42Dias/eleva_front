@@ -172,8 +172,6 @@ export default function MyProds() {
     }, []
   )
   
-  console.log(redeSKU)
-
   return (
     <>
     <S.ContainerBuy>
@@ -746,12 +744,15 @@ export default function MyProds() {
           <S.ContentSupplierFormRadio>
             <span>Origem do produto</span>
             <S.Radio>
-              <S.ContainerButtons>
+              {
+              origem == "Nacional" ? (
+                <S.ContainerButtons>
                 <S.RadioContainer>
                   <input
                     type='radio'
                     name='produtoOrigem'
                     id='n'
+                    checked
                     onChange={(text) => setorigem('Nacional')}
                   />
                   <p>Nacional</p>
@@ -766,6 +767,30 @@ export default function MyProds() {
                   <p>Importado</p>
                 </S.RadioContainer>
               </S.ContainerButtons>
+              ) : (
+                <S.ContainerButtons>
+                <S.RadioContainer>
+                  <input
+                    type='radio'
+                    name='produtoOrigem1'
+                    id='n'
+                    onChange={(text) => setorigem('Nacional')}
+                  />
+                  <p>Nacional</p>
+                </S.RadioContainer>
+                <S.RadioContainer>
+                  <input
+                    type='radio'
+                    name='produtoOrigem1'
+                    id='i'
+                    checked
+                    onChange={(text) => setorigem('Importado')}
+                  />
+                  <p>Importado</p>
+                </S.RadioContainer>
+              </S.ContainerButtons>
+              )
+              }
             </S.Radio>
           </S.ContentSupplierFormRadio>
 
