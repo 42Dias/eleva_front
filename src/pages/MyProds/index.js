@@ -31,6 +31,7 @@ export default function MyProds() {
   const [medidas, setMedidas] = useState([])
   const [tipoMateriais, settipoMateriais] = useState([])
   const [curvaTipos, setcurvaTipos] = useState([])
+
   const [codigo, setcodigo] = useState('')
   const [codigoDeBarras, setCodigoDeBarras] = useState('')
   const [nome, setnome] = useState('')
@@ -107,6 +108,59 @@ export default function MyProds() {
     setProdutos(prods)
   }
 
+  function handleSetProdutoFields(index){
+    let prodSelected = produtos[index]
+
+    setcodigo(prodSelected.codigo)
+    setCodigoDeBarras(prodSelected.codigoDeBarras)
+    setnome(prodSelected.nome)
+    setdescricao(prodSelected.descricao)
+    setunidadeMedida(prodSelected.unidadeMedida)
+    settipoMaterial(prodSelected.tipoMaterial)
+    setprecoVenda(prodSelected.precoVenda)
+    setreferenciaTec(prodSelected.referenciaTec)
+    setdemandaDiaria(prodSelected.demandaDiaria)
+    setestoque(prodSelected.estoque)
+    setestoqueFornecedor(prodSelected.estoqueFornecedor)
+    setleadTime(prodSelected.leadTime)
+    setativo(prodSelected.ativo)
+    setdataInatividade(prodSelected.dataInatividade)
+    setredeSKU(prodSelected.redeSKU)
+    setpedidoMinimo(prodSelected.pedidoMinimo)
+    setentregaMinima(prodSelected.entregaMinima)
+    setqtdEmbalagem(prodSelected.qtdEmbalagem)
+    setmoduloMinimo(prodSelected.moduloMinimo)
+    setmoduloMaster(prodSelected.moduloMaster)
+    setcomprimento_cm(prodSelected.comprimento_cm)
+    setlargura_cm(prodSelected.largura_cm)
+    setaltura_cm(prodSelected.altura_cm)
+    setcubagemEmbalagem(prodSelected.cubagemEmbalagem)
+    setpesoLiq(prodSelected.pesoLiq)
+    setpesoBruto(prodSelected.pesoBruto)
+    setestoqueMinimo(prodSelected.estoqueMinimo)
+    setestoqueMaximo(prodSelected.estoqueMaximo)
+    setcurva(prodSelected.curva)
+    setmediaDeVendaA(prodSelected.mediaDeVendaA)
+    setmediaDeVendaB(prodSelected.mediaDeVendaB)
+    setdtUltimaVenda(prodSelected.dtUltimaVenda)
+    setdepartamentoCategoria(prodSelected.departamentoCategoria)
+    setncm(prodSelected.ncm)
+    setdescricaoNCM(prodSelected.descricaoNCM)
+    setmarca(prodSelected.marca)
+    setcustoUltimaCompra(prodSelected.custoUltimaCompra)
+    setdataPrimeiraVenda(prodSelected.dataPrimeiraVenda)
+    setstatusProduto(prodSelected.statusProduto)
+    setorigem(prodSelected.origem)
+    setdepartamentoId(prodSelected.departamentoId)
+    setempresaId(prodSelected.empresaId)
+    setPriceFormated(prodSelected.image)
+    setPreco(prodSelected.status)
+
+    // setIsSKU()
+    // setImage()
+
+  }
+
 
   useEffect(
     () => {
@@ -180,7 +234,7 @@ export default function MyProds() {
         }}
       >
         <S.ImageInput>
-          <div class="image-upload">
+          <div className="image-upload">
             <label for="file-input">
               <img className="inputImage" src={image} />
             </label>
@@ -211,6 +265,7 @@ export default function MyProds() {
               <label htmlFor='name-product'>Nome do produto*</label>
               <input
                 required
+                value={nome}
                 type='text'
                 id='name-product'
                 onChange={(text) => setnome(text.target.value)}
@@ -221,6 +276,7 @@ export default function MyProds() {
               <label htmlFor='code'>Código*</label>
               <input
                 required
+                value={codigo}
                 type='text'
                 id='code'
                 onChange={(text) => setcodigo(text.target.value)}
@@ -231,6 +287,7 @@ export default function MyProds() {
               <label htmlFor='description'>Descrição*</label>
               <input
                 required
+                value={descricao}
                 type='text'
                 id='description'
                 onChange={(text) => setdescricao(text.target.value)}
@@ -241,6 +298,7 @@ export default function MyProds() {
               <label htmlFor='ref'>Referência técnica</label>
               <input
                 type='text'
+                value={referenciaTec}
                 id='ref'
                 onChange={(text) => setreferenciaTec(text.target.value)}
               />
@@ -279,6 +337,7 @@ export default function MyProds() {
               <label htmlFor='inactivity'>Data de inatividade</label>
               <input
                 type='date'
+                value={dataInatividade}
                 id='inactivity'
                 onChange={(text) => setdataInatividade(text.target.value)}
               />
@@ -288,14 +347,9 @@ export default function MyProds() {
               style={{ width: '95%', padding: 0 }}
             >
               <label htmlFor='category'>Departamento / Categoria*</label>
-              {/* <input
-                required
-                type='text'
-                id='category'
-                // onChange={(text) => setcategoria(text.target.value)} // HA CATEGORIAS???
-              /> */}
               <select
                 required
+                value={departamentoId}
                 onChange={(e) => {
                   // console.log(e.target.id)
                   console.log(e.target.value)
@@ -303,7 +357,8 @@ export default function MyProds() {
                 }
                 }
               >
-                {categorias.map(
+                {
+                categorias.map(
                   (categoria) => (
                     <option
                       value={categoria.id}
@@ -313,7 +368,8 @@ export default function MyProds() {
                       {categoria.nome}
                     </option>
                   )
-                )}
+                )
+                }
               </select>
 
 
@@ -338,6 +394,7 @@ export default function MyProds() {
               <label htmlFor='demand'>Demanda*</label>
               <input
                 required
+                value={demandaDiaria}
                 type='text'
                 id='demand'
                 onChange={(text) => setdemandaDiaria(text.target.value)}
@@ -349,6 +406,7 @@ export default function MyProds() {
               <input
                 required
                 type='number'
+                value={estoqueMinimo}
                 id='safety-stock'
                 onChange={(text) => {
                   handleSetNumber(text.target.value, setestoqueMinimo)
@@ -361,6 +419,7 @@ export default function MyProds() {
               <input
                 required
                 type='number'
+                value={estoqueMaximo}
                 id='maximum-stock'
                 onChange={(text) => {
                   handleSetNumber(text.target.value, setestoqueMaximo)
@@ -401,6 +460,7 @@ export default function MyProds() {
               <input
                 required
                 type='text'
+                value={marca}
                 id='brand'
                 onChange={(text) => setmarca(text.target.value)}
               />
@@ -412,6 +472,7 @@ export default function MyProds() {
                 required
                 type='email'
                 id='minimum-delivery'
+                value={entregaMinima}
                 // onChange={(text) => setentregaMinima(text.target.value)}
                 onChange={(text) => {
                   handleSetNumber(text.target.value, setentregaMinima)
@@ -424,6 +485,7 @@ export default function MyProds() {
               <input
                 required
                 type='text'
+                value={pedidoMinimo}
                 id='minimum-order'
                 onChange={(text) => setpedidoMinimo(text.target.value)}
               />
@@ -569,6 +631,7 @@ export default function MyProds() {
               <label htmlFor='last-sale'>Data da última venda</label>
               <input
                 type='date'
+                value={dtUltimaVenda}
                 id='last-sale'
                 onChange={(text) => setdtUltimaVenda(text.target.value)}
               />
@@ -578,6 +641,7 @@ export default function MyProds() {
               <label htmlFor='first-sale'>Data da primeira venda</label>
               <input
                 type='date'
+                value={dataPrimeiraVenda}
                 id='first-sale'
                 onChange={(text) => setdataPrimeiraVenda(text.target.value)}
               />
@@ -587,6 +651,7 @@ export default function MyProds() {
               <label htmlFor='ncm'>NCM</label>
               <input
                 type='text'
+                value={ncm}
                 id='ncm'
                 onChange={(text) => setncm(text.target.value)}
               />
@@ -596,6 +661,7 @@ export default function MyProds() {
               <label htmlFor='ncm-description'>Descrição NCM</label>
               <input
                 type='text'
+                value={descricaoNCM}
                 id='ncm-description'
                 onChange={(text) => setdescricaoNCM(text.target.value)}
               />
@@ -669,6 +735,7 @@ export default function MyProds() {
               <input
                 required
                 type='text'
+                value={leadTime}
                 id='lead-time'
                 onChange={(text) => setleadTime(text.target.value)}
               />
@@ -676,34 +743,10 @@ export default function MyProds() {
           </S.ContentSupplierForm>
 
           <S.SelectItems>
-            {/* <select
-              required 
-              id='product-sku'
-              onChange={(text) => setredeSKU(text.target.value)}
-              >
-              <option>informação 1</option>
-              <option>informação 2</option>
-            </select> */}
-            {/* <label htmlFor='product-sku'>Produto SKU*</label>
-            <input
-                required
-                type='text'
-                id='lead-time'
-                onChange={(text) => setredeSKU(text.target.value)}
-              /> */}
-
             <label htmlFor='bar-code'>Código de barras</label>
-            {/* <select
-              required 
-              onChange={(text) => setcodigo(text.target.value)}
-              
-              id='bar-code'>
-              <option>informação 1</option>
-              <option>informação 2</option>
-            </select> */}
-
             <input
               required
+              value={codigoDeBarras}
               type='text'
               id='lead-time'
               onChange={(text) => setCodigoDeBarras(text.target.value)}
@@ -712,10 +755,9 @@ export default function MyProds() {
             <label htmlFor='unit-of-measurement'>Unidade de medida</label>
             <select
               required
+              value={unidadeMedida}
               onChange={(text) => setunidadeMedida(text.target.value)}
               id='unit-of-measurement'>
-              {/* <option>informação 1</option> */}
-              {/* <option>informação 2</option> */}
               {medidas.map(
                 (medida) => (
                   <option value={medida}>{medida}</option>
@@ -725,6 +767,7 @@ export default function MyProds() {
           </S.SelectItems>
           <S.SelectItems>
             <input
+              value={redeSKU}
               required
               type='text'
               id='lead-time'
@@ -732,16 +775,8 @@ export default function MyProds() {
             />
 
             <label htmlFor='bar-code'>Curva</label>
-
-            {/* <input
-                required
-                type='text'
-                id='lead-time'
-                onChange={(text) => setCodigoDeBarras(text.target.value)}
-              /> */}
-
-            {/* <label htmlFor='unit-of-measurement'>Unidade de medida</label> */}
             <select
+              value={curva}
               onChange={(text) => setcurva(text.target.value)}
               id='unit-of-measurement'>
               {curvaTipos.map(
@@ -752,14 +787,6 @@ export default function MyProds() {
             </select>
           </S.SelectItems>
         </S.RegisterSupplier>
-        <S.Button>
-          <button style={{ background: '#AA2323' }}>
-            Cancelar
-          </button>
-          <button
-            onSubmit={() => createProduct()}
-          >Salvar</button>
-        </S.Button>
       </S.ContainerRegisterSupplier>
         </S.Container>
 
