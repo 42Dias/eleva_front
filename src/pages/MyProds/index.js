@@ -671,61 +671,62 @@ export default function MyProds() {
           <S.ContentSupplierFormRadio>
             <span>Rede SKU*</span>
             <S.Radio>
-              <S.RadioContainer>
-                <input
-                  onClick={(e) => {
-                    let value = e.target.value
-                    console.log(value)
-                    setredeSKU(value)
-                  }}
-                  type='radio'
-                  name='redeSku'
-                  id='s'
-                  value="Sim"
-                />
-                <p>Sim</p>
-              </S.RadioContainer>
-
-              <S.RadioContainer>
-                <input
-                  onClick={(e) => {
-                    let value = e.target.value
-                    console.log(value)
-
-                    setredeSKU(value)
-                  }}
-                  type='radio'
-                  name='redeSku'
-                  id='n'
-                  value="Não"
-                />
-                <p>Não</p>
-              </S.RadioContainer>
+              <S.ContainerButtons>
+                <S.RadioContainer>
+                  <input
+                    onClick={(e) => {
+                      let value = e.target.value
+                      console.log(value)
+                      setredeSKU(value)
+                    }}
+                    type='radio'
+                    name='redeSku'
+                    id='s'
+                    value="Sim"
+                  />
+                  <p>Sim</p>
+                </S.RadioContainer>
+                <S.RadioContainer>
+                  <input
+                    onClick={(e) => {
+                      let value = e.target.value
+                      console.log(value)
+                      setredeSKU(value)
+                    }}
+                    type='radio'
+                    name='redeSku'
+                    id='n'
+                    value="Não"
+                  />
+                  <p>Não</p>
+                </S.RadioContainer>
+              </S.ContainerButtons>
             </S.Radio>
           </S.ContentSupplierFormRadio>
 
           <S.ContentSupplierFormRadio>
             <span>Origem do produto</span>
             <S.Radio>
-              <S.RadioContainer>
-                <input
-                  type='radio'
-                  name='produtoOrigem'
-                  id='n'
-                  onChange={(text) => setorigem('Nacional')}
-                />
-                <p>Nacional</p>
-              </S.RadioContainer>
-
-              <S.RadioContainer>
-                <input
-                  type='radio'
-                  name='produtoOrigem'
-                  id='i'
-                  onChange={(text) => setorigem('Importado')}
-                />
-                <p>Importado</p>
-              </S.RadioContainer>
+              <S.ContainerButtons>
+                <S.RadioContainer>
+                  <input
+                    type='radio'
+                    name='produtoOrigem'
+                    id='n'
+                    onChange={(text) => setorigem('Nacional')}
+                  />
+                  <p>Nacional</p>
+                </S.RadioContainer>
+                <S.RadioContainer>
+                  <input
+                    type='radio'
+                    name='produtoOrigem'
+                    id='i'
+                    onChange={(text) => setorigem('Importado')}
+                  />
+                  <p>Importado</p>
+                </S.RadioContainer>
+              </S.ContainerButtons>
             </S.Radio>
           </S.ContentSupplierFormRadio>
 

@@ -246,6 +246,12 @@ align-items: center;
     height: 20px;
   }
 
+  input[type='radio'] {
+    border-radius: 50% !important;
+    width: 20px;
+    height: 20px;
+  }
+
   input {
     width: 375px;
     padding: 0 1.5rem;
@@ -413,6 +419,7 @@ export const ContainerButtons = styled.div`
   display: flex;
   width: 100%;
   margin: 0 auto;
+  flex-direction: row !important;
   justify-content: space-evenly;
 
 `
@@ -601,6 +608,7 @@ export const RadioContainer = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
+  width: 50%;
 
   p {
     font-size: 14px;
