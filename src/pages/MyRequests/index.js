@@ -3,7 +3,7 @@ import { FaHistory, FaEye, FaUmbraco } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/Sidebar/Sidebar'
 import { id } from '../../services/api'
-import pedidoFindWithProductToEmpresa from '../../services/pedido/pedidoFindWithProductToEmpresa'
+import pedidoFindWithProductToEmpresaSingle from '../../services/pedido/pedidoFindWithProductToEmpresaSingle'
 import * as S from './styled'
 
 export default function MyRequests() {
@@ -14,11 +14,18 @@ export default function MyRequests() {
 
   async function handlePedidoList(){
     // id = userId got from localStorage
-    const userPedidos = await pedidoFindWithProductToEmpresa(id)
+    const userPedidos = await pedidoFindWithProductToEmpresaSingle(id)
     console.log(userPedidos)
     setPedidos(userPedidos)
   }
+/*
+seu cnpj -> produto específico
+caso for cnpj de rede -> todos os da rede
 
+produto, empresaCompr, empresaVend
+
+
+*/
   
 
   useEffect(
@@ -43,7 +50,8 @@ export default function MyRequests() {
           <Link className='history-icon' to='/historico-de-pedidos'>Historico <FaHistory /></Link>
         </S.GridMyRequestTop>
 
-      pedidos.length == 0 ? () : (
+      {
+      pedidos.length == 0 ? (false) : (
         <S.GridMyRequest>
           <span>Cod. barras</span>
           <span>Produto SKU</span>
@@ -52,6 +60,7 @@ export default function MyRequests() {
           <span>Status</span>
         </S.GridMyRequest>
       )
+    }
 
       {pedidos.map(
         (pedido) => (
