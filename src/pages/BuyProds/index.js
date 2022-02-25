@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Modal from 'react-modal'
 import { Link } from 'react-router-dom'
 // FiFilter,
-import { FiEdit, FiPlus, FiX } from 'react-icons/fi'
+import { FiEdit, FiPlus, FiTrash, FiX } from 'react-icons/fi'
 import Navbar from '../../components/Sidebar/Sidebar'
 import Accordion from '../../components/Accordion/Accordion'
 import item from './../../assets/item.png'
@@ -27,6 +27,10 @@ import makeSumToFornecedorOfQuantidade from "../../utils/makeSumToFornecedorOfQu
 import makeSumToFornecedorOfPeso from "../../utils/makeSumToFornecedorOfPeso";
 import makeSumToFornecedorOfCubagem from "../../utils/makeSumToFornecedorOfCubagem";
 import makeSumToFornecedorOfValorUnitario from "../../utils/makeSumToFornecedorOfValorUnitario";
+import findUserProduto from "../../services/userProduto/findUserProduto";
+import { DeleteButton } from "../../components/ButtonDelete/styled";
+import deleteManyFromCart from "../../services/carrinho/deleteManyFromCart";
+import { toast } from "react-toastify";
 
 export default function BuyProds() {
   const { addProduct, removeProductFromCart } = useCart();
@@ -40,8 +44,15 @@ export default function BuyProds() {
   const [fornecedoresNoCarrinho, setFornecedoresNoCarrinho    ] =  useState([])
   const [listas,                 setListas                    ] =  useState([])
   const [lista,                  setLista                     ] =  useState([])
+  const [produtosCod,            setProdutosCod               ] =  useState([])
   const [valorTotal,             setValorTotal                ] =  useState(0)
   const [listaId,                setListaId                   ] =  useState("")
+  const [id,                     setId                        ] =  useState("")
+
+  const [idFromProdutoToBeInCart   , setIdFromProdutoToBeInCart    ] =  useState("")
+  const [carrinhoProdutoToBeChanged, setcarrinhoProdutoToBeChanged ] =  useState("")
+  const [quantidadeFromProdutoChanged, setQuantidadeFromProdutoChanged ] =  useState("")
+
 
 
   function openModal() {
@@ -72,22 +83,21 @@ export default function BuyProds() {
 
   function closeModal3() {
     setIsOpen3(false)
+    //Necessary to do not break the UX
+    setId('')
+    setIdFromProdutoToBeInCart('')
+    setcarrinhoProdutoToBeChanged('')
   }
 
-  /*
-    LISTAR 
-    DELETAR
-    EXCLUIR DA TELA
-  */
 
   async function handleLoadCart(){
     let cartData =  await loadCart()
     let formatedCart = await filterFornecedores(cartData, setCarrinho)
     let sumFromCarrinho = makeSumToCarrinho(formatedCart)
-    setValorTotal(sumFromCarrinho)
-
-    
+    setValorTotal(sumFromCarrinho) 
   }
+
+  
 
   useEffect(
     () => {
@@ -113,10 +123,14 @@ export default function BuyProds() {
     findAndSetLista(listaId)
   }
 
+
+
   async function handleLoadListas(){
     let listas = await loadLista()
       setListas(listas)
   }
+
+
 
   function handleChangeUrl(id){
     let cleanUrl = window.location.hash
@@ -129,12 +143,16 @@ export default function BuyProds() {
     closeModal2()
   }
 
+
+
   async function handlePushInCart(id, quantidade){
     await addProduct(id, quantidade);
 
     await handleLoadCart()
 
   }
+
+
 
   async function handleSubmitPedido(){
     carrinho.map(
@@ -150,9 +168,52 @@ export default function BuyProds() {
     await handleLoadCart()
   }
 
-  console.log("carrinho")
-  console.log(carrinho )
+
+
+  async function handleLoadProdutoCodigo(id){
+    const prodsCod = await findUserProduto(id)
+    console.log(prodsCod)
+    setProdutosCod(prodsCod)
+  }
+
+
+
+  async function handleDeleteProdutosOfFornecedor(produtos){
+    let ids = []
+
+    produtos.map(
+      produto => {
+        console.log(produto)
+        ids.push(produto.id)
+      }
+    )
+
+    await deleteManyFromCart(ids)
+
+    await handleLoadCart()
+  }
   
+  async function handleChangeProdutoAlreadyInCart(){
+    if(!idFromProdutoToBeInCart || !id){
+      toast.error("Selecione um produto")
+      return
+    }
+    await removeProductFromCart(id)
+    
+    closeModal3()
+
+    await addProduct(idFromProdutoToBeInCart, quantidadeFromProdutoChanged)
+
+    await handleLoadCart()
+
+    setId('')
+    setIdFromProdutoToBeInCart('')
+    setcarrinhoProdutoToBeChanged('')
+    /*
+    QUANTIDADE É ALTERADA FORA DO MODAL 
+    */
+  }
+
 
   return (
     <>
@@ -178,7 +239,6 @@ export default function BuyProds() {
             <span>Nome</span>
             <span></span>
             <span>Quantidade</span>
-      
           </S.GridValidation>
 
           )
@@ -218,7 +278,7 @@ export default function BuyProds() {
               type='number'
               id='quantity'
               name='quantity'
-              min='1'
+              min='0'
               max='9999999'
             />
           }
@@ -238,7 +298,8 @@ export default function BuyProds() {
 
           )
         }
-        {/* <Accordion
+        {/*
+        <Accordion
           codeBarras='321312421321321'
           prodSku='Mackbook'
           code='XXXXX'
@@ -261,29 +322,7 @@ export default function BuyProds() {
             />
           }
         />
-        <Accordion
-          codeBarras='321312421321321'
-          prodSku='Mackbook'
-          code='XXXXX'
-          name='Macbook Pro M1X'
-          amount='5 '
-          content={item}
-          lote='400'
-          info='400'
-          lastprice='400'
-          quantidadeporembalagem='400'
-          leadtime='400'
-          datadefaturamento='400'
-          myProp={
-            <input
-              type='number'
-              id='quantity'
-              name='quantity'
-              min='1'
-              max='9999999'
-            />
-          }
-        /> */}
+        */}
       </S.ContainerApprove>
 
       <Modal
@@ -305,8 +344,6 @@ export default function BuyProds() {
           
           NECESSIDADE: PUXAR MAIS DADOS DO FORNECEDOR!
 
-          
-          
           */}
           {
           carrinho.map(
@@ -329,7 +366,13 @@ export default function BuyProds() {
                         <th>Peso</th>
                         <th>Volume</th>
                         <th>Valor</th>
-                        <th></th>
+                        <th>
+                          <DeleteButton
+                            onClick={(e) => handleDeleteProdutosOfFornecedor(fornecedor.produtos)}
+                            >
+                                <FiTrash/>
+                          </DeleteButton>
+                        </th>
                       </tr>
                     </thead>
                     <tbody className='body'>
@@ -356,7 +399,23 @@ export default function BuyProds() {
                           <td>
                             {formatPrice(Number(carrinho.produto.preco) * carrinho.quantidade)}
                           </td>
-                          <td><button><FiEdit onClick={openModal3} /></button></td>
+                          <td
+                            onClick={() => {
+                              setId(carrinho.produto.id)
+
+                              setQuantidadeFromProdutoChanged(carrinho.quantidade)
+
+                              setcarrinhoProdutoToBeChanged(carrinho.id)
+
+                              handleLoadProdutoCodigo(carrinho.produto.id)
+                              
+                              openModal3()
+                              }} 
+                          >
+                            <button>
+                              <FiEdit  />
+                            </button>
+                          </td>
 
                         </tr>
                       )
@@ -518,55 +577,47 @@ export default function BuyProds() {
             <FiX />
           </button>
           <h2>Lista de fornecedores</h2>
-         
-          <button className='buttonSecondModal'>
-            <h2>
-              fornecedor.produtos[0].empresaNome
-            </h2>
-            <p>Fornecedor: Evaldo 1,99</p>
-            <p>Preço padrão: R$ 199,00</p>
-            <p>Preço negociado: Não</p>
-            <h3>Total: R$199,00</h3>
-          </button>
+          {
+          produtosCod.map(
+            (produto) => (
+              <button
+              onClick={
+                () =>  setIdFromProdutoToBeInCart(produto.id)
+              }
+              className='buttonSecondModal'>
+                <h2>
+                  {produto.nome}
+                </h2>
+                <p>Fornecedor: {produto.nomeFantasia}</p>
+                <p>
+                  Preço padrão:
+                  {
+                    formatPrice(Number(produto.precoVenda))
+                  }
+                </p>
+                <p>
+                   x Preço negociado: 
+                   {
+                     produto.precoNegociado ? formatPrice(Number(produto.precoNegociado)) : '  Não'
+                   }
+                </p>
+                <h3>Total: 
+                  {
+                    produto.precoNegociado ? formatPrice(Number(produto.precoNegociado)) : formatPrice(Number(produto.precoVenda))
+                  }
+                </h3>
+              </button>
+            )
+          )}
 
-
-          <button className='buttonSecondModal'>
-            <h2>
-              fornecedor.produtos[0].empresaNome
-            </h2>
-            <p>Fornecedor: Evaldo 1,99</p>
-            <p>Preço padrão: R$ 199,00</p>
-            <p>Preço negociado: Não</p>
-            <h3>Total: R$199,00</h3>
-          </button>
-
-
-          <button className='buttonSecondModal'>
-            <h2>
-              fornecedor.produtos[0].empresaNome
-            </h2>
-            <p>Fornecedor: Evaldo 1,99</p>
-            <p>Preço padrão: R$ 199,00</p>
-            <p>Preço negociado: Não</p>
-            <h3>Total: R$199,00</h3>
-          </button>
-
-          <button className='buttonSecondModal'>
-            <h2>
-              fornecedor.produtos[0].empresaNome
-            </h2>
-            <p>Fornecedor: Evaldo 1,99</p>
-            <p>Preço padrão: R$ 199,00</p>
-            <p>Preço negociado: Não</p>
-            <h3>Total: R$199,00</h3>
-          </button>
           <S.BtnsContent>
             
-            <button>Trocar</button>
+            <button
+              onClick={() => handleChangeProdutoAlreadyInCart()}
+            >
+              Trocar
+            </button>
 
-            {/*
-            
-            */}
           </S.BtnsContent>
         </S.Container>
       </Modal>
