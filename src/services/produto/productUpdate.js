@@ -13,6 +13,7 @@ export default async function productUpdateAprove(product) {
     // console.log(response)
     let productData = response.data
     toast.success("Produto aprovado!")
+    location.reload(true)
     return productData
   }).catch((erro)=>{
     toast.error(erro)
