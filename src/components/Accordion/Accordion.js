@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Chevron from './Chevron'
 
 import './Accordion.css'
+import productUpdate from '../../services/produto/productUpdate'
 
 function Accordion(props) {
   const [setActive, setActiveState] = useState('')
@@ -52,9 +53,9 @@ function Accordion(props) {
         <a className={props.iconClass}>
           <img src={props.icon} alt='' />
         </a>
-        <a className={props.iconAprove}>
+        <button className={props.iconAprove} onClick={()=> productUpdate(props.produtoId)}>
           <img src={props.iconAproveImage} alt='' />
-        </a>
+        </button>
         <span>{props.myProp}</span>
       </div>
     </div>
