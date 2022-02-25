@@ -18,6 +18,8 @@ import InputMask from 'react-input-mask';
 import cadastrarProduct from "../../services/produto/cadastrarProduct";
 import currencyConfig from '../../utils/currenryConfig'
 
+import productFindWithFilter from "../../services/produto/productFindWithFilter";
+
 export default function MyProds() {
   const [modalIsOpen, setIsOpen] = useState(false)
   
@@ -97,11 +99,19 @@ export default function MyProds() {
     setPriceFormated(maskedValue); // masked value (ex: R$1234,56)
   };
 
+  async function handleLoadProdutos(){
+    let filter = 'empresa';
+    let filterValue = empresaId;
+    const prods = await productFindWithFilter(filter, filterValue)
+    console.log(prods)
+    setProdutos(prods)
+  }
+
 
   useEffect(
     () => {
 
-      
+    handleLoadProdutos()
 
     }, []
   )
@@ -116,8 +126,8 @@ export default function MyProds() {
         <S.ContainerPurchases>
 
           {produtos.map((product, index) => {
-              return <>
-                <S.BoxProd key={product.id}>
+              return (
+              <S.BoxProd key={product.id}>
                 <Link to={`/produto/${product.id}`}>
                   <img src={product.image ? product.image : IMAGE4} alt='' />
                 </Link>
@@ -126,10 +136,20 @@ export default function MyProds() {
                 <span>{formatPrice(parseFloat(product.precoVenda))}</span>
                 <S.ContainerButtons>
                   <ButtonDelete/>
-                  <ChangeBtn />
+                  <div
+                    onClick={
+                      () => {
+                        openModal()
+                        handleSetProdutoFields(index) 
+                      }
+                    }
+                  >
+                    <ChangeBtn
+                    />
+                  </div>
                 </S.ContainerButtons>
               </S.BoxProd>
-              </>
+              )
           })}
         </S.ContainerPurchases>
       </S.BoxBuy>
@@ -169,56 +189,18 @@ export default function MyProds() {
               name='image'
               onChange={e => {
                 console.log(e)
-                // @ts-ignore
                 nameImage = e.target.files[0].name
-                // @ts-ignore
                 Image = e.target.files[0]
-                // @ts-ignore
                 console.log(e.target.files[0].name)
-                // @ts-ignore
-                //setName(name)
-                // @ts-ignore
                 console.log(e.target.files[0])
-                // @ts-ignore
-                //setImage(e.target.files[0])
 
-                // @ts-ignore
                 if (e.target.files[0].type.includes('image')) {
-                // @ts-ignore
                 uploadImage(e.target.files[0])
                 } else {
                  toast.error('Arquivo inválido!')
                 }
               }} />
           </div>
-          {/* <img src={IMAGE}
-            alt='upload image'
-            type='file'
-            name='image'
-            onChange={e => {
-              //console.log(e)
-              // @ts-ignore
-              nameImage = e.target.files[0].name
-              // @ts-ignore
-              Image = e.target.files[0]
-              // @ts-ignore
-              console.log(e.target.files[0].name)
-              // @ts-ignore
-              setName(name)
-              // @ts-ignore
-              console.log(e.target.files[0])
-              // @ts-ignore
-              setImage(e.target.files[0])
-
-              // @ts-ignore
-              //if (e.target.files[0].type.includes('image') || e.target.files[0].type.includes('file')) {
-              // @ts-ignore
-              uploadImage(e.target.files[0])
-              //} else {
-              // toast.error('Arquivo não suportado')
-              // }
-            }}
-          /> */}
 
         </S.ImageInput>
         <S.RegisterSupplier>
