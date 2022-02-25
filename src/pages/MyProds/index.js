@@ -21,6 +21,9 @@ import currencyConfig from '../../utils/currenryConfig'
 import productFindWithFilter from "../../services/produto/productFindWithFilter";
 import changeProduct from "../../services/produto/changeProduct";
 
+import { empresaId as empresaUserId  } from "../../services/api" ;
+import LoadingGif from "../../components/LoadingGif";
+
 export default function MyProds() {
   const [modalIsOpen, setIsOpen] = useState(false)
   
@@ -81,6 +84,8 @@ export default function MyProds() {
   const [preco, setPreco] = useState('')
   const [image, setImage] = useState(IMAGE4)
 
+  const [loading, setLoading] = useState(false)
+
   const [codigoSalvar, setCodigoSalvar] = useState('')
   const [produtoSKUSalvar, setProdutoSKUSalvar] = useState('')
 
@@ -108,7 +113,7 @@ export default function MyProds() {
 
   async function handleLoadProdutos(){
     let filter = 'empresa';
-    let filterValue = empresaId;
+    let filterValue = empresaUserId;
     const prods = await productFindWithFilter(filter, filterValue)
     console.log(prods)
     setProdutos(prods)
@@ -141,7 +146,6 @@ export default function MyProds() {
     setdescricao(prodSelected.descricao)
     setunidadeMedida(prodSelected.unidadeMedida)
     settipoMaterial(prodSelected.tipoMaterial)
-    setprecoVenda(prodSelected.precoVenda)
     setreferenciaTec(prodSelected.referenciaTec)
     setdemandaDiaria(prodSelected.demandaDiaria)
     setestoque(prodSelected.estoque)
@@ -177,17 +181,21 @@ export default function MyProds() {
     setorigem(prodSelected.origem)
     setdepartamentoId(prodSelected.departamentoId)
     setempresaId(prodSelected.empresaId)
-    setPriceFormated(formatPrice(Number(prodSelected.precoVenda)))
     setStatus(prodSelected.status)
     setImage(prodSelected.image)
+    setPreco(prodSelected.precoVenda)
+    setPriceFormated(formatPrice(Number(prodSelected.precoVenda)))
   }
-
+  
   async function handleChangeProduct() {
     const data = generateProductData()
+    setLoading(true)
 
     await changeProduct(data, id).then(
       async (funcReturn) => {
         if (funcReturn == 'ok') {
+          closeModal()
+          setLoading(false)
           await handleLoadProdutos()       
         }
       }
@@ -920,11 +928,14 @@ export default function MyProds() {
         </S.RegisterSupplier>
       </S.ContainerRegisterSupplier>
         </S.Container>
-
-        <S.BtnsContent>
-          <button onClick={closeModal}>Cancelar</button>
-          <button style={{ marginLeft: '10px' }}  onClick={() => handleChangeProduct()}>Salvar</button>
-        </S.BtnsContent>
+        {loading ? (
+        <LoadingGif /> 
+        ) : (
+          <S.BtnsContent>
+            <button onClick={closeModal}>Cancelar</button>
+            <button style={{ marginLeft: '10px' }}  onClick={() => handleChangeProduct()}>Salvar</button>
+          </S.BtnsContent>
+        ) }
       </Modal>
 
     </>
