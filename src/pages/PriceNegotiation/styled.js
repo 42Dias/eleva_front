@@ -6,7 +6,7 @@ export const ContainerRegisterSupplier = styled.aside`
   margin: 0 auto;
 `
 
-export const RegisterSupplier = styled.div`
+export const RegisterSupplier = styled.form`
   padding: 0 20px;
 
   h2 {
@@ -15,7 +15,8 @@ export const RegisterSupplier = styled.div`
     padding: 30px 0;
   }
 
-  a {
+  button {
+    border: 0;
     padding: 10px 30px 10px 30px;
     border-radius: 5px;
     background: ${theme.colors.green};
@@ -43,6 +44,23 @@ export const Price = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+
+  select {
+    width: 710px;
+    height: 48px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin: 10px 0;
+    padding: 0 7px;
+    border: 0;
+    transition: 0.4s;
+  }
+
+  select:focus {
+    border: 1px solid ${theme.colors.green};
+    background: transparent;
+    color: ${theme.colors.green};
+  }
 
   input {
     width: 710px;
