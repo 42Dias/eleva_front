@@ -104,9 +104,10 @@ export default function ApproveOrders() {
               leadtime={produto.leadTime}
               iconClass='btnDelete'
               icon={deleteIcon}
+              produtoDelete={produto.id}
               iconAprove='btnAprove'
               iconAproveImage={aproveIcon}
-              produtoId={produto}
+              produtoUpdate={produto}
             />
           ) : "Nenhum produto esperando por aprovação!"}
       </S.ContainerApprove>

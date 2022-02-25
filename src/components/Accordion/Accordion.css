@@ -82,7 +82,7 @@
   border-radius: 5px;
 }
 
-a.btnDelete {
+button.btnDelete {
   width: 35px;
   height: 35px;
   border-radius: 5px;
@@ -93,7 +93,7 @@ a.btnDelete {
   margin-left: 10px;
 }
 
-a.btnDelete svg {
+button.btnDelete svg {
   color: white;
   font-size: 18px;
 }
