@@ -140,7 +140,7 @@ export const BoxProd = styled.div`
   p {
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     color: ${theme.colors.neutral[700]};
     padding: 0 20px;
@@ -415,4 +415,266 @@ export const ContainerButtons = styled.div`
   margin: 0 auto;
   justify-content: space-evenly;
 
+`
+
+export const BoxImage = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const Input = styled.input`
+  width: 200px;
+  height: 48px;
+  background: ${theme.colors.white};
+  border-radius: 4px;
+  border: none;
+  color: ${theme.colors.blue};
+  padding: 0 0 0 10px;
+  margin: 0 0 20px 0;
+
+  &[type='radio'] {
+    height: 10px;
+    width: 10px;
+  }
+`
+export const ContainerRegisterSupplier = styled.form`
+  max-width: 780px;
+  margin: 0 auto;
+
+  a {
+    padding: 10px 30px 10px 30px;
+    border-radius: 5px;
+    background: ${theme.colors.green};
+    margin: 0 0 0 35px;
+    color: ${theme.colors.white};
+  }
+`
+
+export const RegisterSupplier = styled.div`
+  padding: 0 20px;
+
+  h2 {
+    font-size: 24px;
+    color: ${theme.colors.neutral[0]};
+    padding: 30px 0;
+  }
+`
+export const ImageInput = styled.div`
+
+.image-upload>input {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.inputImage {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+}
+
+`
+
+export const RegisterSupplierForm = styled.form`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+
+  input {
+    width: 345px;
+    height: 48px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin: 10px 0;
+    padding: 0 7px;
+    border: 0;
+  }
+
+  input:focus {
+    border: 1px solid ${theme.colors.green};
+    background: transparent;
+    color: ${theme.colors.green};
+  }
+`
+
+export const ContentSupplierForm = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 14px;
+    color: ${theme.colors.neutral[0]};
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+ 
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+`
+
+/*
+
+  .flex-holder{
+    display: flex;
+  }
+  .flex-holder .current-measure{
+    align-self: center;
+    padding-top: 15px;
+    -webkit-border-top-right-radius:    5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright:        5px;
+    -moz-border-radius-bottomright:     5px;
+    border-top-right-radius:            5px;
+    border-bottom-right-radius:         5px;
+    transform: translateX(-20px);
+    color: ${theme.colors.white};
+    background-color: ${theme.colors.darkBlue};
+  }
+
+
+  input:focus .flex-holder .current-measure{
+    border: 1px solid ${theme.colors.green};
+    background: transparent;
+    color: ${theme.colors.green};
+  }
+
+*/
+
+export const ContentLeadTime = styled.form`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+`
+
+export const LeadTime = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+
+  input {
+    width: 710px;
+    height: 48px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin: 10px 0;
+    padding: 0 7px;
+    border: 0;
+  }
+
+  input:focus {
+    border: 1px solid ${theme.colors.green};
+    background: transparent;
+    color: ${theme.colors.green};
+  }
+`
+
+export const ContentSupplierFormRadio = styled.div`
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+
+  span {
+    color: ${theme.colors.neutral[0]};
+    font-size: 13px;
+  }
+`
+
+export const Radio = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 15px 15px;
+`
+
+export const RadioContainer = styled.div`
+  margin-right: 20px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  p {
+    font-size: 14px;
+    color: ${theme.colors.neutral[0]};
+  }
+
+  input[type='radio'] {
+    margin-right: 10px;
+  }
+`
+
+export const SelectItems = styled.form`
+  padding: 0 15px 40px 15px;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 14px;
+    color: ${theme.colors.neutral[0]};
+  }
+
+  select {
+    width: 100%;
+    height: 48px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin: 10px 0;
+    padding: 0 15px;
+    border: 0;
+    background: ${theme.colors.white};
+  }
+
+  input {
+    width: 100%;
+    height: 48px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin: 10px 0;
+    padding: 0 7px;
+    border: 0;
+    background: ${theme.colors.white};
+  }
+
+  input:focus {
+    border: 1px solid ${theme.colors.green};
+    background: transparent;
+    color: ${theme.colors.green};
+  }
+`
+export const Button = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+
+  button {
+    padding: 10px 20px;
+    font-size: 15px;
+    border: 0;
+    text-decoration: none;
+    color: ${theme.colors.white};
+    background: ${theme.colors.green};
+    border-radius: 5px;
+    margin: 35px 0 0 0;
+    width: 256px;
+    height: 48px;
+    text-align: center;
+  }
+
+  button :hover {
+    opacity: 70%;
+    transition: 0.5s;
+  }
+
+
+  
 `
