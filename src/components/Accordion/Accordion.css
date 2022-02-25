@@ -98,6 +98,23 @@ a.btnDelete svg {
   font-size: 18px;
 }
 
+a.btnAprove {
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  background: #05DEBD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+a.btnAprove svg {
+  color: white;
+  font-size: 18px;
+}
+
+
 input[type='number'] {
   border: 1px solid #BFBFBF;
   width: 90px;
