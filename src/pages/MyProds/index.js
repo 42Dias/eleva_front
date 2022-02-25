@@ -252,6 +252,13 @@ export default function MyProds() {
     return data
   }
 
+  useEffect(
+    () => {
+
+      loadCategorias(setcategorias)
+    }, []
+  )
+
 
   return (
     <>
