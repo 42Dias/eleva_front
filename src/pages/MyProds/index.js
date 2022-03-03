@@ -26,6 +26,8 @@ import LoadingGif from "../../components/LoadingGif";
 import loadCategorias from "../../services/categoria/loadCategorias";
 import uploadImage from "../../services/imagem/upload";
 import deleteProduct from "../../services/produto/deleteProduct";
+import handleSetNumber from "../../utils/handleSetNumber";
+import handleCubagem from "../../utils/handleCubagem";
 
 export default function MyProds() {
   const [modalIsOpen, setIsOpen] = useState(false)
@@ -140,7 +142,9 @@ export default function MyProds() {
   function handleSetProdutoFields(index) {
     let prodSelected = produtos[index]
 
-    // console.log(prodSelected)
+    console.log(prodSelected)
+
+
     setId(prodSelected.id)
     setcodigo(prodSelected.codigo)
     setCodigoDeBarras(prodSelected.codigoDeBarras)
@@ -721,6 +725,18 @@ export default function MyProds() {
                     }}
                   />
                 </S.ContentSupplierForm>
+
+                curva: null
+                ​<br/>
+                ​
+                custoUltimaCompra: "2.00"
+                ​<br/>
+                dataInatividade: null
+                ​<br/>
+                dataPrimeiraVenda: {dataPrimeiraVenda}
+                ​<br/>
+
+                dtUltimaVenda: {dtUltimaVenda}
 
                 <S.ContentSupplierForm>
                   <label htmlFor='last-sale'>Data da última venda</label>
