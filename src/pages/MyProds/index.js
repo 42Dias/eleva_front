@@ -24,6 +24,7 @@ import changeProduct from "../../services/produto/changeProduct";
 import { empresaId as empresaUserId  } from "../../services/api" ;
 import LoadingGif from "../../components/LoadingGif";
 import loadCategorias from "../../services/categoria/loadCategorias";
+import uploadImage from "../../services/imagem/upload";
 
 export default function MyProds() {
   const [modalIsOpen, setIsOpen] = useState(false)
@@ -116,7 +117,7 @@ export default function MyProds() {
     let filter = 'empresa';
     let filterValue = empresaUserId;
     const prods = await productFindWithFilter(filter, filterValue)
-    console.log(prods)
+    // console.log(prods)
     setProdutos(prods)
   }
 
@@ -139,7 +140,7 @@ export default function MyProds() {
   function handleSetProdutoFields(index){
     let prodSelected = produtos[index]
 
-    console.log(prodSelected)
+    // console.log(prodSelected)
     setId(prodSelected.id)
     setcodigo(prodSelected.codigo)
     setCodigoDeBarras(prodSelected.codigoDeBarras)
@@ -320,7 +321,7 @@ export default function MyProds() {
           <S.ContainerRegisterSupplier
         onSubmit={(e) => {
           e.preventDefault()
-          createProduct()
+          handleChangeProduct()
         }}
       >
         <S.ImageInput>
@@ -332,14 +333,10 @@ export default function MyProds() {
             <input id="file-input" type='file'
               name='image'
               onChange={e => {
-                console.log(e)
-                nameImage = e.target.files[0].name
-                Image = e.target.files[0]
-                console.log(e.target.files[0].name)
-                console.log(e.target.files[0])
+                let imageToUpload = e.target.files[0]
 
                 if (e.target.files[0].type.includes('image')) {
-                uploadImage(e.target.files[0])
+                uploadImage(imageToUpload, setImage)
                 } else {
                  toast.error('Arquivo inválido!')
                 }
@@ -408,7 +405,6 @@ export default function MyProds() {
                 required
                 id='product-sku'
                 onChange={(text) => {
-                  console.log(text.target.value)
                   settipoMaterial(text.target.value)
                 }
                 }
@@ -441,8 +437,8 @@ export default function MyProds() {
                 required
                 value={departamentoId}
                 onChange={(e) => {
-                  // console.log(e.target.id)
-                  console.log(e.target.value)
+                  // // console.log(e.target.id)
+                  // console.log(e.target.value)
                   setdepartamentoId(e.target.value)
                 }
                 }
@@ -453,7 +449,7 @@ export default function MyProds() {
                     <option
                       value={categoria.id}
                       id={categoria.nome}
-                      onClick={(e) => console.log(e.target.id)}
+                      // onClick={(e) => // console.log(e.target.id)}
                     >
                       {categoria.nome}
                     </option>
@@ -611,7 +607,7 @@ export default function MyProds() {
                   }}
                   onBlur={
                     (e) => {
-                      console.log(e.target.value)
+                      // // console.log(e.target.value)
                       handleCubagem(altura_cm, largura_cm, comprimento_cm, setcubagemEmbalagem)
                     }
                   }
@@ -632,7 +628,7 @@ export default function MyProds() {
                   }}
                   onBlur={
                     (e) => {
-                      console.log(e.target.value)
+                      // console.log(e.target.value)
                       handleCubagem(altura_cm, largura_cm, comprimento_cm, setcubagemEmbalagem)
                     }
                   }
@@ -653,7 +649,7 @@ export default function MyProds() {
                   }}
                   onBlur={
                     (e) => {
-                      console.log(e.target.value)
+                      // console.log(e.target.value)
                       handleCubagem(altura_cm, largura_cm, comprimento_cm, setcubagemEmbalagem)
                     }
                   }
@@ -768,7 +764,7 @@ export default function MyProds() {
                   <input
                     onClick={(e) => {
                       let value = e.target.value
-                      console.log(value)
+                      // console.log(value)
                       setredeSKU(value)
                     }}
                     type='radio'
@@ -783,7 +779,7 @@ export default function MyProds() {
                   <input
                     onClick={(e) => {
                       let value = e.target.value
-                      console.log(value)
+                      // console.log(value)
                       setredeSKU(value)
                     }}
                     type='radio'
@@ -800,7 +796,7 @@ export default function MyProds() {
                   <input
                     onClick={(e) => {
                       let value = e.target.value
-                      console.log(value)
+                      // console.log(value)
                       setredeSKU(value)
                     }}
                     type='radio'
@@ -814,7 +810,7 @@ export default function MyProds() {
                   <input
                     onClick={(e) => {
                       let value = e.target.value
-                      console.log(value)
+                      // console.log(value)
                       setredeSKU(value)
                     }}
                     type='radio'
