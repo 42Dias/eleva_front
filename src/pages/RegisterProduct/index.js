@@ -11,7 +11,7 @@ import currencyConfig from '../../utils/currenryConfig'
 import { FaSortNumericUp } from "react-icons/fa";
 import handleSetNumber from "../../utils/handleSetNumber";
 import handleCubagem from "../../utils/handleCubagem";
-import { api } from "../../services/api";
+import { api, empresaId } from "../../services/api";
 import loadCategorias from "../../services/categoria/loadCategorias";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -63,7 +63,7 @@ export default function RegisterProduct() {
   const [statusProduto, setstatusProduto] = useState('')
   const [origem, setorigem] = useState('')
   const [departamentoId, setdepartamentoId] = useState('')
-  const [empresaId, setempresaId] = useState('')
+  //const [empresaId, setempresaId] = useState('')
   const [priceFormated, setPriceFormated] = useState('')
   const [preco, setPreco] = useState('')
   const [image, setImage] = useState(IMAGE)

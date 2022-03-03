@@ -1,4 +1,4 @@
-import { useState ,useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Modal from 'react-modal'
 import { BiLike } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
@@ -15,7 +15,7 @@ import cadastrarUserProduto from "../../services/userProduto/cadastrarUserProdut
 
 export default function Buy() {
   const [modalIsOpen, setIsOpen] = useState(false)
-  
+
   const [id, setId] = useState('')
 
   const [codigoSalvar, setCodigoSalvar] = useState('')
@@ -26,7 +26,7 @@ export default function Buy() {
     setIsOpen(true)
   }
 
-  function afterOpenModal() {}
+  function afterOpenModal() { }
 
   function closeModal() {
     setIsOpen(false)
@@ -41,105 +41,105 @@ export default function Buy() {
       // checkAuth()
     }, []
   )
-  
-   const [number, setNumber] = useState(1)
-  
-   const { loading, products, hasMore } = useInfiniteScroll(number)
-  
-    useInfiniteScroll(number)
-    
-  
-    const observer = useRef()
-    
-    const lastProdElementRef = useCallback(node => {
-      if (loading) return
-      if (observer.current) observer.current.disconnect()
-      observer.current = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting && hasMore) {
-          setNumber(prevPageNumber => prevPageNumber + 1)
-        }
-      })
-      if (node) observer.current.observe(node)
-    }, [loading, hasMore])
-  
-    async function handleAddProduct(id) {
-      console.log(id)
-      
-      let body = {
-        codigo:     codigoSalvar    ,
-        produtoSKU: produtoSKUSalvar,
-        produtoId: id
-      }
-      
-      closeModal()
-      
-      await cadastrarUserProduto(body)
-      
-      await addProduct(id,  1);
 
+  const [number, setNumber] = useState(1)
+
+  const { loading, products, hasMore } = useInfiniteScroll(number)
+
+  useInfiniteScroll(number)
+
+
+  const observer = useRef()
+
+  const lastProdElementRef = useCallback(node => {
+    if (loading) return
+    if (observer.current) observer.current.disconnect()
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        setNumber(prevPageNumber => prevPageNumber + 1)
+      }
+    })
+    if (node) observer.current.observe(node)
+  }, [loading, hasMore])
+
+  async function handleAddProduct(id) {
+    console.log(id)
+
+    let body = {
+      codigo: codigoSalvar,
+      produtoSKU: produtoSKUSalvar,
+      produtoId: id
     }
+
+    closeModal()
+
+    await cadastrarUserProduto(body)
+
+    await addProduct(id, 1);
+
+  }
 
   return (
     <>
-    <S.ContainerBuy>
-      <Navbar />
-      <S.BoxBuy>
-        <img className='imageList' src={bannerList} />
-        <S.ContainerPurchases>
+      <S.ContainerBuy>
+        <Navbar />
+        <S.BoxBuy>
+          <img className='imageList' src={bannerList} />
+          <S.ContainerPurchases>
 
-          {products.map((product, index) => {
-        if(products.length === index + 1){
-          return <>
-              <S.BoxProd key={product.id} ref={lastProdElementRef} >
-                <Link to={`/produto/${product.id}`}>
-                    <img src={product.image ? product.image :IMAGE4} alt='' />
-                </Link>
-                <h3>{product.nome}</h3>
-                <p>{product.descricao}</p>
-                <span>{product.precoVendaNegociada}</span>
+            {products.map((product, index) => {
+              if (products.length === index + 1) {
+                return <>
+                  <S.BoxProd key={product.id} ref={lastProdElementRef} >
+                    <Link to={`/produto/${product.id}`}>
+                      <img src={product.image ? product.image : IMAGE4} alt='' />
+                    </Link>
+                    <h3>{product.nome}</h3>
+                    <p>{product.descricao}</p>
+                    <span>{product.precoVendaNegociada}</span>
 
-                <span>{formatPrice(parseFloat(product.precoVendaNegociado || product.precoVenda))}</span>
+                    <span>{formatPrice(parseFloat(product.precoVendaNegociado || product.precoVenda))}</span>
 
-                {/* custoUlmtimaCompra ou precoVenda? */}
-                <div className='btnContent'>
-                  <button
-                  onClick={openModal}
-                  >
-                    Salvar <BiLike color={'white'} />
-                  </button>
-                </div>
-              </S.BoxProd>
-              </>
-            }
-            else {
-              return <>
-                <S.BoxProd key={product.id}>
-                <Link to={`/produto/${product.id}`}>
-                  <img src={product.image ? product.image :IMAGE4} alt='' />
-                </Link>
-                <h3>{product.nome}</h3>
-                <p>{product.descricao}</p>
-                <span>{formatPrice(parseFloat(product.precoVendaNegociado || product.precoVenda))}</span>
-                <div className='btnContent'>
-                  <button
-                    onClick={() => {
-                      openModal()
-                      setId(product.id)
-                    }}
-                  >
-                    Salvar <BiLike color={'white'} />
-                  </button>
-                </div>
-              </S.BoxProd>
-              </>
-            }
-          })}
-        </S.ContainerPurchases>
-      </S.BoxBuy>
-    </S.ContainerBuy>
+                    {/* custoUlmtimaCompra ou precoVenda? */}
+                    <div className='btnContent'>
+                      <button
+                        onClick={openModal}
+                      >
+                        Salvar <BiLike color={'white'} />
+                      </button>
+                    </div>
+                  </S.BoxProd>
+                </>
+              }
+              else {
+                return <>
+                  <S.BoxProd key={product.id}>
+                    <Link to={`/produto/${product.id}`}>
+                      <img src={product.image ? product.image : IMAGE4} alt='' />
+                    </Link>
+                    <h3>{product.nome}</h3>
+                    <p>{product.descricao}</p>
+                    <span>{formatPrice(parseFloat(product.precoVendaNegociado || product.precoVenda))}</span>
+                    <div className='btnContent'>
+                      <button
+                        onClick={() => {
+                          openModal()
+                          setId(product.id)
+                        }}
+                      >
+                        Salvar <BiLike color={'white'} />
+                      </button>
+                    </div>
+                  </S.BoxProd>
+                </>
+              }
+            })}
+          </S.ContainerPurchases>
+        </S.BoxBuy>
+      </S.ContainerBuy>
 
 
-    <Modal
+      <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
@@ -193,7 +193,7 @@ export default function Buy() {
 
         <S.BtnsContent>
           <button onClick={closeModal}>Cancelar</button>
-          <button style={{ marginLeft: '10px' }}  onClick={() => handleAddProduct(id)}>Salvar</button>
+          <button style={{ marginLeft: '10px' }} onClick={() => handleAddProduct(id)}>Salvar</button>
         </S.BtnsContent>
       </Modal>
 
