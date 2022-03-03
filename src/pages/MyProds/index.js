@@ -418,6 +418,7 @@ export default function MyProds() {
 
                   <select
                     required
+                    value={tipoMaterial}
                     id='product-sku'
                     onChange={(text) => {
                       settipoMaterial(text.target.value)
@@ -593,11 +594,11 @@ export default function MyProds() {
                 <S.ContentSupplierForm>
                   <label htmlFor='price'>Preço*</label>
                   {/* <input
-                required
-                type='text'
-                id='price'
-                onChange={(text) => setprecoVenda(text.target.value)}
-              /> */}
+                    required
+                    type='text'
+                    id='price'
+                    onChange={(text) => setprecoVenda(text.target.value)}
+                  /> */}
                   <IntlCurrencyInput
                     required
                     currency="BRL"
@@ -725,19 +726,6 @@ export default function MyProds() {
                     }}
                   />
                 </S.ContentSupplierForm>
-
-                curva: null
-                ​<br/>
-                ​
-                custoUltimaCompra: "2.00"
-                ​<br/>
-                dataInatividade: null
-                ​<br/>
-                dataPrimeiraVenda: {dataPrimeiraVenda}
-                ​<br/>
-
-                dtUltimaVenda: {dtUltimaVenda}
-
                 <S.ContentSupplierForm>
                   <label htmlFor='last-sale'>Data da última venda</label>
                   <input
