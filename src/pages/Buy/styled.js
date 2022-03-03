@@ -149,6 +149,7 @@ export const BoxProd = styled.div`
   img {
     width: 250px;
     height: 180px;
+    object-fit: cover;
     left: 0px;
     top: 0px;
     border-radius: 5px 5px 0px 0px;
