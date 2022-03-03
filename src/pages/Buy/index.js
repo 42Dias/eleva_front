@@ -96,14 +96,13 @@ export default function Buy() {
                     </Link>
                     <h3>{product.nome}</h3>
                     <p>{product.descricao}</p>
-                    <span>{product.precoVendaNegociada}</span>
-
                     <span>{formatPrice(parseFloat(product.precoVendaNegociado || product.precoVenda))}</span>
-
-                    {/* custoUlmtimaCompra ou precoVenda? */}
                     <div className='btnContent'>
                       <button
-                        onClick={openModal}
+                        onClick={() => {
+                          openModal()
+                          setId(product.id)
+                        }}
                       >
                         Salvar <BiLike color={'white'} />
                       </button>
