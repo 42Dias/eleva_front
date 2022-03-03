@@ -25,6 +25,7 @@ import { empresaId as empresaUserId  } from "../../services/api" ;
 import LoadingGif from "../../components/LoadingGif";
 import loadCategorias from "../../services/categoria/loadCategorias";
 import uploadImage from "../../services/imagem/upload";
+import deleteProduct from "../../services/produto/deleteProduct";
 
 export default function MyProds() {
   const [modalIsOpen, setIsOpen] = useState(false)
@@ -117,7 +118,6 @@ export default function MyProds() {
     let filter = 'empresa';
     let filterValue = empresaUserId;
     const prods = await productFindWithFilter(filter, filterValue)
-    // console.log(prods)
     setProdutos(prods)
   }
 
@@ -261,6 +261,13 @@ export default function MyProds() {
     }, []
   )
 
+  // deleteProduct()
+  async function handleDeleteProduct(id){
+    console.log(id)
+    await deleteProduct(id)
+    handleLoadProdutos()
+  }
+
 
   return (
     <>
@@ -280,7 +287,11 @@ export default function MyProds() {
                 <p>{product.descricao}</p>
                 <span>{formatPrice(parseFloat(product.precoVenda))}</span>
                 <S.ContainerButtons>
-                  <ButtonDelete/>
+                  <div
+                  onClick={() => handleDeleteProduct(product.id)}
+                  >
+                    <ButtonDelete/>
+                  </div>
                   <div
                     onClick={
                       () => {
@@ -437,8 +448,6 @@ export default function MyProds() {
                 required
                 value={departamentoId}
                 onChange={(e) => {
-                  // // console.log(e.target.id)
-                  // console.log(e.target.value)
                   setdepartamentoId(e.target.value)
                 }
                 }
