@@ -12,7 +12,7 @@ export  default  function SaleDetails() {
   const [modalIsOpen,             setIsOpen                    ] =  useState(false)
   const [pedido,                  setPedido                    ] =  useState([])
 
-  async function handlePedidoList(){
+  async function handlePedidoList(id){
     // id = userId got from localStorage
     const userPedidos = await pedidoFindWithProductToEmpresaSingle(id)
     console.log(userPedidos)
@@ -24,8 +24,8 @@ export  default  function SaleDetails() {
     () => {
       const vendaId = getIdFromUrl('#/detalhes-da-venda/')
       console.log(vendaId)
-
-    }
+      handlePedidoList(vendaId)
+    }, []
   )
 
   return (
