@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { api, apiWithoutTenant, ip } from '../services/api';
+import { apiWithoutTenantAndWithToken } from '../services/api';
 
 
 export default function useInfiniteScroll(number){
@@ -17,11 +16,12 @@ export default function useInfiniteScroll(number){
 	useEffect(() => {
 	setLoading(true)
 
-	apiWithoutTenant.get(`produto/${number}`)
+	apiWithoutTenantAndWithToken.get(`produto/${number}`)
 	.then(res => {
 	   setProducts(prevProducts => {
 	   		return [...new Set([...prevProducts, ...res.data])]	
 	   	   })
+			console.log(res.data)
 			setLoading(false)
 			setHasMore(res.data.length!==0)
 			// setHasMore(true)
