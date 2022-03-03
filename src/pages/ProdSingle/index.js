@@ -7,7 +7,10 @@ import * as S from './styled'
 import productFind from '../../services/produto/productFind'
 import { formatPrice } from '../../utils/format'
 
+import IMAGE4 from '../../assets/sem_imagem.png'
+
 import getIdFromUrl from '../../utils/getIdFromUrl'
+import loadProduct from '../../services/produto/loadProduct'
 
 export default function ProdSingle() {
   const [produto, setProduto ] = useState({})
@@ -17,6 +20,8 @@ export default function ProdSingle() {
     let productData = await productFind(id)
   
     setProduto(productData)
+
+    loadProduct()
   }
 
   useEffect(
@@ -32,7 +37,10 @@ export default function ProdSingle() {
         <S.ProdImage>
           <h1>{produto.nome}</h1>
           <div className='border-helper'>
-            <img src="https://wallpapercave.com/wp/wp9024378.jpg" alt='' />
+            <img 
+            src={produto.image ? produto.image : IMAGE4} 
+            alt='' 
+            />
             </div>
 
 
