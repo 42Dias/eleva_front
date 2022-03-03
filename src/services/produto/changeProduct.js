@@ -13,7 +13,7 @@ export default async function changeProduct(data, id) {
       data
       })
       .then((response) => {
-        let mensagemOk = 'Recebemos seu produto, ele será revisado e logo estará na plataforma :)'
+        let mensagemOk = 'Seu produto foi alterado com sucesso! Ele será revisado e logo estará na plataforma :)'
         let mensagemNaoOK = 'Revise os dados do produto :('
         responseHandler(response.status, mensagemOk, mensagemNaoOK)
         if (response.status == 200) {
@@ -22,7 +22,7 @@ export default async function changeProduct(data, id) {
         }
 
       })
-      .catch(() => {
-        servidorErrorMessage()
-      })
+      // .catch(() => {
+      //   servidorErrorMessage()
+      // })
   }
