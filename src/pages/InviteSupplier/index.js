@@ -12,6 +12,7 @@ import GreenBtn from '../../components/GreenBtn'
 import Modal from 'react-modal'
 import LoadingGif from '../../components/LoadingGif'
 import { AiOutlineClose } from "react-icons/ai";
+import { api, apiWithoutTenant, tenantId } from '../../services/api'
 
 
 export  default function InviteSupplier() {
@@ -54,16 +55,21 @@ export  default function InviteSupplier() {
   )
 
   async function handleCategoryCreate(e){
+
+    
     setLoading(true)
     e.preventDefault()
     e.target.reset();  // reset all form data
+    let dataFornecedor = {
+      email: newCategory,
+      tenantId: tenantId,
+    role: null   }
+      console.log(dataFornecedor)
+    apiWithoutTenant.post('/convidar-fornecedor/enviarConviteFornecedor', dataFornecedor)
+    
+    
 
-    let data =  {
-        nome: newCategory
-      }
-      await cadastrarCategory(data)
-      loadData()
-      setNewCategory("")
+      setChangeCategoryName('');
       closeModal()
       setLoading(false)
     }

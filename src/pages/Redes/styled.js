@@ -328,4 +328,20 @@ export const Container = styled.form`
       border: 1px solid ${theme.colors.green};
     }
   }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      background-color: ${theme.colors.green};
+      color: ${theme.colors.white};
+      border: 0;
+      width: 150px;
+      padding: 0 1.5rem;
+      height: 4rem;
+      margin-top: 10px;
+      border-radius: 0.25rem; 
+    }
+  }
 `

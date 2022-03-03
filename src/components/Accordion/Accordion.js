@@ -52,6 +52,9 @@ function Accordion(props) {
         <a className={props.iconClass}>
           <img src={props.icon} alt='' />
         </a>
+        <a className={props.iconAprove}>
+          <img src={props.iconAproveImage} alt='' />
+        </a>
         <span>{props.myProp}</span>
       </div>
     </div>

@@ -51,10 +51,6 @@ export  default function Register() {
     // email senha role e status
     /*
       req.body.email,
-      req.body.password,
-      req.body.cnpj,
-      req.body.phoneNumber,
-      req.body.invitationToken,
       req.body.tenantId,
       req,
     */
