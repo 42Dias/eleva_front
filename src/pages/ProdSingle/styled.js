@@ -35,7 +35,7 @@ export const ProdImage = styled.div`
     }
   }
   
-  img {
+  a img {
     object-fit: cover;
     width: 906px; 
     height: 450px;
